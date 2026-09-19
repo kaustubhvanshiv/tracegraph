@@ -288,13 +288,15 @@ class RelationshipExtractor:
 
 **Relationship Type Mapping**:
 
-| Relationship Type | Trigger Fields | Source Entity | Target Entity |
-|-------------------|---------------|---------------|---------------|
-| LOGGED_INTO | user + source_host + action=login | User | Host |
-| AUTHENTICATED_TO | user + destination_host + action=auth | User | Server |
-| EXECUTED | process + host | Process | Host (or File) |
-| CONNECTED_TO | source_ip + destination_ip | IP | IP |
-| ACCESSED | process/user + file | Process/User | File |
+| Relationship Type | Required Fields | Action Condition | Source Entity | Target Entity |
+|-------------------|----------------|-----------------|---------------|---------------|
+| LOGGED_INTO | user + source_host | action == "login" | User | Host |
+| AUTHENTICATED_TO | user + destination_host | action == "auth" | User | Server |
+| EXECUTED | process + source_host | action == "execute" | Process | Host |
+| CONNECTED_TO | source_ip + destination_ip | action == "connect" | IP | IP |
+| ACCESSED | (process or user) + file | action == "access" | Process or User | File |
+
+**Note**: The `action` field is required for disambiguation. Without an explicit action condition, `EXECUTED` would incorrectly fire on network-connection events that happen to have a process field. Every rule requires both the entity fields AND a matching `action` value.
 
 **Responsibilities**:
 - Map event fields to relationship types via a declarative rule table
@@ -391,7 +393,7 @@ class GraphRepository:
     def upsert_relationship(self, rel: CorrelatedRelationship) -> None: ...
     def get_graph(self, investigation_id: str, filters: GraphFilter) -> GraphResult: ...
     def pivot(self, entity_id: str, investigation_id: str, hops: int = 2) -> GraphResult: ...
-    def get_entity(self, entity_id: str) -> EntityDetail: ...
+    def get_entity(self, entity_id: str, investigation_id: str) -> EntityDetail: ...
 ```
 
 **Upsert Semantics**:
@@ -433,7 +435,8 @@ class TimelineService:
 ```
 
 **Responsibilities**:
-- Retrieve normalized events from Neo4j ordered by timestamp
+- Retrieve normalized events from **PostgreSQL** (`security_events` table) ordered by timestamp — NOT from Neo4j (Neo4j stores entity/relationship nodes, not raw event rows)
+- Build `entity_ids` for each timeline event by joining against the `event_entity_map` table (see PostgreSQL schema addition below)
 - Support filtering by: time range, entity_id, event_type, severity
 - Return entity_id references on each timeline event to enable graph highlighting
 - Maintain consistency: every event in the graph appears in the timeline and vice versa
@@ -577,10 +580,11 @@ class InvestigationService:
 
 ```python
 class SecurityEvent(BaseModel):
-    event_id: str                          # Non-empty, globally unique
+    event_id: str                          # Non-empty, unique within an investigation
+    source_type: str                       # Parser source type (e.g. "sysmon", "edr")
     timestamp: datetime                    # UTC, parsed to Python datetime
     event_type: str                        # e.g., "authentication", "process_creation"
-    action: str                            # e.g., "login", "execute", "connect"
+    action: str                            # e.g., "login", "execute", "connect", "access", "auth"
     user: str | None = None               # Normalized username
     source_host: str | None = None        # Normalized hostname (lowercase)
     destination_host: str | None = None   # Normalized hostname (lowercase)
@@ -591,23 +595,29 @@ class SecurityEvent(BaseModel):
     severity: str | None = None           # "low", "medium", "high", "critical"
     raw_data: dict | None = None          # Original parsed fields (preserved)
 
-    @validator('event_id')
-    def event_id_must_be_nonempty(cls, v):
-        assert v and v.strip(), "event_id must be non-empty"
+    @field_validator('event_id')
+    @classmethod
+    def event_id_must_be_nonempty(cls, v: str) -> str:
+        if not v or not v.strip():
+            raise ValueError("event_id must be non-empty")
         return v
 
-    @validator('severity')
-    def severity_must_be_valid(cls, v):
-        if v is not None:
-            assert v in {"low", "medium", "high", "critical"}
+    @field_validator('severity')
+    @classmethod
+    def severity_must_be_valid(cls, v: str | None) -> str | None:
+        if v is not None and v not in {"low", "medium", "high", "critical"}:
+            raise ValueError(f"severity must be one of low/medium/high/critical, got {v!r}")
         return v
 ```
 
 **Validation Rules**:
-- `event_id`: non-empty string, unique within an investigation
+- `event_id`: non-empty string, unique within an investigation (not a global primary key — re-ingesting the same event from the same investigation is idempotent)
+- `source_type`: non-empty string matching a registered adapter
 - `timestamp`: must be parseable to UTC datetime; reject events with unparseable timestamps
+- `action`: required; drives relationship-type selection in `RelationshipExtractor`
 - `severity`: if present, must be one of: low, medium, high, critical
 - All string fields: stripped of leading/trailing whitespace after normalization
+- Use `field_validator` / `model_validator` from Pydantic v2 (`@validator` with `assert` is deprecated)
 
 ---
 
@@ -686,14 +696,21 @@ class InvestigationStatus(str, Enum):
 
 **Node Labels and Properties**:
 
-| Label | Properties |
-|-------|-----------|
-| User | entity_id, canonical_key, aliases[], investigation_ids[] |
-| Host | entity_id, canonical_key, aliases[], investigation_ids[] |
-| Server | entity_id, canonical_key, aliases[], role, investigation_ids[] |
-| IP | entity_id, canonical_key, investigation_ids[] |
-| Process | entity_id, canonical_key, host, pid, investigation_ids[] |
-| File | entity_id, canonical_key, host, path, investigation_ids[] |
+| Label | Properties | Identity Key |
+|-------|-----------|-------------|
+| User | entity_id, canonical_key, aliases[], investigation_id | (canonical_key, investigation_id) |
+| Host | entity_id, canonical_key, aliases[], investigation_id | (canonical_key, investigation_id) |
+| Server | entity_id, canonical_key, aliases[], server_role, investigation_id | (canonical_key, investigation_id) |
+| IP | entity_id, canonical_key, investigation_id | (canonical_key, investigation_id) |
+| Process | entity_id, canonical_key, host, investigation_id | (canonical_key, investigation_id) |
+| File | entity_id, canonical_key, host, path, investigation_id | (canonical_key, investigation_id) |
+
+**Important**: Nodes are scoped per investigation. Two investigations that observe the same hostname produce separate nodes, isolating their graphs entirely (Req 19.4). The MERGE key always includes `investigation_id`. `get_entity` and all graph queries filter by `investigation_id`.
+
+**Entity Identity Notes**:
+- Host and Server: both use hostname as canonical_key but have different entity types, so they always produce different nodes for the same hostname. If an event has only a hostname (no `server_role`), classify it as Host. Use Server only when `event_type` or `server_role` field explicitly indicates a server role.
+- Process: canonical_key is `"{source_host}::{process_name}"`. `pid` is stored as metadata only — it is NOT part of the canonical_key because PIDs are ephemeral across sessions and would create spurious duplicates.
+- Server: `server_role` is the `server_role` field on `SecurityEvent` (optional). If absent, classify as Host, not Server.
 
 **Relationship Properties** (all relationship types carry these):
 
@@ -710,8 +727,8 @@ explanation: str
 
 **Cypher Upsert Pattern**:
 ```cypher
-MERGE (u:User {entity_id: $entity_id})
-ON CREATE SET u += $properties
+MERGE (u:User {canonical_key: $canonical_key, investigation_id: $investigation_id})
+ON CREATE SET u.entity_id = $entity_id, u.aliases = $aliases
 ON MATCH SET u.aliases = u.aliases + [x IN $new_aliases WHERE NOT x IN u.aliases]
 
 MERGE (src)-[r:LOGGED_INTO {investigation_id: $investigation_id}]->(tgt)
@@ -719,6 +736,8 @@ ON CREATE SET r = $properties
 ON MATCH SET r.event_ids = r.event_ids + [x IN $new_event_ids WHERE NOT x IN r.event_ids],
              r.signal_names = r.signal_names + [x IN $new_signals WHERE NOT x IN r.signal_names]
 ```
+
+`get_entity` always requires `investigation_id`: `def get_entity(self, entity_id: str, investigation_id: str) -> EntityDetail`
 
 ---
 
@@ -743,9 +762,13 @@ CREATE TABLE investigations (
 );
 
 -- Normalized security events (evidence store)
+-- event_id is unique per investigation (not globally) — same source event_id
+-- may appear in multiple investigations without conflict.
 CREATE TABLE security_events (
-    event_id          TEXT PRIMARY KEY,
-    investigation_id  UUID REFERENCES investigations(investigation_id),
+    id                BIGSERIAL PRIMARY KEY,
+    event_id          TEXT NOT NULL,
+    investigation_id  UUID NOT NULL REFERENCES investigations(investigation_id),
+    source_type       TEXT NOT NULL,
     timestamp         TIMESTAMPTZ NOT NULL,
     event_type        TEXT NOT NULL,
     action            TEXT NOT NULL,
@@ -758,7 +781,8 @@ CREATE TABLE security_events (
     file              TEXT,
     severity          TEXT CHECK (severity IN ('low', 'medium', 'high', 'critical')),
     raw_data          JSONB,
-    ingested_at       TIMESTAMPTZ NOT NULL DEFAULT now()
+    ingested_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (event_id, investigation_id)
 );
 
 -- Analyst notes
@@ -774,6 +798,17 @@ CREATE INDEX idx_security_events_investigation ON security_events(investigation_
 CREATE INDEX idx_security_events_timestamp ON security_events(timestamp);
 CREATE INDEX idx_security_events_user ON security_events("user");
 CREATE INDEX idx_security_events_source_host ON security_events(source_host);
+
+-- Maps each stored event to the entities extracted from it (for timeline entity_ids)
+CREATE TABLE event_entity_map (
+    id               BIGSERIAL PRIMARY KEY,
+    event_id         TEXT NOT NULL,
+    investigation_id UUID NOT NULL REFERENCES investigations(investigation_id),
+    entity_id        TEXT NOT NULL,
+    UNIQUE (event_id, investigation_id, entity_id)
+);
+CREATE INDEX idx_event_entity_investigation ON event_entity_map(investigation_id);
+CREATE INDEX idx_event_entity_event ON event_entity_map(event_id, investigation_id);
 ```
 
 ---
@@ -933,10 +968,20 @@ BEGIN
 
   entities ← extract_entities(normalized)
   raw_relationships ← extract_relationships(normalized, entities)
-  candidates ← retrieve_candidates(normalized, window=DEFAULT_WINDOW_MINUTES)
+
+  -- Sort by timestamp before candidate retrieval (pipeline never pre-sorts).
+  sorted_normalized ← sort_by_timestamp(normalized)
+  candidates ← retrieve_candidates(sorted_normalized, window=DEFAULT_WINDOW_MINUTES)
   correlated ← correlate(candidates)
 
-  persist_graph(entities, correlated)
+  -- Persist both directly-extracted relationships AND correlated relationships.
+  -- raw_relationships covers single-event cases (no pairs → no correlated output).
+  -- correlated enriches multi-event relationships with signal metadata.
+  -- Merge: for each correlated relationship, update the matching raw_relationship
+  -- with signal data; add any new correlated relationships not in raw_relationships.
+  merged_relationships ← merge_relationships(raw_relationships, correlated)
+
+  persist_graph(entities, merged_relationships)
   store_events(normalized, investigation_id)
 
   RETURN IngestionResponse(
@@ -1027,8 +1072,19 @@ BEGIN
     RETURN None  -- No signals fired; not a correlated pair
   END IF
 
-  max_possible ← sum(SIGNAL_WEIGHTS[s] FOR s IN fired_signals)
-  combined_score ← sum(scores.values()) / max_possible
+  -- Require at least one context signal beyond temporal_proximity alone.
+  -- temporal_proximity fires for every candidate pair inside the window, so
+  -- a pair consisting only of temporal_proximity has no shared context and
+  -- must be rejected to prevent unrelated-event pairs from being correlated.
+  context_signals ← fired_signals - {"temporal_proximity"}
+  IF len(context_signals) = 0 THEN
+    RETURN None  -- temporal_proximity alone is insufficient
+  END IF
+
+  -- Normalize against the sum of ALL configured signal weights (not just fired ones).
+  -- Dividing by fired-signal weights only would always produce 1.0.
+  total_weight ← sum(SIGNAL_WEIGHTS.values())
+  combined_score ← sum(scores.values()) / total_weight
 
   explanation ← build_explanation(fired_signals, scores, event_a, event_b)
 
@@ -1518,15 +1574,18 @@ tracegraph/
 | Package | Purpose |
 |---------|---------|
 | fastapi | HTTP API framework |
-| pydantic | Schema validation, settings management |
+| pydantic>=2 | Schema validation, settings management |
+| pydantic-settings | BaseSettings (split from pydantic v2 core) |
 | uvicorn | ASGI server |
-| sqlalchemy | PostgreSQL ORM |
-| psycopg2-binary | PostgreSQL driver |
+| sqlalchemy[asyncio] | PostgreSQL async ORM |
+| asyncpg | Async PostgreSQL driver (compatible with SQLAlchemy async engine; replaces psycopg2-binary for async) |
+| alembic | Database schema migrations |
 | neo4j (official driver) | Neo4j graph database client |
-| python-jose | JWT encoding/decoding |
-| passlib | Password hashing |
+| python-jose[cryptography] | JWT encoding/decoding |
+| bcrypt | Password hashing (direct; replaces passlib which breaks with bcrypt>=4) |
 | hypothesis | Property-based testing |
 | pytest | Test runner |
+| pytest-asyncio | Async test support |
 | httpx | Async HTTP client (for LLM provider + tests) |
 
 ### Frontend

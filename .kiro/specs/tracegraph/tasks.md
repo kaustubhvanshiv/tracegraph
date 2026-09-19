@@ -10,16 +10,17 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 
 - [ ] 1. Project scaffolding and core infrastructure
   - Create the `tracegraph/` monorepo directory structure exactly as specified in the design's package structure section
-  - Initialize `backend/` as a Python package with `pyproject.toml` (or `requirements.txt`) pinning all backend dependencies: `fastapi`, `pydantic`, `uvicorn`, `sqlalchemy`, `psycopg2-binary`, `neo4j`, `python-jose`, `passlib`, `hypothesis`, `pytest`, `httpx`
+  - Initialize `backend/` as a Python package with `pyproject.toml` (or `requirements.txt`) pinning all backend dependencies: `fastapi`, `pydantic>=2`, `pydantic-settings`, `uvicorn`, `sqlalchemy[asyncio]`, `asyncpg`, `alembic`, `neo4j`, `python-jose[cryptography]`, `bcrypt`, `pytest-asyncio`, `hypothesis`, `pytest`, `httpx`
   - Initialize `frontend/` with a React project (Vite or CRA) and install pinned frontend dependencies: `react`, `react-router-dom`, `cytoscape`, `cytoscape-fcose`, `axios`, `date-fns`, `tailwindcss`
-  - Create `backend/app/core/config.py` using Pydantic `BaseSettings` to load all secrets (JWT secret, DB credentials, LLM API key) exclusively from environment variables
+  - Create `backend/app/core/config.py` using Pydantic `BaseSettings` from `pydantic-settings` (separate package in v2) to load all secrets exclusively from environment variables
   - Create `.env.example` documenting every required environment variable with placeholder values
   - Add `.env` to `.gitignore`
-  - _Requirements: 17.1, 17.3, 17.4, 15.4_
+  - Create docker-compose.yml and Dockerfiles early (Task 1) so integration tests in tasks 13+ have live databases
+  - _Requirements: 17.1, 17.2, 17.3, 17.4, 17.5, 15.4_
 
 - [ ] 2. Core Pydantic schemas and SQLAlchemy models
   - [ ] 2.1 Implement Pydantic schemas for the Common Security Event Model and supporting types
-    - Create `backend/app/schemas/security_event.py` with the full `SecurityEvent` model: `event_id` (non-empty validator), `timestamp` (UTC datetime), `event_type`, `action`, optional fields (`user`, `source_host`, `destination_host`, `source_ip`, `destination_ip`, `process`, `file`), `severity` (enum validator: low/medium/high/critical), `raw_data`
+    - Create `backend/app/schemas/security_event.py` using Pydantic v2 `@field_validator` (NOT deprecated `@validator`). Add `source_type` field. `event_id` non-empty, `timestamp` (UTC datetime), `event_type`, `action`, optional fields (`user`, `source_host`, `destination_host`, `source_ip`, `destination_ip`, `process`, `file`), `severity` (enum validator: low/medium/high/critical), `raw_data`
     - Create `backend/app/schemas/entity.py` with `Entity`, `EntityType` enum, and identity key constants
     - Create `backend/app/schemas/relationship.py` with `RawRelationship`, `CorrelatedRelationship`, `RelationshipType` enum
     - Create `backend/app/schemas/investigation.py` with `Investigation`, `InvestigationStatus` enum, `CreateInvestigationPayload`, `OutcomePayload`, `NotePayload`
@@ -28,7 +29,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - _Requirements: 3.1, 3.8, 4.1, 5.1, 7.1, 11.1, 11.4, 16.1, 16.4_
 
   - [ ] 2.2 Implement SQLAlchemy ORM models and database connection management
-    - Create `backend/app/models/investigation.py`, `security_event.py`, `note.py` matching the PostgreSQL schema in the design exactly (including all `CHECK` constraints and indexes)
+    - Create `backend/app/models/investigation.py`, `security_event.py` (with source_type column, composite unique key on event_id+investigation_id), `note.py`, `event_entity_map.py` matching the PostgreSQL schema in the design exactly (including all `CHECK` constraints and indexes)
     - Create `backend/app/core/database.py` with connection factories for both PostgreSQL (SQLAlchemy async engine) and Neo4j (official driver), startup health checks, and connection error logging
     - _Requirements: 11.5, 17.5_
 
@@ -56,7 +57,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Ensure no secrets are hardcoded; all keys are read from `config.py`
     - _Requirements: 15.1, 15.2, 15.3, 15.4_
 
-  - [ ]* 4.2 Write property test for authorization isolation (Property 17)
+  - [ ] 4.2 Write property test for authorization isolation (Property 17)
     - **Property 17: Authorization Isolation**
     - **Validates: Requirements 15.2, 11.8**
     - Use `hypothesis` to generate arbitrary investigation IDs and user pairs; assert every request by a non-owner receives HTTP 403
@@ -128,7 +129,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 - [ ] 8. Entity extraction service
   - [ ] 8.1 Implement `EntityExtractor`
     - Create `backend/app/services/entity_extractor.py` with `EntityExtractor.extract(events: list[SecurityEvent]) -> list[Entity]`
-    - Apply identity key rules from the design: User → normalized username; Host → normalized hostname; Server → hostname + role hint; IP → canonical IP; Process → (host, process_name, pid) tuple; File → (host, absolute_path) tuple
+    - Apply identity key rules from the design: User → normalized username; Host → normalized hostname; Server → hostname (only when server_role field is set); IP → canonical IP; Process → "{source_host}::{process_name}" (pid is metadata, NOT in canonical_key); File → (host, absolute_path) tuple
     - Assign deterministic `entity_id` as a hash of `(entity_type, canonical_key)`
     - Deduplicate by `entity_id`: merge aliases, accumulate `event_ids`
     - Never create an entity without at least one evidence reference
@@ -189,7 +190,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Create `backend/app/services/correlation.py` with `TemporalCorrelationEngine.correlate(candidates) -> list[CorrelatedRelationship]`
     - Implement all seven signals: `shared_user`, `shared_host`, `shared_ip`, `host_continuity`, `temporal_proximity`, `compatible_action_sequence`, `process_file_context`
     - Load signal weights from config (not hardcoded); default weights from design table
-    - Compute `combined_score` as weighted sum of fired signals normalized to `[0, 1]`
+    - Compute `combined_score` = sum(fired weights) / sum(ALL weights) — never divide by fired-only weights (that always gives 1.0). Reject pairs where temporal_proximity is the only signal fired
     - Generate a human-readable `explanation` listing fired signals and evidence
     - Filter out candidate pairs that trigger zero signals
     - Add explicit code comment documenting that `combined_score` is NOT an attack probability
@@ -216,7 +217,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
   - [ ] 13.1 Implement `GraphRepository` with idempotent upsert semantics
     - Create `backend/app/repositories/graph_repository.py` with `upsert_entity`, `upsert_relationship`, `get_graph`, `pivot`, `get_entity`
     - Use parameterized Cypher queries exclusively (no string interpolation of user-controlled values) using the MERGE patterns from the design
-    - `upsert_entity`: MERGE on `(type, canonical_key)`; ON MATCH append only new aliases
+    - `upsert_entity`: MERGE on `(canonical_key, investigation_id)` — nodes are scoped per investigation, never shared; ON MATCH append only new aliases
     - `upsert_relationship`: MERGE on `(source_id, target_id, type, investigation_id)`; ON MATCH append new `event_ids` and `signal_names` (no duplicates); NEVER remove existing entries
     - Store all required relationship properties: `investigation_id`, `timestamp`, `event_ids`, `source`, `signal_names`, `signal_scores`, `combined_score`, `explanation`
     - Implement `get_graph` with filters by entity type, relationship type, time range
@@ -244,12 +245,12 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Validate investigation existence before any processing; return `INVESTIGATION_NOT_FOUND` if missing
     - Reject immediately with `INVALID_SOURCE_TYPE` if `source_type` is not in the registry
     - Process each event independently in batch mode; collect partial failures without stopping
-    - Wire together: `AdapterRegistry.dispatch` → `NormalizationEngine.normalize` → Pydantic validation → `EntityExtractor.extract` → `RelationshipExtractor.extract` → `CandidateRetrieval.retrieve` → `TemporalCorrelationEngine.correlate` → `GraphRepository.upsert_*` → `EventRepository.store`
+    - Wire together: parse → normalize → validate → extract_entities → extract_relationships (upsert immediately) → sort_by_timestamp → retrieve_candidates → correlate → enrich relationships with signals → upsert_graph → store_events + event_entity_map
     - Return `IngestionResponse` with `accepted`, `rejected`, and `errors` (field-level reasons)
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 16.3_
 
   - [ ] 14.2 Implement `EventRepository` for PostgreSQL event storage
-    - Create `backend/app/repositories/event_repository.py` with `store(events, investigation_id)` and `get(event_id)` using parameterized SQLAlchemy queries
+    - Create `backend/app/repositories/event_repository.py` with `store(events, investigation_id, entity_map)` and `get(event_id, investigation_id)`. Also INSERT into `event_entity_map`. Use ON CONFLICT DO NOTHING for idempotent re-ingestion using parameterized SQLAlchemy queries
     - _Requirements: 15.6_
 
   - [ ] 14.3 Implement ingestion API routes
@@ -259,7 +260,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Return `SuccessResponse[IngestionResponse]` or `ErrorResponse`
     - _Requirements: 1.1–1.8, 15.5, 16.1–16.4_
 
-  - [ ]* 14.4 Write integration tests for the ingestion pipeline
+  - [ ] 14.4 Write integration tests for the ingestion pipeline
     - Test single event success, batch partial failure, `INVESTIGATION_NOT_FOUND`, `INVALID_SOURCE_TYPE`, ownership enforcement, and round-trip `event_id` preservation
     - _Requirements: 1.1–1.8_
 

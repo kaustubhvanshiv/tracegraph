@@ -69,6 +69,7 @@ The platform is designed for explainability first: every relationship traces bac
 6. IF the `source_type` field is not registered in the Adapter_Registry, THEN THE Ingestion_API SHALL reject the entire batch immediately with error code `INVALID_SOURCE_TYPE` and SHALL NOT partially process any events.
 7. THE Ingestion_API SHALL enforce investigation ownership via authorization middleware before processing any event.
 8. THE Ingestion_API SHALL support the following `source_type` values: `siem`, `edr`, `sysmon`, `auth`, `network`, `public_dataset`.
+9. WHEN the same `event_id` is submitted for the same investigation a second time, THE Ingestion_API SHALL treat it as an idempotent re-ingestion: update the existing record and return `accepted=1` without creating a duplicate. The `event_id` uniqueness constraint is scoped to `(event_id, investigation_id)`, not globally.
 
 ---
 
@@ -116,7 +117,7 @@ The platform is designed for explainability first: every relationship traces bac
 3. WHEN multiple events reference the same entity under different name variants, THE Entity_Extractor SHALL merge them into a single `Entity` and list all observed variants in `entity.aliases`.
 4. FOR ALL events that contain at least one extractable entity field, THE Entity_Extractor SHALL produce at least one `Entity` such that the event's `event_id` is present in `entity.event_ids`.
 5. THE Entity_Extractor SHALL NOT create an entity unless at least one event field supports its extraction.
-6. THE Entity_Extractor SHALL apply the following identity keys: User → normalized username; Host → normalized hostname; Server → normalized hostname + role hint; IP → dotted-decimal or compressed IPv6; Process → `(host, process_name, pid)` tuple; File → `(host, absolute_path)` tuple.
+6. THE Entity_Extractor SHALL apply the following identity keys: User → normalized username; Host → normalized hostname (used when no `server_role` is present); Server → normalized hostname (used only when `server_role` field is explicitly set on the event); IP → dotted-decimal or compressed IPv6; Process → `"{source_host}::{process_name}"` string (pid is stored as metadata, not in the canonical_key); File → `(host, absolute_path)` tuple. A single hostname SHALL map to either Host OR Server for a given event, never both.
 7. WHEN `extract_entities` is called multiple times on the same input, THE Entity_Extractor SHALL produce entities with identical `entity_id` values on each invocation.
 
 ---
@@ -130,7 +131,7 @@ The platform is designed for explainability first: every relationship traces bac
 1. WHEN `extract_relationships` is called, THE Relationship_Extractor SHALL produce only relationships of the five defined types: `LOGGED_INTO`, `AUTHENTICATED_TO`, `EXECUTED`, `CONNECTED_TO`, `ACCESSED`.
 2. FOR ALL extracted relationships, THE Relationship_Extractor SHALL include at least one `event_id` in `relationship.event_ids`.
 3. WHEN the same relationship is observed in multiple events, THE Relationship_Extractor SHALL merge them into a single relationship and accumulate all contributing `event_ids`.
-4. THE Relationship_Extractor SHALL apply the following mapping rules: `LOGGED_INTO` ← user + source_host + action=login; `AUTHENTICATED_TO` ← user + destination_host + action=auth; `EXECUTED` ← process + host; `CONNECTED_TO` ← source_ip + destination_ip; `ACCESSED` ← process/user + file.
+4. THE Relationship_Extractor SHALL apply the following mapping rules with explicit action conditions: `LOGGED_INTO` ← user + source_host + action=="login"; `AUTHENTICATED_TO` ← user + destination_host + action=="auth"; `EXECUTED` ← process + source_host + action=="execute"; `CONNECTED_TO` ← source_ip + destination_ip + action=="connect"; `ACCESSED` ← (process or user) + file + action=="access". The `action` field is required for all rules; an event matching only the entity fields but not the action condition SHALL NOT produce a relationship.
 5. THE Relationship_Extractor SHALL NOT infer a relationship type that is not supported by the event fields present.
 6. WHEN a relationship is extracted, THE Relationship_Extractor SHALL store the `source` (parser source_type) and `investigation_id` on the relationship.
 
@@ -164,7 +165,8 @@ The platform is designed for explainability first: every relationship traces bac
 5. FOR ALL `CorrelatedRelationship` objects returned by `correlate`, THE Correlation_Engine SHALL set `explanation` to a non-empty, human-readable string describing which signals fired and the evidence behind them.
 6. THE Correlation_Engine SHALL document that `combined_score` is a weighted-sum relevance indicator and is NOT an attack probability score.
 7. THE Correlation_Engine SHALL use configurable signal weights and SHALL NOT hardcode weight values in business logic.
-8. WHEN signal weights are configured, THE Correlation_Engine SHALL compute `combined_score` as the weighted sum of fired signal scores, normalized to `[0, 1]`.
+8. WHEN signal weights are configured, THE Correlation_Engine SHALL compute `combined_score` as the weighted sum of fired signal scores divided by the sum of ALL configured signal weights (not only the fired ones), so that `combined_score` reflects how many possible signals fired rather than always returning 1.0.
+9. THE Correlation_Engine SHALL require at least one context signal (any signal other than `temporal_proximity`) to be fired before producing a `CorrelatedRelationship`. A pair that fires only `temporal_proximity` — and no shared-entity or action-compatibility signal — SHALL be treated as having zero meaningful context and SHALL NOT produce a `CorrelatedRelationship`.
 
 ---
 
