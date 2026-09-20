@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.core.errors import register_error_handlers
 
 app = FastAPI(
     title="TraceGraph API",
@@ -20,6 +21,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Register global exception handlers after middleware so all requests are covered.
+register_error_handlers(app)
 
 
 @app.get("/health")

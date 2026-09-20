@@ -38,8 +38,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test `SuccessResponse` and `ErrorResponse` envelope serialization
     - _Requirements: 3.1, 3.8, 16.1, 16.4_
 
-- [ ] 3. Error handling and structured error codes
-  - [ ] 3.1 Implement global error handling middleware and error code constants
+- [x] 3. Error handling and structured error codes
+  - [x] 3.1 Implement global error handling middleware and error code constants
     - Create `backend/app/core/errors.py` defining all standard error code strings: `VALIDATION_ERROR`, `INVALID_SOURCE_TYPE`, `UNAUTHORIZED`, `FORBIDDEN`, `INVESTIGATION_NOT_FOUND`, `EVENT_NOT_FOUND`, `PARSE_ERROR`, `AI_UNAVAILABLE`, `GRAPH_UNAVAILABLE`
     - Implement a FastAPI exception handler that converts all application exceptions to `ErrorResponse` JSON with the correct HTTP status code
     - Implement a `GRAPH_UNAVAILABLE` handler that returns HTTP 503 when Neo4j is unreachable
