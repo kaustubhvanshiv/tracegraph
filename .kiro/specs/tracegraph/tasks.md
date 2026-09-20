@@ -8,7 +8,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 
 ## Tasks
 
-- [ ] 1. Project scaffolding and core infrastructure
+- [x] 1. Project scaffolding and core infrastructure
   - Create the `tracegraph/` monorepo directory structure exactly as specified in the design's package structure section
   - Initialize `backend/` as a Python package with `pyproject.toml` (or `requirements.txt`) pinning all backend dependencies: `fastapi`, `pydantic>=2`, `pydantic-settings`, `uvicorn`, `sqlalchemy[asyncio]`, `asyncpg`, `alembic`, `neo4j`, `python-jose[cryptography]`, `bcrypt`, `pytest-asyncio`, `hypothesis`, `pytest`, `httpx`
   - Initialize `frontend/` with a React project (Vite or CRA) and install pinned frontend dependencies: `react`, `react-router-dom`, `cytoscape`, `cytoscape-fcose`, `axios`, `date-fns`, `tailwindcss`
