@@ -1,5 +1,5 @@
-"""Database connection management for PostgreSQL (SQLAlchemy async) and Neo4j."""
-
+import logging
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
@@ -8,13 +8,10 @@ from sqlalchemy.ext.asyncio import (
 
 from app.core.config import settings
 
+logger = logging.getLogger(__name__)
+
 # ---------------------------------------------------------------------------
-# PostgreSQL — async engine (Supabase connection pooler)
-#
-# Supabase uses pgBouncer in transaction-pooling mode, which does not support
-# prepared statements. Two tweaks are required:
-#   1. Disable prepared statement caching via the connect_args option.
-#   2. Enable SSL (Supabase requires it on the pooler endpoint).
+# PostgreSQL — async engine
 # ---------------------------------------------------------------------------
 
 DATABASE_URL = (
@@ -22,14 +19,16 @@ DATABASE_URL = (
     f"@{settings.postgres_host}:{settings.postgres_port}/{settings.postgres_db}"
 )
 
+connect_args = {
+    "prepared_statement_cache_size": 0,
+}
+if "supabase.com" in settings.postgres_host:
+    connect_args["ssl"] = "require"
+
 engine = create_async_engine(
     DATABASE_URL,
     echo=settings.app_env == "development",
-    # pgBouncer (transaction mode) does not support server-side prepared statements
-    connect_args={
-        "prepared_statement_cache_size": 0,
-        "ssl": "require",
-    },
+    connect_args=connect_args,
 )
 
 AsyncSessionLocal = async_sessionmaker(
@@ -49,12 +48,11 @@ async def get_db() -> AsyncSession:
 # Neo4j — async driver
 # ---------------------------------------------------------------------------
 
-# Initialized lazily on app startup via init_neo4j().
 neo4j_driver = None
 
 
 async def init_neo4j() -> None:
-    """Initialize the Neo4j async driver.  Called during app startup."""
+    """Initialize the Neo4j async driver. Called during app startup."""
     from neo4j import AsyncGraphDatabase  # type: ignore[import-untyped]
 
     global neo4j_driver
@@ -65,6 +63,42 @@ async def init_neo4j() -> None:
 
 
 async def close_neo4j() -> None:
-    """Close the Neo4j async driver.  Called during app shutdown."""
+    """Close the Neo4j async driver. Called during app shutdown."""
     if neo4j_driver is not None:
         await neo4j_driver.close()
+
+
+# ---------------------------------------------------------------------------
+# Health checks
+# ---------------------------------------------------------------------------
+
+async def check_postgres_health() -> bool:
+    """Verify PostgreSQL connectivity."""
+    try:
+        async with engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        return True
+    except Exception as e:
+        logger.error("PostgreSQL health check failed: %s", e)
+        return False
+
+
+async def check_neo4j_health() -> bool:
+    """Verify Neo4j connectivity."""
+    if neo4j_driver is None:
+        return False
+    try:
+        await neo4j_driver.verify_connectivity()
+        return True
+    except Exception as e:
+        logger.error("Neo4j health check failed: %s", e)
+        return False
+
+
+async def check_db_health() -> dict[str, bool]:
+    """Check connectivity to all databases."""
+    return {
+        "postgres": await check_postgres_health(),
+        "neo4j": await check_neo4j_health(),
+    }
+

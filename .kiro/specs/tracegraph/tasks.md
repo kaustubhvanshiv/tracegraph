@@ -18,8 +18,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
   - Create docker-compose.yml and Dockerfiles early (Task 1) so integration tests in tasks 13+ have live databases
   - _Requirements: 17.1, 17.2, 17.3, 17.4, 17.5, 15.4_
 
-- [ ] 2. Core Pydantic schemas and SQLAlchemy models
-  - [ ] 2.1 Implement Pydantic schemas for the Common Security Event Model and supporting types
+- [x] 2. Core Pydantic schemas and SQLAlchemy models
+  - [x] 2.1 Implement Pydantic schemas for the Common Security Event Model and supporting types
     - Create `backend/app/schemas/security_event.py` using Pydantic v2 `@field_validator` (NOT deprecated `@validator`). Add `source_type` field. `event_id` non-empty, `timestamp` (UTC datetime), `event_type`, `action`, optional fields (`user`, `source_host`, `destination_host`, `source_ip`, `destination_ip`, `process`, `file`), `severity` (enum validator: low/medium/high/critical), `raw_data`
     - Create `backend/app/schemas/entity.py` with `Entity`, `EntityType` enum, and identity key constants
     - Create `backend/app/schemas/relationship.py` with `RawRelationship`, `CorrelatedRelationship`, `RelationshipType` enum
@@ -28,12 +28,12 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Create `backend/app/schemas/graph.py`, `timeline.py`, `summary.py` with `GraphResult`, `GraphFilter`, `TimelineResult`, `TimelineFilter`, `InvestigationContext`, `SummaryResult`
     - _Requirements: 3.1, 3.8, 4.1, 5.1, 7.1, 11.1, 11.4, 16.1, 16.4_
 
-  - [ ] 2.2 Implement SQLAlchemy ORM models and database connection management
+  - [x] 2.2 Implement SQLAlchemy ORM models and database connection management
     - Create `backend/app/models/investigation.py`, `security_event.py` (with source_type column, composite unique key on event_id+investigation_id), `note.py`, `event_entity_map.py` matching the PostgreSQL schema in the design exactly (including all `CHECK` constraints and indexes)
     - Create `backend/app/core/database.py` with connection factories for both PostgreSQL (SQLAlchemy async engine) and Neo4j (official driver), startup health checks, and connection error logging
     - _Requirements: 11.5, 17.5_
 
-  - [ ]* 2.3 Write unit tests for schema validators
+  - [x]* 2.3 Write unit tests for schema validators
     - Test `event_id` non-empty validator, `severity` enum validator, UTC timestamp coercion
     - Test `SuccessResponse` and `ErrorResponse` envelope serialization
     - _Requirements: 3.1, 3.8, 16.1, 16.4_

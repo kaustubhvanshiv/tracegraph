@@ -1,8 +1,28 @@
-"""Pydantic v2 schemas for timeline query results.
+from datetime import datetime
+from pydantic import BaseModel, Field
+from app.schemas.security_event import SecurityEvent
 
-Full implementation is covered by task 2.1.
-"""
 
-# TODO: implement — task 2.1
-# class TimelineFilter(BaseModel): time_range_start, time_range_end, entity_id, event_type, severity
-# class TimelineResult(BaseModel): events: list[SecurityEvent], total: int
+class TimelineFilter(BaseModel):
+    """Filter criteria for timeline events."""
+    start_time: datetime | None = None
+    end_time: datetime | None = None
+    entity_id: str | None = None
+    event_type: str | None = None
+    severity: str | None = None
+    limit: int = 100
+    offset: int = 0
+
+
+class TimelineEvent(BaseModel):
+    """Timeline event wrapper including cross-linked entity IDs for graph highlight."""
+    event: SecurityEvent
+    entity_ids: list[str] = Field(default_factory=list, description="Extracted entity IDs for graph cross-linking")
+
+
+class TimelineResult(BaseModel):
+    """Chronologically sorted timeline result."""
+    investigation_id: str
+    events: list[TimelineEvent] = Field(default_factory=list)
+    total: int = 0
+

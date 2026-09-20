@@ -1,8 +1,19 @@
-"""Generic API envelope schemas used across all endpoints.
+from typing import Any, Generic, TypeVar
+from pydantic import BaseModel, Field
 
-Full implementation is covered by task 2.1.
-"""
+T = TypeVar("T")
 
-# TODO: implement — task 2.1
-# class SuccessResponse(BaseModel, Generic[T]): data: T, message: str | None = None
-# class ErrorResponse(BaseModel): error_code: str, message: str, details: Any = None
+
+class SuccessResponse(BaseModel, Generic[T]):
+    """Generic success envelope for API responses."""
+    status: str = Field(default="success")
+    data: T
+
+
+class ErrorResponse(BaseModel):
+    """Generic error envelope for API error responses."""
+    status: str = Field(default="error")
+    code: str
+    message: str
+    details: dict[str, Any] | None = None
+

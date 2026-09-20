@@ -1,11 +1,41 @@
-"""SQLAlchemy ORM model for the investigations table.
+import uuid
+from datetime import datetime
+from sqlalchemy import CheckConstraint, DateTime, Integer, String, Text, func
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import Mapped, mapped_column
+from app.models.base import Base
 
-Full implementation (with all CHECK constraints and indexes) is covered by
-task 2.2.
-"""
 
-# TODO: implement — task 2.2
-# Table: investigations
-# Columns: investigation_id (UUID PK), title, description, status CHECK
-#   (OPEN/UNDER_REVIEW/CLOSED), outcome CHECK, created_at, updated_at,
-#   owner_id, event_count
+class InvestigationModel(Base):
+    """SQLAlchemy model for the investigations table."""
+    __tablename__ = "investigations"
+
+    investigation_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    )
+    title: Mapped[str] = mapped_column(Text, nullable=False)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    status: Mapped[str] = mapped_column(
+        Text, nullable=False, server_default="OPEN"
+    )
+    outcome: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
+    )
+    owner_id: Mapped[str] = mapped_column(Text, nullable=False)
+    event_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0, server_default="0")
+
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('OPEN', 'UNDER_REVIEW', 'CLOSED')",
+            name="check_investigation_status",
+        ),
+        CheckConstraint(
+            "outcome IS NULL OR outcome IN ('TRUE_POSITIVE', 'FALSE_POSITIVE', 'INCONCLUSIVE', 'ESCALATED')",
+            name="check_investigation_outcome",
+        ),
+    )
+
