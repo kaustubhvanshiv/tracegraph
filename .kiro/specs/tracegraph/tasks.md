@@ -45,19 +45,19 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Implement a `GRAPH_UNAVAILABLE` handler that returns HTTP 503 when Neo4j is unreachable
     - _Requirements: 16.1, 16.2, 16.5_
 
-  - [ ]* 3.2 Write unit tests for error handler
+  - [x] 3.2 Write unit tests for error handler
     - Test each error code maps to the correct HTTP status
     - Test `ErrorResponse` envelope shape matches the schema
     - _Requirements: 16.1, 16.2_
 
-- [ ] 4. JWT authentication and authorization middleware
-  - [ ] 4.1 Implement JWT middleware and investigation ownership enforcement
+- [x] 4. JWT authentication and authorization middleware
+  - [x] 4.1 Implement JWT middleware and investigation ownership enforcement
     - Create `backend/app/core/auth.py` with a FastAPI dependency that validates JWT tokens on every request and returns HTTP 401 (`UNAUTHORIZED`) for missing or invalid tokens
     - Implement an `require_investigation_owner` dependency that checks the authenticated caller owns the referenced `investigation_id` and returns HTTP 403 (`FORBIDDEN`) otherwise
     - Ensure no secrets are hardcoded; all keys are read from `config.py`
     - _Requirements: 15.1, 15.2, 15.3, 15.4_
 
-  - [ ] 4.2 Write property test for authorization isolation (Property 17)
+  - [x] 4.2 Write property test for authorization isolation (Property 17)
     - **Property 17: Authorization Isolation**
     - **Validates: Requirements 15.2, 11.8**
     - Use `hypothesis` to generate arbitrary investigation IDs and user pairs; assert every request by a non-owner receives HTTP 403
