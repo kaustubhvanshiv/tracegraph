@@ -62,24 +62,24 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - **Validates: Requirements 15.2, 11.8**
     - Use `hypothesis` to generate arbitrary investigation IDs and user pairs; assert every request by a non-owner receives HTTP 403
 
-- [ ] 5. Parser adapter infrastructure and source-type adapters
-  - [ ] 5.1 Implement the `ParserAdapter` protocol and `AdapterRegistry`
+- [x] 5. Parser adapter infrastructure and source-type adapters
+  - [x] 5.1 Implement the `ParserAdapter` protocol and `AdapterRegistry`
     - Create `backend/app/adapters/base.py` with the `ParserAdapter` Protocol: `source_type: str` and `parse(raw: dict) -> ParsedEvent | ParseError`; include pre/postcondition docstrings from the design
     - Create `backend/app/services/parser_registry.py` implementing `AdapterRegistry` with `register(adapter)` and `dispatch(source_type, raw)` methods; support runtime registration without code changes to the registry
     - Define `ParsedEvent` and `ParseError` Pydantic models in `backend/app/schemas/`
     - _Requirements: 2.5, 2.6, 1.8_
 
-  - [ ] 5.2 Implement the six source-type parser adapters
+  - [x] 5.2 Implement the six source-type parser adapters
     - Create `backend/app/adapters/siem.py`, `edr.py`, `sysmon.py`, `auth.py`, `network.py`, `public_dataset.py` — one adapter per source type
     - Each adapter must: map recognized fields to `ParsedEvent`, preserve all unrecognized fields in `extra_fields`, never mutate the input dict, return `ParseError` (not raise) on failure, preserve `event_id` unchanged
     - _Requirements: 2.1, 2.2, 2.3, 2.4, 1.8_
 
-  - [ ]* 5.3 Write property test for parser non-mutation (Property 16)
+  - [x]* 5.3 Write property test for parser non-mutation (Property 16)
     - **Property 16: Parser Non-Mutation**
     - **Validates: Requirements 2.1, 2.4**
     - Use `hypothesis` to generate arbitrary raw event dicts; assert every key is present in either recognized fields or `extra_fields` after parsing
 
-  - [ ]* 5.4 Write unit tests for each parser adapter
+  - [x]* 5.4 Write unit tests for each parser adapter
     - Test field mapping, `extra_fields` preservation, `ParseError` return on malformed input, `event_id` passthrough for each of the six adapters
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
