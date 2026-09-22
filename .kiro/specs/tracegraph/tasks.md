@@ -83,8 +83,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test field mapping, `extra_fields` preservation, `ParseError` return on malformed input, `event_id` passthrough for each of the six adapters
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-- [ ] 6. Normalization engine
-  - [ ] 6.1 Implement the `NormalizationEngine`
+- [x] 6. Normalization engine
+  - [x] 6.1 Implement the `NormalizationEngine`
     - Create `backend/app/services/normalization.py` with `NormalizationEngine.normalize(parsed: ParsedEvent) -> SecurityEvent`
     - Implement configurable field-name mapping tables (loaded from config, not hardcoded)
     - Implement timestamp normalization: parse multiple formats, convert to UTC-aware datetime, reject unparseable timestamps with `VALIDATION_ERROR`
