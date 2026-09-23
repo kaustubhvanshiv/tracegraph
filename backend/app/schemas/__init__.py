@@ -13,6 +13,7 @@ from app.schemas.investigation import (
     NotePayload,
     OutcomePayload,
 )
+from app.schemas.parser import ParsedEvent, ParseError
 from app.schemas.relationship import CorrelatedRelationship, RawRelationship, RelationshipType
 from app.schemas.security_event import SecurityEvent
 from app.schemas.summary import EvidenceDetail, InvestigationContext, SummaryResult
@@ -22,6 +23,8 @@ __all__ = [
     "SuccessResponse",
     "ErrorResponse",
     "SecurityEvent",
+    "ParsedEvent",
+    "ParseError",
     "EntityType",
     "Entity",
     "generate_entity_id",
@@ -46,4 +49,5 @@ __all__ = [
     "InvestigationContext",
     "SummaryResult",
 ]
+
 

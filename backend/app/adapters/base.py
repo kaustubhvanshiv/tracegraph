@@ -1,20 +1,24 @@
-"""ParserAdapter Protocol definition.
+from typing import Any, Protocol, runtime_checkable
+from app.schemas.parser import ParsedEvent, ParseError
 
-All source-type adapters must implement this protocol.
 
-Preconditions (documented as per design):
-  - raw is a non-empty dict with at least a timestamp field
-Postconditions:
-  - Returns ParsedEvent with all recognized fields populated
-  - Unrecognized fields are preserved in extra_fields
-  - Never raises; returns ParseError on failure
-  - Does NOT mutate the input raw dict
-  - Preserves event_id unchanged
+@runtime_checkable
+class ParserAdapter(Protocol):
+    """Protocol that all log source-type adapters must implement."""
+    source_type: str
 
-Full implementation is covered by task 5.1.
-"""
+    def parse(self, raw: dict[str, Any]) -> ParsedEvent | ParseError:
+        """
+        Transform raw event log dict into a ParsedEvent or ParseError.
 
-# TODO: implement — task 5.1
-# class ParserAdapter(Protocol):
-#     source_type: str
-#     def parse(self, raw: dict) -> ParsedEvent | ParseError: ...
+        Preconditions:
+          - raw is a non-empty dict containing event telemetry
+        Postconditions:
+          - Returns ParsedEvent with recognized fields mapped
+          - Unrecognized fields are preserved in extra_fields
+          - Never raises exceptions; returns ParseError on malformed input
+          - Does NOT mutate the input raw dict
+          - Preserves event_id unchanged
+        """
+        ...
+

@@ -73,5 +73,42 @@ class Settings(BaseSettings):
     default_window_minutes: int = 10
     max_context_events: int = 50
 
+    # ------------------------------------------------------------------
+    # Normalization field-name mapping
+    # source_type -> {raw_field_name -> canonical_field_name}
+    # Loadable from env var NORMALIZATION_FIELD_MAP (JSON) or uses default.
+    # ------------------------------------------------------------------
+    normalization_field_map: dict[str, dict[str, str]] = {
+        "siem": {
+            "src_host": "source_host",
+            "dst_host": "destination_host",
+            "src_ip": "source_ip",
+            "dst_ip": "destination_ip",
+        },
+        "edr": {
+            "hostname": "source_host",
+            "target_host": "destination_host",
+        },
+        "sysmon": {
+            "Computer": "source_host",
+            "DestinationHostname": "destination_host",
+            "SourceIp": "source_ip",
+            "DestinationIp": "destination_ip",
+            "User": "user",
+        },
+        "auth": {
+            "workstation": "source_host",
+            "target_server": "destination_host",
+            "account_name": "user",
+        },
+        "network": {
+            "src": "source_ip",
+            "dst": "destination_ip",
+            "src_host": "source_host",
+            "dst_host": "destination_host",
+        },
+        "public_dataset": {},
+    }
+
 
 settings = Settings()
