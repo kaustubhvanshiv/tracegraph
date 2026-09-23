@@ -48,6 +48,37 @@
         "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
         "timestamp": 1789929667073
       }
+    ],
+    "7.1 Implement `InvestigationService` and `InvestigationRepository`": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790186639541
+      },
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187325909
+      }
+    ],
+    "7.2 Implement Investigation Management API routes": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790186644222
+      },
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187330348
+      }
+    ],
+    "7. Investigation management service and API": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187330536
+      }
     ]
   }
 }
