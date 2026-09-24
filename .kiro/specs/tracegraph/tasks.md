@@ -167,8 +167,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test each of the five relationship types, multi-event accumulation (deduplication of event_ids), rejection of unsupported field combinations
     - _Requirements: 5.1–5.6_
 
-- [ ] 10. Candidate retrieval service
-  - [ ] 10.1 Implement `CandidateRetrieval`
+- [x] 10. Candidate retrieval service
+  - [x] 10.1 Implement `CandidateRetrieval`
     - Create `backend/app/services/candidate_retrieval.py` with `CandidateRetrieval.retrieve(events, window_minutes=10) -> list[CandidatePair]`
     - Implement the sliding-window algorithm from the design's pseudocode: O(n) inner-loop break when delta exceeds window
     - Deduplicate pairs: `(a, b)` and `(b, a)` treated as the same pair
