@@ -79,7 +79,25 @@
         "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
         "timestamp": 1790187330536
       }
+    ],
+    "10.1 Implement `CandidateRetrieval`": [
+      {
+        "executionId": "28290dfd-a02d-47b6-b431-c19c109b665d",
+        "chatSessionId": "sess_14c33406-6439-490c-9879-f7774efaadfb",
+        "timestamp": 1790270831094
+      },
+      {
+        "executionId": "28290dfd-a02d-47b6-b431-c19c109b665d",
+        "chatSessionId": "sess_14c33406-6439-490c-9879-f7774efaadfb",
+        "timestamp": 1790271288855
+      }
+    ],
+    "10. Candidate retrieval service": [
+      {
+        "executionId": "28290dfd-a02d-47b6-b431-c19c109b665d",
+        "chatSessionId": "sess_14c33406-6439-490c-9879-f7774efaadfb",
+        "timestamp": 1790271288906
+      }
     ]
   }
 }
-

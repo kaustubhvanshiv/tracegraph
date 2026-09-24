@@ -1,6 +1,13 @@
+from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
 from pydantic import BaseModel, Field
+
+# SecurityEvent is imported here for CandidatePair; the TYPE_CHECKING guard is
+# intentionally NOT used because Pydantic v2 needs the real class at model
+# construction time (not just for type annotations).
+from app.schemas.security_event import SecurityEvent  # noqa: E402
 
 
 class RelationshipType(str, Enum):
@@ -38,4 +45,23 @@ class CorrelatedRelationship(BaseModel):
     signal_scores: dict[str, float] = Field(default_factory=dict, description="Per-signal score breakdown")
     combined_score: float = Field(description="Weighted sum normalized to [0.0, 1.0]")
     explanation: str = Field(description="Human-readable explanation of correlation")
+
+
+
+class CandidatePair(BaseModel):
+    """
+    A pair of SecurityEvents that are candidates for temporal correlation.
+
+    Invariants:
+      - event_a.timestamp <= event_b.timestamp (a is always the earlier event)
+      - event_a.event_id != event_b.event_id (never self-pairs)
+      - Both events belong to the same investigation_id
+    """
+    event_a: SecurityEvent = Field(description="Earlier event in the candidate pair")
+    event_b: SecurityEvent = Field(description="Later event in the candidate pair")
+    investigation_id: str = Field(description="Shared investigation scope for both events")
+    delta_seconds: float = Field(
+        description="Time delta between events in seconds (b.timestamp - a.timestamp)"
+    )
+
 

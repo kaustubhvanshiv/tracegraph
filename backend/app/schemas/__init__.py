@@ -14,7 +14,7 @@ from app.schemas.investigation import (
     OutcomePayload,
 )
 from app.schemas.parser import ParsedEvent, ParseError
-from app.schemas.relationship import CorrelatedRelationship, RawRelationship, RelationshipType
+from app.schemas.relationship import CandidatePair, CorrelatedRelationship, RawRelationship, RelationshipType
 from app.schemas.security_event import SecurityEvent
 from app.schemas.summary import EvidenceDetail, InvestigationContext, SummaryResult
 from app.schemas.timeline import TimelineEvent, TimelineFilter, TimelineResult
@@ -31,6 +31,7 @@ __all__ = [
     "RelationshipType",
     "RawRelationship",
     "CorrelatedRelationship",
+    "CandidatePair",
     "InvestigationStatus",
     "InvestigationOutcome",
     "Investigation",
