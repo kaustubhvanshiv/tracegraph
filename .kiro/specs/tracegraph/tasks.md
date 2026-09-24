@@ -126,8 +126,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test all valid transitions, all invalid transitions, outcome recording, paginated list, note persistence with author/timestamp
     - _Requirements: 11.2, 11.3, 11.4, 11.7_
 
-- [ ] 8. Entity extraction service
-  - [ ] 8.1 Implement `EntityExtractor`
+- [x] 8. Entity extraction service
+  - [x] 8.1 Implement `EntityExtractor`
     - Create `backend/app/services/entity_extractor.py` with `EntityExtractor.extract(events: list[SecurityEvent]) -> list[Entity]`
     - Apply identity key rules from the design: User → normalized username; Host → normalized hostname; Server → hostname (only when server_role field is set); IP → canonical IP; Process → "{source_host}::{process_name}" (pid is metadata, NOT in canonical_key); File → (host, absolute_path) tuple
     - Assign deterministic `entity_id` as a hash of `(entity_type, canonical_key)`
