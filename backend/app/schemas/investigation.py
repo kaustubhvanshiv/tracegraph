@@ -1,6 +1,6 @@
 from datetime import datetime
 from enum import Enum
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class InvestigationStatus(str, Enum):
@@ -20,6 +20,8 @@ class InvestigationOutcome(str, Enum):
 
 class Investigation(BaseModel):
     """Investigation metadata schema."""
+    model_config = ConfigDict(from_attributes=True)
+
     investigation_id: str
     title: str
     description: str | None = None
@@ -57,6 +59,8 @@ class NotePayload(BaseModel):
 
 class Note(BaseModel):
     """Analyst note schema."""
+    model_config = ConfigDict(from_attributes=True)
+
     note_id: str
     investigation_id: str
     author_id: str
@@ -70,4 +74,25 @@ class InvestigationFilter(BaseModel):
     owner_id: str | None = None
     limit: int = 50
     offset: int = 0
+
+
+class PatchInvestigationPayload(BaseModel):
+    """Payload for updating investigation status and/or outcome.
+
+    At least one of status or outcome must be provided.
+    """
+    status: InvestigationStatus | None = None
+    outcome: str | None = None
+
+    @field_validator("outcome")
+    @classmethod
+    def outcome_must_be_valid_if_set(cls, v: str | None) -> str | None:
+        if v is None:
+            return v
+        valid_outcomes = {o.value for o in InvestigationOutcome}
+        if v not in valid_outcomes:
+            raise ValueError(
+                f"outcome must be one of {sorted(valid_outcomes)}, got {v!r}"
+            )
+        return v
 

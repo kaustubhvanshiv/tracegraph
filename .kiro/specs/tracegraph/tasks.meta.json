@@ -1,0 +1,85 @@
+{
+  "pbtResults": {
+    "4.2 Write property test for authorization isolation (Property 17)": {
+      "status": "passed",
+      "lastRunTimestamp": 1789929635068
+    }
+  },
+  "executionHistory": {
+    "3.2 Write unit tests for error handler": [
+      {
+        "executionId": "51b8f02d-1889-45c7-939c-5d1fe6bed0fa",
+        "chatSessionId": "sess_440cd2de-f01c-450d-aec2-be8a6238a73f",
+        "timestamp": 1789927744256
+      },
+      {
+        "executionId": "51b8f02d-1889-45c7-939c-5d1fe6bed0fa",
+        "chatSessionId": "sess_440cd2de-f01c-450d-aec2-be8a6238a73f",
+        "timestamp": 1789928061749
+      }
+    ],
+    "4.1 Implement JWT middleware and investigation ownership enforcement": [
+      {
+        "executionId": "cee83bc7-0e0d-481b-bcd6-f9bb332fcc15",
+        "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
+        "timestamp": 1789928322572
+      },
+      {
+        "executionId": "cee83bc7-0e0d-481b-bcd6-f9bb332fcc15",
+        "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
+        "timestamp": 1789929662541
+      }
+    ],
+    "4.2 Write property test for authorization isolation (Property 17)": [
+      {
+        "executionId": "cee83bc7-0e0d-481b-bcd6-f9bb332fcc15",
+        "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
+        "timestamp": 1789928326243
+      },
+      {
+        "executionId": "cee83bc7-0e0d-481b-bcd6-f9bb332fcc15",
+        "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
+        "timestamp": 1789929666957
+      }
+    ],
+    "4. JWT authentication and authorization middleware": [
+      {
+        "executionId": "cee83bc7-0e0d-481b-bcd6-f9bb332fcc15",
+        "chatSessionId": "sess_7b613d02-cd61-4125-9a5b-95822fa4475b",
+        "timestamp": 1789929667073
+      }
+    ],
+    "7.1 Implement `InvestigationService` and `InvestigationRepository`": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790186639541
+      },
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187325909
+      }
+    ],
+    "7.2 Implement Investigation Management API routes": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790186644222
+      },
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187330348
+      }
+    ],
+    "7. Investigation management service and API": [
+      {
+        "executionId": "da5dba6b-25c9-421f-b86b-fd83898a4f32",
+        "chatSessionId": "sess_11e5db27-6492-4410-80fd-6a1115073716",
+        "timestamp": 1790187330536
+      }
+    ]
+  }
+}
+

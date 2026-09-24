@@ -106,8 +106,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test timestamp parsing for multiple formats and timezones, hostname lowercasing, domain-prefix stripping, IP normalization, severity validation, `raw_data` preservation
     - _Requirements: 3.1–3.9_
 
-- [ ] 7. Investigation management service and API
-  - [ ] 7.1 Implement `InvestigationService` and `InvestigationRepository`
+- [x] 7. Investigation management service and API
+  - [x] 7.1 Implement `InvestigationService` and `InvestigationRepository`
     - Create `backend/app/repositories/investigation_repository.py` with CRUD operations against PostgreSQL using parameterized SQLAlchemy queries (no string interpolation)
     - Create `backend/app/services/investigation.py` implementing `create`, `get`, `list` (paginated), `update_status`, `record_outcome`, `add_note`, `list_notes`
     - Enforce the lifecycle state machine: `OPEN → UNDER_REVIEW`, `UNDER_REVIEW → OPEN`, `UNDER_REVIEW → CLOSED`; reject all other transitions with a descriptive error
@@ -115,7 +115,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Enforce ownership: only the owner (or explicitly granted user) can modify or view an investigation
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 15.6_
 
-  - [ ] 7.2 Implement Investigation Management API routes
+  - [x] 7.2 Implement Investigation Management API routes
     - Create `backend/app/api/investigations.py` with routes: `POST /api/investigations`, `GET /api/investigations` (paginated), `GET /api/investigations/{id}`, `PATCH /api/investigations/{id}` (status/outcome)
     - Create `backend/app/api/notes.py` with `POST /api/investigations/{id}/notes` and `GET /api/investigations/{id}/notes`
     - Apply JWT middleware and ownership checks to all routes
