@@ -149,8 +149,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test each of the six entity types, alias merging, deduplication, deterministic `entity_id` across multiple calls with identical input
     - _Requirements: 4.1–4.7_
 
-- [ ] 9. Relationship extraction service
-  - [ ] 9.1 Implement `RelationshipExtractor`
+- [x] 9. Relationship extraction service
+  - [x] 9.1 Implement `RelationshipExtractor`
     - Create `backend/app/services/relationship_extractor.py` with `RelationshipExtractor.extract(events, entities) -> list[RawRelationship]`
     - Implement declarative rule table mapping event fields to the five relationship types using the trigger-field rules from the design
     - Merge duplicate relationships (same source/target/type): accumulate `event_ids`
@@ -158,12 +158,12 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Never infer a relationship type not supported by the present event fields
     - _Requirements: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6_
 
-  - [ ]* 9.2 Write property test for relationship evidence (Property 5)
+  - [x]* 9.2 Write property test for relationship evidence (Property 5)
     - **Property 5: Relationship Evidence**
     - **Validates: Requirements 5.2**
     - Use `hypothesis`; assert every relationship in the output has `len(event_ids) >= 1`
 
-  - [ ]* 9.3 Write unit tests for relationship extraction
+  - [x]* 9.3 Write unit tests for relationship extraction
     - Test each of the five relationship types, multi-event accumulation (deduplication of event_ids), rejection of unsupported field combinations
     - _Requirements: 5.1–5.6_
 
