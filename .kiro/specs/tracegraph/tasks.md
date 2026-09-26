@@ -493,6 +493,457 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 
 ---
 
+## ML/DL/GNN Research Track
+
+These tasks form a parallel research track that builds on the deterministic pipeline above. They are labeled `ML-NN` and do NOT replace or renumber Tasks 1–31. The dependency chain is: Tasks 1–27 → ML-01 onward.
+
+**Critical distinctions to maintain throughout this track:**
+- Rule-based correlation (`combined_score`) is a deterministic relevance indicator — NOT an attack probability.
+- GNN output is a learned signal — NOT a replacement for rule-based correlation.
+- LLM summary is a grounded narrative explanation — NOT proof that an attack occurred.
+- These three layers must remain implemented, evaluated, and documented separately.
+
+---
+
+- [ ] ML-01. Dataset Analysis
+  - [ ] ML-01.1 Identify and acquire candidate datasets
+    - Identify at least one publicly available security event dataset suitable for graph construction (e.g., DARPA TC, LANL Netflow, CERT Insider Threat, CIC-IDS, CTU-13, or similar)
+    - Download or link to the dataset; record exact version, URL, and access date in `data/ml/datasets/README.md`
+    - _Requirements: ML-01_
+
+  - [ ] ML-01.2 Inspect raw structure of each candidate dataset
+    - For each dataset, record in `data/ml/datasets/<dataset_name>/analysis.md`:
+      - File format (CSV, JSON, PCAP, syslog, etc.)
+      - Total record/event count
+      - Schema: all column/field names and types
+      - Timestamp fields and format
+      - User fields
+      - Host / machine fields
+      - Source and destination IP fields
+      - Process fields
+      - File fields
+      - Event type / action fields
+      - Label fields (if present)
+      - Incident or session ID fields
+      - Attack category annotations (if present)
+    - _Requirements: ML-01_
+
+  - [ ] ML-01.3 Assess ground truth availability
+    - For each candidate dataset, document:
+      - Whether ground truth labels exist
+      - What "positive" means (attack event, malicious connection, anomalous behavior, etc.)
+      - What "negative" means (benign, normal, background traffic)
+      - Class balance: count and percentage of positive vs. negative examples
+      - Whether labels are per-event, per-connection, per-session, or per-scenario
+      - Any known labelling issues or inconsistencies in the dataset
+    - _Requirements: ML-01, ML-02_
+
+  - [ ] ML-01.4 Assess graph constructibility
+    - For each candidate dataset, document:
+      - Whether a node-edge graph can be constructed without inventing relationships
+      - What fields identify nodes (entities)
+      - What fields identify edges (relationships / actions)
+      - Whether constructed edges correspond to any of the five TraceGraph relationship types
+      - Whether the dataset can be converted to the TraceGraph `SecurityEvent` model via an adapter
+      - Whether related events can be grouped into investigations or attack scenarios
+    - _Requirements: ML-01_
+
+  - [ ] ML-01.5 Answer the dataset analysis questions
+    - For the selected dataset, produce a written answer in `data/ml/datasets/<dataset_name>/analysis.md` for each question:
+      1. What is one event/row?
+      2. What does that event represent in a real security context?
+      3. Which fields identify entities?
+      4. Which fields describe actions between entities?
+      5. Which fields describe relationships between entities?
+      6. What labels exist and how are they assigned?
+      7. What is considered a positive example? A negative example?
+      8. Can a graph be constructed without inventing relationships?
+      9. What could be a realistic prediction target?
+      10. What information could leak between train and test sets if splits are random?
+    - _Requirements: ML-01_
+
+  - [ ] ML-01.6 Select the primary dataset and document the selection rationale
+    - Choose one dataset as the primary ML/GNN research dataset
+    - Document: name, reason for selection, limitations, known biases, licence/usage terms
+    - Do NOT choose a GNN architecture or ML task at this step — that comes after ground truth definition
+    - _Requirements: ML-01_
+
+---
+
+- [ ] ML-02. Ground Truth and Label Definition
+  - [ ] ML-02.1 Define the prediction target precisely
+    - Based on the dataset analysis, write a formal definition in `data/ml/ground_truth.md`:
+      - Prediction target (what the model will predict)
+      - Positive example definition (concrete, falsifiable)
+      - Negative example definition (concrete, falsifiable)
+      - Sample unit (one event? one session? one graph? one subgraph?)
+      - Graph unit (what constitutes one graph input to the model?)
+    - _Requirements: ML-02_
+
+  - [ ] ML-02.2 Define leakage-safe train/validation/test splits
+    - Document the splitting strategy in `data/ml/ground_truth.md`:
+      - Why random per-event splitting is or is not safe for this dataset
+      - Chosen split strategy: incident-aware, scenario-aware, host-aware, or time-aware
+      - Split proportions (e.g., 70/15/15 or 60/20/20)
+      - How to verify that no positive incident has events in both train and test
+    - _Requirements: ML-02_
+
+  - [ ] ML-02.3 Reuse the TraceGraph evaluation scenarios as a labelled validation set
+    - Verify that the four evaluation scenarios from Task 29 (`basic_attack_sequence`, `unrelated_events`, `legitimate_access`, `multi_user_host`) can serve as a controlled validation or test set for the ML experiments
+    - Document which scenarios are usable and any limitations
+    - _Requirements: ML-02, 19.1–19.5_
+
+  - [ ] ML-02.4 Implement dataset preparation scripts
+    - Create `research/ml/data_prep/prepare_dataset.py` that:
+      - Loads the raw dataset
+      - Converts events to `SecurityEvent` format via the existing adapter (or a new one registered in the adapter registry)
+      - Assigns labels according to the ground truth definition
+      - Produces deterministic train/validation/test splits (seeded, reproducible)
+      - Saves prepared splits to `data/ml/splits/`
+    - _Requirements: ML-02_
+
+---
+
+- [ ] ML-03. ML Fundamentals and Optional Classical Baseline
+  - [ ] ML-03.1 Assess whether a classical ML baseline is appropriate
+    - Determine whether the dataset and prediction target support a meaningful tabular/feature-based ML baseline
+    - Document the decision in `research/ml/baseline/README.md`: either the baseline is justified (with feature plan) or it is not justified (with reasoning)
+    - Do not implement a baseline purely for complexity — only if it provides a useful comparison point
+    - _Requirements: ML-03_
+
+  - [ ] ML-03.2 (Optional) Engineer tabular features
+    - If the classical baseline is justified, engineer features that do NOT use raw graph structure:
+      - Event frequency counts per entity
+      - Temporal gap between events
+      - Entity occurrence counts (degree-like statistics)
+      - Rule-signal counts from the deterministic correlation engine
+      - Severity distribution
+    - Document each feature: name, derivation formula, expected predictive value
+    - _Requirements: ML-03_
+
+  - [ ] ML-03.3 (Optional) Train and evaluate a classical baseline model
+    - Choose at most one of: Logistic Regression, Random Forest, XGBoost
+    - Train on the training split, tune on the validation split, evaluate on the test split
+    - Report: precision, recall, F1, PR-AUC, ROC-AUC, false-positive count, false-negative count
+    - Do NOT use accuracy as the primary metric if the dataset is imbalanced
+    - Save the trained model to `research/ml/baseline/models/`
+    - _Requirements: ML-03_
+
+---
+
+- [ ] ML-04. Neural Network Fundamentals
+  - [ ] ML-04.1 Implement and study a small feed-forward neural network on a simple task
+    - Create `research/ml/nn_fundamentals/feedforward_demo.py` demonstrating:
+      - Tensor creation and shapes
+      - A two-layer feed-forward network (manually or via PyTorch/TensorFlow)
+      - Forward pass
+      - Loss computation (binary cross-entropy or MSE)
+      - Backpropagation and gradient descent
+      - Training loop with epochs and batches
+      - Validation loss monitoring
+    - This demo should use a toy dataset (e.g., synthetic binary classification), not the security dataset
+    - _Requirements: ML-04_
+
+  - [ ] ML-04.2 Demonstrate understanding of training dynamics
+    - Add a notebook or script `research/ml/nn_fundamentals/training_dynamics.ipynb` that shows:
+      - Effect of learning rate (too high, too low, appropriate)
+      - Overfitting on a small dataset
+      - Effect of a simple regularization technique (dropout or weight decay)
+      - Train vs. validation loss curves
+      - Checkpoint saving and loading
+    - _Requirements: ML-04_
+
+---
+
+- [ ] ML-05. GNN Fundamentals
+  - [ ] ML-05.1 Study and document core GNN concepts
+    - Create `research/ml/gnn_fundamentals/concepts.md` covering:
+      - Graph representation: adjacency matrix vs. edge list
+      - Node features and edge features
+      - Message passing and neighborhood aggregation
+      - Node embeddings and graph embeddings
+      - Transductive vs. inductive learning
+      - Heterogeneous graphs (multiple node and edge types — relevant to TraceGraph)
+      - Temporal graphs (dynamic edges — relevant to security event data)
+    - _Requirements: ML-05_
+
+  - [ ] ML-05.2 Implement a minimal GCN on a standard benchmark
+    - Create `research/ml/gnn_fundamentals/gcn_demo.py` implementing a two-layer GCN on a standard small graph dataset (e.g., Cora citation network via PyTorch Geometric or DGL)
+    - Demonstrate: graph loading, node feature construction, forward pass, training loop, accuracy on held-out nodes
+    - This is a fundamentals exercise — use the standard dataset, not the security dataset
+    - _Requirements: ML-05_
+
+  - [ ] ML-05.3 Study candidate GNN families and document trade-offs
+    - Create `research/ml/gnn_fundamentals/architecture_survey.md` comparing:
+      - GCN: spectral convolution, transductive, fixed graph
+      - GraphSAGE: inductive, neighborhood sampling, scales to large graphs
+      - GAT: attention-weighted aggregation, interpretable weights, more parameters
+    - For each architecture, note: inductive/transductive, scalability, heterogeneous graph support, ease of debugging
+    - Do NOT select an architecture yet — that happens after task ML-06
+    - _Requirements: ML-05_
+
+---
+
+- [ ] ML-06. GNN Task Selection
+  - [ ] ML-06.1 Define candidate GNN tasks and evaluate against the dataset
+    - Based on the dataset analysis (ML-01) and ground truth definition (ML-02), evaluate the feasibility of:
+      - **Node classification**: classify individual entity nodes as malicious/benign
+      - **Edge classification**: classify individual relationships as malicious/benign
+      - **Link prediction**: predict missing or future relationships
+      - **Graph/subgraph classification**: classify an entire investigation graph or subgraph
+      - **Anomaly detection**: score entities or subgraphs as anomalous
+    - For each candidate task, document: available labels, graph structure fit, number of labelled examples, evaluation reliability
+    - _Requirements: ML-06_
+
+  - [ ] ML-06.2 Select and formally specify the GNN task
+    - Write a task specification in `research/ml/task_spec.md` that records:
+      1. Chosen task (one of the five candidates above)
+      2. Why it matches the dataset and labels
+      3. Target variable / label definition
+      4. Graph representation (nodes, edges, features)
+      5. Required node features
+      6. Required edge features (if applicable)
+      7. Evaluation metrics (must include at minimum precision, recall, F1; add PR-AUC or ROC-AUC if appropriate)
+      8. Known limitations and risks (class imbalance, label noise, leakage risks)
+    - This specification must be written before any GNN code is written
+    - _Requirements: ML-06_
+
+---
+
+- [ ] ML-07. Baseline GNN Experiment
+  - [ ] ML-07.1 Implement graph construction from the security dataset
+    - Create `research/ml/experiments/build_graph.py` that:
+      - Loads the prepared dataset splits from `data/ml/splits/`
+      - Constructs a graph (or heterogeneous graph) from the events
+      - Maps entities to nodes with feature vectors
+      - Maps relationships to edges with optional edge features
+      - Saves the constructed graphs (one per split) to `data/ml/graphs/`
+    - Validate: correct number of nodes, correct number of edges, no missing features, labels present
+    - _Requirements: ML-07_
+
+  - [ ] ML-07.2 Implement the baseline GNN model
+    - Create `research/ml/experiments/model.py` implementing the selected GNN architecture from ML-06
+    - Use PyTorch Geometric or DGL (add to `research/requirements.txt`)
+    - Implement: forward pass, configurable number of layers, configurable hidden dimension
+    - Keep the initial architecture minimal — one or two GNN layers; complexity can be added after the baseline works
+    - _Requirements: ML-07_
+
+  - [ ] ML-07.3 Implement the training and evaluation loop
+    - Create `research/ml/experiments/train.py` with:
+      - Configurable hyperparameters loaded from `research/ml/experiments/config.yaml`: learning rate, hidden dim, num layers, epochs, batch size, random seed
+      - Training loop with per-epoch train loss and validation metric logging
+      - Early stopping based on validation metric
+      - Checkpoint saving at best validation metric
+      - Final evaluation on the test set after training completes
+    - _Requirements: ML-07_
+
+  - [ ] ML-07.4 Record the experiment results
+    - Create `research/ml/experiments/results/run_001.md` recording:
+      - Dataset version
+      - Graph construction method
+      - Node features (names and shapes)
+      - Edge features (if used)
+      - Labels
+      - Train/validation/test split sizes
+      - Model architecture
+      - Hyperparameters (all values from config.yaml)
+      - Optimizer and learning rate
+      - Number of epochs trained
+      - Random seed
+      - Training loss curve (final value)
+      - Validation metric curve (final value)
+      - **Test set metrics**: precision, recall, F1, PR-AUC (or ROC-AUC), false positives, false negatives
+      - Checkpoint location
+      - Inference time per graph
+    - _Requirements: ML-07_
+
+  - [ ] ML-07.5 Verify experiment reproducibility
+    - Re-run the training script with the same config and seed
+    - Verify that test set metrics match `run_001.md` within floating-point tolerance
+    - Document any non-determinism and its source (GPU parallelism, data loading order, etc.)
+    - _Requirements: ML-07_
+
+---
+
+- [ ] ML-08. GNN Evaluation
+  - [ ] ML-08.1 Evaluate the trained GNN on the held-out test set
+    - Load the best checkpoint from ML-07
+    - Run inference on the test set
+    - Compute and record: precision, recall, F1, PR-AUC, ROC-AUC (as appropriate to the task), false positives, false negatives, detection latency (inference time), attack scenario coverage
+    - Do NOT use accuracy as the primary metric for imbalanced data
+    - _Requirements: ML-08_
+
+  - [ ] ML-08.2 Perform error analysis
+    - Inspect false positives and false negatives manually
+    - Document patterns: are certain entity types consistently mispredicted? Are false positives clustered around particular graph structures? Are false negatives associated with rare attack patterns?
+    - Create `research/ml/experiments/error_analysis/run_001.md` recording findings
+    - _Requirements: ML-08_
+
+  - [ ] ML-08.3 Assess and document evaluation limitations
+    - In `research/ml/experiments/error_analysis/run_001.md`, state explicitly:
+      - Class imbalance and its effect on metrics
+      - Label uncertainty or noise
+      - Possible data leakage (and evidence it was avoided)
+      - Dataset size and generalizability limits
+      - Whether results are likely to hold outside this specific dataset/scenario
+    - _Requirements: ML-08_
+
+---
+
+- [ ] ML-09. Rule-Based vs. GNN Comparison
+  - [ ] ML-09.1 Define a shared evaluation protocol
+    - Create `research/ml/comparison/protocol.md` specifying:
+      - The common evaluation dataset/scenario (must be the same for both systems)
+      - The prediction target (must be comparable across both systems)
+      - All metrics to be reported (precision, recall, F1, PR-AUC/ROC-AUC, false positives, false negatives, latency, coverage)
+      - How the rule-based `combined_score` will be converted to a binary prediction (threshold selection)
+      - How the GNN output will be converted to a binary prediction (threshold selection)
+    - _Requirements: ML-09_
+
+  - [ ] ML-09.2 Run the rule-based baseline on the shared evaluation set
+    - Use the existing `TemporalCorrelationEngine` from Task 11
+    - Ingest the evaluation scenario events through the full pipeline
+    - Apply a threshold to `combined_score` to produce binary predictions
+    - Record: precision, recall, F1, PR-AUC (if applicable), false positives, false negatives, latency
+    - If the classical ML baseline (ML-03) was implemented, run it on the same evaluation set and record its metrics too
+    - _Requirements: ML-09_
+
+  - [ ] ML-09.3 Run the GNN on the shared evaluation set
+    - Load the best GNN checkpoint from ML-07
+    - Run inference on the same evaluation set used in ML-09.2
+    - Record the same metrics in the same format
+    - _Requirements: ML-09_
+
+  - [ ] ML-09.4 Produce the comparison table and analysis
+    - Create `research/ml/comparison/results.md` containing:
+      - A side-by-side metric table: rule-based | (classical ML if applicable) | GNN
+      - Narrative analysis: where each approach performs better, where it is worse, and why
+      - Observations about false positive patterns, false negative patterns, and latency
+      - An explicit statement of what the data does and does not support
+    - Do NOT write a conclusion that assumes the GNN wins — report what the data shows
+    - _Requirements: ML-09_
+
+---
+
+- [ ] ML-10. GNN Integration into the TraceGraph Pipeline
+  - [ ] ML-10.1 Design the integration architecture
+    - Only begin this task after ML-07 (standalone experiment working) and ML-09 (comparison complete)
+    - Write `research/ml/integration/design.md` specifying:
+      - Where in the pipeline GNN inference runs (after graph persistence, before or after LLM context building)
+      - Model input format: what graph data is passed to the GNN
+      - Graph-to-model conversion: how the investigation graph is converted to GNN input tensors
+      - Feature construction at inference time
+      - Inference service/module location (`backend/app/services/gnn_inference.py`)
+      - Model version management (how the model file is referenced)
+      - Prediction output format and what it represents
+      - How GNN output is distinguished from deterministic `combined_score` in API responses and the analyst UI
+      - Failure handling: if GNN inference fails, the investigation workflow continues unchanged
+      - Evidence linkage: which graph nodes/edges the prediction applies to
+    - _Requirements: ML-10_
+
+  - [ ] ML-10.2 Implement `GNNInferenceService`
+    - Create `backend/app/services/gnn_inference.py` with `GNNInferenceService.predict(graph: GraphResult, investigation_id: str) -> GNNPrediction`
+    - Load model from a configured path (environment variable, not hardcoded)
+    - Convert `GraphResult` to model input tensors using the same feature construction as `build_graph.py`
+    - Return `GNNPrediction` carrying: prediction value(s), confidence/score, model version, feature names used, a note that this is a learned signal (not a ground truth label)
+    - If model file is missing or inference fails: log the error and return `GNNPrediction(available=False)` — never raise to caller
+    - _Requirements: ML-10_
+
+  - [ ] ML-10.3 Extend `InvestigationContext` to include GNN output
+    - Add an optional `gnn_signal: GNNPrediction | None` field to `InvestigationContext`
+    - Populate it in `AIContextBuilder.build_context()` when `GNNInferenceService` is available and returns a valid prediction
+    - The LLM system prompt must be updated to describe the GNN signal accurately: "a learned graph pattern score — not a confirmed attack label"
+    - _Requirements: ML-10_
+
+  - [ ] ML-10.4 Expose GNN prediction in the graph API response
+    - Add `gnn_signal: GNNPrediction | None` to the `GraphResult` schema
+    - Populate it in the `GET /api/investigations/{id}/graph` response when available
+    - Document in the API response that this is a learned signal, not a deterministic label
+    - _Requirements: ML-10_
+
+  - [ ] ML-10.5 Write integration tests for GNN failure isolation
+    - Test that when `GNNInferenceService` raises an exception or returns `available=False`, the rest of the investigation workflow (graph retrieval, timeline, evidence, AI summary) continues to function correctly
+    - Test that GNN output does not appear in the `InvestigationContext` when the model is unavailable
+    - _Requirements: ML-10_
+
+---
+
+- [ ] ML-11. Final ML Research Documentation
+  - [ ] ML-11.1 Write the final ML research report
+    - Create `research/ml/report/final_report.md` documenting:
+      - Dataset: name, version, source, access date, licence
+      - Reason the dataset was selected over alternatives
+      - Problem definition and prediction target
+      - Graph representation: nodes, edges, features
+      - GNN architecture: layers, hidden dimensions, activation functions, pooling
+      - Feature design: all node and edge features used, with derivation formulas
+      - Labels: positive/negative definition, source
+      - Split strategy: method, proportions, leakage avoidance approach
+      - Baseline methods: rule-based correlation, classical ML (if implemented)
+      - Metrics used and why they were chosen for this imbalanced task
+      - Results table: all systems, all metrics, train/val/test
+      - Error analysis summary: false positive patterns, false negative patterns
+      - Limitations: dataset size, generalizability, label quality, class imbalance
+      - Reproducibility: how to re-run the experiment from scratch
+      - Integration design summary
+      - What the evidence actually supports — and what it does not
+    - _Requirements: ML-11_
+
+  - [ ] ML-11.2 Validate reproducibility of the full research pipeline
+    - Document the exact commands to:
+      1. Acquire the dataset
+      2. Run `prepare_dataset.py`
+      3. Run `build_graph.py`
+      4. Run `train.py` with the recorded config
+      5. Run the evaluation against the evaluation scenarios
+      6. Reproduce the comparison table
+    - A person who was not involved in the project must be able to reproduce the key results from these instructions
+    - _Requirements: ML-11_
+
+---
+
+## ML/DL/GNN Research Track — Dependency Chain
+
+```
+Tasks 1–10 (implemented)
+        ↓
+Tasks 11–25 (core engineering)
+        ↓
+Task 26 — evaluation dataset / scenarios
+        ↓
+Task 27 — measurable rule-based baseline (precision/recall)
+        ↓
+ML-01 — dataset analysis
+        ↓
+ML-02 — ground truth / label definition
+        ↓
+ML-03 — optional classical ML baseline
+        ↓
+ML-04 — neural network fundamentals
+        ↓
+ML-05 — GNN fundamentals
+        ↓
+ML-06 — GNN task selection
+        ↓
+ML-07 — baseline GNN experiment
+        ↓
+ML-08 — GNN evaluation
+        ↓
+ML-09 — rule vs. GNN comparison
+        ↓
+ML-10 — GNN integration (only after standalone experiment is valid)
+        ↓
+Task 28 — investigation utility evaluation
+        ↓
+Task 29 — AI summary grounding validation
+        ↓
+Task 30 — end-to-end demonstration
+        ↓
+Task 31 — definition of done
+```
+
+---
+
 ## Notes
 
 - Tasks marked with `*` are optional and can be skipped for a faster MVP; property-based tests in particular can be added incrementally
@@ -502,10 +953,15 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 - Parameterized queries are mandatory for both PostgreSQL (SQLAlchemy) and Neo4j (Cypher parameters) — string interpolation in queries is a hard requirement violation
 - The `combined_score` from the Correlation Engine is explicitly NOT an attack probability — this distinction must appear in code comments and API documentation
 - Checkpoints at tasks 12, 18, 22, and 30 ensure incremental validation throughout the build
+- ML/DL/GNN research tasks (ML-01 through ML-11) are a separate research track; they do not replace Tasks 1–31 and should not be started before Task 27 (measurable rule-based baseline) is complete
+- The GNN is not assumed to outperform the deterministic baseline — the experiment determines the result
+- All three reasoning layers (rule-based correlation, GNN learned signal, LLM narrative) must remain implemented, evaluated, and documented separately
 
 ---
 
 ## Task Dependency Graph
+
+### Engineering Tasks (Tasks 1–30)
 
 ```json
 {
@@ -531,3 +987,37 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
   ]
 }
 ```
+
+### ML/DL/GNN Research Track Dependencies
+
+```
+Tasks 1–10 (✓ implemented)
+        ↓
+Tasks 11–27 (engineering: correlation → evaluation baseline)
+        ↓
+ML-01.1 → ML-01.2 → ML-01.3 → ML-01.4 → ML-01.5 → ML-01.6
+        ↓
+ML-02.1 → ML-02.2 → ML-02.3 → ML-02.4
+        ↓
+ML-03.1 → ML-03.2* → ML-03.3*    (parallel with ML-04)
+        ↓
+ML-04.1 → ML-04.2
+        ↓
+ML-05.1 → ML-05.2 → ML-05.3
+        ↓
+ML-06.1 → ML-06.2
+        ↓
+ML-07.1 → ML-07.2 → ML-07.3 → ML-07.4 → ML-07.5
+        ↓
+ML-08.1 → ML-08.2 → ML-08.3
+        ↓
+ML-09.1 → ML-09.2 → ML-09.3 → ML-09.4
+        ↓
+ML-10.1 → ML-10.2 → ML-10.3 → ML-10.4 → ML-10.5
+        ↓
+ML-11.1 → ML-11.2
+        ↓
+Tasks 28–30 (investigation utility, AI grounding, demo)
+```
+
+`*` denotes optional tasks.
