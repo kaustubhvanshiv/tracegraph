@@ -74,6 +74,23 @@ class Settings(BaseSettings):
     max_context_events: int = 50
 
     # ------------------------------------------------------------------
+    # Temporal correlation signal weights
+    # Weights must sum to 1.25 to match the design table.
+    # combined_score = sum(fired weights) / sum(ALL weights)
+    # combined_score is a weighted-sum relevance indicator — NOT an attack
+    # probability score.
+    # ------------------------------------------------------------------
+    correlation_signal_weights: dict[str, float] = {
+        "shared_user": 0.25,
+        "shared_host": 0.20,
+        "shared_ip": 0.20,
+        "host_continuity": 0.15,
+        "temporal_proximity": 0.10,
+        "compatible_action_sequence": 0.20,
+        "process_file_context": 0.15,
+    }
+
+    # ------------------------------------------------------------------
     # Normalization field-name mapping
     # source_type -> {raw_field_name -> canonical_field_name}
     # Loadable from env var NORMALIZATION_FIELD_MAP (JSON) or uses default.

@@ -185,8 +185,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test deduplication, empty-window case, boundary conditions (events exactly at window edge), investigation_id scoping
     - _Requirements: 6.1–6.6_
 
-- [ ] 11. Temporal correlation engine
-  - [ ] 11.1 Implement `TemporalCorrelationEngine`
+- [x] 11. Temporal correlation engine
+  - [x] 11.1 Implement `TemporalCorrelationEngine`
     - Create `backend/app/services/correlation.py` with `TemporalCorrelationEngine.correlate(candidates) -> list[CorrelatedRelationship]`
     - Implement all seven signals: `shared_user`, `shared_host`, `shared_ip`, `host_continuity`, `temporal_proximity`, `compatible_action_sequence`, `process_file_context`
     - Load signal weights from config (not hardcoded); default weights from design table
