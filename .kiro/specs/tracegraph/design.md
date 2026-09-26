@@ -1607,3 +1607,428 @@ tracegraph/
 | Neo4j | 5.x | Investigation graph persistence |
 | PostgreSQL | 15.x | Case metadata + normalized event store |
 | Docker | 24.x | Containerized local development |
+
+---
+
+## ML/DL/GNN Research Track
+
+This section documents the design of the parallel ML/DL/GNN research track. It extends the deterministic pipeline with a learned graph signal layer but does NOT replace any component defined in the sections above.
+
+**Three-layer separation — enforced in code, documentation, and evaluation:**
+
+| Layer | Component | Output | What it is NOT |
+|-------|-----------|--------|----------------|
+| Deterministic | `TemporalCorrelationEngine` | `combined_score` ∈ [0,1] | An attack probability |
+| Learned graph signal | `GNNInferenceService` | `GNNPrediction.score` | A replacement for rule-based correlation |
+| Narrative explanation | `AISummaryService` | `SummaryResult.overview` | Proof that an attack occurred |
+
+These three outputs must remain clearly separated in API responses, the analyst UI, and the AI context.
+
+---
+
+### ML Architecture Overview
+
+```mermaid
+graph TD
+    subgraph Deterministic["Deterministic Pipeline (Tasks 1–10, implemented)"]
+        PARSE[Parser / Adapter Registry]
+        NORM[Normalization Engine]
+        ENT[Entity Extractor]
+        REL[Relationship Extractor]
+        CAND[Candidate Retrieval]
+        CORR[Temporal Correlation Engine]
+        NEO4J[(Neo4j Graph DB)]
+        PG[(PostgreSQL)]
+    end
+
+    subgraph Research["ML/GNN Research Track"]
+        direction TB
+        DS[Dataset Analysis\nML-01]
+        GT[Ground Truth Definition\nML-02]
+        CL[Classical Baseline\nML-03 optional]
+        NN[NN Fundamentals\nML-04]
+        GF[GNN Fundamentals\nML-05]
+        TS[Task Selection\nML-06]
+        EXP[Baseline GNN Experiment\nML-07]
+        EVAL[GNN Evaluation\nML-08]
+        CMP[Rule vs. GNN Comparison\nML-09]
+    end
+
+    subgraph Integration["GNN Integration (ML-10, after ML-09)"]
+        GNN_SVC[GNNInferenceService]
+        CTX_EXT[Extended InvestigationContext\n+ gnn_signal]
+        GRAPH_API[GraphResult\n+ gnn_signal]
+    end
+
+    subgraph Explanation["Explanation Layer (Tasks 19–20)"]
+        CTX[AI Context Builder]
+        LLM[AI Summary Service]
+    end
+
+    CORR --> NEO4J
+    NEO4J --> GNN_SVC
+    GNN_SVC --> CTX_EXT
+    GNN_SVC --> GRAPH_API
+    CTX_EXT --> LLM
+
+    DS --> GT --> CL
+    GT --> NN --> GF --> TS --> EXP --> EVAL --> CMP
+    CMP --> GNN_SVC
+```
+
+The GNN integration arrow from `CMP` to `GNN_SVC` represents the dependency gate: integration only begins after the standalone experiment (ML-07) is working and the rule-vs-GNN comparison (ML-09) is complete.
+
+---
+
+### Research Track Dependency on Engineering Tasks
+
+The ML research track depends on specific engineering tasks being complete before it begins:
+
+```
+Tasks 1–10  ← already implemented; provide SecurityEvent, entities, relationships,
+              correlation, and Neo4j graph — the raw material for the GNN
+        ↓
+Tasks 11–27 ← provide graph query APIs, evaluation scenarios, and a measurable
+              rule-based precision/recall baseline (Task 27)
+        ↓
+ML-01       ← dataset analysis: must happen before any GNN design decision
+        ↓
+ML-02       ← ground truth definition: must happen before any split or training
+        ↓
+ML-03*      ← optional classical baseline (parallel with ML-04)
+ML-04       ← NN fundamentals
+        ↓
+ML-05       ← GNN fundamentals
+        ↓
+ML-06       ← task selection: architecture choice made here, not before
+        ↓
+ML-07       ← standalone GNN experiment (outside production system)
+        ↓
+ML-08       ← GNN evaluation (honest, on held-out test set)
+        ↓
+ML-09       ← rule vs. GNN comparison (same evaluation data, same metrics)
+        ↓
+ML-10       ← GNN integration into production pipeline
+        ↓
+Tasks 28–30 ← investigation utility evaluation, AI summary grounding, demo
+```
+
+---
+
+### Component 14: GNN Inference Service
+
+**Purpose**: Load a trained GNN checkpoint and run inference on an investigation graph, returning a learned graph-structural signal as an optional enrichment to the investigation context and graph API response.
+
+**Interface**:
+```python
+class GNNInferenceService:
+    def predict(
+        self,
+        graph: GraphResult,
+        investigation_id: str
+    ) -> GNNPrediction:
+        """
+        Preconditions:
+          - graph is a valid GraphResult for the specified investigation_id
+          - model checkpoint path is configured via environment variable
+        Postconditions:
+          - On success: returns GNNPrediction with available=True, score, model_version,
+            feature_names, and signal_description
+          - On any failure (missing model, load error, inference error):
+            returns GNNPrediction(available=False) — never raises to caller
+          - GNNPrediction.score is explicitly NOT a ground-truth attack label
+        """
+        ...
+```
+
+**GNNPrediction Schema**:
+```python
+class GNNPrediction(BaseModel):
+    available: bool                        # False if model unavailable or inference failed
+    score: float | None = None             # Learned signal score (task-dependent range)
+    model_version: str | None = None       # Identifier of the checkpoint used
+    feature_names: list[str] | None = None # Node/edge features used for inference
+    signal_description: str = (
+        "Learned graph-pattern signal from a trained GNN. "
+        "This is NOT a confirmed attack label and NOT equivalent to the "
+        "deterministic combined_score. It reflects structural patterns learned "
+        "from a specific training dataset and must be interpreted in that context."
+    )
+    error_message: str | None = None       # Set when available=False due to error
+```
+
+**Responsibilities**:
+- Load model from a path configured exclusively via environment variable — never hardcoded
+- Convert `GraphResult` to GNN input tensors using the same feature construction pipeline as `research/ml/experiments/build_graph.py`
+- Return `GNNPrediction(available=False)` on any exception — never propagate to caller
+- Never block, delay, or modify the deterministic investigation pipeline
+- Log inference errors at WARNING level for observability without disrupting the analyst workflow
+
+**Failure isolation guarantee**: If `GNNInferenceService.predict()` raises for any reason, the caller catches the exception and sets `gnn_signal=None`. The rest of the investigation (graph retrieval, timeline, evidence, AI summary) continues without change.
+
+---
+
+### Component 15: Dataset Analysis Artifacts
+
+**Purpose**: Structured documentation produced during ML-01 that records everything discovered about the candidate datasets. These artifacts drive every subsequent ML design decision.
+
+**Directory structure**:
+```
+data/
+└── ml/
+    ├── datasets/
+    │   ├── README.md                    # Dataset index: name, URL, version, access date
+    │   └── <dataset_name>/
+    │       └── analysis.md              # Full dataset analysis (schema, GT, graph constructibility)
+    ├── ground_truth.md                  # Prediction target, positive/negative definitions, split strategy
+    └── splits/                          # Prepared train/val/test splits (seeded, reproducible)
+        ├── train.jsonl
+        ├── val.jsonl
+        └── test.jsonl
+```
+
+**Required content in `analysis.md`**:
+- File format, record count, schema
+- Timestamp, user, host, IP, process, file, event type, action, label fields
+- Ground truth: labels, positive/negative definition, class balance, label granularity
+- Graph constructibility: nodes, edges, relationship type mapping, `SecurityEvent` compatibility
+- Answers to the ten dataset analysis questions (from Requirement ML-01.4)
+- Selection rationale (for the chosen primary dataset) or rejection rationale (for discarded ones)
+
+---
+
+### GNN Data Model
+
+**Graph representation for ML**:
+
+The investigation graph persisted in Neo4j (see Neo4j Graph Data Model section above) is the primary input to the GNN. The `build_graph.py` script converts it to a PyTorch Geometric `HeteroData` or DGL `DGLHeteroGraph` object.
+
+**Node types** (one per TraceGraph entity type):
+
+| Node Type | Feature candidates |
+|-----------|--------------------|
+| User | occurrence count, distinct host count, event type distribution |
+| Host | occurrence count, distinct user count, distinct IP count |
+| Server | occurrence count, role encoding |
+| IP | occurrence count, internal/external flag, distinct connection count |
+| Process | occurrence count, distinct file access count, source host encoding |
+| File | occurrence count, distinct accessor count |
+
+**Edge types** (one per TraceGraph relationship type):
+
+| Edge Type | Feature candidates |
+|-----------|-------------------|
+| LOGGED_INTO | combined_score, temporal_proximity score, event count |
+| AUTHENTICATED_TO | combined_score, temporal_proximity score, event count |
+| EXECUTED | combined_score, process_file_context score, event count |
+| CONNECTED_TO | combined_score, shared_ip score, event count |
+| ACCESSED | combined_score, process_file_context score, event count |
+
+**Important caveats**:
+- The exact features used must be determined during ML-01 (what the dataset provides) and ML-06 (what the task requires). The table above lists candidates only.
+- `combined_score` appears as an edge feature when included — it is a deterministic signal used as an input, not as a target label.
+- Feature engineering must be consistent between training (`build_graph.py`) and inference (`GNNInferenceService`) — the same feature construction code must be used in both paths.
+
+---
+
+### Extended Data Models for GNN Integration
+
+#### Extended `GraphResult` (ML-10)
+
+```python
+class GraphResult(BaseModel):
+    investigation_id: str
+    entities: list[EntityDetail]
+    relationships: list[CorrelatedRelationship]
+    filters_applied: GraphFilter
+    # Added by ML-10 — None when GNN unavailable or not yet integrated
+    gnn_signal: GNNPrediction | None = None
+```
+
+#### Extended `InvestigationContext` (ML-10)
+
+```python
+class InvestigationContext(BaseModel):
+    investigation_id: str
+    total_events: int
+    total_entities: int
+    entities: list[EntityDetail]
+    relationships: list[CorrelatedRelationship]
+    timeline_summary: dict
+    evidence_sample: list[EvidenceDetail]
+    # Added by ML-10 — None when GNN unavailable or not yet integrated
+    gnn_signal: GNNPrediction | None = None
+```
+
+**LLM prompt update for ML-10**: When `gnn_signal` is present in the context, the AI Summary Service system prompt must include the following constraint:
+
+> "The context may include a `gnn_signal` field. This is a learned graph-pattern score produced by a GNN trained on a specific dataset. It is NOT a confirmed attack label, NOT equivalent to the deterministic combined_score, and must NOT be described as proof that an attack occurred. If you reference it, qualify it explicitly as a learned signal with limited scope."
+
+---
+
+### Research Experiment Directory Structure
+
+```
+research/
+└── ml/
+    ├── requirements.txt               # ML-specific Python dependencies (torch, pyg/dgl, etc.)
+    ├── task_spec.md                   # GNN task specification (written in ML-06)
+    ├── data_prep/
+    │   └── prepare_dataset.py         # Loads raw data → SecurityEvent → labelled splits
+    ├── baseline/
+    │   ├── README.md                  # Classical baseline decision + feature plan
+    │   └── models/                    # Saved classical ML model (if implemented)
+    ├── nn_fundamentals/
+    │   ├── feedforward_demo.py        # Toy NN demo (ML-04.1)
+    │   └── training_dynamics.ipynb    # Learning rate / overfitting demo (ML-04.2)
+    ├── gnn_fundamentals/
+    │   ├── concepts.md                # GNN concepts documentation (ML-05.1)
+    │   ├── gcn_demo.py                # GCN on benchmark dataset (ML-05.2)
+    │   └── architecture_survey.md    # GCN vs. GraphSAGE vs. GAT trade-offs (ML-05.3)
+    ├── experiments/
+    │   ├── config.yaml                # All hyperparameters (no hardcoding in train.py)
+    │   ├── build_graph.py             # Dataset → GNN graph (ML-07.1)
+    │   ├── model.py                   # GNN model implementation (ML-07.2)
+    │   ├── train.py                   # Training + evaluation loop (ML-07.3)
+    │   ├── results/
+    │   │   └── run_001.md             # Recorded experiment results (ML-07.4)
+    │   └── error_analysis/
+    │       └── run_001.md             # False positive / false negative analysis (ML-08.2)
+    ├── comparison/
+    │   ├── protocol.md                # Shared evaluation protocol (ML-09.1)
+    │   └── results.md                 # Side-by-side metric table + analysis (ML-09.4)
+    ├── integration/
+    │   └── design.md                  # GNN integration architecture (ML-10.1)
+    └── report/
+        └── final_report.md            # Complete ML research report (ML-11.1)
+```
+
+---
+
+### GNN Correctness Properties
+
+These properties extend the existing Correctness Properties section. They must hold once ML-10 is integrated.
+
+#### Property 18: GNN Failure Isolation
+
+`∀ GNNInferenceService failure: investigation_workflow(investigation_id) == investigation_workflow_without_gnn(investigation_id)`
+
+When GNN inference fails for any reason, the investigation workflow — graph retrieval, timeline, evidence detail, AI summary — must produce the same result as if GNN inference were never called. No data is lost, no endpoint returns an error due to GNN failure, and `gnn_signal` is absent (None) in all outputs.
+
+**Validates: Requirements ML-10.3, ML-10.4**
+
+#### Property 19: GNN Signal Separation
+
+`∀ response containing gnn_signal AND combined_score: gnn_signal.score ≠ combined_score AND both are labelled distinctly`
+
+The GNN prediction score and the deterministic `combined_score` must never be presented as equivalent measures. They must be stored in separate fields, labelled separately in API responses, and described separately in the AI context prompt.
+
+**Validates: Requirements ML-10.7**
+
+#### Property 20: GNN Evidence Linkage
+
+`∀ GNNPrediction with available=True: GNNPrediction.model_version IS NOT NULL AND GNNPrediction.feature_names IS NOT NULL`
+
+Every successful GNN prediction must carry metadata identifying which model version produced it and which features were used. An anonymous prediction without provenance is not acceptable.
+
+**Validates: Requirements ML-10.2**
+
+---
+
+### ML Research Evaluation Framework
+
+This section extends the existing Testing Strategy and Evaluation Framework sections.
+
+#### Dataset Analysis Validation
+
+- All ten dataset analysis questions (Requirement ML-01.4) must have written answers before any model code is written.
+- Ground truth definitions (Requirement ML-02.1) must be reviewed for internal consistency before splits are produced.
+- Split leakage must be verified: no positive incident may have events in both train and test sets.
+
+#### GNN Experiment Checks (analogous to engineering unit tests)
+
+| Check | Description |
+|-------|-------------|
+| Graph shape validation | Verify node count, edge count, feature tensor shapes match expectations before training |
+| Label balance check | Assert positive/negative ratio matches ground truth definition |
+| Split separation check | Assert no overlap between train, val, and test node/graph sets |
+| Reproducibility check | Re-run with same seed; assert test metrics match recorded results within tolerance |
+| Checkpoint save/load | Assert loaded checkpoint produces identical predictions to in-memory model |
+| Feature consistency | Assert `build_graph.py` and `GNNInferenceService` use identical feature construction |
+| Inference output shape | Assert `GNNPrediction` fields are non-None and correctly typed on valid input |
+| Missing feature handling | Assert `GNNInferenceService` returns `available=False` gracefully when features cannot be constructed |
+
+#### Comparison Protocol Requirements
+
+The rule-vs-GNN comparison (ML-09) must satisfy:
+- Same evaluation dataset for all systems
+- Same metrics for all systems
+- Threshold selection documented before results are examined (not tuned post-hoc)
+- Results reported for all systems regardless of which performs better
+- Narrative conclusions qualified as specific to the evaluation dataset and scenario
+
+#### ML Integration Tests
+
+| Test | Assertion |
+|------|-----------|
+| GNN unavailable — graph API | `GET /api/investigations/{id}/graph` returns 200 with `gnn_signal: null` |
+| GNN unavailable — AI context | `InvestigationContext.gnn_signal` is None; LLM summary completes without error |
+| GNN unavailable — timeline | `GET /api/investigations/{id}/timeline` unaffected |
+| GNN available — signal present | `GraphResult.gnn_signal.available == True` and `model_version` is non-null |
+| GNN available — signal labelled | Response includes `signal_description` distinguishing learned signal from `combined_score` |
+| GNN exception during request | Exception caught; `gnn_signal=None`; all other response fields populated correctly |
+
+---
+
+### Package Structure Additions (ML Research Track)
+
+The `research/` directory sits alongside `backend/` and `frontend/` at the repository root. It is a standalone Python project with its own `requirements.txt`.
+
+```
+tracegraph/
+├── backend/                           # (existing)
+├── frontend/                          # (existing)
+├── data/
+│   ├── fixtures/                      # (existing)
+│   ├── scenarios/                     # (existing — evaluation scenarios)
+│   └── ml/
+│       ├── datasets/                  # Dataset analysis artifacts
+│       ├── ground_truth.md            # Prediction target and split definitions
+│       ├── splits/                    # Prepared train/val/test splits
+│       └── graphs/                    # Constructed GNN graphs per split
+└── research/
+    └── ml/
+        ├── requirements.txt           # torch, torch-geometric or dgl, scikit-learn, etc.
+        ├── task_spec.md
+        ├── data_prep/
+        ├── baseline/
+        ├── nn_fundamentals/
+        ├── gnn_fundamentals/
+        ├── experiments/
+        ├── comparison/
+        ├── integration/
+        └── report/
+```
+
+The `GNNInferenceService` lives in `backend/app/services/gnn_inference.py` and imports the model class from `research/ml/experiments/model.py`. This means `research/` must be reachable on the Python path at inference time, or the model class must be copied to a stable location under `backend/` when the integration is deployed. The integration design document (ML-10.1) must address this explicitly.
+
+---
+
+### Dependencies Additions (ML Research Track)
+
+These packages are added to `research/ml/requirements.txt` — NOT to the production `backend/` requirements — until ML-10 integration is complete.
+
+| Package | Purpose |
+|---------|---------|
+| torch | Core tensor computation and autograd |
+| torch-geometric (PyG) | GNN layers, heterogeneous graph support, standard benchmark datasets |
+| dgl (alternative to PyG) | Alternative GNN framework — choose one, not both |
+| scikit-learn | Classical ML baseline (Logistic Regression, Random Forest), metrics (PR-AUC, ROC-AUC) |
+| xgboost | Classical ML baseline (optional, if Random Forest is insufficient) |
+| pandas | Tabular dataset manipulation for classical baseline feature engineering |
+| numpy | Numerical operations |
+| matplotlib | Loss curve and metric visualisation |
+| pyyaml | Hyperparameter config file loading |
+| jupyter | Notebook support for training dynamics demo |
+
+When GNN integration (ML-10) is complete, `torch`, `torch-geometric` (or `dgl`), and `numpy` move into `backend/requirements.txt` with pinned versions.

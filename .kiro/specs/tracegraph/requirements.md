@@ -359,3 +359,193 @@ The platform is designed for explainability first: every relationship traces bac
 3. THE system SHALL provide a `legitimate_access` scenario where a normal authentication sequence is ingested and relationships SHALL be created without inflating correlation scores beyond what the evidence supports.
 4. THE system SHALL provide a `multi_user_host` scenario with overlapping events from multiple users and hosts, and entity deduplication SHALL be correct with no cross-contamination between investigations.
 5. WHEN evaluation is run, THE Pipeline SHALL expose precision and recall metrics for expected vs. produced vs. missed relationships per scenario.
+
+---
+
+## ML/DL/GNN Research Track Requirements
+
+These requirements govern the research track that extends TraceGraph with graph-based machine learning. They are numbered ML-01 through ML-11 to match the task labels and do NOT replace Requirements 1–19. The deterministic pipeline (Requirements 1–19) remains the production foundation; the ML track adds a parallel learned signal layer.
+
+**Three-layer separation — enforced throughout this track:**
+- Rule-based `combined_score`: a deterministic, explainable relevance indicator. NOT an attack probability.
+- GNN prediction: a learned graph-structural signal. NOT a replacement for rule-based correlation.
+- LLM narrative: an evidence-grounded explanation. NOT proof that an attack occurred.
+
+---
+
+### Requirement ML-01: Dataset Analysis
+
+**User Story:** As a researcher, I want a thorough structural analysis of candidate security event datasets before any ML model is designed, so that the GNN task, architecture, and features are chosen based on what the data actually contains rather than assumptions.
+
+#### Acceptance Criteria
+
+1. FOR each candidate dataset inspected, THE researcher SHALL document in `data/ml/datasets/<dataset_name>/analysis.md`: file format, total record count, all column/field names and types, timestamp fields, user fields, host fields, source/destination IP fields, process fields, file fields, event type / action fields, label fields, incident or session ID fields, and attack category annotations where present.
+2. FOR each candidate dataset, THE researcher SHALL document ground truth availability: whether labels exist, what positive means, what negative means, class balance (count and percentage), label granularity (per-event / per-session / per-scenario), and any known labelling issues.
+3. FOR each candidate dataset, THE researcher SHALL document graph constructibility: whether a node-edge graph can be constructed without inventing relationships, which fields identify nodes, which fields identify edges, whether constructed edges correspond to any of the five TraceGraph relationship types, and whether the dataset can be converted to the `SecurityEvent` model.
+4. THE researcher SHALL answer the following ten questions in writing for the selected dataset: (1) What is one event/row? (2) What does it represent? (3) Which fields identify entities? (4) Which fields describe actions? (5) Which fields describe relationships? (6) What labels exist? (7) What is a positive example and what is a negative example? (8) Can a graph be constructed without inventing relationships? (9) What is a realistic prediction target? (10) What information could leak between train and test if splits are random?
+5. THE researcher SHALL select one primary dataset and record the selection rationale, limitations, known biases, and licence/usage terms BEFORE designing any GNN architecture or selecting any ML task.
+6. THE researcher SHALL NOT choose a GNN architecture, a GNN task type, or any model hyperparameters during the dataset analysis phase.
+
+---
+
+### Requirement ML-02: Ground Truth and Label Definition
+
+**User Story:** As a researcher, I want the prediction target, positive/negative definitions, and train/test splitting strategy defined in writing before any model is trained, so that the evaluation is valid and leakage-free.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL produce a formal written definition of: the prediction target, what constitutes a positive example, what constitutes a negative example, the sample unit (event / session / graph / subgraph), and the graph unit (what constitutes one model input).
+2. THE researcher SHALL document the splitting strategy, including: why random per-event splitting is or is not safe for the chosen dataset, the chosen strategy (incident-aware / scenario-aware / host-aware / time-aware), split proportions, and how to verify no positive incident has events in both train and test sets.
+3. THE evaluation scenarios from engineering Task 29 (`basic_attack_sequence`, `unrelated_events`, `legitimate_access`, `multi_user_host`) SHALL be assessed for use as a controlled validation or test set for ML experiments, with any limitations documented.
+4. THE researcher SHALL implement deterministic, seeded dataset preparation scripts that produce reproducible train/validation/test splits. Running the script twice with the same seed SHALL produce identical splits.
+5. Labels SHALL be assigned according to the written ground truth definition and SHALL NOT be assigned ad-hoc or based on model performance.
+
+---
+
+### Requirement ML-03: Optional Classical ML Baseline
+
+**User Story:** As a researcher, I want the option to establish a simple tabular ML baseline before building a GNN, so that I have a non-graph learned reference point for comparison if the dataset supports it.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL first assess whether a classical ML baseline is appropriate for the dataset and prediction target, and SHALL document the decision with reasoning BEFORE implementing any model.
+2. IF a classical baseline is implemented, THE researcher SHALL use at most one model from: Logistic Regression, Random Forest, XGBoost. Multiple models SHALL NOT be added solely for complexity.
+3. IF a classical baseline is implemented, THE researcher SHALL engineer tabular features that do NOT use raw graph structure; acceptable features include: entity event frequency, temporal gap statistics, entity occurrence counts, rule-signal counts from the deterministic correlation engine, and severity distribution.
+4. IF a classical baseline is implemented, THE researcher SHALL evaluate it on the test split and report: precision, recall, F1, PR-AUC, ROC-AUC, false-positive count, and false-negative count. Accuracy SHALL NOT be used as the primary metric for imbalanced data.
+5. IF a classical baseline is NOT implemented, THE researcher SHALL document the reason and acknowledge this in the final comparison.
+
+---
+
+### Requirement ML-04: Neural Network Fundamentals
+
+**User Story:** As a researcher, I want to demonstrate sufficient understanding of neural network training before building a GNN, so that I can implement, debug, and interpret the GNN experiment reliably.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL implement a working feed-forward neural network demonstration that shows: tensor creation, forward pass, loss computation, backpropagation, gradient descent, a training loop with epochs and batches, and validation loss monitoring. This demonstration SHALL use a toy dataset, NOT the security dataset.
+2. THE researcher SHALL demonstrate understanding of training dynamics by producing training and validation loss curves that show the effect of: an appropriate learning rate, an excessively high learning rate, overfitting on a small dataset, and at least one regularization technique.
+3. THE researcher SHALL demonstrate checkpoint saving and loading: saving the model at the best validation metric and reloading it for inference.
+4. The neural network fundamentals phase SHALL be completed BEFORE beginning GNN implementation.
+
+---
+
+### Requirement ML-05: GNN Fundamentals
+
+**User Story:** As a researcher, I want to demonstrate understanding of GNN-specific concepts before selecting a GNN architecture for the security task, so that the architecture choice is informed rather than arbitrary.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL produce written documentation covering: graph representation (adjacency vs. edge list), node features, edge features, message passing, neighborhood aggregation, node embeddings, graph embeddings, transductive vs. inductive learning, heterogeneous graphs, and temporal graphs.
+2. THE researcher SHALL implement a working GCN demonstration on a standard benchmark graph dataset (e.g., Cora). This demonstration SHALL use the standard benchmark, NOT the security dataset.
+3. THE researcher SHALL document trade-offs for GCN, GraphSAGE, and GAT architectures covering: inductive/transductive behaviour, scalability, heterogeneous graph support, and interpretability.
+4. THE researcher SHALL NOT select a GNN architecture for the security task during this phase. Architecture selection happens in ML-06 after the task specification is written.
+
+---
+
+### Requirement ML-06: GNN Task Selection
+
+**User Story:** As a researcher, I want the GNN task and architecture selected through a documented, evidence-based process, so that the choice can be defended and the evaluation is appropriate for the data.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL evaluate the feasibility of at least the following GNN task types against the chosen dataset and ground truth: node classification, edge classification, link prediction, graph/subgraph classification, and anomaly detection.
+2. FOR each candidate task, THE researcher SHALL document: available labels, graph structure fit, number of labelled examples, and evaluation reliability.
+3. THE researcher SHALL produce a written task specification before writing any GNN model code. The specification SHALL include: (1) chosen task, (2) why it matches the dataset and labels, (3) target variable/label, (4) graph representation, (5) required node features, (6) required edge features if applicable, (7) evaluation metrics, (8) known limitations and risks.
+4. THE chosen evaluation metrics SHALL include at minimum: precision, recall, and F1. PR-AUC or ROC-AUC SHALL be added when the class distribution makes them informative.
+5. The GNN task specification SHALL be written and reviewed BEFORE any GNN model is implemented.
+
+---
+
+### Requirement ML-07: Baseline GNN Experiment
+
+**User Story:** As a researcher, I want a small, reproducible standalone GNN experiment that proves the end-to-end pipeline works before integration into the production system, so that the model can be evaluated in isolation without risk to the deterministic pipeline.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL implement graph construction from the prepared dataset splits, producing graphs with correct node counts, edge counts, feature shapes, and labels. Graph construction SHALL be validated before model training begins.
+2. THE researcher SHALL implement a GNN model matching the architecture selected in ML-06. The initial implementation SHALL be minimal (one or two layers); complexity SHALL be added only after the baseline works end-to-end.
+3. ALL hyperparameters (learning rate, hidden dimension, number of layers, epochs, batch size, random seed) SHALL be loaded from a configuration file and SHALL NOT be hardcoded in training code.
+4. THE training script SHALL: log per-epoch training loss and validation metric, implement early stopping on the validation metric, save a checkpoint at the best validation metric, and run final evaluation on the test set after training completes.
+5. THE researcher SHALL record all of the following for the baseline run: dataset version, graph construction method, node features (names and shapes), edge features (if used), labels, split sizes, model architecture, all hyperparameters, optimizer, learning rate, epochs trained, random seed, training loss (final), validation metric (final), test set precision/recall/F1/PR-AUC, false positives, false negatives, checkpoint location, and inference time per graph.
+6. THE experiment SHALL be reproducible: re-running the training script with the same configuration and seed SHALL produce test set metrics matching the recorded results within floating-point tolerance. Any non-determinism SHALL be documented and its source identified.
+7. THE standalone GNN experiment SHALL run entirely outside the production FastAPI application. Integration into the production system SHALL NOT begin before ML-09 is complete.
+
+---
+
+### Requirement ML-08: GNN Evaluation
+
+**User Story:** As a researcher, I want a thorough, honest evaluation of the trained GNN including error analysis and explicit limitation statements, so that the research conclusions are grounded in what the data actually shows.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL evaluate the trained GNN on the held-out test set using the metrics specified in ML-06: at minimum precision, recall, F1, and PR-AUC or ROC-AUC where appropriate. Accuracy SHALL NOT be the primary metric for imbalanced data.
+2. THE researcher SHALL additionally record: false-positive count, false-negative count, detection latency (inference time per graph), and attack scenario coverage.
+3. THE researcher SHALL perform error analysis by manually inspecting false positives and false negatives, documenting: whether certain entity types are consistently mispredicted, whether false positives cluster around particular graph structures, and whether false negatives are associated with rare attack patterns.
+4. THE researcher SHALL explicitly document in the evaluation report: class imbalance and its effect on metrics, label uncertainty or noise, evidence that data leakage was avoided, dataset size and generalizability limits, and whether results are expected to hold outside this specific dataset/scenario.
+5. The evaluation report SHALL NOT contain language suggesting the GNN is generally effective at detecting attacks on the basis of this experiment alone.
+
+---
+
+### Requirement ML-09: Rule-Based vs. GNN Comparison
+
+**User Story:** As a researcher, I want a controlled comparison between the deterministic rule-based correlation baseline and the trained GNN on the same evaluation data, so that any performance difference is attributable to the difference in approach rather than to different datasets or metrics.
+
+#### Acceptance Criteria
+
+1. THE researcher SHALL define a shared evaluation protocol in writing BEFORE running either system. The protocol SHALL specify: the common evaluation dataset/scenario, the prediction target, all metrics to be reported, the threshold selection method for converting `combined_score` to binary predictions, and the threshold selection method for converting GNN output to binary predictions.
+2. THE rule-based `TemporalCorrelationEngine` from engineering Task 11 SHALL be used as the deterministic baseline. It SHALL be evaluated on the same dataset/scenario as the GNN using the protocol defined in ML-09.1.
+3. THE GNN SHALL be evaluated on the same dataset/scenario using the same protocol. The best checkpoint from ML-07 SHALL be used.
+4. IF a classical ML baseline was implemented in ML-03, it SHALL also be evaluated on the same dataset/scenario using the same protocol.
+5. THE researcher SHALL produce a side-by-side metric comparison table and a narrative analysis. The analysis SHALL report: where each approach performs better, where it is worse, false-positive patterns, false-negative patterns, and latency.
+6. THE researcher SHALL NOT write a conclusion that assumes the GNN wins. The written conclusion SHALL be based only on the measured results. If the deterministic baseline outperforms the GNN, that result SHALL be reported honestly and analysed.
+7. Any claimed improvement SHALL be stated as specific to the evaluation dataset and scenario and SHALL NOT be generalised to cybersecurity broadly.
+
+---
+
+### Requirement ML-10: GNN Integration into the TraceGraph Pipeline
+
+**User Story:** As a developer, I want GNN inference integrated as an optional, non-blocking enrichment layer in the TraceGraph pipeline, so that the learned signal is available to analysts and the AI context builder while the existing deterministic workflow is never disrupted by a GNN failure.
+
+#### Acceptance Criteria
+
+1. GNN integration SHALL NOT begin before ML-07 (standalone experiment working) and ML-09 (rule-vs-GNN comparison complete).
+2. THE `GNNInferenceService` SHALL load the model from a configured file path (environment variable, NOT hardcoded) and SHALL return a `GNNPrediction` object carrying: prediction value(s), score/confidence, model version, feature names used, and an explicit note that the output is a learned signal and NOT a confirmed attack label.
+3. IF the model file is missing, the model cannot be loaded, or inference raises an exception, THE `GNNInferenceService` SHALL return `GNNPrediction(available=False)` and SHALL NOT raise an exception to the caller.
+4. IF GNN inference is unavailable or fails for any reason, THE existing investigation workflow (graph retrieval, timeline, evidence, AI summary) SHALL continue to function correctly and completely without GNN output.
+5. THE `InvestigationContext` passed to the AI Summary Service SHALL include an optional `gnn_signal` field populated when GNN inference is available. The LLM system prompt SHALL describe the GNN signal as "a learned graph-pattern score — not a confirmed attack label."
+6. THE `GraphResult` returned by `GET /api/investigations/{id}/graph` SHALL include an optional `gnn_signal` field populated when GNN inference is available. The API documentation SHALL state that this is a learned signal, not a deterministic label.
+7. GNN output SHALL be clearly distinguished from the deterministic `combined_score` in all API responses, the analyst UI, and the AI context. They SHALL NOT be merged, averaged, or presented as equivalent measures.
+8. THE integration SHALL have explicit tests verifying that GNN failure does not break the investigation workflow, that GNN output is absent from the context when the model is unavailable, and that GNN output is correctly associated with the right investigation.
+
+---
+
+### Requirement ML-11: Final ML Research Documentation
+
+**User Story:** As a researcher, I want complete, honest documentation of the ML research track that states clearly what was measured, how, and what the results actually support, so that the work is reproducible and the claims are defensible.
+
+#### Acceptance Criteria
+
+1. THE final research report SHALL document: dataset name and version, selection rationale, problem definition, prediction target, graph representation (nodes, edges, features), GNN architecture, feature design with derivation formulas, label definitions, split strategy, baseline methods used, metrics and why they were chosen, results table (all systems, all metrics, train/val/test), error analysis summary, and limitations.
+2. THE final report SHALL include an explicit statement of what the evaluation results do and do not support. Claims about improved detection SHALL be scoped to the specific dataset and scenario evaluated and SHALL NOT be generalised.
+3. THE researcher SHALL document exact commands sufficient for a person not involved in the project to: acquire the dataset, prepare splits, construct graphs, train the model, evaluate the model, and reproduce the comparison table.
+4. THE research pipeline SHALL be reproducible end-to-end from the documented commands. Any steps that require manual intervention SHALL be documented with the required input.
+5. THE report SHALL NOT claim general cybersecurity effectiveness from results on a single capstone-scale dataset.
+
+---
+
+### Glossary Additions (ML/GNN Track)
+
+- **GNN**: Graph Neural Network. A neural network architecture that operates directly on graph-structured data using message passing between nodes.
+- **GNN_Prediction**: The output of the `GNNInferenceService` — a learned graph-structural signal carrying a score, model version, and feature names. Explicitly NOT a ground-truth attack label.
+- **Combined_Score**: (restated for clarity) A weighted sum of deterministic rule-based correlation signals, normalized to [0, 1]. NOT an attack probability. NOT equivalent to `GNN_Prediction.score`.
+- **GCN**: Graph Convolutional Network. A transductive spectral GNN variant.
+- **GraphSAGE**: An inductive GNN that uses neighborhood sampling for scalable inference on unseen nodes.
+- **GAT**: Graph Attention Network. A GNN that uses attention weights for neighborhood aggregation.
+- **Node_Classification**: A GNN task where the model assigns a label to each node in a graph.
+- **Edge_Classification**: A GNN task where the model assigns a label to each edge in a graph.
+- **Link_Prediction**: A GNN task where the model predicts whether an edge should exist between two nodes.
+- **Inductive_Learning**: A learning paradigm where the model generalises to nodes/graphs not seen during training.
+- **Transductive_Learning**: A learning paradigm where the model is trained and evaluated on the same fixed graph.
+- **Message_Passing**: The core GNN operation where each node aggregates information from its neighbors.
+- **GNN_Inference_Service**: The backend service (`backend/app/services/gnn_inference.py`) that loads a trained GNN checkpoint and runs inference on an investigation graph.
+- **Research_Track**: The ML/DL/GNN experimental work (ML-01 through ML-11) that runs in parallel with the engineering tasks. It does not replace the deterministic pipeline.
