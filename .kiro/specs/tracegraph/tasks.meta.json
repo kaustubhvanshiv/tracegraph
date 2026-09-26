@@ -117,6 +117,18 @@
         "chatSessionId": "sess_e83adb3a-914a-481e-888f-a4f81058fdaf",
         "timestamp": 1790427848010
       }
+    ],
+    "12. Checkpoint — core pipeline": [
+      {
+        "executionId": "8d60049d-0ef8-430f-803f-532e789a488b",
+        "chatSessionId": "sess_3600cff2-8052-4975-bf1d-89f5b26b04a7",
+        "timestamp": 1790428461625
+      },
+      {
+        "executionId": "8d60049d-0ef8-430f-803f-532e789a488b",
+        "chatSessionId": "sess_3600cff2-8052-4975-bf1d-89f5b26b04a7",
+        "timestamp": 1790429499480
+      }
     ]
   }
 }

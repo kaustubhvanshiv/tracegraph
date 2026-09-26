@@ -210,7 +210,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test each of the seven signals in isolation; test combined scoring; test zero-signal filtering; test configurable weights
     - _Requirements: 7.1–7.8_
 
-- [ ] 12. Checkpoint — core pipeline
+- [x] 12. Checkpoint — core pipeline
   - Ensure all unit and property tests for tasks 2–11 pass. Run `pytest tests/unit/` and fix any failures before proceeding to persistence.
 
 - [ ] 13. Neo4j graph repository
