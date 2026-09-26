@@ -98,6 +98,37 @@
         "chatSessionId": "sess_14c33406-6439-490c-9879-f7774efaadfb",
         "timestamp": 1790271288906
       }
+    ],
+    "11. Temporal correlation engine": [
+      {
+        "executionId": "fce6f85b-1a99-49f6-a3f9-482ddea36ffd",
+        "chatSessionId": "sess_e83adb3a-914a-481e-888f-a4f81058fdaf",
+        "timestamp": 1790426171515
+      },
+      {
+        "executionId": "fce6f85b-1a99-49f6-a3f9-482ddea36ffd",
+        "chatSessionId": "sess_e83adb3a-914a-481e-888f-a4f81058fdaf",
+        "timestamp": 1790427848095
+      }
+    ],
+    "11.1 Implement `TemporalCorrelationEngine`": [
+      {
+        "executionId": "fce6f85b-1a99-49f6-a3f9-482ddea36ffd",
+        "chatSessionId": "sess_e83adb3a-914a-481e-888f-a4f81058fdaf",
+        "timestamp": 1790427848010
+      }
+    ],
+    "12. Checkpoint — core pipeline": [
+      {
+        "executionId": "8d60049d-0ef8-430f-803f-532e789a488b",
+        "chatSessionId": "sess_3600cff2-8052-4975-bf1d-89f5b26b04a7",
+        "timestamp": 1790428461625
+      },
+      {
+        "executionId": "8d60049d-0ef8-430f-803f-532e789a488b",
+        "chatSessionId": "sess_3600cff2-8052-4975-bf1d-89f5b26b04a7",
+        "timestamp": 1790429499480
+      }
     ]
   }
 }
