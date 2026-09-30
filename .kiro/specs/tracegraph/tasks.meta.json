@@ -3,6 +3,10 @@
     "4.2 Write property test for authorization isolation (Property 17)": {
       "status": "passed",
       "lastRunTimestamp": 1789929635068
+    },
+    "6.2 Write property test for normalization canonical forms (Property 13)": {
+      "status": "passed",
+      "lastRunTimestamp": 1790772814017
     }
   },
   "executionHistory": {
@@ -128,6 +132,37 @@
         "executionId": "8d60049d-0ef8-430f-803f-532e789a488b",
         "chatSessionId": "sess_3600cff2-8052-4975-bf1d-89f5b26b04a7",
         "timestamp": 1790429499480
+      }
+    ],
+    "13.1 Implement `GraphRepository` with idempotent upsert semantics": [
+      {
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772019474
+      },
+      {
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772455347
+      }
+    ],
+    "13. Neo4j graph repository": [
+      {
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772455477
+      }
+    ],
+    "6.2 Write property test for normalization canonical forms (Property 13)": [
+      {
+        "executionId": "e76d4de5-092e-42ce-85a8-326d463c9033",
+        "chatSessionId": "sess_bf678fe9-c372-4e2b-aa55-e209d4a14584",
+        "timestamp": 1790772523515
+      },
+      {
+        "executionId": "e76d4de5-092e-42ce-85a8-326d463c9033",
+        "chatSessionId": "sess_bf678fe9-c372-4e2b-aa55-e209d4a14584",
+        "timestamp": 1790772828253
       }
     ]
   }

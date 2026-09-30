@@ -92,7 +92,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Store original parsed fields in `SecurityEvent.raw_data`; preserve `event_id` unchanged
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.9_
 
-  - [ ]* 6.2 Write property test for normalization canonical forms (Property 13)
+  - [x] 6.2 Write property test for normalization canonical forms (Property 13)
     - **Property 13: Normalization Canonical Forms**
     - **Validates: Requirements 3.1, 3.3, 3.4, 3.5**
     - Use `hypothesis` to generate arbitrary `ParsedEvent` objects; assert output `source_host` equals `source_host.lower()` and `timestamp` is UTC-aware
@@ -213,8 +213,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 - [x] 12. Checkpoint — core pipeline
   - Ensure all unit and property tests for tasks 2–11 pass. Run `pytest tests/unit/` and fix any failures before proceeding to persistence.
 
-- [ ] 13. Neo4j graph repository
-  - [ ] 13.1 Implement `GraphRepository` with idempotent upsert semantics
+- [x] 13. Neo4j graph repository
+  - [x] 13.1 Implement `GraphRepository` with idempotent upsert semantics
     - Create `backend/app/repositories/graph_repository.py` with `upsert_entity`, `upsert_relationship`, `get_graph`, `pivot`, `get_entity`
     - Use parameterized Cypher queries exclusively (no string interpolation of user-controlled values) using the MERGE patterns from the design
     - `upsert_entity`: MERGE on `(canonical_key, investigation_id)` — nodes are scoped per investigation, never shared; ON MATCH append only new aliases
