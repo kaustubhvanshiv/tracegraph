@@ -102,3 +102,19 @@ async def check_db_health() -> dict[str, bool]:
         "neo4j": await check_neo4j_health(),
     }
 
+
+# ---------------------------------------------------------------------------
+# FastAPI dependency for Neo4j driver
+# ---------------------------------------------------------------------------
+
+
+async def get_neo4j_driver():
+    """FastAPI dependency that yields the global Neo4j async driver.
+
+    The driver is initialised during app startup via ``init_neo4j()``.
+    Callers that need the driver inside a route handler should declare::
+
+        driver = Depends(get_neo4j_driver)
+    """
+    return neo4j_driver
+
