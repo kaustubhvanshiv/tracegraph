@@ -239,8 +239,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test entity creation, alias merge, relationship creation, event_id accumulation, signal_name accumulation, filtered retrieval, `GRAPH_UNAVAILABLE` error path
     - _Requirements: 8.1–8.10_
 
-- [ ] 14. Evidence ingestion API and pipeline orchestration
-  - [ ] 14.1 Implement `IngestionService` pipeline orchestration
+- [x] 14. Evidence ingestion API and pipeline orchestration
+  - [x] 14.1 Implement `IngestionService` pipeline orchestration
     - Create `backend/app/services/ingestion.py` implementing the full `process_event_batch` algorithm from the design's pseudocode
     - Validate investigation existence before any processing; return `INVESTIGATION_NOT_FOUND` if missing
     - Reject immediately with `INVALID_SOURCE_TYPE` if `source_type` is not in the registry
@@ -249,23 +249,23 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Return `IngestionResponse` with `accepted`, `rejected`, and `errors` (field-level reasons)
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 16.3_
 
-  - [ ] 14.2 Implement `EventRepository` for PostgreSQL event storage
+  - [x] 14.2 Implement `EventRepository` for PostgreSQL event storage
     - Create `backend/app/repositories/event_repository.py` with `store(events, investigation_id, entity_map)` and `get(event_id, investigation_id)`. Also INSERT into `event_entity_map`. Use ON CONFLICT DO NOTHING for idempotent re-ingestion using parameterized SQLAlchemy queries
     - _Requirements: 15.6_
 
-  - [ ] 14.3 Implement ingestion API routes
+  - [x] 14.3 Implement ingestion API routes
     - Create `backend/app/api/events.py` with `POST /api/investigations/{id}/events` (single) and `POST /api/investigations/{id}/events/batch`
     - Apply JWT and ownership middleware
     - Log only `event_id` and `investigation_id` at INFO level (never raw event data)
     - Return `SuccessResponse[IngestionResponse]` or `ErrorResponse`
     - _Requirements: 1.1–1.8, 15.5, 16.1–16.4_
 
-  - [ ] 14.4 Write integration tests for the ingestion pipeline
+  - [x] 14.4 Write integration tests for the ingestion pipeline
     - Test single event success, batch partial failure, `INVESTIGATION_NOT_FOUND`, `INVALID_SOURCE_TYPE`, ownership enforcement, and round-trip `event_id` preservation
     - _Requirements: 1.1–1.8_
 
-- [ ] 15. Timeline service
-  - [ ] 15.1 Implement `TimelineService`
+- [x] 15. Timeline service
+  - [x] 15.1 Implement `TimelineService`
     - Create `backend/app/services/timeline.py` with `TimelineService.get_timeline(investigation_id, filters) -> TimelineResult`
     - Return events sorted ascending by `timestamp`; all timestamps as UTC ISO-8601 strings
     - Include `entity_ids` on each timeline event for graph cross-linking
@@ -273,7 +273,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Guarantee the filter-is-subset invariant: filtered results are always a subset of unfiltered results
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7_
 
-  - [ ] 15.2 Implement timeline API route
+  - [x] 15.2 Implement timeline API route
     - Create `backend/app/api/timeline.py` with `GET /api/investigations/{id}/timeline` supporting all filter parameters
     - _Requirements: 9.1–9.7_
 
