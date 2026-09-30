@@ -264,8 +264,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Test single event success, batch partial failure, `INVESTIGATION_NOT_FOUND`, `INVALID_SOURCE_TYPE`, ownership enforcement, and round-trip `event_id` preservation
     - _Requirements: 1.1–1.8_
 
-- [ ] 15. Timeline service
-  - [ ] 15.1 Implement `TimelineService`
+- [x] 15. Timeline service
+  - [x] 15.1 Implement `TimelineService`
     - Create `backend/app/services/timeline.py` with `TimelineService.get_timeline(investigation_id, filters) -> TimelineResult`
     - Return events sorted ascending by `timestamp`; all timestamps as UTC ISO-8601 strings
     - Include `entity_ids` on each timeline event for graph cross-linking
@@ -273,7 +273,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Guarantee the filter-is-subset invariant: filtered results are always a subset of unfiltered results
     - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7_
 
-  - [ ] 15.2 Implement timeline API route
+  - [x] 15.2 Implement timeline API route
     - Create `backend/app/api/timeline.py` with `GET /api/investigations/{id}/timeline` supporting all filter parameters
     - _Requirements: 9.1–9.7_
 

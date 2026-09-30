@@ -8,6 +8,7 @@ from app.core.errors import register_error_handlers
 from app.api.events import router as events_router
 from app.api.investigations import router as investigations_router
 from app.api.notes import router as notes_router
+from app.api.timeline import router as timeline_router
 
 app = FastAPI(
     title="TraceGraph API",
@@ -38,6 +39,7 @@ register_default_adapters()
 app.include_router(investigations_router)
 app.include_router(notes_router)
 app.include_router(events_router)
+app.include_router(timeline_router)
 
 
 @app.get("/health")
