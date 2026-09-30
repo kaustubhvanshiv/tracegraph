@@ -3,6 +3,10 @@
     "4.2 Write property test for authorization isolation (Property 17)": {
       "status": "passed",
       "lastRunTimestamp": 1789929635068
+    },
+    "6.2 Write property test for normalization canonical forms (Property 13)": {
+      "status": "passed",
+      "lastRunTimestamp": 1790772814017
     }
   },
   "executionHistory": {
@@ -130,35 +134,35 @@
         "timestamp": 1790429499480
       }
     ],
-    "15.1 Implement `TimelineService`": [
+    "13.1 Implement `GraphRepository` with idempotent upsert semantics": [
       {
-        "executionId": "3b54e76f-c8a4-4219-9329-85fbe00049e6",
-        "chatSessionId": "sess_a82f2c10-42ec-44a1-8f94-9439f4695e5f",
-        "timestamp": 1790787566361
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772019474
       },
       {
-        "executionId": "3b54e76f-c8a4-4219-9329-85fbe00049e6",
-        "chatSessionId": "sess_a82f2c10-42ec-44a1-8f94-9439f4695e5f",
-        "timestamp": 1790787959366
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772455347
       }
     ],
-    "15.2 Implement timeline API route": [
+    "13. Neo4j graph repository": [
       {
-        "executionId": "3b54e76f-c8a4-4219-9329-85fbe00049e6",
-        "chatSessionId": "sess_a82f2c10-42ec-44a1-8f94-9439f4695e5f",
-        "timestamp": 1790787572183
+        "executionId": "d6a40b75-0dfe-4168-8a7c-2d0b9fd91dd4",
+        "chatSessionId": "sess_1f991833-d882-437d-9bb8-5d4a6dd788b2",
+        "timestamp": 1790772455477
+      }
+    ],
+    "6.2 Write property test for normalization canonical forms (Property 13)": [
+      {
+        "executionId": "e76d4de5-092e-42ce-85a8-326d463c9033",
+        "chatSessionId": "sess_bf678fe9-c372-4e2b-aa55-e209d4a14584",
+        "timestamp": 1790772523515
       },
       {
-        "executionId": "3b54e76f-c8a4-4219-9329-85fbe00049e6",
-        "chatSessionId": "sess_a82f2c10-42ec-44a1-8f94-9439f4695e5f",
-        "timestamp": 1790787965797
-      }
-    ],
-    "15. Timeline service": [
-      {
-        "executionId": "3b54e76f-c8a4-4219-9329-85fbe00049e6",
-        "chatSessionId": "sess_a82f2c10-42ec-44a1-8f94-9439f4695e5f",
-        "timestamp": 1790787965920
+        "executionId": "e76d4de5-092e-42ce-85a8-326d463c9033",
+        "chatSessionId": "sess_bf678fe9-c372-4e2b-aa55-e209d4a14584",
+        "timestamp": 1790772828253
       }
     ]
   }
