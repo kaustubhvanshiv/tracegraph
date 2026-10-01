@@ -47,3 +47,7 @@ class IngestionResponse(BaseModel):
         default_factory=list,
         description="Details for each rejected event",
     )
+    timing_metrics: dict[str, float] = Field(
+        default_factory=dict,
+        description="Per-stage elapsed times in milliseconds",
+    )

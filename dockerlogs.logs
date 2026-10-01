@@ -1,0 +1,116 @@
+postgres | 2026-10-01 16:23:23.585 | 
+postgres | 2026-10-01 16:23:23.585 | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres | 2026-10-01 16:23:23.585 | 
+postgres | 2026-10-01 16:23:23.614 | 2026-10-01 10:53:23.614 UTC [1] FATAL:  database files are incompatible with server
+postgres | 2026-10-01 16:23:23.614 | 2026-10-01 10:53:23.614 UTC [1] DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 15.19.
+neo4j    | 2026-10-01 16:23:24.870 | Installing Plugin 'apoc' from /var/lib/neo4j/labs/apoc-*-core.jar to /var/lib/neo4j/plugins/apoc.jar
+neo4j    | 2026-10-01 16:23:24.890 | Applying default values for plugin apoc to neo4j.conf
+neo4j    | 2026-10-01 16:23:28.913 | Changed password for user 'neo4j'. IMPORTANT: this change will only take effect if performed before the database is started for the first time.
+neo4j    | 2026-10-01 16:23:32.385 | 2026-10-01 10:53:32.382+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+neo4j    | 2026-10-01 16:23:32.404 | 2026-10-01 10:53:32.403+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+neo4j    | 2026-10-01 16:23:32.404 | 2026-10-01 10:53:32.404+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+neo4j    | 2026-10-01 16:23:32.434 | 2026-10-01 10:53:32.433+0000 INFO  Starting...
+neo4j    | 2026-10-01 16:23:33.919 | 2026-10-01 10:53:33.919+0000 INFO  This instance is ServerId{c1741711} (c1741711-18f0-4ead-8a99-68aa14de64bc)
+neo4j    | 2026-10-01 16:23:35.797 | 2026-10-01 10:53:35.796+0000 INFO  ======== Neo4j 5.26.31 ========
+neo4j    | 2026-10-01 16:23:40.120 | 2026-10-01 10:53:40.118+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+neo4j    | 2026-10-01 16:23:40.217 | 2026-10-01 10:53:40.217+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+neo4j    | 2026-10-01 16:23:42.864 | 2026-10-01 10:53:42.863+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+neo4j    | 2026-10-01 16:23:42.864 | 2026-10-01 10:53:42.864+0000 INFO  Remote interface available at http://localhost:7474/
+neo4j    | 2026-10-01 16:23:42.868 | 2026-10-01 10:53:42.867+0000 INFO  id: 9483C5B0BC2C500D7A554FEBA58FD0DB1A5987F761D11380872D14DD4276A4FF
+neo4j    | 2026-10-01 16:23:42.868 | 2026-10-01 10:53:42.868+0000 INFO  name: system
+neo4j    | 2026-10-01 16:23:42.868 | 2026-10-01 10:53:42.868+0000 INFO  creationDate: 2026-09-20T17:40:44.249Z
+neo4j    | 2026-10-01 16:23:42.868 | 2026-10-01 10:53:42.868+0000 INFO  Started.
+neo4j    | 2026-10-01 16:29:20.080 | 2026-10-01 10:59:20.077+0000 INFO  Neo4j Server shutdown initiated by request
+neo4j    | 2026-10-01 16:29:20.081 | 2026-10-01 10:59:20.080+0000 INFO  Stopping...
+frontend | 2026-10-01 16:29:28.661 | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+frontend | 2026-10-01 16:29:28.661 | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+frontend | 2026-10-01 16:29:28.664 | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+frontend | 2026-10-01 16:29:28.673 | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+frontend | 2026-10-01 16:29:28.697 | 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+frontend | 2026-10-01 16:29:28.698 | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+frontend | 2026-10-01 16:29:28.698 | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+frontend | 2026-10-01 16:29:28.702 | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+frontend | 2026-10-01 16:29:28.705 | /docker-entrypoint.sh: Configuration complete; ready for start up
+frontend | 2026-10-01 16:29:28.713 | 2026/10/01 10:59:28 [notice] 1#1: using the "epoll" event method
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: nginx/1.31.6
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: OS: Linux 6.18.33.2-microsoft-standard-WSL2
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: start worker processes
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 29
+frontend | 2026-10-01 16:29:28.714 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 30
+frontend | 2026-10-01 16:29:28.715 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 31
+frontend | 2026-10-01 16:29:28.715 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 32
+frontend | 2026-10-01 16:29:28.716 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 33
+frontend | 2026-10-01 16:29:28.716 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 34
+frontend | 2026-10-01 16:29:28.717 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 35
+frontend | 2026-10-01 16:29:28.717 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 36
+frontend | 2026-10-01 16:29:28.718 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 37
+frontend | 2026-10-01 16:29:28.718 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 38
+frontend | 2026-10-01 16:29:28.719 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 39
+frontend | 2026-10-01 16:29:28.719 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 40
+frontend | 2026-10-01 16:29:28.720 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 41
+frontend | 2026-10-01 16:29:28.721 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 42
+frontend | 2026-10-01 16:29:28.721 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 43
+frontend | 2026-10-01 16:29:28.722 | 2026/10/01 10:59:28 [notice] 1#1: start worker process 44
+neo4j    | 2026-10-01 16:29:33.353 | Installing Plugin 'apoc' from /var/lib/neo4j/labs/apoc-*-core.jar to /var/lib/neo4j/plugins/apoc.jar
+neo4j    | 2026-10-01 16:29:33.362 | Applying default values for plugin apoc to neo4j.conf
+neo4j    | 2026-10-01 16:29:33.379 | Skipping dbms.security.procedures.unrestricted for plugin apoc because it is already set.
+neo4j    | 2026-10-01 16:29:33.379 | You may need to add apoc.* to the dbms.security.procedures.unrestricted setting in your configuration file.
+backend  | 2026-10-01 16:29:33.621 | INFO:     Started server process [1]
+backend  | 2026-10-01 16:29:33.621 | INFO:     Waiting for application startup.
+postgres | 2026-10-01 16:29:34.321 | 
+postgres | 2026-10-01 16:29:34.321 | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres | 2026-10-01 16:29:34.321 | 
+postgres | 2026-10-01 16:29:34.335 | 2026-10-01 10:59:34.335 UTC [1] FATAL:  database files are incompatible with server
+postgres | 2026-10-01 16:29:34.335 | 2026-10-01 10:59:34.335 UTC [1] DETAIL:  The data directory was initialized by PostgreSQL version 16, which is not compatible with this version 15.19.
+neo4j    | 2026-10-01 16:29:36.889 | Changed password for user 'neo4j'. IMPORTANT: this change will only take effect if performed before the database is started for the first time.
+backend  | 2026-10-01 16:29:37.632 | {"timestamp": "2026-10-01T10:59:37.632033+00:00", "level": "ERROR", "logger": "app.core.database", "message": "PostgreSQL health check failed: [Errno -5] No address associated with hostname"}
+backend  | 2026-10-01 16:29:37.633 | CRITICAL ERROR: Cannot establish connection to PostgreSQL database. Exiting.
+backend  | 2026-10-01 16:29:37.634 | ERROR:    Traceback (most recent call last):
+backend  | 2026-10-01 16:29:37.634 |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 732, in lifespan
+backend  | 2026-10-01 16:29:37.634 |     async with self.lifespan_context(app) as maybe_state:
+backend  | 2026-10-01 16:29:37.634 |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+backend  | 2026-10-01 16:29:37.634 |     return await anext(self.gen)
+backend  | 2026-10-01 16:29:37.634 |            ^^^^^^^^^^^^^^^^^^^^^
+backend  | 2026-10-01 16:29:37.634 |   File "/app/app/main.py", line 32, in lifespan
+backend  | 2026-10-01 16:29:37.634 |     sys.exit(1)
+backend  | 2026-10-01 16:29:37.634 | SystemExit: 1
+backend  | 2026-10-01 16:29:37.634 | 
+backend  | 2026-10-01 16:29:37.634 | ERROR:    Application startup failed. Exiting.
+neo4j    | 2026-10-01 16:29:40.129 | 2026-10-01 10:59:40.127+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+neo4j    | 2026-10-01 16:29:40.144 | 2026-10-01 10:59:40.143+0000 WARN  Use of deprecated setting 'dbms.memory.heap.max_size'. It is replaced by 'server.memory.heap.max_size'.
+neo4j    | 2026-10-01 16:29:40.145 | 2026-10-01 10:59:40.144+0000 WARN  Use of deprecated setting 'dbms.memory.heap.initial_size'. It is replaced by 'server.memory.heap.initial_size'.
+neo4j    | 2026-10-01 16:29:40.161 | 2026-10-01 10:59:40.161+0000 INFO  Starting...
+neo4j    | 2026-10-01 16:29:41.454 | 2026-10-01 10:59:41.454+0000 INFO  This instance is ServerId{c1741711} (c1741711-18f0-4ead-8a99-68aa14de64bc)
+neo4j    | 2026-10-01 16:29:43.139 | 2026-10-01 10:59:43.138+0000 INFO  ======== Neo4j 5.26.31 ========
+neo4j    | 2026-10-01 16:29:47.286 | 2026-10-01 10:59:47.285+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+neo4j    | 2026-10-01 16:29:47.346 | 2026-10-01 10:59:47.345+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+frontend | 2026-10-01 16:29:48.993 | 172.18.0.1 - - [01/Oct/2026:10:59:48 +0000] "GET / HTTP/1.1" 200 477 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+frontend | 2026-10-01 16:29:49.094 | 172.18.0.1 - - [01/Oct/2026:10:59:49 +0000] "GET /assets/index-C3B8nE9F.js HTTP/1.1" 200 828180 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+frontend | 2026-10-01 16:29:49.096 | 172.18.0.1 - - [01/Oct/2026:10:59:49 +0000] "GET /assets/index-BiP8fNso.css HTTP/1.1" 200 18336 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+frontend | 2026-10-01 16:29:49.576 | 172.18.0.1 - - [01/Oct/2026:10:59:49 +0000] "GET /api/investigations?limit=50&offset=0 HTTP/1.1" 200 477 "http://localhost:5173/investigations" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+frontend | 2026-10-01 16:29:49.744 | 172.18.0.1 - - [01/Oct/2026:10:59:49 +0000] "GET /vite.svg HTTP/1.1" 200 1497 "http://localhost:5173/investigations" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+backend  | 2026-10-01 16:29:49.790 | INFO:     Started server process [1]
+backend  | 2026-10-01 16:29:49.790 | INFO:     Waiting for application startup.
+neo4j    | 2026-10-01 16:29:50.097 | 2026-10-01 10:59:50.097+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+neo4j    | 2026-10-01 16:29:50.098 | 2026-10-01 10:59:50.098+0000 INFO  Remote interface available at http://localhost:7474/
+neo4j    | 2026-10-01 16:29:50.104 | 2026-10-01 10:59:50.103+0000 INFO  id: 9483C5B0BC2C500D7A554FEBA58FD0DB1A5987F761D11380872D14DD4276A4FF
+neo4j    | 2026-10-01 16:29:50.105 | 2026-10-01 10:59:50.104+0000 INFO  name: system
+neo4j    | 2026-10-01 16:29:50.105 | 2026-10-01 10:59:50.105+0000 INFO  creationDate: 2026-09-20T17:40:44.249Z
+neo4j    | 2026-10-01 16:29:50.105 | 2026-10-01 10:59:50.105+0000 INFO  Started.
+backend  | 2026-10-01 16:29:53.804 | {"timestamp": "2026-10-01T10:59:53.802828+00:00", "level": "ERROR", "logger": "app.core.database", "message": "PostgreSQL health check failed: [Errno -5] No address associated with hostname"}
+backend  | 2026-10-01 16:29:53.804 | CRITICAL ERROR: Cannot establish connection to PostgreSQL database. Exiting.
+backend  | 2026-10-01 16:29:53.805 | ERROR:    Traceback (most recent call last):
+backend  | 2026-10-01 16:29:53.806 |   File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 732, in lifespan
+backend  | 2026-10-01 16:29:53.806 |     async with self.lifespan_context(app) as maybe_state:
+backend  | 2026-10-01 16:29:53.806 |   File "/usr/local/lib/python3.11/contextlib.py", line 210, in __aenter__
+backend  | 2026-10-01 16:29:53.806 |     return await anext(self.gen)
+backend  | 2026-10-01 16:29:53.806 |            ^^^^^^^^^^^^^^^^^^^^^
+backend  | 2026-10-01 16:29:53.806 |   File "/app/app/main.py", line 32, in lifespan
+backend  | 2026-10-01 16:29:53.806 |     sys.exit(1)
+backend  | 2026-10-01 16:29:53.806 | SystemExit: 1
+backend  | 2026-10-01 16:29:53.806 | 
+backend  | 2026-10-01 16:29:53.806 | ERROR:    Application startup failed. Exiting.
+frontend | 2026-10-01 16:30:01.107 | 172.18.0.1 - - [01/Oct/2026:11:00:01 +0000] "POST /api/investigations HTTP/1.1" 405 559 "http://localhost:5173/investigations" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"
+frontend | 2026-10-01 16:30:05.205 | 172.18.0.1 - - [01/Oct/2026:11:00:05 +0000] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 200 477 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36" "-"

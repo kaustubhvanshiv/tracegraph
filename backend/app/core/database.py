@@ -23,6 +23,7 @@ connect_args = {
     "prepared_statement_cache_size": 0,
 }
 if "supabase.com" in settings.postgres_host:
+    # pyrefly: ignore [bad-assignment]
     connect_args["ssl"] = "require"
 
 engine = create_async_engine(
@@ -38,6 +39,7 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
+# pyrefly: ignore [bad-return]
 async def get_db() -> AsyncSession:
     """FastAPI dependency that yields an async database session."""
     async with AsyncSessionLocal() as session:

@@ -23,6 +23,8 @@ Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 16.3
 from __future__ import annotations
 
 import logging
+import time
+from contextlib import contextmanager
 from typing import Any
 
 from neo4j import AsyncDriver  # type: ignore[import-untyped]
@@ -47,6 +49,17 @@ from app.services.parser_registry import default_registry
 from app.services.relationship_extractor import RelationshipExtractor
 
 logger = logging.getLogger(__name__)
+
+
+@contextmanager
+def StageTimer(stage_name: str, metrics_dict: dict[str, float]):
+    """Context manager to record elapsed time (in ms) for a pipeline stage."""
+    start = time.perf_counter()
+    try:
+        yield
+    finally:
+        elapsed_ms = (time.perf_counter() - start) * 1000
+        metrics_dict[stage_name] = round(elapsed_ms, 2)
 
 
 class IngestionService:
@@ -105,53 +118,55 @@ class IngestionService:
         # ------------------------------------------------------------------
         # 3. Parse + normalize each event independently
         # ------------------------------------------------------------------
+        metrics: dict[str, float] = {}
         accepted_events: list[SecurityEvent] = []
         rejected_events: list[RejectedEvent] = []
         normalizer = NormalizationEngine()
 
-        for raw in raw_events:
-            # a. Parse
-            parse_result = default_registry.dispatch(source_type, raw)
-            if isinstance(parse_result, ParseError):
-                logger.debug(
-                    "Parse failure for event",
-                    extra={
-                        "event_id": parse_result.event_id,
-                        "field": parse_result.field_name,
-                        "reason": parse_result.reason,
-                        "investigation_id": investigation_id,
-                    },
-                )
-                rejected_events.append(
-                    RejectedEvent(
-                        event_id=parse_result.event_id,
-                        reason=parse_result.reason,
-                        field=parse_result.field_name,
+        with StageTimer("parse_and_normalize", metrics):
+            for raw in raw_events:
+                # a. Parse
+                parse_result = default_registry.dispatch(source_type, raw)
+                if isinstance(parse_result, ParseError):
+                    logger.debug(
+                        "Parse failure for event",
+                        extra={
+                            "event_id": parse_result.event_id,
+                            "field": parse_result.field_name,
+                            "reason": parse_result.reason,
+                            "investigation_id": investigation_id,
+                        },
                     )
-                )
-                continue
-
-            # b. Normalize (validate timestamps, canonicalize identifiers, etc.)
-            try:
-                security_event = normalizer.normalize(parse_result)
-            except (AppValidationError, Exception) as exc:
-                logger.debug(
-                    "Normalization failure for event",
-                    extra={
-                        "event_id": parse_result.event_id,
-                        "reason": str(exc),
-                        "investigation_id": investigation_id,
-                    },
-                )
-                rejected_events.append(
-                    RejectedEvent(
-                        event_id=parse_result.event_id,
-                        reason=str(exc),
+                    rejected_events.append(
+                        RejectedEvent(
+                            event_id=parse_result.event_id,
+                            reason=parse_result.reason,
+                            field=parse_result.field_name,
+                        )
                     )
-                )
-                continue
+                    continue
 
-            accepted_events.append(security_event)
+                # b. Normalize (validate timestamps, canonicalize identifiers, etc.)
+                try:
+                    security_event = normalizer.normalize(parse_result)
+                except (AppValidationError, Exception) as exc:
+                    logger.debug(
+                        "Normalization failure for event",
+                        extra={
+                            "event_id": parse_result.event_id,
+                            "reason": str(exc),
+                            "investigation_id": investigation_id,
+                        },
+                    )
+                    rejected_events.append(
+                        RejectedEvent(
+                            event_id=parse_result.event_id,
+                            reason=str(exc),
+                        )
+                    )
+                    continue
+
+                accepted_events.append(security_event)
 
         if not accepted_events:
             # Nothing made it through — return early with the rejection list.
@@ -176,103 +191,109 @@ class IngestionService:
         # ------------------------------------------------------------------
         # 4. Entity extraction
         # ------------------------------------------------------------------
-        extractor = EntityExtractor()
-        entities = extractor.extract(accepted_events, investigation_id=investigation_id)
+        with StageTimer("entity_extraction", metrics):
+            extractor = EntityExtractor()
+            entities = extractor.extract(accepted_events, investigation_id=investigation_id)
 
-        # Build event_id → [entity_id, ...] map for EventRepository
-        entity_map: dict[str, list[str]] = {}
-        for entity in entities:
-            for eid in entity.event_ids:
-                entity_map.setdefault(eid, []).append(entity.entity_id)
+            # Build event_id → [entity_id, ...] map for EventRepository
+            entity_map: dict[str, list[str]] = {}
+            for entity in entities:
+                for eid in entity.event_ids:
+                    entity_map.setdefault(eid, []).append(entity.entity_id)
 
         # ------------------------------------------------------------------
         # 5. Relationship extraction
         # ------------------------------------------------------------------
-        rel_extractor = RelationshipExtractor()
-        raw_rels = rel_extractor.extract(
-            accepted_events,
-            entities,
-            investigation_id=investigation_id,
-        )
+        with StageTimer("relationship_extraction", metrics):
+            rel_extractor = RelationshipExtractor()
+            raw_rels = rel_extractor.extract(
+                accepted_events,
+                entities,
+                investigation_id=investigation_id,
+            )
 
         # ------------------------------------------------------------------
         # 6. Candidate retrieval (requires ascending timestamp order)
         # ------------------------------------------------------------------
-        sorted_events = sorted(accepted_events, key=lambda e: e.timestamp)
+        with StageTimer("candidate_retrieval", metrics):
+            sorted_events = sorted(accepted_events, key=lambda e: e.timestamp)
 
-        candidate_retrieval = CandidateRetrieval()
-        candidates = candidate_retrieval.retrieve(
-            sorted_events,
-            window_minutes=10,
-            investigation_id=investigation_id,
-        )
+            candidate_retrieval = CandidateRetrieval()
+            candidates = candidate_retrieval.retrieve(
+                sorted_events,
+                window_minutes=10,
+                investigation_id=investigation_id,
+            )
 
         # ------------------------------------------------------------------
         # 7. Temporal correlation
         # ------------------------------------------------------------------
-        corr_engine = TemporalCorrelationEngine()
-        correlated_rels = corr_engine.correlate(candidates)
+        with StageTimer("correlation", metrics):
+            corr_engine = TemporalCorrelationEngine()
+            correlated_rels = corr_engine.correlate(candidates)
 
         # ------------------------------------------------------------------
         # 8. Persist graph: entities + relationships (Neo4j)
         # ------------------------------------------------------------------
-        graph_repo = GraphRepository(self._neo4j_driver)
+        with StageTimer("graph_persistence", metrics):
+            graph_repo = GraphRepository(self._neo4j_driver)
 
-        # Upsert all entities
-        for entity in entities:
-            await graph_repo.upsert_entity(entity)  # raises GraphUnavailableError on failure
+            # Upsert all entities
+            for entity in entities:
+                await graph_repo.upsert_entity(entity)  # raises GraphUnavailableError on failure
 
-        # Build a set of (source, target, type) keys for correlated rels to
-        # detect which raw_rels have no correlated counterpart.
-        corr_keys: set[tuple[str, str, str]] = {
-            (r.source_entity_id, r.target_entity_id, r.relationship_type.value)
-            for r in correlated_rels
-        }
+            # Build a set of (source, target, type) keys for correlated rels to
+            # detect which raw_rels have no correlated counterpart.
+            corr_keys: set[tuple[str, str, str]] = {
+                (r.source_entity_id, r.target_entity_id, r.relationship_type.value)
+                for r in correlated_rels
+            }
 
-        # Upsert correlated relationships (carry signal metadata)
-        for rel in correlated_rels:
-            await graph_repo.upsert_relationship(rel)
+            # Upsert correlated relationships (carry signal metadata)
+            for rel in correlated_rels:
+                await graph_repo.upsert_relationship(rel)
 
-        # Upsert raw relationships that were NOT enriched by correlation
-        # (single-event evidence with no temporal pairing partner).
-        # Convert RawRelationship → CorrelatedRelationship with zero signal metadata.
-        from app.schemas.relationship import CorrelatedRelationship  # noqa: PLC0415
+            # Upsert raw relationships that were NOT enriched by correlation
+            # (single-event evidence with no temporal pairing partner).
+            # Convert RawRelationship → CorrelatedRelationship with zero signal metadata.
+            from app.schemas.relationship import CorrelatedRelationship  # noqa: PLC0415
 
-        for raw_rel in raw_rels:
-            key = (
-                raw_rel.source_entity_id,
-                raw_rel.target_entity_id,
-                raw_rel.relationship_type.value,
-            )
-            if key not in corr_keys:
-                # Promote to CorrelatedRelationship with no signal data
-                promoted = CorrelatedRelationship(
-                    relationship_id=raw_rel.relationship_id,
-                    source_entity_id=raw_rel.source_entity_id,
-                    target_entity_id=raw_rel.target_entity_id,
-                    relationship_type=raw_rel.relationship_type,
-                    investigation_id=raw_rel.investigation_id,
-                    timestamp=raw_rel.timestamp,
-                    event_ids=raw_rel.event_ids,
-                    source=raw_rel.source,
-                    signal_names=[],
-                    signal_scores={},
-                    combined_score=0.0,
-                    explanation="Directly extracted relationship (no temporal correlation).",
+            for raw_rel in raw_rels:
+                key = (
+                    raw_rel.source_entity_id,
+                    raw_rel.target_entity_id,
+                    raw_rel.relationship_type.value,
                 )
-                await graph_repo.upsert_relationship(promoted)
+                if key not in corr_keys:
+                    # Promote to CorrelatedRelationship with no signal data
+                    promoted = CorrelatedRelationship(
+                        relationship_id=raw_rel.relationship_id,
+                        source_entity_id=raw_rel.source_entity_id,
+                        target_entity_id=raw_rel.target_entity_id,
+                        relationship_type=raw_rel.relationship_type,
+                        investigation_id=raw_rel.investigation_id,
+                        timestamp=raw_rel.timestamp,
+                        event_ids=raw_rel.event_ids,
+                        source=raw_rel.source,
+                        signal_names=[],
+                        signal_scores={},
+                        combined_score=0.0,
+                        explanation="Directly extracted relationship (no temporal correlation).",
+                    )
+                    await graph_repo.upsert_relationship(promoted)
 
         # ------------------------------------------------------------------
         # 9. Store events + entity map in PostgreSQL
         # ------------------------------------------------------------------
-        from app.repositories.event_repository import EventRepository  # noqa: PLC0415
+        with StageTimer("pg_persistence", metrics):
+            from app.repositories.event_repository import EventRepository  # noqa: PLC0415
 
-        ev_repo = EventRepository(self._db)
-        await ev_repo.store(
-            accepted_events,
-            investigation_id=investigation_id,
-            entity_map=entity_map,
-        )
+            ev_repo = EventRepository(self._db)
+            await ev_repo.store(
+                accepted_events,
+                investigation_id=investigation_id,
+                entity_map=entity_map,
+            )
 
         logger.info(
             "Ingestion pipeline complete",
@@ -281,6 +302,7 @@ class IngestionService:
                 "accepted": len(accepted_events),
                 "entities": len(entities),
                 "correlated_relationships": len(correlated_rels),
+                "timing_metrics": metrics,
             },
         )
 
@@ -288,4 +310,5 @@ class IngestionService:
             accepted=len(accepted_events),
             rejected=len(rejected_events),
             errors=rejected_events,
+            timing_metrics=metrics,
         )

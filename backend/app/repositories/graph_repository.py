@@ -551,3 +551,82 @@ class GraphRepository:
             relationships=relationships,
             event_ids=all_event_ids,
         )
+
+    # ------------------------------------------------------------------
+    # get_entities_for_event
+    # ------------------------------------------------------------------
+
+    async def get_entities_for_event(
+        self,
+        event_id: str,
+        investigation_id: str,
+    ) -> list[Entity]:
+        """Return all entity nodes associated with *event_id* in an investigation."""
+        query = """
+            MATCH (n {investigation_id: $investigation_id})
+            WHERE $event_id IN n.event_ids
+            RETURN DISTINCT n
+        """
+        params: dict[str, Any] = {
+            "event_id": event_id,
+            "investigation_id": investigation_id,
+        }
+
+        try:
+            async with self._driver.session() as session:
+                result = await session.run(query, params)
+                records = await result.data()
+        except (ServiceUnavailable, AuthError, Neo4jError) as exc:
+            logger.error("Neo4j get_entities_for_event failed: %s", exc)
+            raise GraphUnavailableError(
+                "Neo4j is unreachable or returned an error during event entity lookup."
+            ) from exc
+
+        entities: list[Entity] = []
+        for record in records:
+            try:
+                entities.append(_record_to_entity(record["n"]))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Skipping malformed node in get_entities_for_event: %s", exc)
+
+        return entities
+
+    # ------------------------------------------------------------------
+    # get_relationships_for_event
+    # ------------------------------------------------------------------
+
+    async def get_relationships_for_event(
+        self,
+        event_id: str,
+        investigation_id: str,
+    ) -> list[CorrelatedRelationship]:
+        """Return all correlated relationships referencing *event_id* in an investigation."""
+        query = """
+            MATCH (a {investigation_id: $investigation_id})-[r]->(b {investigation_id: $investigation_id})
+            WHERE $event_id IN r.event_ids
+            RETURN DISTINCT r
+        """
+        params: dict[str, Any] = {
+            "event_id": event_id,
+            "investigation_id": investigation_id,
+        }
+
+        try:
+            async with self._driver.session() as session:
+                result = await session.run(query, params)
+                records = await result.data()
+        except (ServiceUnavailable, AuthError, Neo4jError) as exc:
+            logger.error("Neo4j get_relationships_for_event failed: %s", exc)
+            raise GraphUnavailableError(
+                "Neo4j is unreachable or returned an error during event relationship lookup."
+            ) from exc
+
+        relationships: list[CorrelatedRelationship] = []
+        for record in records:
+            try:
+                relationships.append(_record_to_relationship(record["r"]))
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Skipping malformed relationship in get_relationships_for_event: %s", exc)
+
+        return relationships
+

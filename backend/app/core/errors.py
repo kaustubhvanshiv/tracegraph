@@ -22,6 +22,7 @@ UNAUTHORIZED = "UNAUTHORIZED"
 FORBIDDEN = "FORBIDDEN"
 INVESTIGATION_NOT_FOUND = "INVESTIGATION_NOT_FOUND"
 EVENT_NOT_FOUND = "EVENT_NOT_FOUND"
+ENTITY_NOT_FOUND = "ENTITY_NOT_FOUND"
 PARSE_ERROR = "PARSE_ERROR"
 AI_UNAVAILABLE = "AI_UNAVAILABLE"
 GRAPH_UNAVAILABLE = "GRAPH_UNAVAILABLE"
@@ -95,6 +96,13 @@ class EventNotFoundError(AppError):
     """The requested security event does not exist within this investigation."""
 
     code = EVENT_NOT_FOUND
+    http_status = 404
+
+
+class EntityNotFoundError(AppError):
+    """The requested graph entity does not exist within this investigation."""
+
+    code = ENTITY_NOT_FOUND
     http_status = 404
 
 

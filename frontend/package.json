@@ -11,16 +11,18 @@
   },
   "dependencies": {
     "axios": "^1.20.0",
-    "cytoscape": "3.29.2",
-    "cytoscape-fcose": "2.2.0",
-    "date-fns": "3.6.0",
+    "cytoscape": "^3.29.2",
+    "cytoscape-fcose": "^2.2.0",
+    "date-fns": "^3.6.0",
     "react": "18.3.1",
+    "react-cytoscapejs": "^2.0.0",
     "react-dom": "18.3.1",
     "react-router-dom": "^6.30.6"
   },
   "devDependencies": {
-    "@types/cytoscape": "3.21.4",
+    "@types/cytoscape": "^3.21.4",
     "@types/react": "18.3.3",
+    "@types/react-cytoscapejs": "^1.2.6",
     "@types/react-dom": "18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
