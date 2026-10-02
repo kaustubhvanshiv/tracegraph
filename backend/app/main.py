@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.core.errors import register_error_handlers
+from app.api.auth import router as auth_router
 from app.api.events import router as events_router
 from app.api.investigations import router as investigations_router
 from app.api.notes import router as notes_router
@@ -36,6 +37,7 @@ from app.adapters import register_default_adapters  # noqa: E402
 register_default_adapters()
 
 # Register API routers
+app.include_router(auth_router)
 app.include_router(investigations_router)
 app.include_router(notes_router)
 app.include_router(events_router)
