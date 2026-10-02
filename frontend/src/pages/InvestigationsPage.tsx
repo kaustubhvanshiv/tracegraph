@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInvestigationList } from '../hooks/useInvestigation';
 import InvestigationList from '../components/InvestigationList/InvestigationList';
+import { tokenStore } from '../services/authApi';
 import type { InvestigationStatus } from '../types';
 
 export default function InvestigationsPage() {
@@ -46,7 +47,15 @@ export default function InvestigationsPage() {
           <span className="text-lg font-bold text-on-surface tracking-tight">TraceGraph</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-on-surface-muted mono hidden md:block">SOC Investigation Platform</span>
+          <span className="text-xs text-on-surface-muted mono hidden md:block">
+            {tokenStore.getUser() ?? 'analyst'}
+          </span>
+          <button
+            onClick={() => { tokenStore.clear(); navigate('/login', { replace: true }); }}
+            className="btn-ghost text-xs py-1.5"
+          >
+            Sign out
+          </button>
           <button
             onClick={() => setModalOpen(true)}
             className="btn-primary flex items-center gap-1.5"
