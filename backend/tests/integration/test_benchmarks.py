@@ -2,7 +2,7 @@ import asyncio
 import time
 import uuid
 import pytest
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from app.main import app
 from app.core.config import settings
 
@@ -36,11 +36,11 @@ async def test_benchmark_single_event(auth_headers):
     }
     
     latencies = []
-    async with AsyncClient(app=app, base_url="http://test") as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         # Create investigation first
         await ac.post(
             "/api/investigations",
-            json={"id": inv_id, "title": "Bench Inv", "description": "Bench"},
+            json={"title": "Bench Inv", "description": "Bench"},
             headers=auth_headers
         )
         
@@ -73,8 +73,8 @@ async def test_benchmark_batch_events(auth_headers):
     }
     
     latencies = []
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        await ac.post("/api/investigations", json={"id": inv_id, "title": "Bench"}, headers=auth_headers)
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        await ac.post("/api/investigations", json={"title": "Bench"}, headers=auth_headers)
         
         for _ in range(5):
             start = time.perf_counter()
@@ -90,8 +90,8 @@ async def test_benchmark_graph_retrieval(auth_headers):
     # Target: < 200ms
     inv_id = str(uuid.uuid4())
     latencies = []
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        await ac.post("/api/investigations", json={"id": inv_id, "title": "Bench"}, headers=auth_headers)
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        await ac.post("/api/investigations", json={"title": "Bench"}, headers=auth_headers)
         # Assuming empty graph is fast, we should ideally populate it first, but this measures baseline retrieval overhead.
         for _ in range(20):
             start = time.perf_counter()
@@ -108,14 +108,15 @@ async def test_benchmark_multi_hop_pivot(auth_headers):
     inv_id = str(uuid.uuid4())
     entity_id = "test_entity"
     latencies = []
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        await ac.post("/api/investigations", json={"id": inv_id, "title": "Bench"}, headers=auth_headers)
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        await ac.post("/api/investigations", json={"title": "Bench"}, headers=auth_headers)
         for _ in range(20):
             start = time.perf_counter()
-            resp = await ac.get(f"/api/investigations/{inv_id}/graph/pivot/{entity_id}?hops=2", headers=auth_headers)
+            resp = await ac.get(f"/api/investigations/{inv_id}/graph/pivot?entity_id={entity_id}&hops=2", headers=auth_headers)
             latencies.append((time.perf_counter() - start) * 1000)
             assert resp.status_code == 200
             
     p95 = get_p95(latencies)
     print(f"Multi-hop pivot p95: {p95:.2f}ms")
     assert p95 < 500.0, f"Latency {p95} exceeds 500ms target"
+

@@ -3,7 +3,7 @@ import json
 import uuid
 from pathlib import Path
 import pytest
-from httpx import AsyncClient
+from httpx import ASGITransport, AsyncClient
 from neo4j import AsyncGraphDatabase
 
 from app.main import app
@@ -30,7 +30,7 @@ async def test_evaluation_scenarios(auth_headers):
         "events": [e["raw"] for e in events]
     }
     
-    async with AsyncClient(app=app, base_url="http://test") as ac:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         resp = await ac.post("/api/investigations", json={"id": inv_id, "title": "Eval"}, headers=auth_headers)
         assert resp.status_code == 200
         
