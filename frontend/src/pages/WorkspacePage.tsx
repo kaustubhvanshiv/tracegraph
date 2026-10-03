@@ -1,126 +1,142 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { 
-  GraphPanel, 
-  TimelinePanel, 
-  EvidencePanel, 
-  AISummaryPanel, 
-  AnalystDecisionPanel 
-} from '../components/Workspace';
-import { useGraphTimelineSync } from '../hooks/useGraphTimelineSync';
+import { useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import WorkspaceHeader from '../components/Workspace/Header';
+import GraphPanel from '../components/Workspace/GraphPanel';
+import TimelinePanel from '../components/Workspace/TimelinePanel';
+import EvidencePanel from '../components/Workspace/EvidencePanel';
+import AISummaryPanel from '../components/Workspace/AISummaryPanel';
+import AnalystDecisionPanel from '../components/Workspace/AnalystDecisionPanel';
+import { useGraph } from '../hooks/useGraph';
+import { useTimeline } from '../hooks/useTimeline';
 import { useInvestigation } from '../hooks/useInvestigation';
-import { Investigation } from '../types';
+import { useGraphTimelineSync } from '../hooks/useGraphTimelineSync';
 
-const WorkspacePage: React.FC = () => {
+export default function WorkspacePage() {
   const { id } = useParams<{ id: string }>();
-  const [investigation, setInvestigation] = useState<Investigation | null>(null);
-  const { getInvestigation, loading, error } = useInvestigation();
-  
-  const { 
-    selectedEvent,
-    handleNodeSelect,
-    handleEventSelect,
-    graphHighlightedEntityIds,
-    timelineHighlightedEntityId
+  const investigationId = id ?? '';
+
+  const { investigation, notes, fetchInvestigation, fetchNotes, patch, addNote } =
+    useInvestigation(investigationId);
+
+  const { graph, loading: graphLoading, error: graphError, fetchGraph } =
+    useGraph(investigationId);
+
+  const {
+    timeline,
+    evidence,
+    loading: timelineLoading,
+    evidenceLoading,
+    error: timelineError,
+    fetchTimeline,
+    fetchEvidence,
+  } = useTimeline(investigationId);
+
+  const {
+    selectedEntityId,
+    selectedEventId,
+    selectedEventEntityIds,
+    onNodeSelected,
+    onEventSelected,
   } = useGraphTimelineSync();
 
+  // Refs to trigger summary regeneration from header
+  const summaryTriggerRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
-    if (id) {
-      getInvestigation(id).then(data => {
-        if (data) setInvestigation(data);
-      });
-    }
-  }, [id, getInvestigation]);
+    if (!investigationId) return;
+    fetchInvestigation(investigationId);
+    fetchNotes(investigationId);
+    fetchGraph();
+    fetchTimeline();
+  }, [investigationId, fetchInvestigation, fetchNotes, fetchGraph, fetchTimeline]);
 
-  if (loading && !investigation) {
-    return <div className="p-8 flex justify-center items-center h-screen">Loading workspace...</div>;
-  }
+  // When timeline event selected → fetch its evidence
+  useEffect(() => {
+    if (selectedEventId) fetchEvidence(selectedEventId);
+  }, [selectedEventId, fetchEvidence]);
 
-  if (error || !investigation) {
-    return (
-      <div className="p-8 flex flex-col items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">Error loading workspace</h1>
-        <p className="text-gray-600 mb-4">{error || 'Investigation not found'}</p>
-        <Link to="/investigations" className="text-blue-600 hover:underline">Back to Investigations</Link>
-      </div>
-    );
-  }
+  const handleNodeSelected = (entityId: string | null) => {
+    onNodeSelected(entityId);
+  };
+
+  const handleEventSelected = (eventId: string | null, entityIds: string[]) => {
+    onEventSelected(eventId, entityIds);
+  };
+
+  const handleEvidenceRefClick = (eventId: string) => {
+    onEventSelected(eventId, []);
+    fetchEvidence(eventId);
+  };
+
+  const handleGenerateSummary = () => {
+    summaryTriggerRef.current?.();
+  };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100 overflow-hidden">
-      {/* Workspace Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shrink-0 shadow-sm z-10">
-        <div className="flex items-center gap-4">
-          <Link to="/investigations" className="text-gray-500 hover:text-blue-600 transition-colors">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-          </Link>
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">{investigation.title}</h1>
-            <p className="text-sm text-gray-500">ID: {investigation.investigation_id}</p>
-          </div>
-        </div>
-        <div>
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold
-            ${investigation.status === 'OPEN' ? 'bg-green-100 text-green-800' : ''}
-            ${investigation.status === 'UNDER_REVIEW' ? 'bg-yellow-100 text-yellow-800' : ''}
-            ${investigation.status === 'CLOSED' ? 'bg-gray-100 text-gray-800' : ''}
-          `}>
-            {investigation.status}
-          </span>
-        </div>
-      </header>
+    <div className="h-screen flex flex-col bg-surface overflow-hidden">
+      <WorkspaceHeader
+        investigation={investigation}
+        onGenerateSummary={handleGenerateSummary}
+      />
 
-      {/* Workspace Grid */}
-      <main className="flex-1 overflow-hidden p-4 gap-4 grid grid-cols-12 grid-rows-2">
-        
-        {/* Left Column: Graph & Summaries */}
-        <div className="col-span-8 row-span-2 flex flex-col gap-4 overflow-hidden">
-          {/* Top Half: Graph */}
-          <div className="flex-1 min-h-0">
-            <GraphPanel 
-              investigationId={investigation.investigation_id} 
-              onNodeSelect={handleNodeSelect}
-              highlightedEntityIds={graphHighlightedEntityIds}
+      {/* 2-column workspace */}
+      <div className="flex-1 grid grid-cols-5 gap-3 p-3 overflow-hidden">
+        {/* LEFT: Graph (top) + Timeline (bottom) */}
+        <div className="col-span-3 flex flex-col gap-3 min-h-0">
+          {/* Graph panel: 55% height */}
+          <div className="flex-[55] min-h-0">
+            <GraphPanel
+              graph={graph}
+              loading={graphLoading}
+              error={graphError}
+              selectedEntityId={selectedEntityId}
+              highlightedEntityIds={selectedEventEntityIds}
+              onNodeSelected={handleNodeSelected}
             />
           </div>
-          
-          {/* Bottom Half: AI Summary and Analyst Decision side by side */}
-          <div className="flex-1 min-h-0 grid grid-cols-2 gap-4">
-            <div className="overflow-hidden">
-              <AISummaryPanel investigationId={investigation.investigation_id} />
-            </div>
-            <div className="overflow-hidden">
-              <AnalystDecisionPanel 
-                investigation={investigation} 
-                onInvestigationUpdated={setInvestigation} 
-              />
-            </div>
-          </div>
-        </div>
 
-        {/* Right Column: Timeline & Evidence */}
-        <div className="col-span-4 row-span-2 flex flex-col gap-4 overflow-hidden">
-          {/* Top Half: Timeline */}
-          <div className="flex-1 min-h-0">
-            <TimelinePanel 
-              investigationId={investigation.investigation_id} 
-              selectedEntityId={timelineHighlightedEntityId}
-              onEventSelect={handleEventSelect}
-            />
-          </div>
-          
-          {/* Bottom Half: Evidence */}
-          <div className="flex-1 min-h-0">
-            <EvidencePanel 
-              investigationId={investigation.investigation_id} 
-              selectedEventId={selectedEvent?.event_id || null}
+          {/* Timeline panel: 45% height */}
+          <div className="flex-[45] min-h-0">
+            <TimelinePanel
+              timeline={timeline}
+              loading={timelineLoading}
+              error={timelineError}
+              selectedEventId={selectedEventId}
+              highlightedEntityId={selectedEntityId}
+              onEventSelected={handleEventSelected}
+              onFilterChange={(params) => fetchTimeline(params)}
             />
           </div>
         </div>
 
-      </main>
+        {/* RIGHT: Evidence (top) + AI Summary + Analyst Decision (stacked) */}
+        <div className="col-span-2 flex flex-col gap-3 min-h-0">
+          {/* Evidence: top third */}
+          <div className="flex-1 min-h-0">
+            <EvidencePanel evidence={evidence} loading={evidenceLoading} />
+          </div>
+
+          {/* AI Summary: middle third */}
+          <div className="flex-1 min-h-0">
+            <AISummaryPanel
+              investigationId={investigationId}
+              onEvidenceRefClick={handleEvidenceRefClick}
+            />
+          </div>
+
+          {/* Analyst Decision: bottom third */}
+          <div className="flex-1 min-h-0">
+            <AnalystDecisionPanel
+              investigation={investigation}
+              notes={notes}
+              onPatch={async (payload) => {
+                await patch({ status: payload.status, outcome: payload.outcome as import('../types').InvestigationOutcome | undefined });
+              }}
+              onAddNote={async (body) => { await addNote({ body }); }}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default WorkspacePage;
+}

@@ -31,11 +31,17 @@ class EvidenceDetailService:
 
     def __init__(
         self,
-        event_repo: EventRepository,
-        graph_repo: GraphRepository,
+        event_repo: EventRepository | None = None,
+        graph_repo: GraphRepository | None = None,
+        db=None,
+        neo4j_driver=None,
     ) -> None:
-        self._event_repo = event_repo
-        self._graph_repo = graph_repo
+        if event_repo is not None and graph_repo is not None:
+            self._event_repo = event_repo
+            self._graph_repo = graph_repo
+        else:
+            self._event_repo = EventRepository(db) if db is not None else event_repo
+            self._graph_repo = GraphRepository(neo4j_driver) if neo4j_driver is not None else graph_repo
 
     async def get_evidence(
         self,
@@ -61,8 +67,6 @@ class EvidenceDetailService:
         ------
         EventNotFoundError (HTTP 404):
             If the event does not exist in this investigation.
-        GraphUnavailableError (HTTP 503):
-            If Neo4j graph lookup fails.
         """
         # 1. Fetch normalized event from PostgreSQL
         event = await self._event_repo.get(event_id, investigation_id)

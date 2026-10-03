@@ -10,30 +10,30 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.20.0",
+    "axios": "^1.7.2",
     "cytoscape": "^3.29.2",
     "cytoscape-fcose": "^2.2.0",
     "date-fns": "^3.6.0",
-    "react": "18.3.1",
+    "react": "^18.3.1",
     "react-cytoscapejs": "^2.0.0",
-    "react-dom": "18.3.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "^6.30.6"
   },
   "devDependencies": {
     "@types/cytoscape": "^3.21.4",
-    "@types/react": "18.3.3",
+    "@types/react": "^18.3.3",
     "@types/react-cytoscapejs": "^1.2.6",
-    "@types/react-dom": "18.3.0",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
-    "@vitejs/plugin-react": "4.3.1",
-    "autoprefixer": "10.4.19",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "postcss": "^8.5.28",
-    "tailwindcss": "3.4.4",
-    "typescript": "5.5.2",
-    "vite": "^5.4.21"
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
   }
 }

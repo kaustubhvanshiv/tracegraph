@@ -1,167 +1,195 @@
-import React, { useEffect, useState } from 'react';
-import { useNotes } from '../../hooks/useNotes';
-import { useInvestigation } from '../../hooks/useInvestigation';
-import { Investigation, InvestigationStatus, InvestigationOutcome } from '../../types';
-import { formatUtc } from '../../utils/timelineHelpers';
+import { useEffect, useState } from 'react';
+import type { Investigation, InvestigationStatus, Note } from '../../types';
+import { formatFullTimestamp, statusBadgeClass, statusLabel } from '../../utils/timelineHelpers';
 
-interface AnalystDecisionPanelProps {
-  investigation: Investigation;
-  onInvestigationUpdated: (inv: Investigation) => void;
+interface Props {
+  investigation: Investigation | null;
+  notes?: Note[];
+  onPatch?: (payload: { status?: InvestigationStatus; outcome?: string }) => Promise<void>;
+  onAddNote?: (body: string) => Promise<void>;
+  onInvestigationUpdated?: (inv: Investigation) => void;
 }
 
-export const AnalystDecisionPanel: React.FC<AnalystDecisionPanelProps> = ({ 
-  investigation, 
-  onInvestigationUpdated 
-}) => {
-  const { notes, loading: notesLoading, error: notesError, fetchNotes, addNote } = useNotes(investigation.investigation_id);
-  const { updateStatus, loading: updateLoading, error: updateError } = useInvestigation();
-  
-  const [newNote, setNewNote] = useState('');
-  const [status, setStatus] = useState<InvestigationStatus>(investigation.status);
-  const [outcome, setOutcome] = useState<InvestigationOutcome | ''>(investigation.outcome || '');
+const STATUSES: InvestigationStatus[] = ['OPEN', 'UNDER_REVIEW', 'CLOSED'];
+
+const OUTCOMES = [
+  { value: '', label: 'Select verdict…' },
+  { value: 'TRUE_POSITIVE', label: 'True Positive' },
+  { value: 'FALSE_POSITIVE', label: 'False Positive' },
+  { value: 'INCONCLUSIVE', label: 'Inconclusive' },
+  { value: 'ESCALATED', label: 'Escalated' },
+];
+
+export default function AnalystDecisionPanel({
+  investigation,
+  notes = [],
+  onPatch,
+  onAddNote,
+}: Props) {
+  const [pendingStatus, setPendingStatus] = useState<InvestigationStatus>('OPEN');
+  const [pendingOutcome, setPendingOutcome] = useState<string>('');
+  const [noteText, setNoteText] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [auditOpen, setAuditOpen] = useState(false);
 
   useEffect(() => {
-    fetchNotes();
-  }, [fetchNotes]);
-
-  useEffect(() => {
-    setStatus(investigation.status);
-    setOutcome(investigation.outcome || '');
+    if (investigation) {
+      setPendingStatus(investigation.status);
+      setPendingOutcome(investigation.outcome ?? '');
+    }
   }, [investigation]);
 
-  const handleAddNote = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newNote.trim()) return;
-    
-    const note = await addNote(newNote);
-    if (note) {
-      setNewNote('');
+  const saveChanges = async () => {
+    if (!onPatch) return;
+    setSaving(true);
+    try {
+      await onPatch({
+        status: pendingStatus,
+        outcome: pendingOutcome || undefined,
+      });
+    } finally {
+      setSaving(false);
     }
   };
 
-  const handleUpdateStatus = async () => {
-    const updated = await updateStatus(
-      investigation.investigation_id, 
-      status, 
-      outcome === '' ? undefined : outcome
-    );
-    if (updated) {
-      onInvestigationUpdated(updated);
+  const submitNote = async () => {
+    if (!noteText.trim() || !onAddNote) return;
+    setSaving(true);
+    try {
+      await onAddNote(noteText.trim());
+      setNoteText('');
+    } finally {
+      setSaving(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="flex p-4 border-b border-gray-100 bg-gray-50/50 justify-between items-center">
-        <h2 className="text-lg font-semibold text-gray-800">Analyst Decision</h2>
+    <div className="sentinel-card flex flex-col h-full overflow-y-auto">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-outline-variant/20">
+        <span className="text-sm font-semibold text-on-surface">Analyst Decision</span>
+        <span className="text-on-surface-muted text-xs">(Human verdict — separate from AI output)</span>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
-        
-        {/* Status & Outcome Controls */}
-        <section className="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
-          <h3 className="text-sm font-semibold text-blue-900 mb-3 uppercase tracking-wider">Resolution</h3>
-          
-          {updateError && (
-            <div className="text-red-600 bg-red-50 p-2 rounded border border-red-200 text-sm mb-3">
-              {updateError}
-            </div>
-          )}
-
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">Status</label>
-              <select 
-                value={status} 
-                onChange={(e) => setStatus(e.target.value as InvestigationStatus)}
-                className="border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value={InvestigationStatus.OPEN}>Open</option>
-                <option value={InvestigationStatus.UNDER_REVIEW}>Under Review</option>
-                <option value={InvestigationStatus.CLOSED}>Closed</option>
-              </select>
-            </div>
-            
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium text-gray-700">Outcome</label>
-              <select 
-                value={outcome} 
-                onChange={(e) => setOutcome(e.target.value as InvestigationOutcome | '')}
-                className="border border-gray-300 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="">-- Select Outcome --</option>
-                <option value={InvestigationOutcome.TRUE_POSITIVE}>True Positive</option>
-                <option value={InvestigationOutcome.FALSE_POSITIVE}>False Positive</option>
-                <option value={InvestigationOutcome.INCONCLUSIVE}>Inconclusive</option>
-                <option value={InvestigationOutcome.ESCALATED}>Escalated</option>
-              </select>
-            </div>
-
-            <button 
-              onClick={handleUpdateStatus}
-              disabled={updateLoading || (status === investigation.status && outcome === (investigation.outcome || ''))}
-              className="mt-2 w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+      {/* Status */}
+      <div className="px-4 pt-4 pb-3">
+        <p className="text-[10px] uppercase tracking-widest text-on-surface-muted font-semibold mb-2">
+          Investigation Status
+        </p>
+        <div className="flex gap-2">
+          {STATUSES.map((s) => (
+            <button
+              key={s}
+              onClick={() => setPendingStatus(s)}
+              className={`badge-pill cursor-pointer transition-colors ${
+                pendingStatus === s
+                  ? statusBadgeClass(s)
+                  : 'bg-surface-highest text-on-surface-muted border border-outline-variant hover:border-primary/30'
+              }`}
             >
-              {updateLoading ? 'Updating...' : 'Save Resolution'}
+              {statusLabel(s)}
             </button>
-          </div>
-        </section>
+          ))}
+        </div>
+      </div>
 
-        {/* Analyst Notes Section */}
-        <section className="flex flex-col flex-1">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">Analyst Notes</h3>
-          
-          <form onSubmit={handleAddNote} className="mb-4">
-            <textarea
-              value={newNote}
-              onChange={(e) => setNewNote(e.target.value)}
-              placeholder="Add your investigation notes here..."
-              className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2 min-h-[80px]"
-            />
-            <div className="flex justify-between items-center">
-              <span className="text-xs text-gray-500">Markdown supported</span>
-              <button 
-                type="submit"
-                disabled={!newNote.trim()}
-                className="px-4 py-1.5 bg-gray-800 text-white text-sm font-medium rounded-md hover:bg-gray-900 transition-colors disabled:opacity-50"
-              >
-                Add Note
-              </button>
+      {/* Outcome */}
+      <div className="mx-4 mb-3 rounded-lg bg-surface-low p-3">
+        <p className="text-[10px] uppercase tracking-widest text-on-surface-muted font-semibold mb-2">
+          Verdict / Outcome
+        </p>
+        <select
+          value={pendingOutcome}
+          onChange={(e) => setPendingOutcome(e.target.value)}
+          className="input-ghost w-full"
+        >
+          {OUTCOMES.map((o) => (
+            <option key={o.value} value={o.value} className="bg-surface-low text-on-surface">
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Notes */}
+      <div className="px-4 mb-3">
+        <p className="text-[10px] uppercase tracking-widest text-on-surface-muted font-semibold mb-2">
+          Analyst Notes
+        </p>
+        <textarea
+          value={noteText}
+          onChange={(e) => setNoteText(e.target.value)}
+          rows={3}
+          className="input-ghost w-full resize-none"
+          placeholder="Add investigation notes, observations, next steps…"
+        />
+        <div className="flex justify-between items-center mt-1">
+          <span className="text-[10px] text-on-surface-muted">{noteText.length} chars</span>
+          <button
+            onClick={submitNote}
+            disabled={!noteText.trim() || saving}
+            className="btn-ghost text-xs py-1"
+          >
+            Add Note
+          </button>
+        </div>
+      </div>
+
+      {/* Note history */}
+      {notes && notes.length > 0 && (
+        <div className="px-4 mb-3 space-y-2">
+          <p className="text-[10px] uppercase tracking-widest text-on-surface-muted font-semibold">
+            Note History
+          </p>
+          {notes.map((n) => (
+            <div key={n.note_id} className="bg-surface-low rounded-lg p-3">
+              <div className="flex justify-between mb-1">
+                <span className="text-xs text-primary">{n.author_id}</span>
+                <span className="mono text-[10px] text-on-surface-muted">{formatFullTimestamp(n.created_at)}</span>
+              </div>
+              <p className="text-xs text-on-surface leading-relaxed">{n.body}</p>
             </div>
-          </form>
+          ))}
+        </div>
+      )}
 
-          {notesError && (
-            <div className="text-red-600 bg-red-50 p-2 rounded border border-red-200 text-sm mb-3">
-              {notesError}
+      {/* Audit trail */}
+      {investigation && (
+        <div className="mx-4 mb-3">
+          <button
+            onClick={() => setAuditOpen((o) => !o)}
+            className="flex items-center justify-between w-full bg-surface-low rounded-lg px-3 py-2 text-xs text-on-surface-muted hover:text-on-surface transition-colors"
+          >
+            <span className="font-semibold uppercase tracking-wider text-[10px]">Audit Trail</span>
+            <span>{auditOpen ? '▲' : '▼'}</span>
+          </button>
+          {auditOpen && (
+            <div className="bg-surface-low rounded-b-lg px-3 pb-3 space-y-1.5">
+              <div className="flex items-center gap-2 text-xs text-on-surface-muted">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                <span className="mono">{formatFullTimestamp(investigation.updated_at)}</span>
+                <span>Status set to {statusLabel(investigation.status)}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-on-surface-muted">
+                <span className="w-1.5 h-1.5 rounded-full bg-surface-highest shrink-0" />
+                <span className="mono">{formatFullTimestamp(investigation.created_at)}</span>
+                <span>Investigation created</span>
+              </div>
             </div>
           )}
+        </div>
+      )}
 
-          <div className="flex-1 overflow-y-auto space-y-3 pr-2">
-            {notesLoading && notes.length === 0 && (
-              <div className="text-center py-4 text-sm text-gray-500">Loading notes...</div>
-            )}
-            
-            {!notesLoading && notes.length === 0 && (
-              <div className="text-center py-8 text-sm text-gray-500 italic bg-gray-50 rounded border border-gray-100">
-                No notes added yet.
-              </div>
-            )}
-
-            {notes.map(note => (
-              <div key={note.note_id} className="bg-yellow-50/80 border border-yellow-200/60 rounded-lg p-3">
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-semibold text-xs text-yellow-800">Analyst</span>
-                  <span className="text-[10px] text-yellow-600">{formatUtc(note.created_at)}</span>
-                </div>
-                <div className="text-sm text-gray-800 whitespace-pre-wrap">
-                  {note.body}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+      {/* Footer */}
+      <div className="px-4 pb-4 mt-auto flex gap-2">
+        <button
+          onClick={saveChanges}
+          disabled={saving}
+          className="btn-primary flex-1 text-sm"
+        >
+          {saving ? 'Saving…' : 'Save Changes'}
+        </button>
       </div>
     </div>
   );
-};
+}

@@ -1,136 +1,187 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import cytoscape from 'cytoscape';
-import CytoscapeComponent from 'react-cytoscapejs';
-import { useGraph } from '../../hooks/useGraph';
-import { CYTOSCAPE_FCOSE_LAYOUT, CYTOSCAPE_STYLES } from '../../utils/cytoscapeConfig';
+import type { GraphResult } from '../../types';
+import { cytoscapeStylesheet, fcoseLayoutOptions, ENTITY_COLORS } from '../../utils/cytoscapeConfig';
 
-interface GraphPanelProps {
-  investigationId: string;
-  onNodeSelect?: (entityId: string | null) => void;
-  highlightedEntityIds?: string[];
+interface Props {
+  graph: GraphResult | null;
+  loading: boolean;
+  error: string | null;
+  selectedEntityId: string | null;
+  highlightedEntityIds: string[];
+  onNodeSelected: (entityId: string | null) => void;
 }
 
-export const GraphPanel: React.FC<GraphPanelProps> = ({ investigationId, onNodeSelect, highlightedEntityIds = [] }) => {
-  const { data, loading, error, fetchGraph } = useGraph(investigationId);
+const ENTITY_TYPES = ['User', 'Host', 'Server', 'IP', 'Process', 'File'] as const;
+
+export default function GraphPanel({
+  graph,
+  loading,
+  error,
+  selectedEntityId,
+  highlightedEntityIds,
+  onNodeSelected,
+}: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
 
+  // Init cytoscape
   useEffect(() => {
-    fetchGraph();
-  }, [fetchGraph]);
+    if (!containerRef.current) return;
+    const cy = cytoscape({
+      container: containerRef.current,
+      elements: [],
+      style: cytoscapeStylesheet,
+      layout: { name: 'preset' },
+      userZoomingEnabled: true,
+      userPanningEnabled: true,
+      minZoom: 0.1,
+      maxZoom: 3,
+    });
 
-  const elements = useMemo(() => {
-    if (!data) return [];
-    
-    const rawNodes = data.nodes || [];
-    const nodes = rawNodes.map(e => ({
-      data: { 
-        id: e.entity_id, 
-        label: e.canonical_key, 
-        entity_type: e.entity_type 
-      }
-    }));
+    cy.on('tap', 'node', (evt) => {
+      onNodeSelected(evt.target.data('entity_id') as string);
+    });
+    cy.on('tap', (evt) => {
+      if (evt.target === cy) onNodeSelected(null);
+    });
 
-    const rawEdges = data.edges || [];
-    const edges = rawEdges.map(r => ({
-      data: {
-        id: `${r.source_id}-${r.target_id}-${r.type}`,
-        source: r.source_id,
-        target: r.target_id,
-        type: r.type,
-        combined_score: r.combined_score
-      }
-    }));
-
-    return [...nodes, ...edges];
-  }, [data]);
-
-  const handleCyInit = (cy: cytoscape.Core) => {
     cyRef.current = cy;
-    
-    // Bind click events
-    cy.on('tap', 'node', (evt: cytoscape.EventObject) => {
-      const node = evt.target;
-      if (onNodeSelect) {
-        onNodeSelect(node.id());
-      }
-    });
+    return () => { cy.destroy(); };
+  }, [onNodeSelected]);
 
-    cy.on('tap', (evt: cytoscape.EventObject) => {
-      if (evt.target === cy) {
-        // Clicked on background
-        if (onNodeSelect) {
-          onNodeSelect(null);
-        }
-      }
-    });
-  };
-
-  // Apply highlights when highlightedEntityIds changes
+  // Load graph data
   useEffect(() => {
-    if (cyRef.current) {
-      const cy = cyRef.current;
-      cy.elements().removeClass('highlighted faded');
-      
-      if (highlightedEntityIds.length > 0) {
-        // Find nodes to highlight
-        const nodes = cy.nodes().filter((ele: cytoscape.NodeSingular) => highlightedEntityIds.includes(ele.id()));
-        if (nodes.length > 0) {
-          nodes.addClass('highlighted');
-          // Add faded class to all other elements
-          cy.elements().difference(nodes).addClass('faded');
-        }
+    const cy = cyRef.current;
+    if (!cy || !graph) return;
+
+    const nodes = graph.nodes.map((n) => ({
+      data: {
+        id: n.entity_id,
+        label: n.canonical_key,
+        entity_id: n.entity_id,
+        entity_type: n.entity_type,
+      },
+    }));
+
+    const edges = graph.edges.map((e) => ({
+      data: {
+        id: e.relationship_id,
+        source: e.source_entity_id,
+        target: e.target_entity_id,
+        label: e.relationship_type,
+        relationship_id: e.relationship_id,
+      },
+    }));
+
+    cy.elements().remove();
+    cy.add([...nodes, ...edges]);
+    cy.layout(fcoseLayoutOptions as cytoscape.LayoutOptions).run();
+  }, [graph]);
+
+  // Highlight selected + related nodes
+  useEffect(() => {
+    const cy = cyRef.current;
+    if (!cy) return;
+
+    cy.elements().removeClass('highlighted dimmed');
+
+    if (selectedEntityId) {
+      const selected = cy.$(`#${selectedEntityId}`);
+      if (selected.length) {
+        const connected = selected.neighborhood();
+        cy.elements().addClass('dimmed');
+        selected.addClass('highlighted').removeClass('dimmed');
+        connected.addClass('highlighted').removeClass('dimmed');
       }
+    } else if (highlightedEntityIds.length) {
+      cy.elements().addClass('dimmed');
+      highlightedEntityIds.forEach((id) => {
+        cy.$(`#${id}`).addClass('highlighted').removeClass('dimmed');
+      });
     }
-  }, [highlightedEntityIds, data]); // added data as dependency so it reapplies when graph loads
+  }, [selectedEntityId, highlightedEntityIds]);
+
+  const fitView = useCallback(() => {
+    cyRef.current?.fit(undefined, 40);
+  }, []);
+  const zoomIn = useCallback(() => {
+    const cy = cyRef.current;
+    if (cy) cy.zoom(cy.zoom() * 1.2);
+  }, []);
+  const zoomOut = useCallback(() => {
+    const cy = cyRef.current;
+    if (cy) cy.zoom(cy.zoom() * 0.8);
+  }, []);
+  const reLayout = useCallback(() => {
+    cyRef.current?.layout(fcoseLayoutOptions as cytoscape.LayoutOptions).run();
+  }, []);
 
   return (
-    <div className="flex flex-col h-full w-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="flex justify-between items-center p-4 border-b border-gray-100 bg-gray-50/50">
-        <h2 className="text-lg font-semibold text-gray-800">Investigation Graph</h2>
-        <button 
-          onClick={() => fetchGraph()} 
-          className="text-sm px-3 py-1.5 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 rounded-md shadow-sm transition-colors"
-        >
-          Refresh Graph
-        </button>
+    <div className="sentinel-card flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-on-surface">Entity Graph</span>
+          {graph && (
+            <span className="badge-pill bg-surface-highest text-on-surface-muted mono">
+              {graph.nodes.length} nodes · {graph.edges.length} edges
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-1">
+          {[
+            { label: '+', title: 'Zoom in', fn: zoomIn },
+            { label: '−', title: 'Zoom out', fn: zoomOut },
+            { label: '⊡', title: 'Fit view', fn: fitView },
+            { label: '⟳', title: 'Re-layout', fn: reLayout },
+          ].map(({ label, title, fn }) => (
+            <button
+              key={title}
+              title={title}
+              onClick={fn}
+              className="w-7 h-7 flex items-center justify-center rounded text-on-surface-muted hover:text-primary hover:bg-surface-highest text-base transition-colors"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
-      
-      <div className="flex-1 relative w-full h-full min-h-[400px]">
-        {loading && !data && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-              <p className="text-gray-600 font-medium">Loading graph data...</p>
-            </div>
-          </div>
-        )}
-        
-        {error && (
-          <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-            <div className="bg-red-50 text-red-700 p-4 rounded-lg border border-red-200 max-w-md text-center">
-              <p className="font-semibold mb-1">Error Loading Graph</p>
-              <p className="text-sm">{error}</p>
-            </div>
-          </div>
-        )}
 
-        {elements.length === 0 && !loading && !error && (
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <p className="text-gray-500">No nodes or edges found for this investigation.</p>
+      {/* Canvas */}
+      <div className="relative flex-1">
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-surface/80 z-10 rounded-b-xl">
+            <div className="flex items-center gap-2 text-primary text-sm">
+              <span className="animate-spin text-lg">◌</span> Loading graph…
+            </div>
           </div>
         )}
-        
-        {elements.length > 0 && (
-          <CytoscapeComponent
-            elements={elements}
-            style={{ width: '100%', height: '100%' }}
-            stylesheet={CYTOSCAPE_STYLES}
-            layout={CYTOSCAPE_FCOSE_LAYOUT}
-            cy={handleCyInit}
-            wheelSensitivity={0.1}
-          />
+        {error && !loading && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <p className="text-error text-sm">{error}</p>
+          </div>
         )}
+        {!graph && !loading && !error && (
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <p className="text-on-surface-muted text-sm">No graph data yet.</p>
+          </div>
+        )}
+        <div ref={containerRef} className="w-full h-full rounded-b-xl" />
+      </div>
+
+      {/* Legend */}
+      <div className="px-4 py-2 flex items-center gap-3 flex-wrap border-t border-outline-variant/20">
+        {ENTITY_TYPES.map((t) => (
+          <span key={t} className="flex items-center gap-1 text-xs text-on-surface-muted">
+            <span
+              className="inline-block w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: ENTITY_COLORS[t] }}
+            />
+            {t}
+          </span>
+        ))}
       </div>
     </div>
   );
-};
+}

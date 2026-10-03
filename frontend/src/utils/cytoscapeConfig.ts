@@ -1,109 +1,113 @@
-import cytoscape from 'cytoscape';
-// @ts-ignore
-import fcose from 'cytoscape-fcose';
+import type cytoscape from 'cytoscape';
+import type { EntityType } from '../types';
 
-cytoscape.use(fcose);
-
-export const CYTOSCAPE_FCOSE_LAYOUT = {
-  name: 'fcose',
-  quality: 'default',
-  randomize: true,
-  animate: true,
-  animationDuration: 1000,
-  fit: true,
-  padding: 30,
-  nodeDimensionsIncludeLabels: true,
-  uniformNodeDimensions: false,
-  packComponents: true,
-  step: 'all',
+/** Node background colour per entity type (Obsidian Sentinel palette) */
+export const ENTITY_COLORS: Record<EntityType, string> = {
+  User: '#3b82f6',
+  Host: '#10b981',
+  Server: '#ef4444',
+  IP: '#8b5cf6',
+  Process: '#f59e0b',
+  File: '#64748b',
 };
 
-// Vibrant color palette
-const COLORS = {
-  host: '#3b82f6', // blue-500
-  user: '#8b5cf6', // violet-500
-  ip: '#10b981', // emerald-500
-  process: '#f59e0b', // amber-500
-  file: '#ef4444', // red-500
-  default: '#6b7280', // gray-500
-  edge: '#9ca3af', // gray-400
-  edgeSelected: '#4b5563', // gray-600
-  label: '#1f2937', // gray-800
-};
-
-export const CYTOSCAPE_STYLES: cytoscape.StylesheetStyle[] = [
+// Use plain objects — cytoscape accepts { selector, css } OR { selector, style }
+// at runtime. We cast to `object[]` to avoid strict TS fighting us on the union type.
+export const cytoscapeStylesheet = [
   {
     selector: 'node',
-    style: {
-      'background-color': (ele: any) => {
-        const type = ele.data('entity_type');
-        return COLORS[type as keyof typeof COLORS] || COLORS.default;
-      },
+    css: {
+      'background-color': '#4edea3',
       'label': 'data(label)',
-      'color': COLORS.label,
+      'color': '#dae2fd',
+      'font-size': '11px',
+      'font-family': 'Inter, sans-serif',
       'text-valign': 'bottom',
       'text-halign': 'center',
-      'text-margin-y': 5,
-      'font-size': '12px',
-      'font-family': 'Inter, sans-serif',
-      'font-weight': 'bold',
+      'text-margin-y': 4,
+      'width': 36,
+      'height': 36,
       'border-width': 2,
-      'border-color': '#ffffff',
-      'width': 30,
-      'height': 30,
-    },
-  },
-  {
-    selector: 'node:selected',
-    style: {
-      'border-width': 4,
-      'border-color': '#000000',
-      'border-opacity': 0.5,
-    },
-  },
-  {
-    selector: 'edge',
-    style: {
-      'width': (ele: any) => {
-        // Line width correlates to combined_score slightly
-        const score = ele.data('combined_score') || 0.5;
-        return Math.max(1, score * 3);
-      },
-      'line-color': COLORS.edge,
-      'target-arrow-color': COLORS.edge,
-      'target-arrow-shape': 'triangle',
-      'curve-style': 'bezier',
-      'label': 'data(type)',
-      'font-size': '10px',
-      'color': COLORS.edgeSelected,
-      'text-rotation': 'autorotate',
-      'text-background-opacity': 1,
-      'text-background-color': '#ffffff',
+      'border-color': '#3c4a42',
+      'text-background-color': '#0b1326',
+      'text-background-opacity': 0.7,
       'text-background-padding': '2px',
     },
   },
+  // Per-type node colouring
+  ...(['User', 'Host', 'Server', 'IP', 'Process', 'File'] as EntityType[]).map((t) => ({
+    selector: `node[entity_type = "${t}"]`,
+    css: { 'background-color': ENTITY_COLORS[t] },
+  })),
+  // Selected / highlighted node
   {
-    selector: 'edge:selected',
-    style: {
-      'line-color': COLORS.edgeSelected,
-      'target-arrow-color': COLORS.edgeSelected,
-      'width': 3,
+    selector: 'node:selected, node.highlighted',
+    css: {
+      'border-width': 3,
+      'border-color': '#4edea3',
+      'border-opacity': 1,
+      'overlay-color': '#4edea3',
+      'overlay-padding': 6,
+      'overlay-opacity': 0.15,
     },
   },
+  // Dimmed node
   {
-    selector: '.highlighted',
-    style: {
-      'border-width': 4,
-      'border-color': '#000',
-      'shadow-blur': 10,
-      'shadow-color': '#000',
-      'shadow-opacity': 0.8,
-    } as any
+    selector: 'node.dimmed',
+    css: { 'opacity': 0.25 },
   },
+  // Base edge
   {
-    selector: '.faded',
-    style: {
-      'opacity': 0.2,
-    }
-  }
-];
+    selector: 'edge',
+    css: {
+      'width': 1.5,
+      'line-color': '#3c4a42',
+      'target-arrow-color': '#3c4a42',
+      'target-arrow-shape': 'triangle',
+      'curve-style': 'bezier',
+      'label': 'data(label)',
+      'font-size': '9px',
+      'color': '#86948a',
+      'font-family': 'Inter, sans-serif',
+      'text-rotation': 'autorotate',
+      'text-background-color': '#0b1326',
+      'text-background-opacity': 0.8,
+      'text-background-padding': '2px',
+    },
+  },
+  // Highlighted edge
+  {
+    selector: 'edge.highlighted',
+    css: {
+      'line-color': '#4edea3',
+      'target-arrow-color': '#4edea3',
+      'width': 2.5,
+    },
+  },
+  // Dimmed edge
+  {
+    selector: 'edge.dimmed',
+    css: { 'opacity': 0.15 },
+  },
+// cytoscape accepts this shape at runtime; cast to bypass strict union typing
+] as unknown as cytoscape.StylesheetCSS[];
+
+export const CYTOSCAPE_STYLES = cytoscapeStylesheet;
+
+/** fCoSE layout options */
+export const fcoseLayoutOptions = {
+  name: 'fcose',
+  animate: true,
+  animationDuration: 500,
+  fit: true,
+  padding: 40,
+  nodeRepulsion: 4500,
+  idealEdgeLength: 120,
+  edgeElasticity: 0.45,
+  numIter: 2500,
+  tile: true,
+  tilingPaddingVertical: 10,
+  tilingPaddingHorizontal: 10,
+};
+
+export const CYTOSCAPE_FCOSE_LAYOUT = fcoseLayoutOptions;

@@ -1,34 +1,60 @@
 import { useState, useCallback } from 'react';
-import { TimelineEvent } from '../types';
 
-export const useGraphTimelineSync = () => {
+/**
+ * Manages bidirectional highlight state between GraphPanel and TimelinePanel.
+ *
+ * - Selecting a node in GraphPanel → all timeline events with that entity_id are highlighted.
+ * - Selecting an event in TimelinePanel → all graph nodes referenced in that event's entity_ids are highlighted.
+ */
+export function useGraphTimelineSync() {
+  /** entity_id highlighted by a graph node click */
   const [selectedEntityId, setSelectedEntityId] = useState<string | null>(null);
-  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+  /** event_id highlighted by a timeline row click */
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  /** entity_ids associated with the currently selected timeline event */
+  const [selectedEventEntityIds, setSelectedEventEntityIds] = useState<string[]>([]);
 
-  const handleNodeSelect = useCallback((entityId: string | null) => {
+  const onNodeSelected = useCallback((entityId: string | null) => {
     setSelectedEntityId(entityId);
-    // If the node selection changes, we don't necessarily clear the event, 
-    // but the graph selection will drive highlighting in the timeline.
+    if (entityId === null) {
+      setSelectedEventId(null);
+      setSelectedEventEntityIds([]);
+    }
   }, []);
 
-  const handleEventSelect = useCallback((event: TimelineEvent | null) => {
-    setSelectedEvent(event);
-    // When an event is selected, we could also automatically select the primary entity, 
-    // but usually it's better to just pass the event to the GraphPanel for highlighting its entities.
+  const onEventSelected = useCallback(
+    (eventId: string | null, entityIds: string[] = []) => {
+      setSelectedEventId(eventId);
+      setSelectedEventEntityIds(entityIds);
+      if (eventId === null) {
+        setSelectedEntityId(null);
+      }
+    },
+    []
+  );
+
+  const clearSelection = useCallback(() => {
+    setSelectedEntityId(null);
+    setSelectedEventId(null);
+    setSelectedEventEntityIds([]);
   }, []);
-
-  // Compute derived state for what should be highlighted in the graph
-  const graphHighlightedEntityIds = selectedEvent ? selectedEvent.entity_ids : (selectedEntityId ? [selectedEntityId] : []);
-
-  // For the timeline, we just pass the selectedEntityId so it can highlight matching events
-  const timelineHighlightedEntityId = selectedEntityId;
 
   return {
     selectedEntityId,
-    selectedEvent,
-    handleNodeSelect,
-    handleEventSelect,
-    graphHighlightedEntityIds,
-    timelineHighlightedEntityId
+    selectedEventId,
+    selectedEventEntityIds,
+    onNodeSelected,
+    onEventSelected,
+    handleNodeSelect: onNodeSelected,
+    handleEventSelect: (event: any) => {
+      if (!event) {
+        onEventSelected(null, []);
+      } else {
+        onEventSelected(event.event_id, event.entity_ids || []);
+      }
+    },
+    graphHighlightedEntityIds: selectedEventEntityIds.length > 0 ? selectedEventEntityIds : (selectedEntityId ? [selectedEntityId] : []),
+    timelineHighlightedEntityId: selectedEntityId,
+    clearSelection,
   };
-};
+}

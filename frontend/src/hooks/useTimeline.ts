@@ -1,35 +1,60 @@
 import { useState, useCallback } from 'react';
-import { timelineApi } from '../services';
-import { TimelineResult } from '../types';
+import { timelineApi } from '../services/timelineApi';
+import type { TimelineResult, EvidenceDetail } from '../types';
 
-export const useTimeline = (investigationId: string) => {
-  const [data, setData] = useState<TimelineResult | null>(null);
+export function useTimeline(investigationId: string) {
+  const [timeline, setTimeline] = useState<TimelineResult | null>(null);
+  const [evidence, setEvidence] = useState<EvidenceDetail | null>(null);
   const [loading, setLoading] = useState(false);
+  const [evidenceLoading, setEvidenceLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTimeline = useCallback(async (params?: {
-    start_time?: string;
-    end_time?: string;
-    entity_id?: string;
-    event_type?: string;
-    severity?: string;
-  }) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await timelineApi.getTimeline(investigationId, params);
-      setData(response.data);
-    } catch (err: any) {
-      setError(err.message || 'Failed to fetch timeline');
-    } finally {
-      setLoading(false);
-    }
-  }, [investigationId]);
+  const fetchTimeline = useCallback(
+    async (params?: {
+      entity_id?: string;
+      event_type?: string;
+      severity?: string;
+      start_time?: string;
+      end_time?: string;
+      limit?: number;
+    }) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const data = await timelineApi.getTimeline(investigationId, params);
+        setTimeline(data);
+      } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Failed to load timeline');
+      } finally {
+        setLoading(false);
+      }
+    },
+    [investigationId]
+  );
+
+  const fetchEvidence = useCallback(
+    async (eventId: string) => {
+      setEvidenceLoading(true);
+      try {
+        const data = await timelineApi.getEvidence(investigationId, eventId);
+        setEvidence(data);
+      } catch {
+        setEvidence(null);
+      } finally {
+        setEvidenceLoading(false);
+      }
+    },
+    [investigationId]
+  );
 
   return {
-    data,
+    timeline,
+    data: timeline,
+    evidence,
     loading,
+    evidenceLoading,
     error,
-    fetchTimeline
+    fetchTimeline,
+    fetchEvidence,
   };
-};
+}

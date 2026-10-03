@@ -1,120 +1,190 @@
-import React, { useEffect, useState } from 'react';
-import { useTimeline } from '../../hooks/useTimeline';
-import { formatUtc } from '../../utils/timelineHelpers';
-import { TimelineEvent } from '../../types';
+import { useState, useEffect } from 'react';
+import type { TimelineResult, TimelineEvent } from '../../types';
+import {
+  formatTimestamp,
+  eventTypeBadgeClass,
+  severityBadgeClass,
+} from '../../utils/timelineHelpers';
 
-interface TimelinePanelProps {
-  investigationId: string;
+interface Props {
+  timeline?: TimelineResult | null;
+  loading?: boolean;
+  error?: string | null;
+  selectedEventId?: string | null;
+  highlightedEntityId?: string | null;
   selectedEntityId?: string | null;
+  onEventSelected?: (eventId: string | null, entityIds: string[]) => void;
   onEventSelect?: (event: TimelineEvent) => void;
+  onFilterChange?: (params: { event_type?: string; entity_id?: string }) => void;
+  investigationId?: string;
 }
 
-export const TimelinePanel: React.FC<TimelinePanelProps> = ({ 
-  investigationId, 
-  selectedEntityId, 
-  onEventSelect 
-}) => {
-  const { data, loading, error, fetchTimeline } = useTimeline(investigationId);
-  const [severityFilter, setSeverityFilter] = useState<string>('');
+const EVENT_TYPE_FILTERS = ['All', 'Auth', 'Process', 'Network', 'File'];
 
+export default function TimelinePanel({
+  timeline,
+  loading = false,
+  error = null,
+  selectedEventId,
+  highlightedEntityId,
+  selectedEntityId,
+  onEventSelected,
+  onEventSelect,
+  onFilterChange,
+}: Props) {
+  const [search, setSearch] = useState('');
+  const [typeFilter, setTypeFilter] = useState('All');
+
+  const activeHighlightedEntityId = highlightedEntityId || selectedEntityId || null;
+
+  const events = timeline?.events ?? [];
+
+  const filtered = events.filter((te) => {
+    const ev = te.event;
+    const matchType =
+      typeFilter === 'All' ||
+      ev.event_type.toLowerCase().includes(typeFilter.toLowerCase());
+    const matchSearch =
+      !search ||
+      ev.event_id.toLowerCase().includes(search.toLowerCase()) ||
+      (ev.source_host ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (ev.user ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      ev.action.toLowerCase().includes(search.toLowerCase());
+    return matchType && matchSearch;
+  });
+
+  // notify parent on filter change
   useEffect(() => {
-    // Re-fetch timeline when selectedEntityId changes to filter by entity
-    fetchTimeline({ 
-      entity_id: selectedEntityId || undefined,
-      severity: severityFilter || undefined
-    });
-  }, [fetchTimeline, selectedEntityId, severityFilter]);
+    if (onFilterChange && typeFilter !== 'All') {
+      onFilterChange({ event_type: typeFilter.toLowerCase() });
+    } else if (onFilterChange) {
+      onFilterChange({});
+    }
+  }, [typeFilter, onFilterChange]);
 
-  const severityColors = {
-    low: 'bg-green-100 text-green-800 border-green-200',
-    medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-    high: 'bg-orange-100 text-orange-800 border-orange-200',
-    critical: 'bg-red-100 text-red-800 border-red-200',
+  const isRowHighlighted = (te: TimelineEvent) =>
+    activeHighlightedEntityId
+      ? te.entity_ids.includes(activeHighlightedEntityId)
+      : false;
+
+  const handleRowClick = (te: TimelineEvent) => {
+    if (onEventSelected) {
+      onEventSelected(te.event.event_id, te.entity_ids);
+    }
+    if (onEventSelect) {
+      onEventSelect(te);
+    }
   };
 
   return (
-    <div className="flex flex-col h-full w-full bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      <div className="flex flex-col gap-3 p-4 border-b border-gray-100 bg-gray-50/50">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-gray-800">Timeline</h2>
-          <span className="text-sm text-gray-500 font-medium">
-            {data?.total || 0} events
+    <div className="sentinel-card flex flex-col h-full">
+      {/* Header */}
+      <div className="px-4 py-3 border-b border-outline-variant/20 space-y-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-on-surface">Event Timeline</span>
+            <span className="badge-pill bg-surface-highest text-on-surface-muted mono">
+              {timeline?.total ?? 0} events
+            </span>
+          </div>
+        </div>
+        {/* Search + filters */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <input
+            className="input-ghost flex-1 min-w-[140px]"
+            placeholder="Filter events…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <div className="flex gap-1">
+            {EVENT_TYPE_FILTERS.map((f) => (
+              <button
+                key={f}
+                onClick={() => setTypeFilter(f)}
+                className={`badge-pill text-xs cursor-pointer transition-colors ${
+                  typeFilter === f
+                    ? 'bg-primary/20 text-primary border border-primary/40'
+                    : 'bg-surface-highest text-on-surface-muted border border-outline-variant hover:border-primary/30'
+                }`}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Event list */}
+      <div className="flex-1 overflow-y-auto">
+        {loading && (
+          <div className="flex items-center justify-center h-20 text-primary text-sm gap-2">
+            <span className="animate-spin">◌</span> Loading…
+          </div>
+        )}
+        {error && !loading && (
+          <div className="p-4 text-error text-sm">{error}</div>
+        )}
+        {!loading && filtered.length === 0 && (
+          <div className="p-6 text-center text-on-surface-muted text-sm">No events match the current filter.</div>
+        )}
+        {filtered.map((te, idx) => {
+          const ev = te.event;
+          const isSelected = ev.event_id === selectedEventId;
+          const isHighlighted = isRowHighlighted(te);
+          return (
+            <button
+              key={ev.event_id}
+              onClick={() => handleRowClick(te)}
+              className={`w-full text-left flex items-start gap-3 px-4 py-3 relative transition-colors cursor-pointer
+                ${isSelected ? 'bg-surface-high' : idx % 2 === 0 ? 'bg-surface-container' : 'bg-surface-low'}
+                ${isHighlighted && !isSelected ? 'ring-1 ring-inset ring-primary/30' : ''}
+                hover:bg-surface-high`}
+            >
+              {/* Left accent */}
+              <span
+                className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-r ${
+                  isSelected ? 'bg-primary' : 'bg-transparent'
+                }`}
+              />
+              {/* Timestamp */}
+              <span className="mono text-on-surface-muted shrink-0 pt-0.5">
+                {formatTimestamp(ev.timestamp)}
+              </span>
+              {/* Type badge */}
+              <span className={`badge-pill shrink-0 ${eventTypeBadgeClass(ev.event_type)}`}>
+                {ev.event_type.toUpperCase().slice(0, 7)}
+              </span>
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <span className="text-sm font-medium text-on-surface block truncate">
+                  {ev.source_host ?? ev.user ?? ev.event_id}
+                </span>
+                <span className="text-xs text-on-surface-muted truncate block">{ev.action}</span>
+              </div>
+              {/* Severity + ID */}
+              <div className="flex flex-col items-end gap-1 shrink-0">
+                {ev.severity && (
+                  <span className={`badge-pill text-[10px] ${severityBadgeClass(ev.severity)}`}>
+                    {ev.severity.toUpperCase()}
+                  </span>
+                )}
+                <span className="mono text-on-surface-muted text-[10px]">
+                  {ev.event_id.slice(0, 12)}
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Footer */}
+      {timeline && (
+        <div className="px-4 py-2 border-t border-outline-variant/20 flex items-center justify-between">
+          <span className="mono text-on-surface-muted text-[11px]">
+            Showing {filtered.length} of {timeline.total}
           </span>
         </div>
-        
-        <div className="flex gap-2 text-sm">
-          <select 
-            value={severityFilter} 
-            onChange={(e) => setSeverityFilter(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <option value="">All Severities</option>
-            <option value="critical">Critical</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-          {selectedEntityId && (
-            <div className="flex items-center px-2 py-1 bg-blue-50 text-blue-700 rounded border border-blue-100">
-              <span className="truncate max-w-[150px]">Filtered by entity</span>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4 relative">
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/50 z-10">
-            <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
-
-        {error && (
-          <div className="text-red-600 bg-red-50 p-3 rounded border border-red-200 text-sm">
-            {error}
-          </div>
-        )}
-
-        <div className="space-y-4">
-          {data?.events.map((event) => (
-            <div 
-              key={event.event_id}
-              onClick={() => onEventSelect && onEventSelect(event)}
-              className="flex gap-4 p-3 rounded-lg border border-gray-100 hover:border-blue-200 hover:bg-blue-50/30 cursor-pointer transition-colors relative"
-            >
-              {/* Timeline connecting line (visual only, simplified) */}
-              <div className="flex flex-col items-center pt-1">
-                <div className={`w-3 h-3 rounded-full ${severityColors[event.severity] || 'bg-gray-200'}`}></div>
-                <div className="w-0.5 h-full bg-gray-100 mt-1 absolute top-5 bottom-[-16px]"></div>
-              </div>
-              
-              <div className="flex-1 min-w-0">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-semibold text-gray-800 truncate">{event.event_type}</span>
-                  <span className="text-xs text-gray-500 whitespace-nowrap ml-2">
-                    {formatUtc(event.timestamp)}
-                  </span>
-                </div>
-                <div className="text-sm text-gray-600 mb-2 truncate">
-                  {event.action} | {event.source_type}
-                </div>
-                
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {event.user && <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded truncate max-w-[120px]">User: {event.user}</span>}
-                  {event.source_host && <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded truncate max-w-[120px]">Src: {event.source_host}</span>}
-                  {event.destination_host && <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded truncate max-w-[120px]">Dst: {event.destination_host}</span>}
-                </div>
-              </div>
-            </div>
-          ))}
-          
-          {!loading && data?.events.length === 0 && (
-            <div className="text-center text-gray-500 py-8">
-              No events found.
-            </div>
-          )}
-        </div>
-      </div>
+      )}
     </div>
   );
-};
+}

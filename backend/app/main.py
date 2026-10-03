@@ -1,16 +1,38 @@
 """TraceGraph FastAPI application entry point."""
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.core.database import init_neo4j, close_neo4j, check_db_health
 from app.core.errors import register_error_handlers
+from app.api.auth import router as auth_router
 from app.api.events import router as events_router
 from app.api.graph import router as graph_router
 from app.api.investigations import router as investigations_router
 from app.api.notes import router as notes_router
 from app.api.summary import router as summary_router
 from app.api.timeline import router as timeline_router
+from app.api.graph import router as graph_router
+from app.api.summary import router as summary_router
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan manager for startup/shutdown."""
+    # Startup
+    await init_neo4j()
+    # Verify DB connections
+    health = await check_db_health()
+    if not health["postgres"]:
+        logger.warning("PostgreSQL health check failed on startup")
+    if not health["neo4j"]:
+        logger.warning("Neo4j health check failed on startup")
+    yield
+    # Shutdown
+    await close_neo4j()
+
 
 from contextlib import asynccontextmanager
 import sys
@@ -72,6 +94,7 @@ from app.adapters import register_default_adapters  # noqa: E402
 register_default_adapters()
 
 # Register API routers
+app.include_router(auth_router)
 app.include_router(investigations_router)
 app.include_router(notes_router)
 app.include_router(events_router)
@@ -84,3 +107,15 @@ app.include_router(summary_router)
 async def health_check():
     """Liveness probe — returns ok when the process is running."""
     return {"status": "ok"}
+
+
+@app.get("/health/ready")
+async def readiness_check():
+    """Readiness probe — returns ok when all dependencies are healthy."""
+    from app.core.database import check_db_health
+
+    health = await check_db_health()
+    if not all(health.values()):
+        from fastapi import HTTPException
+        raise HTTPException(status_code=503, detail=health)
+    return {"status": "ok", "dependencies": health}

@@ -26,17 +26,16 @@ from app.core.errors import AIUnavailableError, ForbiddenError
 from app.repositories.graph_repository import GraphRepository
 from app.repositories.investigation_repository import InvestigationRepository
 from app.schemas.common import SuccessResponse
+from app.schemas.graph import GraphFilter
 from app.schemas.summary import SummaryResult
+from app.schemas.timeline import TimelineFilter
 from app.services.ai_context_builder import AIContextBuilder
-from app.services.ai_summary import AISummaryService
+from app.services.ai_summary import get_ai_summary_service
 from app.services.timeline import TimelineService
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/investigations", tags=["summary"])
-
-# Singleton service instance with default provider (or pluggable via app context)
-_summary_service = AISummaryService()
 
 
 # ---------------------------------------------------------------------------
@@ -49,7 +48,11 @@ async def _check_investigation_ownership(
     current_user: CurrentUser,
     db: AsyncSession,
 ) -> None:
-    """Raise ForbiddenError if the caller is not the investigation owner."""
+    """Raise ForbiddenError if the caller is not the investigation owner.
+
+    Treats 'not found' and 'wrong owner' identically to avoid leaking
+    existence information to non-owners.
+    """
     inv_repo = InvestigationRepository(db)
     row = await inv_repo.get_by_id(investigation_id)
     if row is None or str(row.owner_id) != current_user.user_id:
@@ -59,7 +62,7 @@ async def _check_investigation_ownership(
 
 
 # ---------------------------------------------------------------------------
-# POST /api/investigations/{investigation_id}/summary
+# POST /api/investigations/{investigation_id}/summary — generate/refresh summary
 # ---------------------------------------------------------------------------
 
 
@@ -97,11 +100,9 @@ async def generate_summary(
 
     # 1. Fetch graph & timeline data to build context
     graph_repo = GraphRepository(neo4j_driver)
-    from app.schemas.graph import GraphFilter  # noqa: PLC0415
     graph_res = await graph_repo.get_graph(investigation_id, filters=GraphFilter())
 
     timeline_svc = TimelineService(db)
-    from app.schemas.timeline import TimelineFilter  # noqa: PLC0415
     timeline_res = await timeline_svc.get_timeline(investigation_id, filters=TimelineFilter(limit=1000))
 
     # 2. Build AI Context
@@ -113,7 +114,8 @@ async def generate_summary(
     )
 
     # 3. Generate summary
-    result = await _summary_service.generate_summary(
+    summary_service = get_ai_summary_service()
+    result = await summary_service.generate_summary(
         context=context,
         force_refresh=force_refresh,
     )
@@ -128,7 +130,7 @@ async def generate_summary(
 
 
 # ---------------------------------------------------------------------------
-# GET /api/investigations/{investigation_id}/summary
+# GET /api/investigations/{investigation_id}/summary — retrieve cached summary
 # ---------------------------------------------------------------------------
 
 
@@ -142,17 +144,32 @@ async def get_summary(
     investigation_id: Annotated[str, Path(description="Target investigation ID")],
     current_user: Annotated[CurrentUser, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(get_db)],
+    neo4j_driver: Annotated[AsyncDriver, Depends(get_neo4j_driver)],
 ) -> SuccessResponse[SummaryResult]:
-    """Retrieve cached AI summary for an investigation.
-
-    Returns HTTP 503 (AI_UNAVAILABLE) if no cached summary is available yet.
-    """
+    """Retrieve cached AI summary for an investigation or generate if none exists."""
     await _check_investigation_ownership(investigation_id, current_user, db)
 
-    result = _summary_service.get_cached_summary(investigation_id)
-    if result is None:
+    summary_service = get_ai_summary_service()
+    cached = summary_service.get_cached_summary(investigation_id)
+    if cached is not None:
+        return SuccessResponse(data=cached)
+
+    # If no cached summary exists, generate one on demand
+    graph_repo = GraphRepository(neo4j_driver)
+    graph_res = await graph_repo.get_graph(investigation_id, filters=GraphFilter())
+    timeline_svc = TimelineService(db)
+    timeline_res = await timeline_svc.get_timeline(investigation_id, filters=TimelineFilter(limit=1000))
+
+    context_builder = AIContextBuilder()
+    context = context_builder.build_context(
+        investigation_id=investigation_id,
+        graph=graph_res,
+        timeline=timeline_res,
+    )
+    result = await summary_service.generate_summary(context, force_refresh=False)
+    if result.error_flag:
         raise AIUnavailableError(
-            f"No cached summary available for investigation {investigation_id!r}."
+            result.error_message or "AI summary service is currently unavailable."
         )
 
     return SuccessResponse(data=result)

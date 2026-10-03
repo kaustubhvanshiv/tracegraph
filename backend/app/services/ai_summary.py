@@ -48,44 +48,37 @@ class LLMProvider(Protocol):
 
 
 class DefaultLLMProvider:
-    """Default provider that formats structured summary from context without external API call."""
+    """Default mock LLM provider for development and testing."""
 
     async def generate(
         self,
         system_prompt: str,
         user_payload: dict[str, Any],
     ) -> dict[str, Any]:
-        sampled_events = user_payload.get("sampled_events", [])
-        entities = user_payload.get("entities", [])
-        relationships = user_payload.get("relationships", [])
-
-        event_ids = [e.get("event_id") for e in sampled_events if e.get("event_id")]
-        entity_keys = [e.get("canonical_key") for e in entities if e.get("canonical_key")]
-        rel_ids = [r.get("relationship_id") for r in relationships if r.get("relationship_id")]
-
-        overview = (
-            f"Investigation {user_payload.get('investigation_id', '')} comprises "
-            f"{user_payload.get('total_events', 0)} total events across {len(entities)} entities "
-            f"and {len(relationships)} correlated relationships."
-        )
-
-        sequence = [
-            f"Event {e.get('event_id')} ({e.get('event_type')} / {e.get('action')}) "
-            f"on {e.get('source_host') or 'unknown'} at {e.get('timestamp')}"
-            for e in sampled_events[:5]
+        sampled_events = user_payload.get("sampled_events") or []
+        evidence_refs = [
+            e["event_id"] if isinstance(e, dict) else getattr(e, "event_id", "")
+            for e in sampled_events
         ]
+        evidence_refs = [ref for ref in evidence_refs if ref]
 
         return {
-            "overview": overview,
-            "chronological_sequence": sequence,
-            "key_entities": entity_keys[:5],
-            "key_relationships": rel_ids[:5],
-            "evidence_refs": event_ids[:10],
-            "uncertainty": "Summary bounded by sampled events; un-sampled low-severity events may contain additional background noise.",
-            "next_questions": [
-                "Are there additional hosts communicating with these entities?",
-                "Has lateral movement occurred across neighboring subnets?",
+            "overview": (
+                f"Investigation {user_payload.get('investigation_id')} summary: "
+                f"analyzed {user_payload.get('total_events', len(sampled_events))} events."
+            ),
+            "chronological_sequence": [
+                f"Event {ref} processed" for ref in evidence_refs[:5]
             ],
+            "key_entities": [
+                e.get("canonical_key") if isinstance(e, dict) else getattr(e, "canonical_key", "")
+                for e in user_payload.get("entities") or []
+            ],
+            "key_relationships": [],
+            "evidence_refs": evidence_refs[:10],
+            "uncertainty": "Mock provider summary: analysis based on limited sampled events.",
+            "next_questions": ["Verify root cause host", "Inspect secondary credentials"],
+            "error_flag": False,
         }
 
 
@@ -95,38 +88,33 @@ class DefaultLLMProvider:
 
 
 class AISummaryService:
-    """Service to generate grounded AI summaries with caching and error isolation."""
+    """Service to generate evidence-grounded AI narrative summaries."""
 
-    def __init__(self, provider: LLMProvider | None = None) -> None:
-        self._provider: LLMProvider = provider or DefaultLLMProvider()
-        # In-memory summary cache: (investigation_id, context_hash) -> SummaryResult
+    def __init__(
+        self,
+        provider: LLMProvider | None = None,
+        llm_provider: LLMProvider | None = None,
+    ) -> None:
+        self._provider = provider or llm_provider or DefaultLLMProvider()
         self._cache: dict[tuple[str, str], SummaryResult] = {}
 
     def _compute_hash(self, context: InvestigationContext) -> str:
-        """Compute stable SHA256 hash of context data."""
-        data_bytes = context.model_dump_json().encode("utf-8")
-        return hashlib.sha256(data_bytes).hexdigest()
+        parts = [context.investigation_id]
+        for e in sorted(context.entities, key=lambda x: x.entity_id):
+            parts.append(f"E:{e.entity_id}")
+        for r in sorted(context.relationships, key=lambda x: x.relationship_id):
+            parts.append(f"R:{r.relationship_id}")
+        for e in sorted(context.sampled_events, key=lambda x: x.event_id):
+            parts.append(f"V:{e.event_id}")
+        context_str = "|".join(parts)
+        return hashlib.sha256(context_str.encode()).hexdigest()[:16]
 
     async def generate_summary(
         self,
         context: InvestigationContext,
         force_refresh: bool = False,
     ) -> SummaryResult:
-        """Generate or retrieve cached summary for the given context.
-
-        Parameters
-        ----------
-        context:
-            InvestigationContext built by AIContextBuilder.
-        force_refresh:
-            If True, bypass cache and re-generate.
-
-        Returns
-        -------
-        SummaryResult:
-            Grounded summary output. On failure, returns SummaryResult(error_flag=True)
-            and never raises an exception.
-        """
+        """Generate or retrieve cached summary for the given context."""
         ctx_hash = self._compute_hash(context)
         cache_key = (context.investigation_id, ctx_hash)
 
@@ -161,6 +149,7 @@ class AISummaryService:
                 return SummaryResult(
                     error_flag=True,
                     error_message=f"Summary post-validation failed: hallucinated evidence_refs {invalid_refs}",
+                    uncertainty="Summary generation failed due to hallucinated evidence references.",
                 )
 
             uncertainty = str(
@@ -191,6 +180,7 @@ class AISummaryService:
             return SummaryResult(
                 error_flag=True,
                 error_message=f"AI summary service error: {exc}",
+                uncertainty="Summary generation failed due to service error.",
             )
 
     def get_cached_summary(
@@ -203,9 +193,17 @@ class AISummaryService:
             cache_key = (investigation_id, self._compute_hash(context))
             return self._cache.get(cache_key)
 
-        # Fallback: return most recent summary for this investigation_id
         for (inv_id, _), summary in reversed(list(self._cache.items())):
             if inv_id == investigation_id:
                 return summary
 
         return None
+
+
+# Module-level singleton
+_ai_summary_service = AISummaryService()
+
+
+def get_ai_summary_service() -> AISummaryService:
+    """Get the AI summary service instance."""
+    return _ai_summary_service

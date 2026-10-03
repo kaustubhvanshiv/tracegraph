@@ -1,19 +1,26 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './components/common/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
 import InvestigationsPage from './pages/InvestigationsPage';
 import WorkspacePage from './pages/WorkspacePage';
 
-function App() {
+export default function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-50 text-gray-900">
-        <Routes>
+    <BrowserRouter>
+      <Routes>
+        {/* Public */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* Protected — require JWT */}
+        <Route element={<ProtectedRoute />}>
           <Route path="/investigations" element={<InvestigationsPage />} />
           <Route path="/investigations/:id" element={<WorkspacePage />} />
-          <Route path="*" element={<Navigate to="/investigations" replace />} />
-        </Routes>
-      </div>
-    </Router>
+        </Route>
+
+        {/* Default redirect */}
+        <Route path="/" element={<Navigate to="/investigations" replace />} />
+        <Route path="*" element={<Navigate to="/investigations" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

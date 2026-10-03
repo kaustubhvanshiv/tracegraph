@@ -1,11 +1,12 @@
-"""Evidence ingestion API routes.
+"""Evidence ingestion and detail API routes.
 
 Endpoints:
   POST /api/investigations/{investigation_id}/events
   POST /api/investigations/{investigation_id}/events/batch
+  GET  /api/investigations/{investigation_id}/events/{event_id}
 
 Security:
-  - JWT required on both endpoints (get_current_user dependency).
+  - JWT required on all endpoints (get_current_user dependency).
   - Investigation ownership enforced inside the handler (ForbiddenError if
     not owner, which the global error handler converts to HTTP 403).
 
@@ -13,8 +14,8 @@ Logging:
   - Only event_id and investigation_id are logged at INFO level.
   - Raw event data is NEVER written to logs (Req 15.5).
 
-Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 15.1, 15.2, 15.5,
-              16.1, 16.2, 16.3, 16.4
+Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 10.1–10.6,
+              15.1, 15.2, 15.5, 16.1, 16.2, 16.3, 16.4
 """
 
 from __future__ import annotations

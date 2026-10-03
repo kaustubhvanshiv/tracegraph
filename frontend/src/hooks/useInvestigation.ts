@@ -1,77 +1,100 @@
 import { useState, useCallback } from 'react';
-import { investigationsApi } from '../services';
-import { Investigation, InvestigationStatus, InvestigationOutcome } from '../types';
+import { investigationsApi } from '../services/investigationsApi';
+import type {
+  Investigation,
+  Note,
+  CreateInvestigationPayload,
+  PatchInvestigationPayload,
+  NotePayload,
+} from '../types';
 
-export const useInvestigation = () => {
+export function useInvestigation(investigationId?: string) {
+  const [investigation, setInvestigation] = useState<Investigation | null>(null);
+  const [notes, setNotes] = useState<Note[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const listInvestigations = useCallback(async (limit = 50, offset = 0): Promise<Investigation[] | null> => {
+  const fetchInvestigation = useCallback(async (id: string) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await investigationsApi.list(limit, offset);
-      return response.data;
-    } catch (err: any) {
-      setError(err.message || 'Failed to list investigations');
-      return null;
+      const data = await investigationsApi.get(id);
+      setInvestigation(data);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Failed to load investigation');
     } finally {
       setLoading(false);
     }
   }, []);
 
-  const getInvestigation = useCallback(async (id: string): Promise<Investigation | null> => {
-    setLoading(true);
-    setError(null);
+  const fetchNotes = useCallback(async (id: string) => {
     try {
-      const response = await investigationsApi.get(id);
-      return response.data;
-    } catch (err: any) {
-      setError(err.message || 'Failed to get investigation');
-      return null;
-    } finally {
-      setLoading(false);
+      const data = await investigationsApi.getNotes(id);
+      setNotes(data);
+    } catch {
+      // non-critical
     }
   }, []);
 
-  const createInvestigation = useCallback(async (title: string, description: string): Promise<Investigation | null> => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await investigationsApi.create({ title, description });
-      return response.data;
-    } catch (err: any) {
-      setError(err.message || 'Failed to create investigation');
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const patch = useCallback(
+    async (payload: PatchInvestigationPayload): Promise<void> => {
+      const targetId = investigationId || investigation?.investigation_id;
+      if (!targetId) return;
+      const updated = await investigationsApi.patch(targetId, payload);
+      setInvestigation(updated);
+    },
+    [investigationId, investigation]
+  );
 
-  const updateStatus = useCallback(async (
-    id: string, 
-    status: InvestigationStatus, 
-    outcome?: InvestigationOutcome
-  ): Promise<Investigation | null> => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await investigationsApi.updateStatus(id, status, outcome);
-      return response.data;
-    } catch (err: any) {
-      setError(err.message || 'Failed to update status');
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const addNote = useCallback(
+    async (payload: NotePayload): Promise<Note> => {
+      const targetId = investigationId || investigation?.investigation_id;
+      if (!targetId) throw new Error('No investigation id');
+      const note = await investigationsApi.addNote(targetId, payload);
+      setNotes((prev) => [...prev, note]);
+      return note;
+    },
+    [investigationId, investigation]
+  );
 
   return {
+    investigation,
+    notes,
     loading,
     error,
-    listInvestigations,
-    getInvestigation,
-    createInvestigation,
-    updateStatus,
+    fetchInvestigation,
+    fetchNotes,
+    patch,
+    addNote,
   };
-};
+}
+
+export function useInvestigationList() {
+  const [investigations, setInvestigations] = useState<Investigation[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetch = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await investigationsApi.list({ limit: 100 });
+      setInvestigations(data);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : 'Failed to load investigations');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const create = useCallback(
+    async (payload: CreateInvestigationPayload): Promise<Investigation> => {
+      const inv = await investigationsApi.create(payload);
+      setInvestigations((prev) => [inv, ...prev]);
+      return inv;
+    },
+    []
+  );
+
+  return { investigations, loading, error, fetch, create };
+}

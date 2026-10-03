@@ -24,7 +24,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.auth import CurrentUser, get_current_user
 from app.core.database import get_db, get_neo4j_driver
-from app.core.errors import EntityNotFoundError, ForbiddenError
+from app.core.errors import EntityNotFoundError, ForbiddenError, GraphUnavailableError
 from app.repositories.graph_repository import GraphRepository
 from app.repositories.investigation_repository import InvestigationRepository
 from app.schemas.common import SuccessResponse
@@ -121,10 +121,18 @@ async def get_graph(
     )
 
     graph_repo = GraphRepository(neo4j_driver)
-    result = await graph_repo.get_graph(
-        investigation_id=investigation_id,
-        filters=filters,
-    )
+    try:
+        result = await graph_repo.get_graph(
+            investigation_id=investigation_id,
+            filters=filters,
+        )
+    except GraphUnavailableError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Graph query failed: %s", exc)
+        raise GraphUnavailableError(
+            "Neo4j is unreachable or returned an error during graph retrieval."
+        ) from exc
 
     return SuccessResponse(data=result)
 
@@ -142,10 +150,10 @@ async def get_graph(
 )
 async def pivot_graph(
     investigation_id: Annotated[str, Path(description="Target investigation ID")],
-    entity_id: Annotated[str, Query(description="Starting entity ID for pivot")],
     current_user: Annotated[CurrentUser, Depends(get_current_user)],
     db: Annotated[AsyncSession, Depends(get_db)],
     neo4j_driver: Annotated[AsyncDriver, Depends(get_neo4j_driver)],
+    entity_id: Annotated[str, Query(alias="entity_id", description="Starting entity ID for pivot")],
     hops: Annotated[
         int,
         Query(ge=1, le=10, description="Max hop depth for traversal (default: 2)"),
@@ -168,11 +176,19 @@ async def pivot_graph(
     )
 
     graph_repo = GraphRepository(neo4j_driver)
-    result = await graph_repo.pivot(
-        entity_id=entity_id,
-        investigation_id=investigation_id,
-        hops=hops,
-    )
+    try:
+        result = await graph_repo.pivot(
+            entity_id=entity_id,
+            investigation_id=investigation_id,
+            hops=hops,
+        )
+    except GraphUnavailableError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Pivot query failed: %s", exc)
+        raise GraphUnavailableError(
+            "Neo4j is unreachable or returned an error during pivot traversal."
+        ) from exc
 
     return SuccessResponse(data=result)
 
@@ -219,6 +235,13 @@ async def get_entity_detail(
     except KeyError as exc:
         raise EntityNotFoundError(
             f"Entity {entity_id!r} not found in investigation {investigation_id!r}"
+        ) from exc
+    except GraphUnavailableError:
+        raise
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Entity detail query failed: %s", exc)
+        raise GraphUnavailableError(
+            "Neo4j is unreachable or returned an error during entity retrieval."
         ) from exc
 
     return SuccessResponse(data=result)

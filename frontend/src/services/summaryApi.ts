@@ -1,17 +1,23 @@
-import { apiClient } from './apiClient';
-import { SuccessResponse, SummaryResult } from '../types';
+import { apiClient, unwrap } from './client';
+import type { SummaryResult } from '../types';
 
 export const summaryApi = {
-  getSummary: async (investigationId: string): Promise<SuccessResponse<SummaryResult>> => {
-    return apiClient.get(`/investigations/${investigationId}/summary`);
+  generate: async (
+    investigationId: string,
+    forceRefresh = false
+  ): Promise<SummaryResult> => {
+    const { data } = await apiClient.post(
+      `/api/investigations/${investigationId}/summary`,
+      null,
+      { params: { force_refresh: forceRefresh } }
+    );
+    return unwrap(data);
   },
 
-  generateSummary: async (
-    investigationId: string, 
-    forceRefresh: boolean = false
-  ): Promise<SuccessResponse<SummaryResult>> => {
-    return apiClient.post(`/investigations/${investigationId}/summary`, null, {
-      params: { force_refresh: forceRefresh }
-    });
+  get: async (investigationId: string): Promise<SummaryResult> => {
+    const { data } = await apiClient.get(
+      `/api/investigations/${investigationId}/summary`
+    );
+    return unwrap(data);
   },
 };
