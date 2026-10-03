@@ -31,12 +31,20 @@ export interface TimelineResult {
   total: number;
 }
 
+export interface CorrelationMetadata {
+  relationship_id: string;
+  signal_names: string[];
+  signal_scores: Record<string, number>;
+  combined_score: number;
+  explanation: string;
+}
+
 export interface EvidenceDetail {
   event: SecurityEvent;
   raw_data: Record<string, unknown> | null;
   entities: Entity[];
   relationships: CorrelatedRelationship[];
-  correlation_metadata: Array<Record<string, unknown>>;
+  correlation_metadata: CorrelationMetadata[];
 }
 
 export interface IngestionResponse {

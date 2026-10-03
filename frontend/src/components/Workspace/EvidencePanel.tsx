@@ -138,7 +138,7 @@ export default function EvidencePanel({ evidence, loading }: Props) {
             {evidence.correlation_metadata.map((m, i) => (
               <li key={i} className="text-xs text-on-surface-muted flex items-center gap-1.5">
                 <span className="text-primary">·</span>
-                {String(m.signal_name ?? m.explanation ?? JSON.stringify(m))}
+                {m.signal_names?.join(', ') ?? m.explanation ?? JSON.stringify(m)}
               </li>
             ))}
           </ul>
