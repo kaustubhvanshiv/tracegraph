@@ -96,7 +96,7 @@ def _iso_to_dt(value: Any) -> datetime:
 
 def _record_to_entity(node: Any) -> Entity:
     """Convert a Neo4j node to an Entity schema object."""
-    props = dict(node)
+    props = dict(node) if not isinstance(node, dict) else node
     return Entity(
         entity_id=props["entity_id"],
         entity_type=EntityType(props["entity_type"]),
@@ -109,7 +109,7 @@ def _record_to_entity(node: Any) -> Entity:
 
 def _record_to_relationship(rel: Any) -> CorrelatedRelationship:
     """Convert a Neo4j relationship to a CorrelatedRelationship schema object."""
-    props = dict(rel)
+    props = dict(rel) if not isinstance(rel, dict) else rel
     raw_scores = props.get("signal_scores", "{}")
     if isinstance(raw_scores, str):
         signal_scores: dict[str, float] = json.loads(raw_scores)
@@ -334,12 +334,12 @@ class GraphRepository:
 
         node_query = f"""
             {node_match}
-            RETURN n
+            RETURN properties(n) AS n
         """
         rel_query = f"""
             {rel_match}
             {where_clause}
-            RETURN r
+            RETURN properties(r) AS r
         """
 
         params: dict[str, Any] = {"investigation_id": investigation_id}
@@ -411,7 +411,7 @@ class GraphRepository:
                          (connected {{investigation_id: $inv_id}})
             UNWIND nodes(path)         AS n
             UNWIND relationships(path) AS r
-            RETURN DISTINCT n, r
+            RETURN DISTINCT properties(n) AS n, properties(r) AS r
         """
         params: dict[str, Any] = {
             "entity_id": entity_id,
@@ -456,7 +456,7 @@ class GraphRepository:
             # Attempt to fetch just the start node so it appears in the result.
             start_query = """
                 MATCH (n {entity_id: $entity_id, investigation_id: $inv_id})
-                RETURN n
+                RETURN properties(n) AS n
             """
             try:
                 async with self._driver.session() as session:
@@ -498,12 +498,12 @@ class GraphRepository:
         """
         node_query = """
             MATCH (n {entity_id: $entity_id, investigation_id: $investigation_id})
-            RETURN n
+            RETURN properties(n) AS n
         """
         rel_query = """
             MATCH (n {entity_id: $entity_id, investigation_id: $investigation_id})
             MATCH (n)-[r]-(other {investigation_id: $investigation_id})
-            RETURN DISTINCT r
+            RETURN DISTINCT properties(r) AS r
         """
         params: dict[str, Any] = {
             "entity_id":        entity_id,
@@ -565,7 +565,7 @@ class GraphRepository:
         query = """
             MATCH (n {investigation_id: $investigation_id})
             WHERE $event_id IN n.event_ids
-            RETURN DISTINCT n
+            RETURN DISTINCT properties(n) AS n
         """
         params: dict[str, Any] = {
             "event_id": event_id,
@@ -604,7 +604,7 @@ class GraphRepository:
         query = """
             MATCH (a {investigation_id: $investigation_id})-[r]->(b {investigation_id: $investigation_id})
             WHERE $event_id IN r.event_ids
-            RETURN DISTINCT r
+            RETURN DISTINCT properties(r) AS r
         """
         params: dict[str, Any] = {
             "event_id": event_id,

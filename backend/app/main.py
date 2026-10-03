@@ -60,6 +60,14 @@ async def lifespan(app: FastAPI):
     # Create PostgreSQL tables if they don't exist
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+
+    # Automatically seed demo data if database is empty
+    try:
+        from seed_demo_data import seed_if_empty
+        await seed_if_empty(force=False)
+    except Exception as e:
+        print(f"Warning: Automatic seeding failed on startup: {e}", file=sys.stderr)
+
     yield
     # Cleanup
     await close_neo4j()

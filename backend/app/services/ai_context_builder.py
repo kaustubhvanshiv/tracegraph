@@ -63,7 +63,7 @@ class AIContextBuilder:
         # 1. Extract events list and total event count
         if isinstance(timeline, TimelineResult):
             events_list = timeline.events
-            total_events = timeline.total_count
+            total_events = getattr(timeline, "total", getattr(timeline, "total_count", len(timeline.events)))
         else:
             events_list = list(timeline)
             total_events = len(events_list)
@@ -72,24 +72,7 @@ class AIContextBuilder:
         normalized_events: list[SecurityEvent] = []
         for item in events_list:
             if isinstance(item, TimelineEvent):
-                normalized_events.append(
-                    SecurityEvent(
-                        event_id=item.event_id,
-                        source_type=item.source_type,
-                        timestamp=item.timestamp,
-                        event_type=item.event_type,
-                        action=item.action,
-                        user=item.user,
-                        source_host=item.source_host,
-                        destination_host=item.destination_host,
-                        source_ip=item.source_ip,
-                        destination_ip=item.destination_ip,
-                        process=item.process,
-                        file=item.file,
-                        severity=item.severity,
-                        raw_data=item.raw_data or {},
-                    )
-                )
+                normalized_events.append(item.event)
             elif isinstance(item, SecurityEvent):
                 normalized_events.append(item)
 

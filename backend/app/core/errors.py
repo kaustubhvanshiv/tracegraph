@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from fastapi import FastAPI, Request
+from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -193,7 +194,7 @@ def register_error_handlers(app: FastAPI) -> None:
             content=_error_response_body(
                 code=VALIDATION_ERROR,
                 message=detail_message,
-                details={"errors": exc.errors()},
+                details={"errors": jsonable_encoder(exc.errors())},
             ),
         )
 

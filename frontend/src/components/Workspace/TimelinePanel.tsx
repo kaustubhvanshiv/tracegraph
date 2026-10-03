@@ -53,14 +53,12 @@ export default function TimelinePanel({
     return matchType && matchSearch;
   });
 
-  // notify parent on filter change
+  // notify parent when typeFilter changes
   useEffect(() => {
-    if (onFilterChange && typeFilter !== 'All') {
-      onFilterChange({ event_type: typeFilter.toLowerCase() });
-    } else if (onFilterChange) {
-      onFilterChange({});
+    if (typeFilter !== 'All') {
+      onFilterChange?.({ event_type: typeFilter.toLowerCase() });
     }
-  }, [typeFilter, onFilterChange]);
+  }, [typeFilter]);
 
   const isRowHighlighted = (te: TimelineEvent) =>
     activeHighlightedEntityId

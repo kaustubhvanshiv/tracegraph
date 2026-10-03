@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import WorkspaceHeader from '../components/Workspace/Header';
 import GraphPanel from '../components/Workspace/GraphPanel';
@@ -68,6 +68,13 @@ export default function WorkspacePage() {
     fetchEvidence(eventId);
   };
 
+  const handleFilterChange = useCallback(
+    (params: { event_type?: string; entity_id?: string }) => {
+      fetchTimeline(params);
+    },
+    [fetchTimeline]
+  );
+
   const handleGenerateSummary = () => {
     summaryTriggerRef.current?.();
   };
@@ -104,7 +111,7 @@ export default function WorkspacePage() {
               selectedEventId={selectedEventId}
               highlightedEntityId={selectedEntityId}
               onEventSelected={handleEventSelected}
-              onFilterChange={(params) => fetchTimeline(params)}
+              onFilterChange={handleFilterChange}
             />
           </div>
         </div>

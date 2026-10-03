@@ -50,6 +50,19 @@ export default function GraphPanel({
     return () => { cy.destroy(); };
   }, [onNodeSelected]);
 
+  // ResizeObserver to ensure viewport resizes when container renders
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(() => {
+      if (cyRef.current) {
+        cyRef.current.resize();
+        cyRef.current.fit(undefined, 40);
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   // Load graph data
   useEffect(() => {
     const cy = cyRef.current;
@@ -76,7 +89,18 @@ export default function GraphPanel({
 
     cy.elements().remove();
     cy.add([...nodes, ...edges]);
-    cy.layout(fcoseLayoutOptions as cytoscape.LayoutOptions).run();
+    cy.resize();
+
+    if (nodes.length > 0) {
+      try {
+        const layout = cy.layout(fcoseLayoutOptions as cytoscape.LayoutOptions);
+        layout.run();
+      } catch {
+        const fallback = cy.layout({ name: 'cose' } as cytoscape.LayoutOptions);
+        fallback.run();
+      }
+      cy.fit(undefined, 40);
+    }
   }, [graph]);
 
   // Highlight selected + related nodes
@@ -87,7 +111,7 @@ export default function GraphPanel({
     cy.elements().removeClass('highlighted dimmed');
 
     if (selectedEntityId) {
-      const selected = cy.$(`#${selectedEntityId}`);
+      const selected = cy.nodes(`[id = "${selectedEntityId}"]`);
       if (selected.length) {
         const connected = selected.neighborhood();
         cy.elements().addClass('dimmed');
@@ -97,7 +121,10 @@ export default function GraphPanel({
     } else if (highlightedEntityIds.length) {
       cy.elements().addClass('dimmed');
       highlightedEntityIds.forEach((id) => {
-        cy.$(`#${id}`).addClass('highlighted').removeClass('dimmed');
+        const target = cy.nodes(`[id = "${id}"]`);
+        if (target.length) {
+          target.addClass('highlighted').removeClass('dimmed');
+        }
       });
     }
   }, [selectedEntityId, highlightedEntityIds]);

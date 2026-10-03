@@ -9,6 +9,7 @@ class TimelineFilter(BaseModel):
     end_time: datetime | None = None
     entity_id: str | None = None
     event_type: str | None = None
+    source_type: str | None = None
     severity: str | None = None
     limit: int = 100
     offset: int = 0

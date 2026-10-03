@@ -40,7 +40,7 @@ if "supabase.com" in settings.postgres_host:
 
 engine = create_async_engine(
     DATABASE_URL,
-    echo=settings.app_env == "development",
+    echo=False,
     connect_args=connect_args,
 )
 

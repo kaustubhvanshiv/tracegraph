@@ -60,6 +60,9 @@ def setup_logging(log_level: int = logging.INFO) -> None:
     console_handler.setFormatter(JSONFormatter())
     root_logger.addHandler(console_handler)
 
+    # Suppress verbose SQL logging from SQLAlchemy engine
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
+
 
 def get_logger(name: str) -> logging.Logger:
     """Return a logger instance configured for structured logging."""
