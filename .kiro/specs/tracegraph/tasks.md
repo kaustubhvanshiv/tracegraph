@@ -612,7 +612,7 @@ ML-11 final ML research documentation
 ---
 
 - [ ] ML-01. Dataset Analysis and Selection
-  - [ ] ML-01.1 Catalogue all locally available candidate datasets
+  - [x] ML-01.1 Catalogue all locally available candidate datasets
     - The following four datasets are already available locally. Inspect them before attempting any download.
       - `../datasets/Darpa/` — DARPA Transparent Computing (TC) engagement data; subdirectories include `Data/cadets/`, `Data/fivedirections/`, `Ground_Truth/`, and `Schema/`. The large binary/compressed files in `Data/` are the original dataset and must not be moved, modified, or deleted.
       - `../datasets/LANL_Cybersecurity_Dataset/` — LANL unified host and network dataset; files: `auth.txt.gz`, `dns.txt.gz`, `flows.txt.gz`, `proc.txt.gz`, `redteam.txt.gz`.
@@ -628,7 +628,7 @@ ML-11 final ML research documentation
     - Do NOT copy any raw files into `data/ml/`. Do NOT download a dataset that already exists locally.
     - _Requirements: ML-01_
 
-  - [ ] ML-01.2 Inspect raw structure of each candidate dataset
+  - [x] ML-01.2 Inspect raw structure of each candidate dataset
     - Inspect each dataset using memory-conscious methods (streaming, chunked reads, sampling, or metadata-only inspection). Record the exact local source path used for every inspection.
     - Create one analysis document per dataset:
       - `data/ml/datasets/darpa/analysis.md`
