@@ -657,7 +657,7 @@ ML-11 final ML research documentation
     - Do not pretend every dataset has the same event semantics. Note where a dataset's structure limits or enables graph construction.
     - _Requirements: ML-01_
 
-  - [ ] ML-01.3 Assess ground truth availability for each candidate
+  - [x] ML-01.3 Assess ground truth availability for each candidate
     - For each candidate dataset, extend its `analysis.md` with a ground truth section documenting:
       - Whether ground truth labels exist and their source
       - What "positive" means (attack event, malicious connection, anomalous behaviour, etc.)

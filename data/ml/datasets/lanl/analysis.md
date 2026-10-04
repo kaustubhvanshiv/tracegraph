@@ -305,3 +305,45 @@ These three files have **no attack labels whatsoever**.
 | **Port anonymisation in flows** | Some port values in `flows.txt.gz` are anonymised as `N<N>` strings instead of integers, complicating numeric port analysis. Check for non-integer port values before casting. |
 | **No cross-dataset correlation** | Anonymisation prevents linking this dataset's `C<N>` identifiers to any external threat intelligence, IP reputation feeds, or other datasets. |
 | **Licence** | LANL open data policy for research use; attribution required (cite Turcotte et al., 2018 DSN Workshop paper and `csr.lanl.gov/data/cyber1/`); no commercial redistribution. |
+
+## 19. Ground Truth Assessment
+
+### 19.1 Ground Truth Availability
+
+Yes, but extremely limited in scope. Labels exist only for authentication events, in the separate file `redteam.txt.gz` (749 records). The `redteam.txt.gz` file must be joined to `auth.txt.gz` on `(time, source_computer, destination_computer)` to retrieve full authentication context. No labels exist for `dns.txt.gz`, `flows.txt.gz`, or `proc.txt.gz`. Source: Los Alamos National Laboratory red team records (Turcotte et al., 2018 DSN Workshop).
+
+### 19.2 Definition of Positive
+
+A red-team authentication event — a lateral movement action performed by the LANL red team, identified by `(time, source_computer, destination_computer)` in `redteam.txt.gz`.
+
+### 19.3 Definition of Negative
+
+Any authentication event in `auth.txt.gz` that does not match a `redteam.txt.gz` record. All `dns.txt.gz`, `flows.txt.gz`, and `proc.txt.gz` events are unlabelled and are neither positive nor negative in a supervised sense.
+
+### 19.4 Class Balance Summary
+
+| Class | Count | Percentage |
+|-------|-------|-----------|
+| Red-team / attack (auth only) | 749 | ~0.000071% |
+| Benign auth events | ~1,051,429,710 | ~99.999929% |
+| **Total auth events** | **1,051,430,459** | 100% |
+| DNS records (unlabelled) | 40,821,591 | — |
+| Flow records (unlabelled) | 129,977,412 | — |
+| Process records (unlabelled) | 426,045,096 | — |
+
+This is one of the most extreme class imbalances of any public cybersecurity dataset.
+
+### 19.5 Label Granularity
+
+Per-authentication-event. Each `redteam.txt.gz` record labels one authentication attempt (one row in `auth.txt.gz`). Labels do not exist at flow, DNS, or process granularity.
+
+### 19.6 Known Labelling Issues and Controversies
+
+| Issue | Detail |
+|-------|--------|
+| **Extreme class imbalance** | 749 attack events in ~1,051,430,459 auth records (~0.000071%). Standard supervised learning is infeasible without very aggressive undersampling of negatives or oversampling of positives. Accuracy as a metric is meaningless at this ratio. |
+| **Labels restricted to auth events only** | DNS, flow, and process files have no labels. The nature of red-team activity on other protocols is unknown and cannot be supervised without external annotation. |
+| **Full anonymisation** | All user, computer, and process identifiers are replaced with opaque `U<N>`, `C<N>`, `P<N>` tokens. Node labels in any constructed graph carry no semantic meaning; external threat intelligence cannot be applied. |
+| **Relative timestamps only** | The dataset epoch is not published in the local files. Preventing absolute time correlation or comparison with external threat intelligence feeds. |
+| **No IP addresses** | Computer names replace all network endpoints, making IP-based correlation and geolocation impossible. |
+| **No process genealogy or file events** | Lateral movement can only be inferred from auth sequences, not from process lineage or file-access chains. The absence of these telemetry types limits attack path reconstruction to auth-hop chains only. |

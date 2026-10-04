@@ -353,3 +353,43 @@ Balance is entirely dependent on how an analyst defines the attack window from t
 | **No per-record attack labels** | All labelling requires manual alignment with the narrative PDF. There is no structured, machine-readable ground-truth mapping. |
 | **Binary format** | Cannot inspect, line-count, or grep the data without an Avro deserializer and the `TCCDMDatum.avsc` schema. |
 | **Access restrictions** | DARPA TC data requires programme affiliation. Do not redistribute. |
+
+## 19. Ground Truth Assessment
+
+### 19.1 Ground Truth Availability
+
+Partial — narrative only. Ground truth is provided as a PDF narrative document (`Ground_Truth/TA51_Final_report_E5.pdf`). No machine-readable per-record label exists in the CDM binary data. Labelling any CDM record requires manual or automated alignment of the record's `hostId`, `timestampNanos`, and event semantics against attack time windows described in the PDF.
+
+### 19.2 Definition of Positive
+
+A CDM `Event` record (or sequence of records) that corresponds to an attacker action described in the TA5.1 engagement report — e.g., Firefox Drakon exploit, Mimikatz/Copykatz credential harvesting from `lsass.exe`, BITS micro-APT, C2 communication, Nginx web server exploit, SSH/SCP lateral movement, kernel module insertion.
+
+### 19.3 Definition of Negative
+
+Any CDM `Event` record that falls outside the attack time windows and attack-involved hosts described in the PDF. Because no binary label exists, "negative" is operationally defined as "not within a documented attack window on a documented attack host."
+
+### 19.4 Class Balance Summary
+
+| Class | Count | Percentage |
+|-------|-------|-----------|
+| Attack (positive) | Unknown — binary Avro format, no deserialization performed | — |
+| Benign (negative) | Unknown — binary Avro format, no deserialization performed | — |
+| **Total** | **Unknown** | — |
+
+Not directly computable. Total record count is unknown without full Avro deserialization. Attack-involved records are a small fraction of the stream — the vast majority of CDM events are benign system activity. No quantitative ratio can be stated without full deserialization and manual time-window annotation from the ground-truth PDF.
+
+### 19.5 Label Granularity
+
+Per-scenario / per-host. The PDF describes attack scenarios at the level of "host X was compromised during time window T1–T2 using technique Y." No per-event binary label exists in the data. Deriving per-event labels requires constructing temporal and host-based windows from the narrative document.
+
+### 19.6 Known Labelling Issues and Controversies
+
+| Issue | Detail |
+|-------|--------|
+| **No structured, machine-readable ground truth** | All labelling requires manual effort against a PDF narrative. There is no structured mapping from `Event.uuid` or `Subject.uuid` to attack category. |
+| **Controlled lab environment** | DARPA TC datasets have been criticised for being generated in a controlled lab, making attack patterns stereotyped and easier to detect relative to real APT activity (Alsaheel et al., USENIX Security 2021; Milajerdi et al., IEEE S&P 2019). |
+| **Incomplete stream coverage** | Only CADETS (FreeBSD) and FiveDirections (Windows) streams are present locally. THEIA, MARPLE, and ClearScope data are absent, limiting the attack scenario coverage available for labelling. |
+| **Data quality issues in present streams** | CADETS has duplicate records and large publishing gaps (2019-05-08 to 2019-05-09). FiveDirections has host restarts that sever process UUID continuity. Both issues complicate reliable per-record labelling. |
+| **Poor MARPLE telemetry quality** | MARPLE published UI events only — syscall-level data is largely absent, making process-lineage-based labelling impossible for that stream. |
+| **Binary Avro format** | Ground truth alignment cannot be performed with standard CSV tooling. Full deserialization with the `TCCDMDatum.avsc` schema is required before any labelling step. |
+| **Access restriction** | DARPA TC data requires programme affiliation. Data cannot be redistributed, limiting reproducibility. |
