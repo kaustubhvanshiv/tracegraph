@@ -493,29 +493,153 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
 
 ---
 
+## ML Workspace and Dataset Locations
+
+Before starting any ML task, read this section carefully. It defines where files live and how to reference them.
+
+### Repository root
+
+The Git repository root is `tracegraph/`. All ML research code and derived artifacts must be created **inside** this directory.
+
+### Raw dataset locations (outside Git)
+
+Raw datasets are stored **outside** the Git repository under `../datasets/` (one level above the `tracegraph/` root). The four currently available datasets are:
+
+```
+../datasets/Darpa/
+../datasets/LANL_Cybersecurity_Dataset/
+../datasets/UNSW-NB15/
+../datasets/CIC-IDS2017/
+```
+
+An archive of removed material is at `../datasets/dataset_archive/`. Do not use archived material as a primary dataset unless a later task explicitly requires investigating it.
+
+**Always inspect what is available locally before attempting any download.** Do not download duplicate copies of a dataset that already exists under `../datasets/`.
+
+### Rules for raw datasets
+
+- Raw datasets **must not** be copied into the Git repository (`data/ml/` or anywhere else under `tracegraph/`).
+- Raw datasets **must not** be committed to Git.
+- Every task that reads a raw dataset must record the exact local source path it used (e.g., `../datasets/Darpa/Data/cadets/`).
+- Large datasets must be inspected using memory-conscious methods: streaming reads, chunked I/O, iterators, sampling, or metadata-only inspection where full loading is unnecessary.
+
+### ML artifacts inside Git
+
+All analysis documents, derived metadata, prepared splits, constructed graphs, model code, experiment results, and research reports belong inside `tracegraph/`:
+
+```
+data/ml/
+data/ml/datasets/            ← per-dataset analysis documents and metadata only
+data/ml/datasets/darpa/
+data/ml/datasets/lanl/
+data/ml/datasets/unsw_nb15/
+data/ml/datasets/cic_ids2017/
+data/ml/ground_truth.md
+data/ml/splits/              ← prepared, labelled train/val/test splits
+data/ml/graphs/              ← serialised graph objects for GNN input
+
+research/ml/
+research/ml/data_prep/       ← dataset conversion and split scripts
+research/ml/graph/           ← graph construction utilities
+research/ml/models/          ← model definitions
+research/ml/experiments/     ← training and evaluation scripts and results
+research/ml/evaluation/      ← standalone evaluation utilities
+research/ml/report/          ← final research reports
+```
+
+Later tasks may create additional subdirectories (`research/ml/baseline/`, `research/ml/nn_fundamentals/`, `research/ml/gnn_fundamentals/`, `research/ml/comparison/`, `research/ml/integration/`). Do not require those directories to exist before their corresponding task begins.
+
+### Path convention summary
+
+| Content | Path prefix |
+|---|---|
+| Raw dataset files (never in Git) | `../datasets/...` |
+| Dataset analysis documents | `data/ml/datasets/<name>/analysis.md` |
+| Dataset index / provenance | `data/ml/datasets/README.md` |
+| Prepared splits | `data/ml/splits/` |
+| Constructed graph objects | `data/ml/graphs/` |
+| Research code | `research/ml/...` |
+
+---
+
 ## ML/DL/GNN Research Track
 
-These tasks form a parallel research track that builds on the deterministic pipeline above. They are labeled `ML-NN` and do NOT replace or renumber Tasks 1–31. The dependency chain is: Tasks 1–27 → ML-01 onward.
+These tasks form a parallel research track that builds on the deterministic pipeline above. They are labeled `ML-NN` and do NOT replace or renumber Tasks 1–30.
+
+**Prerequisites before starting ML-01:**
+- The TraceGraph core pipeline (Tasks 1–11) must be complete so that the deterministic correlation engine and `SecurityEvent` model exist as reference implementations.
+- Task 11 implements the `TemporalCorrelationEngine`, which produces `combined_score`. That score is the deterministic rule-based signal used as the comparison baseline in ML-09.
+- Tasks 27–30 (Docker deployment, performance instrumentation, evaluation scenarios, final checkpoint) are independent of ML-01 through ML-09. ML-01 can begin as soon as Task 11 is complete. ML-09 uses the Task 29 evaluation scenarios when those scenarios are available and validated, but ML-01 through ML-08 are independently executable.
+
+**Logical progression of the ML track:**
+
+```
+TraceGraph core pipeline (Tasks 1–11)
+        ↓
+Task 11 deterministic correlation engine available (combined_score)
+        ↓
+ML-01 dataset analysis and selection
+        ↓
+ML-02 ground truth / label definition and splits
+        ↓
+ML-03 optional classical ML baseline
+        ↓
+ML-04 neural network fundamentals
+        ↓
+ML-05 GNN fundamentals
+        ↓
+ML-06 GNN task selection
+        ↓
+ML-07 baseline GNN experiment
+        ↓
+ML-08 GNN evaluation
+        ↓
+ML-09 rule-based vs GNN comparison
+          (uses Task 29 evaluation scenarios when available and validated)
+        ↓
+ML-10 GNN integration into the pipeline
+          (blocked until ML-07 and ML-09 are both complete)
+        ↓
+ML-11 final ML research documentation
+```
 
 **Critical distinctions to maintain throughout this track:**
-- Rule-based correlation (`combined_score`) is a deterministic relevance indicator — NOT an attack probability.
-- GNN output is a learned signal — NOT a replacement for rule-based correlation.
+- `combined_score` from the `TemporalCorrelationEngine` (Task 11) is a deterministic relevance indicator — NOT an attack probability.
+- GNN output is a learned graph signal — NOT a replacement for rule-based correlation and NOT ground truth.
 - LLM summary is a grounded narrative explanation — NOT proof that an attack occurred.
 - These three layers must remain implemented, evaluated, and documented separately.
 
 ---
 
-- [ ] ML-01. Dataset Analysis
-  - [ ] ML-01.1 Identify and acquire candidate datasets
-    - Identify at least one publicly available security event dataset suitable for graph construction (e.g., DARPA TC, LANL Netflow, CERT Insider Threat, CIC-IDS, CTU-13, or similar)
-    - Download or link to the dataset; record exact version, URL, and access date in `data/ml/datasets/README.md`
+- [ ] ML-01. Dataset Analysis and Selection
+  - [ ] ML-01.1 Catalogue all locally available candidate datasets
+    - The following four datasets are already available locally. Inspect them before attempting any download.
+      - `../datasets/Darpa/` — DARPA Transparent Computing (TC) engagement data; subdirectories include `Data/cadets/`, `Data/fivedirections/`, `Ground_Truth/`, and `Schema/`. The large binary/compressed files in `Data/` are the original dataset and must not be moved, modified, or deleted.
+      - `../datasets/LANL_Cybersecurity_Dataset/` — LANL unified host and network dataset; files: `auth.txt.gz`, `dns.txt.gz`, `flows.txt.gz`, `proc.txt.gz`, `redteam.txt.gz`.
+      - `../datasets/UNSW-NB15/` — UNSW-NB15 network intrusion dataset; subdirectories include `CSV_Files/` and `Reports/`.
+      - `../datasets/CIC-IDS2017/` — CIC-IDS2017 intrusion detection dataset; all labelled CSVs are under `TrafficLabelling/` (eight files covering Monday through Friday traffic scenarios).
+    - Create `data/ml/datasets/README.md` and record for each candidate:
+      - Dataset name
+      - Exact local source path (e.g., `../datasets/Darpa/`)
+      - Public source URL (if known)
+      - Exact version or release identifier (if known)
+      - Access / acquisition notes
+      - Licence and usage constraints (if available)
+    - Do NOT copy any raw files into `data/ml/`. Do NOT download a dataset that already exists locally.
     - _Requirements: ML-01_
 
   - [ ] ML-01.2 Inspect raw structure of each candidate dataset
-    - For each dataset, record in `data/ml/datasets/<dataset_name>/analysis.md`:
-      - File format (CSV, JSON, PCAP, syslog, etc.)
-      - Total record/event count
-      - Schema: all column/field names and types
+    - Inspect each dataset using memory-conscious methods (streaming, chunked reads, sampling, or metadata-only inspection). Record the exact local source path used for every inspection.
+    - Create one analysis document per dataset:
+      - `data/ml/datasets/darpa/analysis.md`
+      - `data/ml/datasets/lanl/analysis.md`
+      - `data/ml/datasets/unsw_nb15/analysis.md`
+      - `data/ml/datasets/cic_ids2017/analysis.md`
+    - Each analysis document must cover:
+      - File format (binary provenance graphs, gzipped CSV, flat CSV, etc.)
+      - Dataset structure (directory layout, number of files, approximate total size)
+      - Record/event count — or a clearly documented counting method if full counting is infeasible
+      - Schema: all field names and types
       - Timestamp fields and format
       - User fields
       - Host / machine fields
@@ -524,82 +648,109 @@ These tasks form a parallel research track that builds on the deterministic pipe
       - File fields
       - Event type / action fields
       - Label fields (if present)
-      - Incident or session ID fields
+      - Incident, session, or scenario ID fields
       - Attack category annotations (if present)
+      - Class balance where meaningful (count and percentage of labelled positive vs. negative examples)
+    - The analysis must explicitly distinguish between dataset semantics:
+      - **Raw event/log-oriented datasets** (DARPA TC, LANL): event or log records containing entity and temporal information, with different levels and forms of provenance/relationship information.
+      - **Flow-oriented datasets** (UNSW-NB15, CIC-IDS2017): aggregated network flow statistics; pre-computed features; lighter entity semantics; attack labels are per-flow or per-session.
+    - Do not pretend every dataset has the same event semantics. Note where a dataset's structure limits or enables graph construction.
     - _Requirements: ML-01_
 
-  - [ ] ML-01.3 Assess ground truth availability
-    - For each candidate dataset, document:
-      - Whether ground truth labels exist
-      - What "positive" means (attack event, malicious connection, anomalous behavior, etc.)
+  - [ ] ML-01.3 Assess ground truth availability for each candidate
+    - For each candidate dataset, extend its `analysis.md` with a ground truth section documenting:
+      - Whether ground truth labels exist and their source
+      - What "positive" means (attack event, malicious connection, anomalous behaviour, etc.)
       - What "negative" means (benign, normal, background traffic)
       - Class balance: count and percentage of positive vs. negative examples
-      - Whether labels are per-event, per-connection, per-session, or per-scenario
-      - Any known labelling issues or inconsistencies in the dataset
+      - Granularity of labels: per-event, per-connection, per-session, per-scenario, or per-host
+      - Any known labelling issues, inconsistencies, or controversies documented in the literature
     - _Requirements: ML-01, ML-02_
 
-  - [ ] ML-01.4 Assess graph constructibility
-    - For each candidate dataset, document:
-      - Whether a node-edge graph can be constructed without inventing relationships
-      - What fields identify nodes (entities)
-      - What fields identify edges (relationships / actions)
+  - [ ] ML-01.4 Assess graph constructibility for each candidate
+    - For each candidate dataset, extend its `analysis.md` with a graph constructibility section documenting:
+      - Whether a node-edge graph can be constructed without inventing relationships not present in the data
+      - Which fields identify nodes (entities) and which fields identify edges (relationships / actions)
       - Whether constructed edges correspond to any of the five TraceGraph relationship types
-      - Whether the dataset can be converted to the TraceGraph `SecurityEvent` model via an adapter
+      - Whether the dataset can be converted to the TraceGraph `SecurityEvent` model via an existing or new adapter
       - Whether related events can be grouped into investigations or attack scenarios
+      - Any leakage risk if events from the same attack scenario span train and test splits
     - _Requirements: ML-01_
 
-  - [ ] ML-01.5 Answer the dataset analysis questions
-    - For the selected dataset, produce a written answer in `data/ml/datasets/<dataset_name>/analysis.md` for each question:
+  - [ ] ML-01.5 Answer the ten dataset analysis questions for each candidate
+    - For each candidate dataset, add a section to its `analysis.md` answering all ten questions:
       1. What is one event/row?
       2. What does that event represent in a real security context?
       3. Which fields identify entities?
       4. Which fields describe actions between entities?
       5. Which fields describe relationships between entities?
       6. What labels exist and how are they assigned?
-      7. What is considered a positive example? A negative example?
-      8. Can a graph be constructed without inventing relationships?
-      9. What could be a realistic prediction target?
-      10. What information could leak between train and test sets if splits are random?
+      7. What is considered a positive example? What is a negative example?
+      8. Can a graph be constructed without inventing relationships not present in the data?
+      9. What could be a realistic prediction target? (Do not make the target final here — list candidates.)
+      10. What information could leak between train and test sets if splitting is done randomly by row?
+    - Answers must be grounded in the actual dataset structure observed in ML-01.2. Do not give generic answers.
+    - Do NOT select a GNN architecture or finalise the prediction target in this task.
     - _Requirements: ML-01_
 
   - [ ] ML-01.6 Select the primary dataset and document the selection rationale
-    - Choose one dataset as the primary ML/GNN research dataset
-    - Document: name, reason for selection, limitations, known biases, licence/usage terms
-    - Do NOT choose a GNN architecture or ML task at this step — that comes after ground truth definition
+    - Compare the four candidate datasets and select ONE as the primary ML/GNN research dataset.
+    - Write the selection rationale in `data/ml/datasets/README.md` under a "Selected Primary Dataset" heading. The rationale must consider:
+      - Graph constructibility (can a meaningful graph be built from raw events without inventing structure?)
+      - Availability and quality of ground truth labels
+      - Event/row semantics (raw event-oriented vs. flow-oriented)
+      - Relationship information present in the data
+      - Compatibility with the TraceGraph `SecurityEvent` abstraction
+      - Ability to construct meaningful investigation or attack-scenario graphs
+      - Leakage risk when splitting
+      - Known dataset limitations and biases
+      - Computational feasibility given available local hardware
+      - Licensing and usage constraints
+    - Do NOT choose a GNN architecture here.
+    - Do NOT implement a prediction model here.
+    - Do NOT finalise the ML prediction target here. Those decisions belong to ML-02 through ML-06.
     - _Requirements: ML-01_
 
 ---
 
 - [ ] ML-02. Ground Truth and Label Definition
+  - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
+
   - [ ] ML-02.1 Define the prediction target precisely
-    - Based on the dataset analysis, write a formal definition in `data/ml/ground_truth.md`:
-      - Prediction target (what the model will predict)
-      - Positive example definition (concrete, falsifiable)
-      - Negative example definition (concrete, falsifiable)
-      - Sample unit (one event? one session? one graph? one subgraph?)
-      - Graph unit (what constitutes one graph input to the model?)
+    - Based on the selected dataset analysis from ML-01, write a formal definition in `data/ml/ground_truth.md`:
+      - Selected primary dataset name and exact local source path
+      - Prediction target (what the model will predict) — chosen from the candidates listed in ML-01.5 question 9
+      - Positive example definition (concrete and falsifiable, grounded in the dataset's actual label fields)
+      - Negative example definition (concrete and falsifiable)
+      - Sample unit (one event? one connection? one session? one graph? one subgraph?)
+      - Graph unit (what constitutes one graph input to the model, if applicable)
+    - The prediction target is selected here for the first time. It was deliberately not finalised in ML-01.
     - _Requirements: ML-02_
 
   - [ ] ML-02.2 Define leakage-safe train/validation/test splits
-    - Document the splitting strategy in `data/ml/ground_truth.md`:
-      - Why random per-event splitting is or is not safe for this dataset
-      - Chosen split strategy: incident-aware, scenario-aware, host-aware, or time-aware
+    - Document the splitting strategy in `data/ml/ground_truth.md`. Random row-level splitting is not assumed to be safe — reason explicitly about the selected dataset:
+      - Why random per-event or per-row splitting is or is not safe for this specific dataset (reference ML-01.5 question 10)
+      - Chosen split strategy and justification — consider: incident-aware, scenario-aware, host-aware, or time-aware splitting depending on what the selected dataset's structure supports
       - Split proportions (e.g., 70/15/15 or 60/20/20)
-      - How to verify that no positive incident has events in both train and test
+      - How to verify that no positive attack incident has events in both train and test partitions
     - _Requirements: ML-02_
 
-  - [ ] ML-02.3 Reuse the TraceGraph evaluation scenarios as a labelled validation set
-    - Verify that the four evaluation scenarios from Task 29 (`basic_attack_sequence`, `unrelated_events`, `legitimate_access`, `multi_user_host`) can serve as a controlled validation or test set for the ML experiments
-    - Document which scenarios are usable and any limitations
+  - [ ] ML-02.3 Plan use of the TraceGraph evaluation scenarios as a controlled test set
+    - The four evaluation scenarios from Task 29 (`data/scenarios/basic_attack_sequence/`, `data/scenarios/unrelated_events/`, `data/scenarios/legitimate_access/`, `data/scenarios/multi_user_host/`) become available as a controlled, labelled validation or test set once Task 29 has been implemented and validated.
+    - ML-01 and ML-02 are independently executable and do not depend on Task 29 being complete.
+    - Document in `data/ml/ground_truth.md`:
+      - Which Task 29 scenarios are applicable to the chosen prediction target and why
+      - Any limitations (e.g., scenario event counts, label granularity mismatch with the primary dataset)
+      - That this controlled set will supplement — not replace — the primary dataset's test split
     - _Requirements: ML-02, 19.1–19.5_
 
   - [ ] ML-02.4 Implement dataset preparation scripts
     - Create `research/ml/data_prep/prepare_dataset.py` that:
-      - Loads the raw dataset
-      - Converts events to `SecurityEvent` format via the existing adapter (or a new one registered in the adapter registry)
-      - Assigns labels according to the ground truth definition
-      - Produces deterministic train/validation/test splits (seeded, reproducible)
-      - Saves prepared splits to `data/ml/splits/`
+      - Reads raw data from the exact local source path recorded in `data/ml/ground_truth.md` (i.e., from `../datasets/...`) using memory-conscious methods appropriate to the dataset size
+      - Converts events to `SecurityEvent` format via the existing adapter or a new adapter registered in the adapter registry
+      - Assigns labels according to the ground truth definition in `data/ml/ground_truth.md`
+      - Produces deterministic, leakage-safe train/validation/test splits using the strategy defined in ML-02.2 (seeded, reproducible)
+      - Saves prepared splits to `data/ml/splits/` — split files only, not copies of the raw dataset
     - _Requirements: ML-02_
 
 ---
@@ -723,14 +874,14 @@ These tasks form a parallel research track that builds on the deterministic pipe
 
   - [ ] ML-07.2 Implement the baseline GNN model
     - Create `research/ml/experiments/model.py` implementing the selected GNN architecture from ML-06
-    - Use PyTorch Geometric or DGL (add to `research/requirements.txt`)
+    - Use PyTorch Geometric or DGL (add to `research/ml/requirements.txt`)
     - Implement: forward pass, configurable number of layers, configurable hidden dimension
     - Keep the initial architecture minimal — one or two GNN layers; complexity can be added after the baseline works
     - _Requirements: ML-07_
 
   - [ ] ML-07.3 Implement the training and evaluation loop
     - Create `research/ml/experiments/train.py` with:
-      - Configurable hyperparameters loaded from `research/ml/experiments/config.yaml`: learning rate, hidden dim, num layers, epochs, batch size, random seed
+      - Configurable hyperparameters loaded from `research/ml/configs/config.yaml`: learning rate, hidden dim, num layers, epochs, batch size, random seed
       - Training loop with per-epoch train loss and validation metric logging
       - Early stopping based on validation metric
       - Checkpoint saving at best validation metric
@@ -746,7 +897,7 @@ These tasks form a parallel research track that builds on the deterministic pipe
       - Labels
       - Train/validation/test split sizes
       - Model architecture
-      - Hyperparameters (all values from config.yaml)
+      - Hyperparameters (all values from `research/ml/configs/config.yaml`)
       - Optimizer and learning rate
       - Number of epochs trained
       - Random seed
@@ -891,7 +1042,7 @@ These tasks form a parallel research track that builds on the deterministic pipe
 
   - [ ] ML-11.2 Validate reproducibility of the full research pipeline
     - Document the exact commands to:
-      1. Acquire the dataset
+      1. Verify/obtain the documented dataset release and provenance (using the existing local dataset under `../datasets/` when available)
       2. Run `prepare_dataset.py`
       3. Run `build_graph.py`
       4. Run `train.py` with the recorded config
@@ -902,46 +1053,6 @@ These tasks form a parallel research track that builds on the deterministic pipe
 
 ---
 
-## ML/DL/GNN Research Track — Dependency Chain
-
-```
-Tasks 1–10 (implemented)
-        ↓
-Tasks 11–25 (core engineering)
-        ↓
-Task 26 — evaluation dataset / scenarios
-        ↓
-Task 27 — measurable rule-based baseline (precision/recall)
-        ↓
-ML-01 — dataset analysis
-        ↓
-ML-02 — ground truth / label definition
-        ↓
-ML-03 — optional classical ML baseline
-        ↓
-ML-04 — neural network fundamentals
-        ↓
-ML-05 — GNN fundamentals
-        ↓
-ML-06 — GNN task selection
-        ↓
-ML-07 — baseline GNN experiment
-        ↓
-ML-08 — GNN evaluation
-        ↓
-ML-09 — rule vs. GNN comparison
-        ↓
-ML-10 — GNN integration (only after standalone experiment is valid)
-        ↓
-Task 28 — investigation utility evaluation
-        ↓
-Task 29 — AI summary grounding validation
-        ↓
-Task 30 — end-to-end demonstration
-        ↓
-Task 31 — definition of done
-```
-
 ---
 
 ## Notes
@@ -951,11 +1062,11 @@ Task 31 — definition of done
 - Every API handler applies JWT middleware and ownership enforcement — never bypass for convenience
 - No secrets are ever hardcoded; all credentials are loaded via Pydantic `BaseSettings` from environment variables
 - Parameterized queries are mandatory for both PostgreSQL (SQLAlchemy) and Neo4j (Cypher parameters) — string interpolation in queries is a hard requirement violation
-- The `combined_score` from the Correlation Engine is explicitly NOT an attack probability — this distinction must appear in code comments and API documentation
+- The `combined_score` from the `TemporalCorrelationEngine` (Task 11) is explicitly NOT an attack probability — this distinction must appear in code comments and API documentation
 - Checkpoints at tasks 12, 18, 22, and 30 ensure incremental validation throughout the build
-- ML/DL/GNN research tasks (ML-01 through ML-11) are a separate research track; they do not replace Tasks 1–31 and should not be started before Task 27 (measurable rule-based baseline) is complete
+- ML/DL/GNN research tasks (ML-01 through ML-11) are a separate research track; they do not replace Tasks 1–30. ML-01 can begin as soon as Task 11 (deterministic correlation engine) is complete. ML-09 uses the Task 29 evaluation scenarios when those scenarios are available and validated. ML-10 must not begin before both ML-07 and ML-09 are complete.
 - The GNN is not assumed to outperform the deterministic baseline — the experiment determines the result
-- All three reasoning layers (rule-based correlation, GNN learned signal, LLM narrative) must remain implemented, evaluated, and documented separately
+- All three reasoning layers (rule-based `combined_score`, GNN learned signal, LLM narrative) must remain implemented, evaluated, and documented separately
 
 ---
 
@@ -988,21 +1099,55 @@ Task 31 — definition of done
 }
 ```
 
-### ML/DL/GNN Research Track Dependencies
+---
+
+## ML/DL/GNN Research Track — Dependency Chain
 
 ```
-Tasks 1–10 (✓ implemented)
+TraceGraph core pipeline (Tasks 1–11)
         ↓
-Tasks 11–27 (engineering: correlation → evaluation baseline)
+Task 11 — deterministic correlation engine available (combined_score)
         ↓
+ML-01 — dataset analysis and selection
+  (independently executable; does not require Tasks 12–30 to be complete)
+        ↓
+ML-02 — ground truth / label definition and leakage-safe splits
+  (ML-02.3: Task 29 evaluation scenarios used here once Task 29 is validated;
+   ML-01 and ML-02 are not blocked by Task 29)
+        ↓
+ML-03 — optional classical ML baseline  (parallel with ML-04)
+        ↓
+ML-04 — neural network fundamentals
+        ↓
+ML-05 — GNN fundamentals
+        ↓
+ML-06 — GNN task selection
+        ↓
+ML-07 — baseline GNN experiment
+        ↓
+ML-08 — GNN evaluation
+        ↓
+ML-09 — rule-based vs GNN comparison
+  (uses Task 29 evaluation scenarios when available and validated;
+   rule-based baseline = TemporalCorrelationEngine combined_score from Task 11)
+        ↓
+ML-10 — GNN integration into the pipeline
+  (blocked until BOTH ML-07 and ML-09 are complete)
+        ↓
+ML-11 — final ML research documentation
+```
+
+### ML/DL/GNN Sub-task Dependencies
+
+```
 ML-01.1 → ML-01.2 → ML-01.3 → ML-01.4 → ML-01.5 → ML-01.6
         ↓
 ML-02.1 → ML-02.2 → ML-02.3 → ML-02.4
         ↓
-ML-03.1 → ML-03.2* → ML-03.3*    (parallel with ML-04)
-        ↓
-ML-04.1 → ML-04.2
-        ↓
+        ├── ML-03.1 → ML-03.2* → ML-03.3*
+        │
+        └── ML-04.1 → ML-04.2
+                        ↓
 ML-05.1 → ML-05.2 → ML-05.3
         ↓
 ML-06.1 → ML-06.2
@@ -1016,8 +1161,6 @@ ML-09.1 → ML-09.2 → ML-09.3 → ML-09.4
 ML-10.1 → ML-10.2 → ML-10.3 → ML-10.4 → ML-10.5
         ↓
 ML-11.1 → ML-11.2
-        ↓
-Tasks 28–30 (investigation utility, AI grounding, demo)
 ```
 
 `*` denotes optional tasks.
