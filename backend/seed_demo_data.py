@@ -1,4 +1,10 @@
 import asyncio
+import platform
+
+# Fix for Windows: asyncpg/Neo4j async drivers need SelectorEventLoop
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 from datetime import datetime, timezone, timedelta
 import logging
 import uuid
