@@ -164,6 +164,30 @@
         "chatSessionId": "sess_bf678fe9-c372-4e2b-aa55-e209d4a14584",
         "timestamp": 1790772828253
       }
+    ],
+    "ML-01.4 Assess graph constructibility for each candidate": [
+      {
+        "executionId": "e028b7ed-b61e-47f0-bfcc-6b44001cbcd0",
+        "chatSessionId": "sess_73c4b3aa-fd91-477d-97dc-15d90014ef6d",
+        "timestamp": 1791143490768
+      },
+      {
+        "executionId": "7be95fea-de77-4ed6-bf8a-81dae27f7d89",
+        "chatSessionId": "sess_767f11fe-33da-43e8-89af-95e2feba1b8d",
+        "timestamp": 1791144056178
+      },
+      {
+        "executionId": "7be95fea-de77-4ed6-bf8a-81dae27f7d89",
+        "chatSessionId": "sess_767f11fe-33da-43e8-89af-95e2feba1b8d",
+        "timestamp": 1791144272555
+      }
+    ],
+    "ML-01.6 Select the primary dataset and document the selection rationale": [
+      {
+        "executionId": "b8f9e330-87c6-4256-bc15-7ac1ecdae5c9",
+        "chatSessionId": "sess_ce9ec95a-3be6-407f-b246-7adc17b4f37f",
+        "timestamp": 1791145224066
+      }
     ]
   }
 }

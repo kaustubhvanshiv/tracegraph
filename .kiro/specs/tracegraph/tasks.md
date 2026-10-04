@@ -667,51 +667,104 @@ ML-11 final ML research documentation
       - Any known labelling issues, inconsistencies, or controversies documented in the literature
     - _Requirements: ML-01, ML-02_
 
-  - [ ] ML-01.4 Assess graph constructibility for each candidate
-    - For each candidate dataset, extend its `analysis.md` with a graph constructibility section documenting:
-      - Whether a node-edge graph can be constructed without inventing relationships not present in the data
-      - Which fields identify nodes (entities) and which fields identify edges (relationships / actions)
-      - Whether constructed edges correspond to any of the five TraceGraph relationship types
-      - Whether the dataset can be converted to the TraceGraph `SecurityEvent` model via an existing or new adapter
-      - Whether related events can be grouped into investigations or attack scenarios
-      - Any leakage risk if events from the same attack scenario span train and test splits
-    - _Requirements: ML-01_
+- [x] ML-01.4 Assess graph constructibility for each candidate
 
-  - [ ] ML-01.5 Answer the ten dataset analysis questions for each candidate
-    - For each candidate dataset, add a section to its `analysis.md` answering all ten questions:
-      1. What is one event/row?
-      2. What does that event represent in a real security context?
-      3. Which fields identify entities?
-      4. Which fields describe actions between entities?
-      5. Which fields describe relationships between entities?
-      6. What labels exist and how are they assigned?
-      7. What is considered a positive example? What is a negative example?
-      8. Can a graph be constructed without inventing relationships not present in the data?
-      9. What could be a realistic prediction target? (Do not make the target final here — list candidates.)
-      10. What information could leak between train and test sets if splitting is done randomly by row?
-    - Answers must be grounded in the actual dataset structure observed in ML-01.2. Do not give generic answers.
-    - Do NOT select a GNN architecture or finalise the prediction target in this task.
-    - _Requirements: ML-01_
+  - Create a separate graph constructibility assessment for each candidate:
+    - `data/ml/graph/cic_ids2017.md`
+    - `data/ml/graph/darpa.md`
+    - `data/ml/graph/lanl.md`
+    - `data/ml/graph/unsw_nb15.md`
 
-  - [ ] ML-01.6 Select the primary dataset and document the selection rationale
-    - Compare the four candidate datasets and select ONE as the primary ML/GNN research dataset.
-    - Write the selection rationale in `data/ml/datasets/README.md` under a "Selected Primary Dataset" heading. The rationale must consider:
-      - Graph constructibility (can a meaningful graph be built from raw events without inventing structure?)
-      - Availability and quality of ground truth labels
-      - Event/row semantics (raw event-oriented vs. flow-oriented)
-      - Relationship information present in the data
-      - Compatibility with the TraceGraph `SecurityEvent` abstraction
-      - Ability to construct meaningful investigation or attack-scenario graphs
-      - Leakage risk when splitting
-      - Known dataset limitations and biases
-      - Computational feasibility given available local hardware
-      - Licensing and usage constraints
-    - Do NOT choose a GNN architecture here.
-    - Do NOT implement a prediction model here.
-    - Do NOT finalise the ML prediction target here. Those decisions belong to ML-02 through ML-06.
-    - _Requirements: ML-01_
+  - For each candidate, assess:
+    - Node/entity fields
+    - Edge/relationship/action fields
+    - Compatibility with the five TraceGraph relationship types
+    - Compatibility with the TraceGraph `SecurityEvent` model
+    - Ability to group related events into investigations or attack scenarios
+    - Train/test leakage considerations
+    - Overall graph suitability: High / Medium / Low
 
----
+  - Base the assessment on the corresponding dataset `analysis.md`
+    and ground truth findings from ML-01.3.
+
+  - Do not modify or extend the existing dataset `analysis.md` files.
+
+  - Keep each assessment concise and focused on graph constructibility
+    and suitability for TraceGraph.
+
+  - *Requirements: ML-01.2, ML-01.3*
+
+- [x] ML-01.5 Compare candidate datasets for ML/GNN suitability
+
+  - Create a new file:
+    `data/ml/comparison/dataset_comparison.md`
+
+  - Create a concise comparative assessment of all four candidate datasets.
+
+  - Compare:
+    - Event/row semantics
+    - Entity information
+    - Action/relationship information
+    - Ground truth quality
+    - Graph constructibility
+    - `SecurityEvent` compatibility
+    - Investigation/attack-scenario grouping
+    - Candidate prediction targets
+    - Train/test leakage risks
+    - Known limitations and biases
+    - Computational feasibility
+
+  - Reference findings from ML-01.2–ML-01.4 rather than duplicating
+    the detailed analysis in the individual `analysis.md` files or
+    graph assessment files.
+
+  - Do not modify or extend the existing dataset `analysis.md` files.
+
+  - Do NOT select a GNN architecture.
+
+  - Do NOT finalise the ML prediction target.
+
+  - Keep the comparison focused on selecting the most suitable candidate
+    dataset for the subsequent ML/GNN research tasks.
+
+  - *Requirements: ML-01.2, ML-01.3, ML-01.4*
+
+- [-] ML-01.6 Select the primary dataset and document the selection rationale
+
+  - Compare the four candidate datasets and select ONE as the primary
+    ML/GNN research dataset.
+
+  - Create a new file:
+    `data/ml/comparison/primary_dataset_selection.md`
+
+  - Document the selected dataset and selection rationale.
+
+  - The rationale must consider:
+    - Graph constructibility
+    - Ground truth quality
+    - Event/row semantics
+    - Relationship information
+    - `SecurityEvent` compatibility
+    - Investigation/attack-scenario suitability
+    - Leakage risk
+    - Dataset limitations and biases
+    - Computational feasibility
+    - Licensing and usage constraints
+
+  - Synthesize the findings from ML-01.1–ML-01.5 rather than duplicating
+    the detailed dataset analyses, graph assessments, or comparison.
+
+  - Do not modify or extend the existing dataset `analysis.md` files.
+
+  - Do not modify or extend `data/ml/datasets/README.md`.
+
+  - Do NOT choose a GNN architecture.
+
+  - Do NOT implement a prediction model.
+
+  - Do NOT finalise the ML prediction target.
+
+  - *Requirements: ML-01.1, ML-01.2, ML-01.3, ML-01.4, ML-01.5*
 
 - [ ] ML-02. Ground Truth and Label Definition
   - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
@@ -735,14 +788,26 @@ ML-11 final ML research documentation
       - How to verify that no positive attack incident has events in both train and test partitions
     - _Requirements: ML-02_
 
-  - [ ] ML-02.3 Plan use of the TraceGraph evaluation scenarios as a controlled test set
-    - The four evaluation scenarios from Task 29 (`data/scenarios/basic_attack_sequence/`, `data/scenarios/unrelated_events/`, `data/scenarios/legitimate_access/`, `data/scenarios/multi_user_host/`) become available as a controlled, labelled validation or test set once Task 29 has been implemented and validated.
-    - ML-01 and ML-02 are independently executable and do not depend on Task 29 being complete.
-    - Document in `data/ml/ground_truth.md`:
-      - Which Task 29 scenarios are applicable to the chosen prediction target and why
-      - Any limitations (e.g., scenario event counts, label granularity mismatch with the primary dataset)
-      - That this controlled set will supplement — not replace — the primary dataset's test split
-    - _Requirements: ML-02, 19.1–19.5_
+- [ ] ML-02.3 Plan use of the TraceGraph evaluation scenarios as a controlled test set
+
+  - The four evaluation scenarios from Task 29
+    (`data/scenarios/basic_attack_sequence/`,
+    `data/scenarios/unrelated_events/`,
+    `data/scenarios/legitimate_access/`,
+    `data/scenarios/multi_user_host/`)
+    become available as a controlled, labelled validation or test set
+    once Task 29 has been implemented and validated.
+
+  - ML-02.1, ML-02.2, and ML-02.4 do not require Task 29.
+    This task may remain pending until Task 29 is available.
+
+  - Document in `data/ml/ground_truth.md`:
+
+    - Which Task 29 scenarios are applicable to the chosen prediction target and why
+    - Any limitations (e.g., scenario event counts, label granularity mismatch with the primary dataset)
+    - That this controlled set will supplement — not replace — the primary dataset's test split
+
+  - *_Requirements: ML-02, 19.1–19.5_*
 
   - [ ] ML-02.4 Implement dataset preparation scripts
     - Create `research/ml/data_prep/prepare_dataset.py` that:
@@ -1111,9 +1176,8 @@ Task 11 — deterministic correlation engine available (combined_score)
 ML-01 — dataset analysis and selection
   (independently executable; does not require Tasks 12–30 to be complete)
         ↓
-ML-02 — ground truth / label definition and leakage-safe splits
-  (ML-02.3: Task 29 evaluation scenarios used here once Task 29 is validated;
-   ML-01 and ML-02 are not blocked by Task 29)
+(ML-02.3: Task 29 evaluation scenarios used here once Task 29 is validated;
+ ML-02.1, ML-02.2, and ML-02.4 are not blocked by Task 29)
         ↓
 ML-03 — optional classical ML baseline  (parallel with ML-04)
         ↓
@@ -1137,12 +1201,11 @@ ML-10 — GNN integration into the pipeline
 ML-11 — final ML research documentation
 ```
 
-### ML/DL/GNN Sub-task Dependencies
-
-```
 ML-01.1 → ML-01.2 → ML-01.3 → ML-01.4 → ML-01.5 → ML-01.6
         ↓
-ML-02.1 → ML-02.2 → ML-02.3 → ML-02.4
+ML-02.1 → ML-02.2 → ML-02.4
+              │
+              └── ML-02.3 (when Task 29 is available)
         ↓
         ├── ML-03.1 → ML-03.2* → ML-03.3*
         │
@@ -1161,6 +1224,5 @@ ML-09.1 → ML-09.2 → ML-09.3 → ML-09.4
 ML-10.1 → ML-10.2 → ML-10.3 → ML-10.4 → ML-10.5
         ↓
 ML-11.1 → ML-11.2
-```
 
 `*` denotes optional tasks.
