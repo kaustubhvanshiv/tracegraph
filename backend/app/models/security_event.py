@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from typing import Any
+from typing import Any, Optional
 from sqlalchemy import BigInteger, CheckConstraint, DateTime, ForeignKey, Index, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
@@ -20,15 +20,15 @@ class SecurityEventModel(Base):
     timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     event_type: Mapped[str] = mapped_column(Text, nullable=False)
     action: Mapped[str] = mapped_column(Text, nullable=False)
-    user: Mapped[str | None] = mapped_column(Text, nullable=True)
-    source_host: Mapped[str | None] = mapped_column(Text, nullable=True)
-    destination_host: Mapped[str | None] = mapped_column(Text, nullable=True)
-    source_ip: Mapped[str | None] = mapped_column(Text, nullable=True)
-    destination_ip: Mapped[str | None] = mapped_column(Text, nullable=True)
-    process: Mapped[str | None] = mapped_column(Text, nullable=True)
-    file: Mapped[str | None] = mapped_column(Text, nullable=True)
-    severity: Mapped[str | None] = mapped_column(Text, nullable=True)
-    raw_data: Mapped[dict[str, Any] | None] = mapped_column(JSONB, nullable=True)
+    user: Mapped[str] = mapped_column(Text, nullable=True)
+    source_host: Mapped[str] = mapped_column(Text, nullable=True)
+    destination_host: Mapped[str] = mapped_column(Text, nullable=True)
+    source_ip: Mapped[str] = mapped_column(Text, nullable=True)
+    destination_ip: Mapped[str] = mapped_column(Text, nullable=True)
+    process: Mapped[str] = mapped_column(Text, nullable=True)
+    file: Mapped[str] = mapped_column(Text, nullable=True)
+    severity: Mapped[str] = mapped_column(Text, nullable=True)
+    raw_data: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=True)
     ingested_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

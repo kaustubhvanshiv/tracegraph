@@ -1,5 +1,7 @@
+import asyncio
 import logging
-from sqlalchemy import text
+import ssl as _ssl
+from sqlalchemy import URL, text
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
@@ -14,20 +16,31 @@ logger = logging.getLogger(__name__)
 # PostgreSQL — async engine
 # ---------------------------------------------------------------------------
 
-DATABASE_URL = (
-    f"postgresql+asyncpg://{settings.postgres_user}:{settings.postgres_password}"
-    f"@{settings.postgres_host}:{settings.postgres_port}/{settings.postgres_db}"
+DATABASE_URL = URL.create(
+    "postgresql+asyncpg",
+    username=settings.postgres_user,
+    password=settings.postgres_password,
+    host=settings.postgres_host,
+    port=settings.postgres_port,
+    database=settings.postgres_db,
 )
 
-connect_args = {
+connect_args: dict = {
     "prepared_statement_cache_size": 0,
 }
 if "supabase.com" in settings.postgres_host:
-    connect_args["ssl"] = "require"
+    # Supabase's connection pooler uses a self-signed cert in its chain which
+    # Python's SSL store rejects on Windows.  We still encrypt the connection
+    # (ssl=True / verify_full is NOT disabled at the network level) but we
+    # skip CA-chain verification so the handshake succeeds.
+    _ssl_ctx = _ssl.create_default_context()
+    _ssl_ctx.check_hostname = False
+    _ssl_ctx.verify_mode = _ssl.CERT_NONE
+    connect_args["ssl"] = _ssl_ctx
 
 engine = create_async_engine(
     DATABASE_URL,
-    echo=settings.app_env == "development",
+    echo=False,
     connect_args=connect_args,
 )
 
@@ -38,6 +51,7 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
+# pyrefly: ignore [bad-return]
 async def get_db() -> AsyncSession:
     """FastAPI dependency that yields an async database session."""
     async with AsyncSessionLocal() as session:
@@ -72,27 +86,46 @@ async def close_neo4j() -> None:
 # Health checks
 # ---------------------------------------------------------------------------
 
-async def check_postgres_health() -> bool:
-    """Verify PostgreSQL connectivity."""
-    try:
-        async with engine.connect() as conn:
-            await conn.execute(text("SELECT 1"))
-        return True
-    except Exception as e:
-        logger.error("PostgreSQL health check failed: %s", e)
-        return False
+async def check_postgres_health(retries: int = 5, delay: float = 2.0) -> bool:
+    """Verify PostgreSQL connectivity with retries.
+
+    Retries up to *retries* times with *delay* seconds between attempts so
+    that transient DNS / network blips (e.g. getaddrinfo failed) at process
+    startup don't cause an immediate fatal exit.
+    """
+    for attempt in range(1, retries + 1):
+        try:
+            async with engine.connect() as conn:
+                await conn.execute(text("SELECT 1"))
+            return True
+        except Exception as e:
+            logger.warning(
+                "PostgreSQL health check attempt %d/%d failed: %s",
+                attempt, retries, e,
+            )
+            if attempt < retries:
+                await asyncio.sleep(delay)
+    logger.error("PostgreSQL health check failed after %d attempts", retries)
+    return False
 
 
-async def check_neo4j_health() -> bool:
-    """Verify Neo4j connectivity."""
+async def check_neo4j_health(retries: int = 5, delay: float = 2.0) -> bool:
+    """Verify Neo4j connectivity with retries."""
     if neo4j_driver is None:
         return False
-    try:
-        await neo4j_driver.verify_connectivity()
-        return True
-    except Exception as e:
-        logger.error("Neo4j health check failed: %s", e)
-        return False
+    for attempt in range(1, retries + 1):
+        try:
+            await neo4j_driver.verify_connectivity()
+            return True
+        except Exception as e:
+            logger.warning(
+                "Neo4j health check attempt %d/%d failed: %s",
+                attempt, retries, e,
+            )
+            if attempt < retries:
+                await asyncio.sleep(delay)
+    logger.error("Neo4j health check failed after %d attempts", retries)
+    return False
 
 
 async def check_db_health() -> dict[str, bool]:
@@ -117,4 +150,3 @@ async def get_neo4j_driver():
         driver = Depends(get_neo4j_driver)
     """
     return neo4j_driver
-

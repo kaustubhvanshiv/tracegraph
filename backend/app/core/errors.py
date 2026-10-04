@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from fastapi import FastAPI, Request
+from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -22,6 +23,7 @@ UNAUTHORIZED = "UNAUTHORIZED"
 FORBIDDEN = "FORBIDDEN"
 INVESTIGATION_NOT_FOUND = "INVESTIGATION_NOT_FOUND"
 EVENT_NOT_FOUND = "EVENT_NOT_FOUND"
+ENTITY_NOT_FOUND = "ENTITY_NOT_FOUND"
 PARSE_ERROR = "PARSE_ERROR"
 AI_UNAVAILABLE = "AI_UNAVAILABLE"
 GRAPH_UNAVAILABLE = "GRAPH_UNAVAILABLE"
@@ -95,6 +97,13 @@ class EventNotFoundError(AppError):
     """The requested security event does not exist within this investigation."""
 
     code = EVENT_NOT_FOUND
+    http_status = 404
+
+
+class EntityNotFoundError(AppError):
+    """The requested graph entity does not exist within this investigation."""
+
+    code = ENTITY_NOT_FOUND
     http_status = 404
 
 
@@ -185,7 +194,7 @@ def register_error_handlers(app: FastAPI) -> None:
             content=_error_response_body(
                 code=VALIDATION_ERROR,
                 message=detail_message,
-                details={"errors": exc.errors()},
+                details={"errors": jsonable_encoder(exc.errors())},
             ),
         )
 

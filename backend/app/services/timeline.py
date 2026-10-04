@@ -99,11 +99,17 @@ class TimelineService:
         if filters.end_time is not None:
             conditions.append(SecurityEventModel.timestamp <= filters.end_time)
 
+        if filters.source_type is not None:
+            conditions.append(SecurityEventModel.source_type.ilike(f"%{filters.source_type}%"))
+
         if filters.event_type is not None:
-            conditions.append(SecurityEventModel.event_type == filters.event_type)
+            pattern = f"%{filters.event_type}%"
+            conditions.append(
+                SecurityEventModel.event_type.ilike(pattern) | SecurityEventModel.source_type.ilike(pattern)
+            )
 
         if filters.severity is not None:
-            conditions.append(SecurityEventModel.severity == filters.severity)
+            conditions.append(SecurityEventModel.severity.ilike(f"%{filters.severity}%"))
 
         # entity_id filter — use a subquery so only events linked to the
         # given entity survive, satisfying the filter-is-subset invariant.

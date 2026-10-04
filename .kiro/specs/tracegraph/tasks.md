@@ -292,8 +292,8 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - **Validates: Requirements 9.7**
     - Assert every entity in the graph has at least one matching timeline event via `entity_ids`
 
-- [ ] 16. Evidence detail service and API
-  - [ ] 16.1 Implement `EvidenceDetailService`
+- [x] 16. Evidence detail service and API
+  - [x] 16.1 Implement `EvidenceDetailService`
     - Create `backend/app/services/evidence.py` with `EvidenceDetailService.get_evidence(event_id) -> EvidenceDetail`
     - Return both normalized `SecurityEvent` fields and original `raw_data`
     - Include all entities extracted from the event and all relationships referencing the `event_id`
@@ -302,17 +302,17 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Return HTTP 404 with `EVENT_NOT_FOUND` if `event_id` does not exist
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6_
 
-  - [ ] 16.2 Implement evidence detail API route
+  - [x] 16.2 Implement evidence detail API route
     - Create `backend/app/api/` evidence endpoint: `GET /api/investigations/{id}/events/{eid}`
     - Apply JWT and ownership middleware
     - _Requirements: 10.1–10.6, 15.1, 15.2_
 
-  - [ ]* 16.3 Write unit tests for evidence detail service
+  - [x]* 16.3 Write unit tests for evidence detail service
     - Test full record return, investigation isolation, `EVENT_NOT_FOUND`, correlation metadata inclusion
     - _Requirements: 10.1–10.6_
 
-- [ ] 17. Graph query API
-  - [ ] 17.1 Implement graph query API routes
+- [x] 17. Graph query API
+  - [x] 17.1 Implement graph query API routes
     - Create `backend/app/api/graph.py` with:
       - `GET /api/investigations/{id}/graph` — full investigation graph with filter query params (entity type, relationship type, time range)
       - `GET /api/investigations/{id}/graph/pivot` — multi-hop pivot from `entity_id` with configurable `hops` param
@@ -321,15 +321,15 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Apply JWT and ownership middleware on all routes
     - _Requirements: 8.8, 8.9, 8.10, 16.5_
 
-  - [ ]* 17.2 Write unit tests for graph query routes
+  - [x]* 17.2 Write unit tests for graph query routes
     - Test filtered retrieval, multi-hop pivot, `GRAPH_UNAVAILABLE` 503 response, entity detail
     - _Requirements: 8.8, 8.9, 8.10_
 
-- [ ] 18. Checkpoint — backend services complete
+- [x] 18. Checkpoint — backend services complete
   - Run `pytest tests/unit/ tests/integration/` and ensure all tests pass. Verify the complete ingestion→graph→timeline→evidence pipeline with a small sample dataset before starting the AI and frontend layers.
 
-- [ ] 19. AI Context Builder
-  - [ ] 19.1 Implement `AIContextBuilder`
+- [x] 19. AI Context Builder
+  - [x] 19.1 Implement `AIContextBuilder`
     - Create `backend/app/services/ai_context_builder.py` with `AIContextBuilder.build_context(investigation_id, graph, timeline, evidence_sample) -> InvestigationContext`
     - Include only entities present in the investigation graph and only relationships with at least one evidence reference
     - Apply configurable size limits (default `max_events=50`): prioritize `high` and `critical` severity events, then most-connected events; deduplicate
@@ -338,12 +338,12 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Never include secrets, credentials, or PII beyond what is already in normalized event fields
     - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5, 12.6, 12.7_
 
-  - [ ]* 19.2 Write unit tests for AI context builder
+  - [x]* 19.2 Write unit tests for AI context builder
     - Test size limit enforcement, high-severity prioritization, graph-only entity inclusion, serialization (no circular refs)
     - _Requirements: 12.1–12.7_
 
-- [ ] 20. AI Summary Service
-  - [ ] 20.1 Implement `LLMProvider` protocol and `AISummaryService`
+- [x] 20. AI Summary Service
+  - [x] 20.1 Implement `LLMProvider` protocol and `AISummaryService`
     - Create `backend/app/services/ai_summary.py` with `LLMProvider` Protocol (enables provider substitution)
     - Implement `AISummaryService.generate_summary(context) -> SummaryResult`
     - Implement a system prompt that explicitly prohibits the LLM from inventing events, entities, or maliciousness claims not in context; pass context as structured data, never as raw concatenated user text
@@ -353,7 +353,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Post-generation validation: verify all `evidence_refs` exist in context; set `error_flag=True` if any invalid reference is found
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7, 13.8, 15.8_
 
-  - [ ] 20.2 Implement AI Summary API routes
+  - [x] 20.2 Implement AI Summary API routes
     - Create `backend/app/api/summary.py` with:
       - `POST /api/investigations/{id}/summary` — generate or force-refresh summary
       - `GET /api/investigations/{id}/summary` — retrieve cached summary
@@ -361,50 +361,50 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Apply JWT and ownership middleware
     - _Requirements: 13.3, 13.4, 13.5, 16.2_
 
-  - [ ]* 20.3 Write property test for graceful AI failure (Property 12)
+  - [x]* 20.3 Write property test for graceful AI failure (Property 12)
     - **Property 12: Graceful AI Failure**
     - **Validates: Requirements 13.3**
     - Use `hypothesis` with a mock LLM that always raises exceptions; assert `generate_summary` always returns a `SummaryResult` and never raises
 
-  - [ ]* 20.4 Write property test for summary grounding (Property 10)
+  - [x]* 20.4 Write property test for summary grounding (Property 10)
     - **Property 10: Summary Grounding**
     - **Validates: Requirements 13.1, 13.7**
     - Use `hypothesis`; assert every `evidence_ref` in the result exists in `context.event_ids`
 
-  - [ ]* 20.5 Write unit tests for AI summary service
+  - [x]* 20.5 Write unit tests for AI summary service
     - Test cache hit, cache miss, `force_refresh`, LLM failure graceful return, post-generation evidence_ref validation, `uncertainty` field presence
     - _Requirements: 13.1–13.8_
 
-- [ ] 21. Structured logging
-  - [ ] 21.1 Implement structured logging configuration
+- [x] 21. Structured logging
+  - [x] 21.1 Implement structured logging configuration
     - Create `backend/app/core/logging.py` with JSON-structured log output
     - Enforce log level controls: raw event data is NEVER logged at INFO level; only `event_id` and `investigation_id` are logged for event-processing operations
     - _Requirements: 15.5_
 
-- [ ] 22. Checkpoint — backend complete
+- [x] 22. Checkpoint — backend complete
   - Run the full backend test suite (`pytest`). Confirm all 19 requirements are covered by passing tests. Review that no secrets are hardcoded and no raw event data leaks into INFO-level logs.
 
-- [ ] 23. React frontend — project setup and API client layer
-  - [ ] 23.1 Set up the React project structure and Tailwind CSS
+- [x] 23. React frontend — project setup and API client layer
+  - [x] 23.1 Set up the React project structure and Tailwind CSS
     - Create `frontend/src/` directory tree matching the design's package structure: `components/`, `pages/`, `services/`, `hooks/`, `utils/`
     - Configure Tailwind CSS and set up React Router with routes for `/investigations` (list) and `/investigations/:id` (workspace)
     - _Requirements: 14.1_
 
-  - [ ] 23.2 Implement typed API client services
+  - [x] 23.2 Implement typed API client services
     - Create `frontend/src/services/investigationsApi.ts`, `eventsApi.ts`, `graphApi.ts`, `timelineApi.ts`, `summaryApi.ts`
     - Define TypeScript interfaces matching all backend response shapes (Investigation, GraphResult, TimelineResult, EvidenceDetail, SummaryResult)
     - Use `axios` with a base URL from environment config; handle `SuccessResponse` and `ErrorResponse` envelopes
     - _Requirements: 14.1, 16.1, 16.4_
 
-- [ ] 24. React frontend — Investigation List page
-  - [ ] 24.1 Implement `InvestigationList` component and `InvestigationsPage`
+- [x] 24. React frontend — Investigation List page
+  - [x] 24.1 Implement `InvestigationList` component and `InvestigationsPage`
     - Create `frontend/src/components/InvestigationList/` with a paginated list view of investigations
     - Create `frontend/src/pages/InvestigationsPage.tsx` rendering the list and a "New Investigation" form
     - Implement `useInvestigation` hook in `frontend/src/hooks/useInvestigation.ts` for CRUD operations
     - _Requirements: 11.1, 11.6_
 
 - [ ] 25. React frontend — Workspace panels
-  - [ ] 25.1 Implement `GraphPanel` with Cytoscape.js fCoSE layout
+  - [x] 25.1 Implement `GraphPanel` with Cytoscape.js fCoSE layout
     - Create `frontend/src/components/Workspace/GraphPanel.tsx`
     - Render entity nodes and relationships using Cytoscape.js with the fCoSE force-directed layout (via `cytoscape-fcose`)
     - Configure node styles per entity type and relationship labels; implement node click handler emitting selected `entity_id`
@@ -412,7 +412,7 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Implement `useGraph` hook in `frontend/src/hooks/useGraph.ts` fetching graph data
     - _Requirements: 14.1, 14.4_
 
-  - [ ] 25.2 Implement `TimelinePanel`
+  - [x] 25.2 Implement `TimelinePanel`
     - Create `frontend/src/components/Workspace/TimelinePanel.tsx`
     - Render a chronologically sorted, filterable event list (filter by time range, entity, event type, severity)
     - Implement event click handler emitting selected `entity_ids`
@@ -420,25 +420,25 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Create `frontend/src/utils/timelineHelpers.ts` for UTC timestamp formatting using `date-fns`
     - _Requirements: 14.1, 14.5_
 
-  - [ ] 25.3 Implement `EvidencePanel`
+  - [x] 25.3 Implement `EvidencePanel`
     - Create `frontend/src/components/Workspace/EvidencePanel.tsx`
     - Display the full `EvidenceDetail` for a selected event: normalized fields, `raw_data`, extracted entities, relationships, and correlation metadata (signal names, combined score, explanation)
     - _Requirements: 14.1, 14.5_
 
-  - [ ] 25.4 Implement `AISummaryPanel` with graceful degradation
+  - [x] 25.4 Implement `AISummaryPanel` with graceful degradation
     - Create `frontend/src/components/Workspace/AISummaryPanel.tsx`
     - On mount, display cached summary if available or trigger generation
     - If AI Summary Service is unavailable (503 / `AI_UNAVAILABLE`), display a graceful error message and do NOT prevent use of other panels
     - _Requirements: 14.1, 14.6, 14.7_
 
-  - [ ] 25.5 Implement `AnalystDecisionPanel`
+  - [x] 25.5 Implement `AnalystDecisionPanel`
     - Create `frontend/src/components/Workspace/AnalystDecisionPanel.tsx`
     - Submit outcome via `PATCH /api/investigations/{id}/outcome`; reflect updated status in UI immediately
     - Add notes via `POST /api/investigations/{id}/notes`; display the new note in the list immediately (optimistic update)
     - _Requirements: 14.1, 14.8, 14.9_
 
-- [ ] 26. React frontend — bidirectional graph/timeline synchronization
-  - [ ] 26.1 Implement `useGraphTimelineSync` hook and wire workspace panels
+- [x] 26. React frontend — bidirectional graph/timeline synchronization
+  - [x] 26.1 Implement `useGraphTimelineSync` hook and wire workspace panels
     - Create `frontend/src/hooks/useGraphTimelineSync.ts` managing bidirectional highlight state between `GraphPanel` and `TimelinePanel`
     - When a node is selected in `GraphPanel`: highlight all `TimelinePanel` events whose `entity_ids` include the selected `entity_id`
     - When an event is selected in `TimelinePanel`: highlight all `GraphPanel` nodes whose `entity_id` is referenced in the selected event's `entity_ids`
@@ -446,28 +446,28 @@ TraceGraph is implemented as a Python/FastAPI backend with a Neo4j graph databas
     - Create `frontend/src/components/Workspace/Header.tsx`
     - _Requirements: 14.2, 14.3_
 
-- [ ] 27. Docker Compose and deployment configuration
-  - [ ] 27.1 Create Docker Compose configuration
+- [x] 27. Docker Compose and deployment configuration
+  - [x] 27.1 Create Docker Compose configuration
     - Create `docker-compose.yml` defining four services: React frontend, FastAPI backend, Neo4j 5.x, PostgreSQL 15.x
     - Configure inter-service networking; set health checks on Neo4j and PostgreSQL
     - Configure the backend to fail with a clear error message on startup if either DB connection cannot be established
     - Mount the `.env` file for secrets; ensure `.env` is in `.gitignore`
     - _Requirements: 17.1, 17.2, 17.4, 17.5_
 
-  - [ ] 27.2 Create Dockerfiles for backend and frontend
+  - [x] 27.2 Create Dockerfiles for backend and frontend
     - Create `backend/Dockerfile` and `frontend/Dockerfile`
     - Backend Dockerfile installs pinned dependencies, runs `uvicorn` on the configured port
     - Frontend Dockerfile builds the React app and serves via a static server (e.g., nginx)
     - _Requirements: 17.1, 17.2_
 
 - [ ] 28. Performance instrumentation
-  - [ ] 28.1 Add per-stage timing instrumentation to the pipeline
+  - [x] 28.1 Add per-stage timing instrumentation to the pipeline
     - In `backend/app/services/ingestion.py`, wrap each pipeline stage (parse, normalize, entity extraction, relationship extraction, candidate retrieval, correlation, graph persistence) with a timing decorator or context manager
     - Expose per-stage elapsed times in the `IngestionResponse` or a separate metrics log entry
     - Ensure timing data is accessible for profiling without code changes (e.g., via structured log output or a metrics endpoint)
     - _Requirements: 18.1, 18.6_
 
-  - [ ]* 28.2 Write performance benchmark tests
+  - [x] 28.2 Write performance benchmark tests
     - Write pytest benchmarks measuring p95 latency for: single-event ingestion (target < 500ms), 100-event batch (target < 5s), full graph retrieval (target < 200ms), multi-hop pivot (target < 500ms)
     - _Requirements: 18.2, 18.3, 18.4, 18.5_
 

