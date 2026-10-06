@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import cytoscape from 'cytoscape';
 import type { GraphResult } from '../../types';
 import { cytoscapeStylesheet, fcoseLayoutOptions, ENTITY_COLORS } from '../../utils/cytoscapeConfig';
@@ -24,10 +24,50 @@ export default function GraphPanel({
 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cyRef = useRef<cytoscape.Core | null>(null);
+  const layoutRef = useRef<cytoscape.Layouts | null>(null);
+  const onNodeSelectedRef = useRef(onNodeSelected);
+  const [containerReady, setContainerReady] = useState(false);
 
-  // Init cytoscape
+  // Keep event handlers current without rebuilding the Cytoscape instance.
   useEffect(() => {
-    if (!containerRef.current) return;
+    onNodeSelectedRef.current = onNodeSelected;
+  }, [onNodeSelected]);
+
+  const stopLayout = useCallback(() => {
+    const layout = layoutRef.current;
+    layoutRef.current = null;
+    layout?.stop();
+  }, []);
+
+  const runLayout = useCallback(() => {
+    const cy = cyRef.current;
+    if (!cy || cy.nodes().empty()) return;
+
+    stopLayout();
+    const options = [fcoseLayoutOptions, { name: 'cose' }, { name: 'grid' }];
+    for (const option of options) {
+      try {
+        const layout = cy.layout(option as cytoscape.LayoutOptions);
+        layoutRef.current = layout;
+        layout.one('layoutstop', () => {
+          if (cy.destroyed() || cyRef.current !== cy || layoutRef.current !== layout) return;
+          layoutRef.current = null;
+          // Animated layouts may finish after the canvas has resized.
+          cy.resize();
+          cy.fit(undefined, 40);
+        });
+        layout.run();
+        return;
+      } catch {
+        stopLayout();
+      }
+    }
+  }, [stopLayout]);
+
+  // Init cytoscape when container has dimensions
+  useEffect(() => {
+    if (!containerRef.current || !containerReady) return;
+
     const cy = cytoscape({
       container: containerRef.current,
       elements: [],
@@ -40,23 +80,32 @@ export default function GraphPanel({
     });
 
     cy.on('tap', 'node', (evt) => {
-      onNodeSelected(evt.target.data('entity_id') as string);
+      onNodeSelectedRef.current(evt.target.data('entity_id') as string);
     });
     cy.on('tap', (evt) => {
-      if (evt.target === cy) onNodeSelected(null);
+      if (evt.target === cy) onNodeSelectedRef.current(null);
     });
 
     cyRef.current = cy;
-    return () => { cy.destroy(); };
-  }, [onNodeSelected]);
+    return () => {
+      stopLayout();
+      if (cyRef.current === cy) cyRef.current = null;
+      cy.destroy();
+    };
+  }, [containerReady, stopLayout]);
 
-  // ResizeObserver to ensure viewport resizes when container renders
+  // ResizeObserver to detect when container gets dimensions
   useEffect(() => {
     if (!containerRef.current) return;
-    const observer = new ResizeObserver(() => {
-      if (cyRef.current) {
-        cyRef.current.resize();
-        cyRef.current.fit(undefined, 40);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect.width > 0 && entry.contentRect.height > 0) {
+          setContainerReady(true);
+          if (cyRef.current) {
+            cyRef.current.resize();
+            cyRef.current.fit(undefined, 40);
+          }
+        }
       }
     });
     observer.observe(containerRef.current);
@@ -66,7 +115,13 @@ export default function GraphPanel({
   // Load graph data
   useEffect(() => {
     const cy = cyRef.current;
-    if (!cy || !graph) return;
+    if (!cy) return;
+
+    stopLayout();
+    if (!graph) {
+      cy.elements().remove();
+      return;
+    }
 
     const nodes = graph.nodes.map((n) => ({
       data: {
@@ -92,16 +147,9 @@ export default function GraphPanel({
     cy.resize();
 
     if (nodes.length > 0) {
-      try {
-        const layout = cy.layout(fcoseLayoutOptions as cytoscape.LayoutOptions);
-        layout.run();
-      } catch {
-        const fallback = cy.layout({ name: 'cose' } as cytoscape.LayoutOptions);
-        fallback.run();
-      }
-      cy.fit(undefined, 40);
+      runLayout();
     }
-  }, [graph]);
+  }, [containerReady, graph, runLayout, stopLayout]);
 
   // Highlight selected + related nodes
   useEffect(() => {
@@ -127,7 +175,7 @@ export default function GraphPanel({
         }
       });
     }
-  }, [selectedEntityId, highlightedEntityIds]);
+  }, [containerReady, graph, selectedEntityId, highlightedEntityIds]);
 
   const fitView = useCallback(() => {
     cyRef.current?.fit(undefined, 40);
@@ -140,14 +188,10 @@ export default function GraphPanel({
     const cy = cyRef.current;
     if (cy) cy.zoom(cy.zoom() * 0.8);
   }, []);
-  const reLayout = useCallback(() => {
-    cyRef.current?.layout(fcoseLayoutOptions as cytoscape.LayoutOptions).run();
-  }, []);
-
   return (
-    <div className="sentinel-card flex flex-col h-full">
+    <div className="sentinel-card flex flex-col h-full min-h-0 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
+      <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
         <div className="flex items-center gap-2">
           <span className="text-sm font-semibold text-on-surface">Entity Graph</span>
           {graph && (
@@ -161,7 +205,7 @@ export default function GraphPanel({
             { label: '+', title: 'Zoom in', fn: zoomIn },
             { label: '−', title: 'Zoom out', fn: zoomOut },
             { label: '⊡', title: 'Fit view', fn: fitView },
-            { label: '⟳', title: 'Re-layout', fn: reLayout },
+            { label: '⟳', title: 'Re-layout', fn: runLayout },
           ].map(({ label, title, fn }) => (
             <button
               key={title}
@@ -176,7 +220,7 @@ export default function GraphPanel({
       </div>
 
       {/* Canvas */}
-      <div className="relative flex-1">
+      <div className="relative flex-1 min-h-0 overflow-hidden">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-surface/80 z-10 rounded-b-xl">
             <div className="flex items-center gap-2 text-primary text-sm">
@@ -194,11 +238,11 @@ export default function GraphPanel({
             <p className="text-on-surface-muted text-sm">No graph data yet.</p>
           </div>
         )}
-        <div ref={containerRef} className="w-full h-full rounded-b-xl" />
+        <div ref={containerRef} className="absolute inset-0" />
       </div>
 
       {/* Legend */}
-      <div className="px-4 py-2 flex items-center gap-3 flex-wrap border-t border-outline-variant/20">
+      <div className="shrink-0 px-4 py-2 flex items-center gap-3 flex-wrap border-t border-outline-variant/20">
         {ENTITY_TYPES.map((t) => (
           <span key={t} className="flex items-center gap-1 text-xs text-on-surface-muted">
             <span

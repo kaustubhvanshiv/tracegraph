@@ -55,10 +55,6 @@ export default function WorkspacePage() {
     if (selectedEventId) fetchEvidence(selectedEventId);
   }, [selectedEventId, fetchEvidence]);
 
-  const handleNodeSelected = (entityId: string | null) => {
-    onNodeSelected(entityId);
-  };
-
   const handleEventSelected = (eventId: string | null, entityIds: string[]) => {
     onEventSelected(eventId, entityIds);
   };
@@ -98,7 +94,7 @@ export default function WorkspacePage() {
               error={graphError}
               selectedEntityId={selectedEntityId}
               highlightedEntityIds={selectedEventEntityIds}
-              onNodeSelected={handleNodeSelected}
+              onNodeSelected={onNodeSelected}
             />
           </div>
 

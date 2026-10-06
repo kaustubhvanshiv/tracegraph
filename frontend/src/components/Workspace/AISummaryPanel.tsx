@@ -125,8 +125,8 @@ export default function AISummaryPanel({
                 Key Entities
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {summary.key_entities.map((e) => (
-                  <span key={e} className="badge-pill bg-surface-highest text-on-surface-muted border border-outline-variant text-xs">
+                {summary.key_entities.map((e, i) => (
+                  <span key={i} className="badge-pill bg-surface-highest text-on-surface-muted border border-outline-variant text-xs">
                     {e}
                   </span>
                 ))}
@@ -141,9 +141,9 @@ export default function AISummaryPanel({
                 Supporting Evidence
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {summary.evidence_refs.map((ref) => (
+                {summary.evidence_refs.map((ref, i) => (
                   <button
-                    key={ref}
+                    key={i}
                     onClick={() => onEvidenceRefClick(ref)}
                     className="badge-pill mono text-xs bg-surface-low text-primary border border-primary/30 hover:bg-primary/10 transition-colors"
                   >
