@@ -81,7 +81,7 @@ export default function AnalystDecisionPanel({
             <button
               key={s}
               onClick={() => setPendingStatus(s)}
-              className={`badge-pill cursor-pointer transition-colors ${
+              className={`badge-pill cursor-pointer transition-colors focus-ring ${
                 pendingStatus === s
                   ? statusBadgeClass(s)
                   : 'bg-surface-highest text-on-surface-muted border border-outline-variant hover:border-primary/30'
@@ -99,10 +99,10 @@ export default function AnalystDecisionPanel({
           Verdict / Outcome
         </p>
         <select
-          value={pendingOutcome}
-          onChange={(e) => setPendingOutcome(e.target.value)}
-          className="input-ghost w-full"
-        >
+            value={pendingOutcome}
+            onChange={(e) => setPendingOutcome(e.target.value)}
+            className="input-ghost w-full focus-ring"
+          >
           {OUTCOMES.map((o) => (
             <option key={o.value} value={o.value} className="bg-surface-low text-on-surface">
               {o.label}
@@ -120,18 +120,18 @@ export default function AnalystDecisionPanel({
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           rows={3}
-          className="input-ghost w-full resize-none"
+          className="input-ghost w-full resize-none focus-ring"
           placeholder="Add investigation notes, observations, next steps…"
         />
         <div className="flex justify-between items-center mt-1">
           <span className="text-[10px] text-on-surface-muted">{noteText.length} chars</span>
           <button
-            onClick={submitNote}
-            disabled={!noteText.trim() || saving}
-            className="btn-ghost text-xs py-1"
-          >
-            Add Note
-          </button>
+              onClick={submitNote}
+              disabled={!noteText.trim() || saving}
+              className="btn-ghost text-xs py-1.5 touch-manipulation"
+            >
+              Add Note
+            </button>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export default function AnalystDecisionPanel({
         <div className="mx-4 mb-3">
           <button
             onClick={() => setAuditOpen((o) => !o)}
-            className="flex items-center justify-between w-full bg-surface-low rounded-lg px-3 py-2 text-xs text-on-surface-muted hover:text-on-surface transition-colors"
+            className="flex items-center justify-between w-full bg-surface-low rounded-lg px-3 py-2 text-xs text-on-surface-muted hover:text-on-surface transition-colors focus-ring"
           >
             <span className="font-semibold uppercase tracking-wider text-[10px]">Audit Trail</span>
             <span>{auditOpen ? '▲' : '▼'}</span>
@@ -182,13 +182,13 @@ export default function AnalystDecisionPanel({
 
       {/* Footer */}
       <div className="px-4 pb-4 mt-auto flex gap-2">
-        <button
-          onClick={saveChanges}
-          disabled={saving}
-          className="btn-primary flex-1 text-sm"
-        >
-          {saving ? 'Saving…' : 'Save Changes'}
-        </button>
+<button
+              onClick={saveChanges}
+              disabled={saving}
+              className="btn-primary flex-1 text-sm touch-manipulation"
+            >
+              {saving ? 'Saving…' : 'Save Changes'}
+            </button>
       </div>
     </div>
   );

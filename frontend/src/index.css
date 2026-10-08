@@ -20,6 +20,16 @@
 
   /* Monospace selection colour */
   ::selection { background: rgba(78, 222, 163, 0.25); }
+
+  /* Reduced motion - respect user preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
@@ -36,21 +46,122 @@
     @apply px-4 py-2 rounded-md text-sm font-semibold text-on-primary
            bg-gradient-to-br from-primary to-primary-container
            hover:opacity-90 transition-opacity focus:outline-none
-           focus:ring-2 focus:ring-primary/50;
+           focus:ring-2 focus:ring-primary/50
+           active:scale-[0.98] transition-transform duration-75
+           touch-manipulation;
   }
   .btn-ghost {
     @apply px-4 py-2 rounded-md text-sm font-semibold text-primary
            bg-transparent border border-outline-variant
            hover:bg-surface-highest transition-colors focus:outline-none
-           focus:ring-2 focus:ring-primary/30;
+           focus:ring-2 focus:ring-primary/30
+           active:bg-surface-high transition-colors duration-75
+           touch-manipulation;
   }
   .input-ghost {
     @apply w-full px-3 py-2 rounded-md text-sm
            bg-surface-low border-0 outline-none
            text-on-surface placeholder-on-surface-muted
-           focus:ring-1 focus:ring-primary/40 transition;
+           focus:ring-1 focus:ring-primary/40 transition
+           transition-colors duration-150;
   }
   .mono {
     @apply font-mono text-xs;
+  }
+
+  /* Motion utilities for Operate mode - fast, functional, purposeful */
+  .transition-fast {
+    @apply transition-all duration-150 ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+  .transition-normal {
+    @apply transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+  .transition-slow {
+    @apply transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+
+  /* Selection pulse - acknowledges action */
+  .selection-pulse {
+    @apply relative;
+  }
+  .selection-pulse::after {
+    content: '';
+    @apply absolute inset-0 rounded-[inherit] opacity-0 pointer-events-none;
+    background: radial-gradient(circle at center, rgba(78, 222, 163, 0.4) 0%, transparent 70%);
+    animation: selection-pulse 400ms ease-out forwards;
+  }
+  @keyframes selection-pulse {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+
+  /* Accent bar slide - makes state change legible */
+  .accent-bar-slide {
+    @apply relative overflow-hidden;
+  }
+  .accent-bar-slide::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-[3px] bg-primary transform -translate-x-full;
+    animation: accent-bar-slide 200ms ease-[cubic-bezier(0.16,1,0.3,1)] forwards;
+  }
+  @keyframes accent-bar-slide {
+    to { transform: translateX(0); }
+  }
+
+  /* Modal entrance - fast, functional */
+  .modal-enter {
+    animation: modal-enter 150ms ease-[cubic-bezier(0.16,1,0.3,1)] forwards;
+  }
+  .modal-exit {
+    animation: modal-exit 100ms ease-in forwards;
+  }
+  @keyframes modal-enter {
+    from { opacity: 0; transform: scale(0.96) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes modal-exit {
+    from { opacity: 1; transform: scale(1) translateY(0); }
+    to { opacity: 0; transform: scale(0.96) translateY(8px); }
+  }
+
+  /* Panel resize continuity - subtle */
+  .panel-resize {
+    @apply transition-[width,height,flex] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)];
+  }
+
+  /* Loading pulse - refined */
+  .loading-pulse {
+    @apply relative overflow-hidden;
+  }
+  .loading-pulse::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, rgba(78, 222, 163, 0.15), transparent);
+    animation: loading-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes loading-pulse {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* Focus ring for keyboard nav - visible, purposeful */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface;
+  }
+
+  /* Toast/notification - for async feedback */
+  .toast-enter {
+    animation: toast-enter 200ms ease-[cubic-bezier(0.16,1,0.3,1)] forwards;
+  }
+  .toast-exit {
+    animation: toast-exit 150ms ease-in forwards;
+  }
+  @keyframes toast-enter {
+    from { opacity: 0; transform: translateX(100%) translateY(-50%); }
+    to { opacity: 1; transform: translateX(0) translateY(-50%); }
+  }
+  @keyframes toast-exit {
+    from { opacity: 1; transform: translateX(0) translateY(-50%); }
+    to { opacity: 0; transform: translateX(100%) translateY(-50%); }
   }
 }

@@ -26,7 +26,7 @@ export default function EvidencePanel({ evidence, loading }: Props) {
 
   if (loading) {
     return (
-      <div className="sentinel-card h-full flex items-center justify-center">
+      <div className="sentinel-card h-full flex items-center justify-center loading-pulse">
         <span className="text-primary text-sm animate-pulse">Loading evidence…</span>
       </div>
     );
@@ -51,7 +51,7 @@ export default function EvidencePanel({ evidence, loading }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
         <span className="text-sm font-semibold text-on-surface">Evidence</span>
-        <button onClick={copyId} className="mono text-xs text-primary/80 hover:text-primary transition-colors">
+        <button onClick={copyId} className="mono text-xs text-primary/80 hover:text-primary transition-colors focus-ring">
           {ev.event_id} ⎘
         </button>
       </div>
@@ -151,7 +151,7 @@ export default function EvidencePanel({ evidence, loading }: Props) {
       <div className="mx-4 mb-4">
         <button
           onClick={() => setRawOpen((o) => !o)}
-          className="flex items-center justify-between w-full bg-surface-lowest rounded-lg px-3 py-2 text-xs text-on-surface-muted hover:text-on-surface transition-colors"
+          className="flex items-center justify-between w-full bg-surface-lowest rounded-lg px-3 py-2 text-xs text-on-surface-muted hover:text-on-surface transition-colors focus-ring"
         >
           <span className="font-semibold uppercase tracking-wider text-[10px]">Raw Event Data</span>
           <span>{rawOpen ? '▲' : '▼'}</span>

@@ -27,11 +27,34 @@ export default function GraphPanel({
   const layoutRef = useRef<cytoscape.Layouts | null>(null);
   const onNodeSelectedRef = useRef(onNodeSelected);
   const [containerReady, setContainerReady] = useState(false);
+  const [selectionPulse, setSelectionPulse] = useState<string | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const prevSelectedRef = useRef<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Check prefers-reduced-motion on mount
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduceMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
 
   // Keep event handlers current without rebuilding the Cytoscape instance.
   useEffect(() => {
     onNodeSelectedRef.current = onNodeSelected;
   }, [onNodeSelected]);
+
+  // Trigger selection pulse animation when selection changes
+  useEffect(() => {
+    if (selectedEntityId && selectedEntityId !== prevSelectedRef.current) {
+      setSelectionPulse(selectedEntityId);
+      // Clear after animation completes
+      setTimeout(() => setSelectionPulse(null), 400);
+    }
+    prevSelectedRef.current = selectedEntityId;
+  }, [selectedEntityId]);
 
   const stopLayout = useCallback(() => {
     const layout = layoutRef.current;
@@ -44,7 +67,8 @@ export default function GraphPanel({
     if (!cy || cy.nodes().empty()) return;
 
     stopLayout();
-    const options = [fcoseLayoutOptions, { name: 'cose' }, { name: 'grid' }];
+    const baseOptions = { ...fcoseLayoutOptions, animate: !reduceMotion, animationDuration: reduceMotion ? 0 : 500 };
+    const options = [baseOptions, { name: 'cose', animate: !reduceMotion }, { name: 'grid' }];
     for (const option of options) {
       try {
         const layout = cy.layout(option as cytoscape.LayoutOptions);
@@ -188,8 +212,27 @@ export default function GraphPanel({
     const cy = cyRef.current;
     if (cy) cy.zoom(cy.zoom() * 0.8);
   }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!isFullscreen) {
+      containerRef.current?.requestFullscreen?.().catch(() => {});
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen?.();
+      setIsFullscreen(false);
+    }
+  }, [isFullscreen]);
+
+  // Handle fullscreen change events (e.g., user presses Esc)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === containerRef.current);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
   return (
-    <div className="sentinel-card flex flex-col h-full min-h-0 overflow-hidden">
+    <div className={`sentinel-card flex flex-col h-full min-h-0 overflow-hidden ${selectionPulse ? 'selection-pulse' : ''} ${isFullscreen ? 'fixed inset-0 z-50 rounded-none' : ''}`}>
       {/* Header */}
       <div className="shrink-0 flex items-center justify-between px-4 py-3 border-b border-outline-variant/20">
         <div className="flex items-center gap-2">
@@ -211,18 +254,25 @@ export default function GraphPanel({
               key={title}
               title={title}
               onClick={fn}
-              className="w-7 h-7 flex items-center justify-center rounded text-on-surface-muted hover:text-primary hover:bg-surface-highest text-base transition-colors"
+              className="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center rounded text-on-surface-muted hover:text-primary hover:bg-surface-highest text-base transition-colors touch-manipulation focus-ring"
             >
               {label}
             </button>
           ))}
+          <button
+            title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+            onClick={toggleFullscreen}
+            className="w-7 h-7 md:w-8 md:h-8 flex items-center justify-center rounded text-on-surface-muted hover:text-primary hover:bg-surface-highest text-base transition-colors touch-manipulation focus-ring"
+          >
+            {isFullscreen ? '⛶' : '⛶'}
+          </button>
         </div>
       </div>
 
       {/* Canvas */}
       <div className="relative flex-1 min-h-0 overflow-hidden">
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-surface/80 z-10 rounded-b-xl">
+          <div className="absolute inset-0 flex items-center justify-center bg-surface/80 z-10 rounded-b-xl loading-pulse">
             <div className="flex items-center gap-2 text-primary text-sm">
               <span className="animate-spin text-lg">◌</span> Loading graph…
             </div>
@@ -238,15 +288,19 @@ export default function GraphPanel({
             <p className="text-on-surface-muted text-sm">No graph data yet.</p>
           </div>
         )}
-        <div ref={containerRef} className="absolute inset-0" />
+        <div
+          ref={containerRef}
+          className="absolute inset-0 touch-pan-x touch-pan-y touch-pinch-zoom"
+          style={{ touchAction: 'pan-x pan-y pinch-zoom' }}
+        />
       </div>
 
       {/* Legend */}
-      <div className="shrink-0 px-4 py-2 flex items-center gap-3 flex-wrap border-t border-outline-variant/20">
+      <div className="shrink-0 px-4 py-2 flex items-center gap-2 md:gap-3 flex-wrap border-t border-outline-variant/20">
         {ENTITY_TYPES.map((t) => (
-          <span key={t} className="flex items-center gap-1 text-xs text-on-surface-muted">
+          <span key={t} className="flex items-center gap-1 text-xs text-on-surface-muted whitespace-nowrap">
             <span
-              className="inline-block w-2.5 h-2.5 rounded-full"
+              className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
               style={{ backgroundColor: ENTITY_COLORS[t] }}
             />
             {t}

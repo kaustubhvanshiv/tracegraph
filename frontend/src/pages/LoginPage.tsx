@@ -50,7 +50,7 @@ export default function LoginPage() {
                 id="username"
                 type="text"
                 autoComplete="username"
-                className="input-ghost w-full"
+                className="input-ghost w-full focus-ring"
                 placeholder="e.g. analyst"
                 value={username}
                 onChange={e => setUsername(e.target.value)}
@@ -68,7 +68,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={!username.trim() || loading}
-              className="btn-primary w-full"
+              className="btn-primary w-full touch-manipulation focus-ring"
             >
               {loading ? 'Signing in…' : 'Sign in'}
             </button>

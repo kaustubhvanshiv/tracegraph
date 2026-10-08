@@ -55,7 +55,7 @@ export default function AISummaryPanel({
         <button
           onClick={() => fetchSummary(true)}
           disabled={loading}
-          className="text-xs text-on-surface-muted hover:text-primary transition-colors disabled:opacity-50"
+          className="text-xs text-on-surface-muted hover:text-primary transition-colors disabled:opacity-50 focus-ring"
           title="Regenerate summary"
         >
           ↺
@@ -69,7 +69,7 @@ export default function AISummaryPanel({
           <p>The AI summary service is currently unreachable. Graph, Timeline, and Evidence panels remain fully functional.</p>
           <button
             onClick={() => fetchSummary(false)}
-            className="mt-2 text-xs text-primary hover:underline"
+            className="mt-2 text-xs text-primary hover:underline focus-ring"
           >
             Try again
           </button>
@@ -78,7 +78,7 @@ export default function AISummaryPanel({
 
       {/* Loading */}
       {loading && (
-        <div className="flex-1 flex items-center justify-center gap-2 text-primary text-sm min-h-[100px]">
+        <div className="flex-1 flex items-center justify-center gap-2 text-primary text-sm min-h-[100px] loading-pulse">
           <span className="animate-spin">◌</span> Generating summary…
         </div>
       )}
@@ -145,7 +145,7 @@ export default function AISummaryPanel({
                   <button
                     key={i}
                     onClick={() => onEvidenceRefClick(ref)}
-                    className="badge-pill mono text-xs bg-surface-low text-primary border border-primary/30 hover:bg-primary/10 transition-colors"
+                    className="badge-pill mono text-xs bg-surface-low text-primary border border-primary/30 hover:bg-primary/10 transition-colors focus-ring"
                   >
                     #{ref.slice(0, 12)}
                   </button>
@@ -188,7 +188,7 @@ export default function AISummaryPanel({
         <div className="px-4 pb-4">
           <button
             onClick={() => fetchSummary(true)}
-            className="w-full btn-primary text-sm"
+            className="w-full btn-primary text-sm focus-ring"
           >
             Regenerate Summary
           </button>

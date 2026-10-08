@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { TimelineResult, TimelineEvent } from '../../types';
 import {
   formatTimestamp,
@@ -65,6 +65,19 @@ export default function TimelinePanel({
       ? te.entity_ids.includes(activeHighlightedEntityId)
       : false;
 
+  // Track previous selection for accent bar animation
+  const prevSelectedRef = useRef<string | null>(null);
+  const [accentBarSlide, setAccentBarSlide] = useState<string | null>(null);
+
+  useEffect(() => {
+    const currentId = selectedEventId ?? null;
+    if (currentId && currentId !== prevSelectedRef.current) {
+      setAccentBarSlide(currentId);
+      setTimeout(() => setAccentBarSlide(null), 200);
+    }
+    prevSelectedRef.current = currentId;
+  }, [selectedEventId]);
+
   const handleRowClick = (te: TimelineEvent) => {
     if (onEventSelected) {
       onEventSelected(te.event.event_id, te.entity_ids);
@@ -89,7 +102,7 @@ export default function TimelinePanel({
         {/* Search + filters */}
         <div className="flex items-center gap-2 flex-wrap">
           <input
-            className="input-ghost flex-1 min-w-[140px]"
+            className="input-ghost flex-1 min-w-[140px] focus-ring"
             placeholder="Filter events…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -99,7 +112,7 @@ export default function TimelinePanel({
               <button
                 key={f}
                 onClick={() => setTypeFilter(f)}
-                className={`badge-pill text-xs cursor-pointer transition-colors ${
+                className={`badge-pill text-xs cursor-pointer transition-colors focus-ring ${
                   typeFilter === f
                     ? 'bg-primary/20 text-primary border border-primary/40'
                     : 'bg-surface-highest text-on-surface-muted border border-outline-variant hover:border-primary/30'
@@ -115,7 +128,7 @@ export default function TimelinePanel({
       {/* Event list */}
       <div className="flex-1 overflow-y-auto">
         {loading && (
-          <div className="flex items-center justify-center h-20 text-primary text-sm gap-2">
+          <div className="flex items-center justify-center h-20 text-primary text-sm gap-2 loading-pulse">
             <span className="animate-spin">◌</span> Loading…
           </div>
         )}
@@ -125,54 +138,58 @@ export default function TimelinePanel({
         {!loading && filtered.length === 0 && (
           <div className="p-6 text-center text-on-surface-muted text-sm">No events match the current filter.</div>
         )}
-        {filtered.map((te, idx) => {
-          const ev = te.event;
-          const isSelected = ev.event_id === selectedEventId;
-          const isHighlighted = isRowHighlighted(te);
-          return (
-            <button
-              key={ev.event_id}
-              onClick={() => handleRowClick(te)}
-              className={`w-full text-left flex items-start gap-3 px-4 py-3 relative transition-colors cursor-pointer
-                ${isSelected ? 'bg-surface-high' : idx % 2 === 0 ? 'bg-surface-container' : 'bg-surface-low'}
-                ${isHighlighted && !isSelected ? 'ring-1 ring-inset ring-primary/30' : ''}
-                hover:bg-surface-high`}
-            >
-              {/* Left accent */}
-              <span
-                className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-r ${
-                  isSelected ? 'bg-primary' : 'bg-transparent'
-                }`}
-              />
-              {/* Timestamp */}
-              <span className="mono text-on-surface-muted shrink-0 pt-0.5">
-                {formatTimestamp(ev.timestamp)}
-              </span>
-              {/* Type badge */}
-              <span className={`badge-pill shrink-0 ${eventTypeBadgeClass(ev.event_type)}`}>
-                {ev.event_type.toUpperCase().slice(0, 7)}
-              </span>
-              {/* Content */}
-              <div className="flex-1 min-w-0">
-                <span className="text-sm font-medium text-on-surface block truncate">
-                  {ev.source_host ?? ev.user ?? ev.event_id}
+        {/* Horizontal scroll wrapper for narrow viewports */}
+        <div className="overflow-x-auto md:overflow-x-visible -mx-4 md:mx-0 px-4 md:px-0">
+          {filtered.map((te, idx) => {
+            const ev = te.event;
+            const isSelected = ev.event_id === selectedEventId;
+            const isHighlighted = isRowHighlighted(te);
+            return (
+              <button
+                key={ev.event_id}
+                onClick={() => handleRowClick(te)}
+                className={`w-full min-w-[520px] md:min-w-0 text-left flex items-start gap-3 px-4 py-3 md:py-4 relative transition-colors cursor-pointer focus-ring
+                  ${isSelected ? 'bg-surface-high' : idx % 2 === 0 ? 'bg-surface-container' : 'bg-surface-low'}
+                  ${isHighlighted && !isSelected ? 'ring-1 ring-inset ring-primary/30' : ''}
+                  hover:bg-surface-high
+                  @media (hover: none) { active:bg-surface-high }`}
+              >
+                {/* Left accent */}
+                <span
+                  className={`absolute left-0 top-0 bottom-0 w-[3px] rounded-r ${
+                    isSelected ? 'bg-primary' : 'bg-transparent'
+                  } ${isSelected && accentBarSlide === ev.event_id ? 'accent-bar-slide' : ''}`}
+                />
+                {/* Timestamp */}
+                <span className="mono text-on-surface-muted shrink-0 pt-0.5 whitespace-nowrap">
+                  {formatTimestamp(ev.timestamp)}
                 </span>
-                <span className="text-xs text-on-surface-muted truncate block">{ev.action}</span>
-              </div>
-              {/* Severity + ID */}
-              <div className="flex flex-col items-end gap-1 shrink-0">
-                {ev.severity && (
-                  <span className={`badge-pill text-[10px] ${severityBadgeClass(ev.severity)}`}>
-                    {ev.severity.toUpperCase()}
+                {/* Type badge */}
+                <span className={`badge-pill shrink-0 ${eventTypeBadgeClass(ev.event_type)}`}>
+                  {ev.event_type.toUpperCase().slice(0, 7)}
+                </span>
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <span className="text-sm font-medium text-on-surface block truncate">
+                    {ev.source_host ?? ev.user ?? ev.event_id}
                   </span>
-                )}
-                <span className="mono text-on-surface-muted text-[10px]">
-                  {ev.event_id.slice(0, 12)}
-                </span>
-              </div>
-            </button>
-          );
-        })}
+                  <span className="text-xs text-on-surface-muted truncate block">{ev.action}</span>
+                </div>
+                {/* Severity + ID */}
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  {ev.severity && (
+                    <span className={`badge-pill text-[10px] ${severityBadgeClass(ev.severity)}`}>
+                      {ev.severity.toUpperCase()}
+                    </span>
+                  )}
+                  <span className="mono text-on-surface-muted text-[10px] whitespace-nowrap">
+                    {ev.event_id.slice(0, 12)}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Footer */}

@@ -82,12 +82,25 @@ export default function WorkspacePage() {
         onGenerateSummary={handleGenerateSummary}
       />
 
-      {/* 2-column workspace */}
-      <div className="flex-1 grid grid-cols-5 gap-3 p-3 overflow-hidden">
-        {/* LEFT: Graph (top) + Timeline (bottom) */}
-        <div className="col-span-3 flex flex-col gap-3 min-h-0">
-          {/* Graph panel: 55% height */}
-          <div className="flex-[55] min-h-0">
+      {/* Responsive workspace layout */}
+      <div className="flex-1 grid gap-3 p-3 overflow-hidden
+        grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-5
+        md:grid-rows-[auto_1fr]
+        lg:grid-rows-[1fr]
+        min-h-0">
+        
+        {/* Graph Panel - responsive positioning */}
+        <div className="
+          col-span-1
+          md:col-span-2
+          lg:col-span-3
+          lg:row-span-1
+          min-h-0
+          lg:flex lg:flex-col
+        ">
+          <div className="min-h-0 lg:flex-[55]">
             <GraphPanel
               graph={graph}
               loading={graphLoading}
@@ -98,8 +111,16 @@ export default function WorkspacePage() {
             />
           </div>
 
-          {/* Timeline panel: 45% height */}
-          <div className="flex-[45] min-h-0">
+          {/* Timeline Panel - below Graph on mobile/tablet, beside Graph on desktop */}
+          <div className="
+            col-span-1
+            md:col-span-2
+            lg:col-span-3
+            lg:row-span-1
+            min-h-0
+            lg:flex-[45]
+            mt-3 lg:mt-0
+          ">
             <TimelinePanel
               timeline={timeline}
               loading={timelineLoading}
@@ -112,8 +133,15 @@ export default function WorkspacePage() {
           </div>
         </div>
 
-        {/* RIGHT: Evidence (top) + AI Summary + Analyst Decision (stacked) */}
-        <div className="col-span-2 flex flex-col gap-3 min-h-0">
+        {/* Right Column: Evidence + AI Summary + Analyst Decision */}
+        <div className="
+          col-span-1
+          md:col-span-2
+          lg:col-span-2
+          lg:row-span-1
+          flex flex-col gap-3 min-h-0
+          order-last md:order-none
+        ">
           {/* Evidence: top third */}
           <div className="flex-1 min-h-0">
             <EvidencePanel evidence={evidence} loading={evidenceLoading} />
