@@ -80,7 +80,7 @@
     @apply transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)];
   }
 
-  /* Selection pulse - acknowledges action */
+  /* Selection pulse - acknowledges action (used on non-graph panels) */
   .selection-pulse {
     @apply relative;
   }
@@ -93,6 +93,13 @@
   @keyframes selection-pulse {
     0% { transform: scale(1); opacity: 0.4; }
     100% { transform: scale(1.15); opacity: 0; }
+  }
+
+  /* Graph node ripple — originates at the clicked node's exact position */
+  @keyframes graph-ripple {
+    0%   { width: 0px; height: 0px; box-shadow: 0 0 0 0 rgba(78, 222, 163, 0.55); opacity: 1; }
+    60%  { width: 56px; height: 56px; box-shadow: 0 0 0 12px rgba(78, 222, 163, 0); opacity: 0.6; }
+    100% { width: 56px; height: 56px; box-shadow: 0 0 0 24px rgba(78, 222, 163, 0); opacity: 0; }
   }
 
   /* Accent bar slide - makes state change legible */
