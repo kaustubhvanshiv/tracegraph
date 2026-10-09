@@ -57,6 +57,7 @@ async def seed_if_empty(force: bool = False) -> bool:
             sysmon_events = [
                 {
                     "event_id": str(uuid.uuid4()),
+                    "RecordID": str(uuid.uuid4()),
                     "Computer": "WS-FIN-01",
                     "User": "FINANCE\\jsmith",
                     "EventID": "1",
@@ -68,6 +69,7 @@ async def seed_if_empty(force: bool = False) -> bool:
                 },
                 {
                     "event_id": str(uuid.uuid4()),
+                    "RecordID": str(uuid.uuid4()),
                     "Computer": "WS-FIN-01",
                     "User": "FINANCE\\jsmith",
                     "EventID": "1",
@@ -79,6 +81,7 @@ async def seed_if_empty(force: bool = False) -> bool:
                 },
                 {
                     "event_id": str(uuid.uuid4()),
+                    "RecordID": str(uuid.uuid4()),
                     "Computer": "WS-FIN-01",
                     "User": "NT AUTHORITY\\SYSTEM",
                     "EventID": "11",

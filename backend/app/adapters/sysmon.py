@@ -13,12 +13,12 @@ class SysmonAdapter:
 
         raw_copy = copy.deepcopy(raw)
 
-        event_id = raw_copy.get("EventID") or raw_copy.get("event_id") or raw_copy.get("RecordID") or raw_copy.get("id")
+        event_id = raw_copy.get("event_id") or raw_copy.get("RecordID") or raw_copy.get("id") or raw_copy.get("EventID")
         if event_id is None or not str(event_id).strip():
             return ParseError(
                 event_id=None,
                 field_name="event_id",
-                reason="Sysmon event missing required EventID / event_id field",
+                reason="Sysmon event missing required event_id / RecordID field",
                 raw_event=raw_copy,
             )
         event_id_str = str(event_id).strip()
