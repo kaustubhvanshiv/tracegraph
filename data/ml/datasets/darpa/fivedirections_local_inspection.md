@@ -71,6 +71,11 @@ presence of a key somewhere does not imply it is populated on all events.
 
 ## Label and preparation status
 
+This section records the initial prefix inspection. Subsequent support reading,
+full reference auditing and label decisions are in
+[the reference review](reference_review.md) and
+[the current label contract](../../ground_truth.md).
+
 No candidate attack-label keys were found by the inspector's limited key-name
 check. This is not proof of their absence across every field or unsampled
 record. The source folder has no other files, and the user confirmed they did

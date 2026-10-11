@@ -11,8 +11,9 @@ alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`
 | Six-file prefix inspection | 120,000 records; 112,498 Events |
 | Support ZIP/PDF review | Complete: E5 report, CDM 2.0 schema, operational log |
 | Complete segment-121 scan | 10,000,000 records; 9,650,235 Events |
-| Ground-truth alignment | Three precise file-open matches; review candidates, not assigned labels |
+| Ground-truth alignment | Three file-open matches: one report-reviewed positive, two unknowns |
 | Reviewed-event preparation | 2,000,000 records scanned; three candidates retained; one parent process resolved |
+| Full reference audit | Six files; 60,000,000 records; missing actor/Host/Principal definitions confirmed |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
 
 The other five segments have prefix inspections only. No trained GNN or
@@ -140,10 +141,12 @@ scan does not establish indicator frequency across the release.
 & $MlPython -m unittest discover -s research/ml/tests -v
 ```
 
-With support dependencies installed, all **17 tests** should pass. They cover
+With support dependencies installed, all **22 tests** should pass. They cover
 corrupt input, sampling limits, timestamp precision/timezones, indicator-label
 separation, safe ZIP paths, preservation of archives, strict label validation,
-streaming preparation, deduplication, and chronological group/context checks.
+streaming preparation, deduplication, chronological group/context checks,
+reference conflicts, cyclic parents, process start-time checks, and local versus
+remote IP evidence.
 
 ## 8. Prepare the reviewed events
 
@@ -167,8 +170,9 @@ training dataset. `--records-per-file 0` scans selected source files fully.
 Only filenames listed in annotations are scanned; other downloaded segments
 are not implicitly covered.
 
-The current run found all three events, with null labels and one resolved
-parent process. Two events share an unresolved parent. No split files were
+The current run found all three events, with one report-reviewed positive,
+two unknown labels and one resolved parent process. Two events share an
+unresolved parent. No split files were
 written. The adapter preserves CDM actions and nanosecond timestamps in raw
 metadata; ambiguous object types are not mapped to files or processes.
 Reference joins are for audit and are not model features.
@@ -181,6 +185,48 @@ Then review annotation `label`, `review_status`, `group_id`, and `evidence`
 against the [label contract](../../data/ml/ground_truth.md), rerun preparation
 with the intended `--context-nanos`, and check the achieved split counts.
 Do not change null labels to zero to make the checks pass.
+
+## 9. Audit references across all downloaded segments
+
+```powershell
+& $MlPython -m research.ml.data_prep.resolve_references `
+  --source $DataSource `
+  --annotations data/ml/datasets/darpa/review_annotations.json `
+  --output .cache/ml-runs/my-reference-audit `
+  --records-per-file 0
+```
+
+This full scan can take several minutes. It builds a local SQLite index of
+subject, principal and host definitions, then joins the three review events.
+`scan_progress.json` records completed files; partial runs cannot be resumed.
+Use a fresh directory for a rerun. A positive limit scans prefixes only and
+cannot establish that a definition is absent from an entire segment.
+
+`reference_report.json` reports unresolved and conflicting UUIDs, distinguishes
+thread IDs from process IDs, and checks process start time against event time.
+Full command lines and principal names stay in the local SQLite index. The
+aggregate report exposes only a Firefox command-line flag for these candidates.
+Entity joins alone do not establish attack or benign labels.
+
+The completed run decoded all **60,000,000 records**, including **58,037,343
+Events**, and indexed 257,164 Subjects. No Host/Principal definitions or the
+missing parent are present in these six files. Host/IP evidence instead comes
+from 268 local netflow observations of `128.55.12.55` in a two-million-record
+segment-121 prefix. Reproduce that bounded check with:
+
+```powershell
+$Segment121 = Join-Path $DataSource 'fivedirections/ta1-fivedirections-1-e5-official-1.bin.121.gz'
+& $MlPython -m research.ml.data_prep.audit_network_host `
+  --source-file $Segment121 `
+  --output .cache/ml-runs/my-network-host-review.json `
+  --records 2000000
+```
+
+Adjust `$Segment121` if your download has a different directory layout.
+The [reference review](../../data/ml/datasets/darpa/reference_review.md)
+documents the one positive's provenance and limitations. The documented benign
+driver setup falls outside these files' event ranges. Additional telemetry or
+reviewed annotations are needed for benign examples and independent incidents.
 
 ## Linux and macOS
 

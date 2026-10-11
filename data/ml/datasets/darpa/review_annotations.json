@@ -21,7 +21,9 @@
       "evidence": {
         "report": "TA51_Final_report_E5.pdf",
         "page": 126,
-        "method": "exact generated filename and compatible UTC time; actor/host identity not fully resolved"
+        "method": "Exact generated artifact and compatible UTC time; host/IP supported but actor parent definition absent from all six downloaded files; label remains unknown",
+        "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
+        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned"
       }
     },
     {
@@ -44,7 +46,9 @@
       "evidence": {
         "report": "TA51_Final_report_E5.pdf",
         "page": 127,
-        "method": "exact generated filename and compatible UTC time; actor/host identity not fully resolved"
+        "method": "Exact generated artifact and compatible UTC time; host/IP supported but actor parent definition absent from all six downloaded files; label remains unknown",
+        "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
+        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned"
       }
     },
     {
@@ -60,14 +64,18 @@
       "cdm_event_type": "EVENT_OPEN",
       "subject_uuid": "8d1252ea10594bb2a5583880fa606aba",
       "record_index_1based": 1946604,
-      "label": null,
+      "label": 1,
       "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
       "group_id": "e5-fivedirections1-verifier-filefilter",
-      "review_status": "candidate",
+      "review_status": "verified",
       "evidence": {
         "report": "TA51_Final_report_E5.pdf",
         "page": 127,
-        "method": "exact generated filename and compatible UTC time; actor/host identity not fully resolved"
+        "method": "Manual report-to-event alignment: exact generated artifact and Pictures path; compatible 16:15 EDT report timing; matching publishing-host local IP; Firefox parent process PID 5432 started before event; no conflicting actor definitions in the downloaded subset",
+        "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
+        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned",
+        "label_provenance": "Codex source review; report-derived, not STARC annotation",
+        "limitations": "Host record and principal definition unavailable; host/IP association inferred from local netflow fields; report time has minute-level precision; label covers this artifact-open action only"
       }
     }
   ]

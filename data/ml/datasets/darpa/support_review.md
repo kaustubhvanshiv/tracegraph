@@ -1,5 +1,10 @@
 # FiveDirections support archive review and ground-truth alignment
 
+This records the initial support review. The later
+[full reference and label review](reference_review.md) supersedes its initial
+all-unknown label status: one event is now a report-reviewed positive, two
+remain unknown, and training is still blocked.
+
 Reviewed 2026-10-11. Original support files remain under:
 
 ```text

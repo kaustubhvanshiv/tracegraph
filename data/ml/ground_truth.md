@@ -43,10 +43,12 @@ activity or label-dependent graph construction as an input feature.
 Three precise report-to-event matches have now been checked in segment 121:
 the generated filenames `PD2GziBJ2wpDwP`, `7B4qoq3yWIKPQh`, and `DXu0yAtkCpuUTo`
 occur as file-open actions at the corresponding May 17 attack times. Their
-event UUIDs and source pages are in the support review. They remain review
-candidates until the annotation protocol is finalized. Verified benign
-host-1 examples and independent attack groups are still missing. None of the
-9,650,235 Events in this full segment scan is automatically assigned a binary label.
+event UUIDs and source pages are in the support review. The subsequent
+[reference review](datasets/darpa/reference_review.md) establishes one
+report-reviewed positive (`DXu0yAtkCpuUTo`); the other two remain unknown
+because their actor parent is absent. Verified benign host-1 examples and
+independent attack groups are still missing. No entire segment or interval
+is automatically assigned binary labels.
 Do not derive labels from TraceGraph `combined_score`, severity, or an LLM.
 
 The preparation manifest should record: stream, event UUID, host UUID,
@@ -127,8 +129,11 @@ The label import contract is `review_annotations.json` version 1 with an
 nanoseconds), cdm_event_type, source_file, label, group_id, review_status,
 and evidence. A binary label requires `review_status: verified`, evidence and
 a curated group ID. Candidate annotations always retain null labels.
-Current report matches do not fully establish actor and host identity, so
-all three remain unknown. No downloaded STARC annotation schema is available.
+The current annotations contain one verified report-derived positive and two
+unknown candidates. Host/IP evidence is inferred from local netflow fields;
+missing Host and Principal records remain explicit limitations. This is a
+manual source review, not STARC event annotations. No downloaded STARC
+annotation schema is available.
 
 The executable splitter orders whole groups by earliest timestamp, targets
 60/20/20, and rejects interleaved intervals, context overlap, duplicate sample
@@ -137,11 +142,19 @@ in nanoseconds; zero means event-only splitting and cannot validate a future
 graph history window. It writes split IDs only when all checks pass.
 
 Executed a 2,000,000-record segment-121 preparation scan: all three selected
-events found, zero conflicts, zero binary labels, one process reference
+events found, zero conflicts, one positive and two unknowns, one process reference
 resolved. The remaining two share missing parent UUID
 `1fca97f4e4134d05869b31eb09df8770`. Reference joins are audit metadata only;
 entity availability in a file does not establish event-time-valid features.
 See [the preparation manifest](datasets/darpa/preparation_review_manifest.json).
+
+A full cross-segment audit subsequently decoded all 60,000,000 records
+(58,037,343 Events) across six files and indexed 257,164 Subject definitions.
+No Host or Principal definitions, nor the missing actor parent, are present
+in this downloaded subset. The first five segments end by May 10; segment 121
+starts May 16 at 20:17 UTC. The May 16 11 AM EDT benign setup described on
+report page 135 is outside these event ranges and cannot supply negative labels.
+See [the full reference report](datasets/darpa/full_reference_report.json).
 
 Pending: complete entity/time/host joins, detailed canonical object semantics,
 verified positives and negatives, independent groups and actual supervised
