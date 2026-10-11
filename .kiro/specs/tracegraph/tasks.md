@@ -611,7 +611,7 @@ ML-11 final ML research documentation
 
 ---
 
-- [ ] ML-01. Dataset Analysis and Selection
+- [x] ML-01. Dataset Analysis and Selection
   - [x] ML-01.1 Catalogue all locally available candidate datasets
     - The following four datasets are already available locally. Inspect them before attempting any download.
       - `../datasets/Darpa/` — DARPA Transparent Computing (TC) engagement data; subdirectories include `Data/cadets/`, `Data/fivedirections/`, `Ground_Truth/`, and `Schema/`. The large binary/compressed files in `Data/` are the original dataset and must not be moved, modified, or deleted.
@@ -729,7 +729,9 @@ ML-11 final ML research documentation
 
   - *Requirements: ML-01.2, ML-01.3, ML-01.4*
 
-- [-] ML-01.6 Select the primary dataset and document the selection rationale
+- [x] ML-01.6 Select the primary dataset and document the selection rationale
+
+  - Completed 2026-10-11: `data/ml/comparison/primary_dataset_selection.md` selects DARPA TC E5. The actual Windows FiveDirections subset is audited in `data/ml/datasets/darpa/fivedirections_local_inspection.md`; historical analysis files are preserved.
 
   - Compare the four candidate datasets and select ONE as the primary
     ML/GNN research dataset.
@@ -768,6 +770,7 @@ ML-11 final ML research documentation
 
 - [ ] ML-02. Ground Truth and Label Definition
   - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
+  - Started 2026-10-11: `data/ml/ground_truth.md` contains a provisional label/split plan. Streaming inspection and ZIP/PDF reading are implemented and tested. Downloaded support archives have been read; a complete scan of segment 121 found three precise report-to-event matches. See `data/ml/datasets/darpa/support_review.md`. Label protocol, verified benign examples, independent incident groups, semantic conversion, and prepared splits remain pending.
 
   - [ ] ML-02.1 Define the prediction target precisely
     - Based on the selected dataset analysis from ML-01, write a formal definition in `data/ml/ground_truth.md`:

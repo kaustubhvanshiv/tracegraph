@@ -1,0 +1,74 @@
+{
+  "source_path": "D:\\Deep Learning\\darpa-tc-e5-support",
+  "archives": [
+    {
+      "path": "D:\\Deep Learning\\darpa-tc-e5-support\\Ground_Truth-20261011T062242Z-1-001.zip",
+      "sha256": "e020ed51d02e9dd7ce30ec71d0ac13bf2901de6184da358474072c692d0f2254",
+      "members": [
+        {
+          "name": "Ground_Truth/TA51_Final_report_E5.docx",
+          "bytes": 2297885,
+          "extracted": false
+        },
+        {
+          "name": "Ground_Truth/TA51_Final_report_E5.pdf",
+          "bytes": 3457780,
+          "extracted": true,
+          "sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+          "output_path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Ground_Truth\\TA51_Final_report_E5.pdf"
+        }
+      ]
+    },
+    {
+      "path": "D:\\Deep Learning\\darpa-tc-e5-support\\Schema-20261011T062309Z-1-001.zip",
+      "sha256": "d19b5bc689f3ed9ceaa15fdf583f6947cee7ac106c39d9e04c551fd4ee8359fc",
+      "members": [
+        {
+          "name": "Schema/TCCDMDatum.avsc",
+          "bytes": 51115,
+          "extracted": true,
+          "sha256": "f5a36712da9d8416f21b53a9fb6b375e4850475a8a7412901073ff139348fb11",
+          "output_path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\TCCDMDatum.avsc"
+        },
+        {
+          "name": "Schema/cdm.pdf",
+          "bytes": 77763,
+          "extracted": true,
+          "sha256": "c7b13a84999e1b77bf7c9c1d647ebab42f388d7e0ffa7ef5269e0c908ce74b2c",
+          "output_path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\cdm.pdf"
+        },
+        {
+          "name": "Schema/CDM20.avdl",
+          "bytes": 53312,
+          "extracted": true,
+          "sha256": "cb17265a7b36a148ebff35aa764c2f0e0b4acc2b0acdab2b3a3dfcea4913397f",
+          "output_path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\CDM20.avdl"
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Engagement-5-Event-Log.md",
+      "sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+    },
+    {
+      "path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Ground_Truth\\TA51_Final_report_E5.pdf",
+      "sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+      "page_count": 158
+    },
+    {
+      "path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\cdm.pdf",
+      "sha256": "c7b13a84999e1b77bf7c9c1d647ebab42f388d7e0ffa7ef5269e0c908ce74b2c",
+      "page_count": 6
+    },
+    {
+      "path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\CDM20.avdl",
+      "sha256": "cb17265a7b36a148ebff35aa764c2f0e0b4acc2b0acdab2b3a3dfcea4913397f"
+    },
+    {
+      "path": "C:\\codes\\PBL sem 7\\tracegraph\\.cache\\ml-support\\Schema\\TCCDMDatum.avsc",
+      "sha256": "f5a36712da9d8416f21b53a9fb6b375e4850475a8a7412901073ff139348fb11"
+    }
+  ]
+}

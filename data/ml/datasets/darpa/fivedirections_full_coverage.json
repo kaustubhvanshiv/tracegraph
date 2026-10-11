@@ -1,0 +1,429 @@
+{
+  "source_path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049",
+  "candidates_path": "C:\\codes\\PBL sem 7\\tracegraph\\data\\ml\\datasets\\darpa\\fivedirections_attack_candidates.json",
+  "label_status": "review candidates only; all labels unknown",
+  "files": [
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "compressed_bytes": 315341536,
+      "complete_scan": true,
+      "records": 10000000,
+      "record_type_counts": {
+        "RECORD_EVENT": 9650235,
+        "RECORD_MEMORY_OBJECT": 312609,
+        "RECORD_SUBJECT": 29959,
+        "RECORD_IPC_OBJECT": 3316,
+        "RECORD_TIME_MARKER": 194,
+        "RECORD_NET_FLOW_OBJECT": 1565,
+        "RECORD_FILE_OBJECT": 1155,
+        "RECORD_REGISTRY_KEY_OBJECT": 926,
+        "RECORD_SRC_SINK_OBJECT": 41
+      },
+      "event_count": 9650235,
+      "event_type_counts": {
+        "EVENT_CLOSE": 795325,
+        "EVENT_OPEN": 1048570,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 1373909,
+        "EVENT_READ": 2477891,
+        "EVENT_OTHER": 578589,
+        "EVENT_WRITE": 424457,
+        "EVENT_CREATE_OBJECT": 1017535,
+        "EVENT_EXIT": 31117,
+        "EVENT_CREATE_THREAD": 28343,
+        "EVENT_SENDTO": 1402899,
+        "EVENT_RECVFROM": 142781,
+        "EVENT_FCNTL": 171024,
+        "EVENT_RENAME": 2999,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 38676,
+        "EVENT_FORK": 1351,
+        "EVENT_EXECUTE": 1351,
+        "EVENT_ACCEPT": 7168,
+        "EVENT_SIGNAL": 1361,
+        "EVENT_LOGOUT": 109,
+        "EVENT_LOADLIBRARY": 45626,
+        "EVENT_BIND": 7233,
+        "EVENT_CONNECT": 5762,
+        "EVENT_LOGIN": 163,
+        "EVENT_RECVMSG": 36014,
+        "EVENT_SENDMSG": 6856,
+        "EVENT_UNLINK": 2894,
+        "EVENT_LINK": 213,
+        "EVENT_UPDATE": 18,
+        "EVENT_SERVICEINSTALL": 1
+      },
+      "min_event_time_utc": "2019-05-16T20:17:51.316000000Z",
+      "max_event_time_utc": "2019-05-17T21:32:40.180000000Z",
+      "host_event_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 9650235
+      },
+      "host_definitions": {},
+      "schema_canonical_sha256": "305b20b24537f2cb015f20440d1944446255c0948f441088d7bccf22251d7e4d",
+      "downloaded_schema_matches": true,
+      "candidate_interval_event_counts": {
+        "e5-fivedirections1-verifier-persistence": 7079314,
+        "e5-fivedirections1-filefilter-elevation": 1362932
+      },
+      "indicator_event_counts": {
+        "dbgstat.dll": 761,
+        "pd2gzibj2wpdwp": 1,
+        "7b4qoq3ywikpqh": 1,
+        "dxu0yatkcpuuto": 1,
+        "tester.exe": 12
+      },
+      "review_event_references": [
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "58518a81c0a14fb2b18886befc117118",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 989647,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "50dcf7a11c7c4d77a961e8f1c708d1eb",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448707000000,
+          "timestamp_utc": "2019-05-17T20:04:08.707000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 989648,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "5f8d5212e622466a99de43d5791c35a0",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448726000000,
+          "timestamp_utc": "2019-05-17T20:04:08.726000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "f26c1a90b8e142c390f87d20acb6a784",
+          "record_index_1based": 989654,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "24622fbaf5174585b645f5a3f92ac2a5",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990521,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "2acb9200b0bd42eda90e39cfef364507",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990525,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "fbda5d2711dd4fc39b2d3089d396d5ec",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990526,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "8e910a5260934c6f949377becdbe39c3",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990527,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "8fe40fb604ba4d79bb46a6b1dfbaa639",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990528,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "18ea3d4b0e41436780af185764c28b75",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448701000000,
+          "timestamp_utc": "2019-05-17T20:04:08.701000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990529,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "dbgstat.dll",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "351394b49c614b54bec98807a30336d4",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123448702000000,
+          "timestamp_utc": "2019-05-17T20:04:08.702000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "014d26216d4f4cae8c2bc9f704caf7ed",
+          "record_index_1based": 990530,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-filefilter-elevation",
+          "indicator": "pd2gzibj2wpdwp",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123962746000000,
+          "timestamp_utc": "2019-05-17T20:12:42.746000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "record_index_1based": 1568068,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-filefilter-elevation",
+          "indicator": "7b4qoq3ywikpqh",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558123996800000000,
+          "timestamp_utc": "2019-05-17T20:13:16.800000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "record_index_1based": 1778584,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-filefilter-elevation",
+          "indicator": "dxu0yatkcpuuto",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558124093225000000,
+          "timestamp_utc": "2019-05-17T20:14:53.225000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "8d1252ea10594bb2a5583880fa606aba",
+          "record_index_1based": 1946604,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "2a6525e2aa8b4d73903f1d85a7dc08e6",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988967000000,
+          "timestamp_utc": "2019-05-17T21:19:48.967000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635619,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "50f09d09c02d4b19b07055135ab5c908",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635620,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "b0222a6217994569a3bc1204c50ee305",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635621,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "e057ed40545b47e9be3d8256f16bcd13",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635622,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "32203029f57a4ea59d4376bc1a6f0f6c",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635623,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "098c3ccc9d984834ae8edc0c9193ec05",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635624,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "ff645f01137643cb979b604871ec28a0",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635625,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "47354028e78e4da2be1bdcd05c2bbcf8",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635626,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "25f441e7a30840f09cd05810a40d7bc3",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9635630,
+          "label": null
+        },
+        {
+          "incident_id": "e5-fivedirections1-verifier-persistence",
+          "indicator": "tester.exe",
+          "matched_fields": [
+            "predicateObjectPath"
+          ],
+          "event_uuid": "27c15b5a3a864184b5837049fbbac77c",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "timestamp_nanos": 1558127988968000000,
+          "timestamp_utc": "2019-05-17T21:19:48.968000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "125b6eb88b8d49de8196f074d5fb22a6",
+          "record_index_1based": 9637079,
+          "label": null
+        }
+      ],
+      "labels_assigned": 0,
+      "source_modified_time_ns": 1791697965512666700
+    }
+  ],
+  "errors": [],
+  "expected_file_count": 6,
+  "all_files_fully_scanned": false,
+  "scan_status": "Segment 121 fully scanned; other segments retain prefix inspections only. Broader full scans deferred until labeled task and incident coverage are established.",
+  "config_sha256": "8117b068816aebde3baab6f8b9d6e33999fdfa3159225da80405d092c9bf18db"
+}

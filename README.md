@@ -8,6 +8,10 @@ TraceGraph is a modern security investigation workspace designed for Security Op
 
 ## 🌟 Key Features
 
+For the DARPA deep learning research on `deeplearning/shlok`, follow the
+[ML setup and reproduction guide](research/ml/README.md). It covers downloads,
+ZIP handling, inspection, evidence alignment, tests, and current training gates.
+
 * **Interactive Entity Graph**: Visualizes relationships between Users, Hosts, IPs, Processes, and Files using Cytoscape.js with force-directed layouts.
 * **Chronological Event Timeline**: Filterable event stream categorized by threat level, event type (`Auth`, `Process`, `Network`, `File`), and cross-linked entity highlights.
 * **Multi-Source Ingestion Pipeline**: Parsers and normalizers for Sysmon, EDR, SIEM, Authentication, and Network traffic.

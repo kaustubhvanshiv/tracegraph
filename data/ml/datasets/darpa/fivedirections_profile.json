@@ -1,0 +1,4405 @@
+{
+  "source_path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049",
+  "records_per_file_limit": 20000,
+  "sampling_method": "prefix of each file; not random or representative of the full release",
+  "file_count": 6,
+  "total_compressed_bytes": 1891510041,
+  "records_inspected": 120000,
+  "events_inspected": 112498,
+  "all_files_fully_scanned": false,
+  "ground_truth_status": "unverified; missing annotations do not imply benign activity",
+  "other_local_files": [],
+  "schema_record_fields": {
+    "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae": {
+      "com.bbn.tc.schema.avro.cdm20.TCCDMDatum": [
+        {
+          "name": "datum",
+          "type": [
+            {
+              "type": "record",
+              "doc": "* Hosts represent a host/machine/node in a network.",
+              "name": "com.bbn.tc.schema.avro.cdm20.Host",
+              "fields": [
+                {
+                  "doc": "universally unique identifier for the host",
+                  "name": "uuid",
+                  "type": {
+                    "type": "fixed",
+                    "doc": "* A host MUST NOT reuse UUIDs at all within their system, even\n     * across restarts, and definitely not for 2 distinct objects",
+                    "name": "com.bbn.tc.schema.avro.cdm20.UUID",
+                    "size": 16
+                  }
+                },
+                {
+                  "doc": "hostname or machine name",
+                  "name": "hostName",
+                  "type": "string"
+                },
+                {
+                  "doc": "* For debugging and analysis, the TA2 and TA3 teams would\n         * like to have the TA1 version number included in the CDM\n         * output. This string gets populated from the contents of a\n         * well known file, either /etc/tc-version or\n         * \\Windows\\System32\\drivers\\etc\\tc-version. This file\n         * contains a date timestamp (down to second granularity) and\n         * hash (that incorporates all components of the system\n         * including configs and translator).",
+                  "name": "ta1Version",
+                  "type": "string"
+                },
+                {
+                  "default": null,
+                  "doc": "list of identifiers, such as serial number, IMEI number",
+                  "name": "hostIdentifiers",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "record",
+                        "doc": "Host identifier, such as serial number, IMEI number",
+                        "name": "com.bbn.tc.schema.avro.cdm20.HostIdentifier",
+                        "fields": [
+                          {
+                            "name": "idType",
+                            "type": "string"
+                          },
+                          {
+                            "name": "idValue",
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "OS level details revealed by tools such as uname -a",
+                  "name": "osDetails",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "doc": "host's role or device type, such as mobile, server, desktop",
+                  "name": "hostType",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* HostType enumerates the host roles or device types",
+                    "name": "com.bbn.tc.schema.avro.cdm20.HostType",
+                    "symbols": [
+                      "HOST_MOBILE",
+                      "HOST_SERVER",
+                      "HOST_DESKTOP",
+                      "HOST_OTHER"
+                    ]
+                  }
+                },
+                {
+                  "default": null,
+                  "doc": "names and addresses of network interfaces",
+                  "name": "interfaces",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "record",
+                        "doc": "Interface name and addresses",
+                        "name": "com.bbn.tc.schema.avro.cdm20.Interface",
+                        "fields": [
+                          {
+                            "name": "name",
+                            "type": "string"
+                          },
+                          {
+                            "name": "macAddress",
+                            "type": "string"
+                          },
+                          {
+                            "default": null,
+                            "name": "ipAddresses",
+                            "type": [
+                              "null",
+                              {
+                                "type": "array",
+                                "items": "string"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* A principal is a local user\n     * TODO: extend to include remote principals\n     * TODO: what happens when the user information changes (are we tracking versions?)\n     * TODO: Authentication mechanisms: are TA1s providing that information and how?",
+              "name": "com.bbn.tc.schema.avro.cdm20.Principal",
+              "fields": [
+                {
+                  "doc": "A unique id for the principal",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "default": "PRINCIPAL_LOCAL",
+                  "doc": "The type of the principal, local by default",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* PrincipalType identifies the type of user: either local to the\n     * host, or remote users/systems.",
+                    "name": "com.bbn.tc.schema.avro.cdm20.PrincipalType",
+                    "symbols": [
+                      "PRINCIPAL_LOCAL",
+                      "PRINCIPAL_REMOTE"
+                    ]
+                  }
+                },
+                {
+                  "doc": "The operating system identifier associated with the user",
+                  "name": "userId",
+                  "type": "string"
+                },
+                {
+                  "default": null,
+                  "doc": "Human-readable string identifier, such as username (Optional)",
+                  "name": "username",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The ids of the groups which this user is part of",
+                  "name": "groupIds",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "string"
+                    }
+                  ]
+                },
+                {
+                  "order": "ignore",
+                  "default": null,
+                  "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                  "name": "properties",
+                  "type": [
+                    "null",
+                    {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* A provenance tag defines source dependence on specific data sources (inputs).\n     * A tag identifier is typically bound to a source and used by the tracking system to\n     * capture dependence on this source input.\n     *\n     * ProvenanceTagNode defines one step of provenance for a value\n     * (i.e., one read from a source or write to a sink), a reference\n     * to the previous provenance of the value (if any), and the tag\n     * operation that resulted the tagId of this ProvenanceTagNode",
+              "name": "com.bbn.tc.schema.avro.cdm20.ProvenanceTagNode",
+              "fields": [
+                {
+                  "doc": "Tag ID for this node *",
+                  "name": "tagId",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "default": null,
+                  "doc": "* The UUID of the source or sink object associated with this\n         * tag. (Optional)\n         *\n         * This attribute is optional because if the\n         * ProvenanceTagNode is simply joining two existing\n         * provenances (e.g., when two values are added together), there\n         * is no flow object associated with that definition.\n         *",
+                  "name": "flowObject",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "doc": "Subject that is performing the src/sink action *",
+                  "name": "subject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "default": null,
+                  "doc": "System call that read/wrote the data *",
+                  "name": "systemCall",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The program point where the event was triggered (e.g., executable and line number), (Optional)",
+                  "name": "programPoint",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The previous tag for this value *",
+                  "name": "prevTagId",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Tag operation that resulted in the tagId of this ProvenanceTagNode *",
+                  "name": "opcode",
+                  "type": [
+                    "null",
+                    {
+                      "type": "enum",
+                      "doc": "* The tag opcode describes the provenance relation i.e., how multiple sources are combined to\n     * produce the output. We identify the following provenance relations",
+                      "name": "com.bbn.tc.schema.avro.cdm20.TagOpCode",
+                      "symbols": [
+                        "TAG_OP_UNION",
+                        "TAG_OP_ENCODE",
+                        "TAG_OP_STRONG",
+                        "TAG_OP_MEDIUM",
+                        "TAG_OP_WEAK"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "tagIds",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The integrity tag may be used to specify the intial\n         *  integrity of an entity, or to endorse it content after\n         *  performing appropriate checking/sanitization.",
+                  "name": "itag",
+                  "type": [
+                    "null",
+                    {
+                      "type": "enum",
+                      "doc": "* The integrity tag may be used to specify the initial integrity of an entity,\n     * or to endorse its content after performing appropriate checking/sanitization.",
+                      "name": "com.bbn.tc.schema.avro.cdm20.IntegrityTag",
+                      "symbols": [
+                        "INTEGRITY_UNTRUSTED",
+                        "INTEGRITY_BENIGN",
+                        "INTEGRITY_INVULNERABLE"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The confidentiality tag may be used to specify the initial\n         * confidentiality of an entity, or to declassify its content\n         * after performing appropriate checking/sanitization.",
+                  "name": "ctag",
+                  "type": [
+                    "null",
+                    {
+                      "type": "enum",
+                      "doc": "* The confidentiality tag may be used to specify the initial confidentiality of an entity,\n     * or to declassify its content after performing appropriate checking/sanitization.",
+                      "name": "com.bbn.tc.schema.avro.cdm20.ConfidentialityTag",
+                      "symbols": [
+                        "CONFIDENTIALITY_SECRET",
+                        "CONFIDENTIALITY_SENSITIVE",
+                        "CONFIDENTIALITY_PRIVATE",
+                        "CONFIDENTIALITY_PUBLIC"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "order": "ignore",
+                  "default": null,
+                  "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                  "name": "properties",
+                  "type": [
+                    "null",
+                    {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* An UnknownProvenanceNode communicates that a Value (of an\n     * Event) has unknown provenance. This record can be used anywhere\n     * a ProvenanceTagNode can be used. \n     *\n     * Example use cases from the ClearScope team: During the early\n     * stages of device boot we are not tracking; files are written\n     * during these stages, and when they are later read, we would\n     * like to report the (earliest) provenance as unknown. Also, for\n     * some processes we do not have our full-precision tracking\n     * enabled, and we would like to communicate to the TA2 analyses\n     * that a Value has unknown provenance, but that the value was\n     * generated by a particular program, possibly at a particular\n     * program point.\n     * \n     * Semantically, if a Value is tagged with an\n     * UnknownProvenanceNode with a Subject, this means that the Value\n     * could have any provenance generated by that Subject up to the\n     * point the UnknownProvnenanceNode was generated.\n     *\n     * If a Value is tagged with an UnknownProvenanceNode with no\n     * subject, it should be conservatively interpreted as meaning the\n     * value could have any \"provenance\" defined by the system up to\n     * the point the UnknownProvenanceNode was created.",
+              "name": "com.bbn.tc.schema.avro.cdm20.UnknownProvenanceNode",
+              "fields": [
+                {
+                  "doc": "Tag ID for this node *",
+                  "name": "upnTagId",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "default": null,
+                  "doc": "the subject that generated this UnknownProvenanceNode, optional",
+                  "name": "subject",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The program point where the node was created\n            (e.g., executable and line number), (Optional)",
+                  "name": "programPoint",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "order": "ignore",
+                  "default": null,
+                  "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                  "name": "properties",
+                  "type": [
+                    "null",
+                    {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Subjects represent execution contexts and include mainly threads and processes. They can be more granular and\n     * can represent other execution boundaries such as units and blocks if needed.",
+              "name": "com.bbn.tc.schema.avro.cdm20.Subject",
+              "fields": [
+                {
+                  "doc": "universally unique identifier for the subject",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "the subject type",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* SubjectType enumerates the types of execution contexts supported.\n     *\n     * SUBJECT_PROCESS,    process\n     * SUBJECT_THREAD,     thread within a process\n     * SUBJECT_UNIT        so far we only know of TRACE BEEP using this",
+                    "name": "com.bbn.tc.schema.avro.cdm20.SubjectType",
+                    "symbols": [
+                      "SUBJECT_PROCESS",
+                      "SUBJECT_THREAD",
+                      "SUBJECT_UNIT",
+                      "SUBJECT_BASIC_BLOCK",
+                      "SUBJECT_OTHER"
+                    ]
+                  }
+                },
+                {
+                  "doc": "Context ID: OS process id for type process, thread id for threads",
+                  "name": "cid",
+                  "type": "int"
+                },
+                {
+                  "default": null,
+                  "doc": "* parent subject's UUID. For a process, this is a parent\n         * process. For a thread, this is the process that created the\n         * thread. Only optional because in some cases the parent may not\n         * be known; null value indicates that the parent is unknown.",
+                  "name": "parentSubject",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* UUID of local principal that owns this subject This\n         * attribute is optional because there are times when\n         * the owner of the subject may not be known at the time the file\n         * object is reported (e.g., missed open call). Otherwise,\n         * the local principal SHOULD be included.",
+                  "name": "localPrincipal",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The start time of the subject\n         * A timestamp stores the number of nanoseconds from the unix epoch, 1 January 1970 00:00:00.000000 UTC.\n         *\n         * This attribute is optional because there are times when the\n         * subject's start time may not be known. This happens when\n         * the subject was started before TC instrumentation software\n         * was started. Otherwise, the timestamp SHOULD be included.",
+                  "name": "startTimestampNanos",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "unit id for unit based instrumentation (Optional)",
+                  "name": "unitId",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "iteration and count are used for distinguishing individual \"units\" of execution (Optional)",
+                  "name": "iteration",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "count",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Process command line arguments including process name (Optional)",
+                  "name": "cmdLine",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Windows allows processes to have different privilege levels (Optional)",
+                  "name": "privilegeLevel",
+                  "type": [
+                    "null",
+                    {
+                      "type": "enum",
+                      "doc": "* Windows allows Subjects (processes) to have the following\n     * enumerated privilege levels.",
+                      "name": "com.bbn.tc.schema.avro.cdm20.PrivilegeLevel",
+                      "symbols": [
+                        "LIMITED",
+                        "ELEVATED",
+                        "FULL"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* imported libraries. (Optional). Lists the libraries that\n         * are expected to be loaded, but may not necessarily\n         * correspond 1-to-1 with actual load library events because\n         * some libraries may already be loaded when this event\n         * occurs.",
+                  "name": "importedLibraries",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "string"
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "exported libraries. (Optional)",
+                  "name": "exportedLibraries",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "string"
+                    }
+                  ]
+                },
+                {
+                  "order": "ignore",
+                  "default": null,
+                  "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                  "name": "properties",
+                  "type": [
+                    "null",
+                    {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a file on the file system. Instantiates an AbstractObject.",
+              "name": "com.bbn.tc.schema.avro.cdm20.FileObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": {
+                    "type": "record",
+                    "doc": "*  Objects, in general, represent data sources and sinks which\n     *  could include sockets, files, memory, and any data in general\n     *  that can be an input and/or output to an event.  This record\n     *  is intended to be abstract i.e., one should not instantiate an\n     *  Object but rather instantiate one of its sub types (ie,\n     *  encapsulating records) FileObject, UnnamedPipeObject,\n     *  RegistryKeyObject, NetFlowObject, MemoryObject, or\n     *  SrcSinkObject.",
+                    "name": "com.bbn.tc.schema.avro.cdm20.AbstractObject",
+                    "fields": [
+                      {
+                        "default": null,
+                        "doc": "Permission bits defined over the object (Optional)",
+                        "name": "permission",
+                        "type": [
+                          "null",
+                          {
+                            "type": "fixed",
+                            "name": "com.bbn.tc.schema.avro.cdm20.SHORT",
+                            "size": 2
+                          }
+                        ]
+                      },
+                      {
+                        "default": null,
+                        "doc": "* Used to track when an object is deleted and a new one is\n         * created with the same identifier. This is useful for when\n         * UUIDs are based on something not likely to be unique, such\n         * as file path.",
+                        "name": "epoch",
+                        "type": [
+                          "null",
+                          "int"
+                        ]
+                      },
+                      {
+                        "order": "ignore",
+                        "default": null,
+                        "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                        "name": "properties",
+                        "type": [
+                          "null",
+                          {
+                            "type": "map",
+                            "values": "string"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "doc": "The type of FileObject",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* These types enumerate the types of FileObjects",
+                    "name": "com.bbn.tc.schema.avro.cdm20.FileObjectType",
+                    "symbols": [
+                      "FILE_OBJECT_BLOCK",
+                      "FILE_OBJECT_CHAR",
+                      "FILE_OBJECT_DIR",
+                      "FILE_OBJECT_FILE",
+                      "FILE_OBJECT_LINK",
+                      "FILE_OBJECT_PEFILE",
+                      "FILE_OBJECT_UNIX_SOCKET"
+                    ]
+                  }
+                },
+                {
+                  "default": null,
+                  "doc": "The file descriptor (Optional)",
+                  "name": "fileDescriptor",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "UUID of local principal that owns this file object.  This\n         * attribute is optional because there are times when \n         * the owner of the file may not be known at the time the file\n         * object is reported (e.g., missed open call). Otherwise,\n         * the local principal SHOULD be included.",
+                  "name": "localPrincipal",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The file size in bytes (Optional). This attribute reports\n         * the file size at the time the FileObject is created. Since records\n         * are not updated, changes in file size is trackable via the events\n         * that changed the file size.",
+                  "name": "size",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* portable execution (PE) info for windows (Optional).\n         * Note from FiveDirections: We will LIKELY change this type for engagement 3",
+                  "name": "peInfo",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "(Optional) Zero or more cryptographic hashes over the FileObject",
+                  "name": "hashes",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "record",
+                        "doc": "* Cryptographic hash records represent one or more cryptographic hashes for\n     * an object, typically, a FileObject.",
+                        "name": "com.bbn.tc.schema.avro.cdm20.CryptographicHash",
+                        "fields": [
+                          {
+                            "doc": "The type of hash used",
+                            "name": "type",
+                            "type": {
+                              "type": "enum",
+                              "doc": "Cryptographich hash types",
+                              "name": "com.bbn.tc.schema.avro.cdm20.CryptoHashType",
+                              "symbols": [
+                                "MD5",
+                                "SHA1",
+                                "SHA256",
+                                "SHA512",
+                                "AUTHENTIHASH",
+                                "SSDEEP",
+                                "IMPHASH"
+                              ]
+                            }
+                          },
+                          {
+                            "doc": "The base64 encoded hash value",
+                            "name": "hash",
+                            "type": "string"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents an IPC. Instantiates an AbstractObject.",
+              "name": "com.bbn.tc.schema.avro.cdm20.IpcObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "doc": "The type of IpcObject",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* These types enumerate the types of IpcObjects",
+                    "name": "com.bbn.tc.schema.avro.cdm20.IpcObjectType",
+                    "symbols": [
+                      "IPC_OBJECT_PIPE_NAMED",
+                      "IPC_OBJECT_PIPE_UNNAMED",
+                      "IPC_OBJECT_SOCKET_ABSTRACT",
+                      "IPC_OBJECT_SOCKET_PAIR",
+                      "IPC_OBJECT_SOCKET_PATHNAME",
+                      "IPC_OBJECT_SOCKET_UNNAMED",
+                      "IPC_OBJECT_WINDOWS_ALPC",
+                      "IPC_OBJECT_WINDOWS_MAILSLOT",
+                      "IPC_OBJECT_SOCKET_NETLINK"
+                    ]
+                  }
+                },
+                {
+                  "default": null,
+                  "doc": "* If flow is unidirectional, then source is UUID1/fd1 and\n         * destination is UUID2/fd2.",
+                  "name": "uuid1",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "uuid2",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "fd1",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "fd2",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a registry key. Instantiates an AbstractObject.",
+              "name": "com.bbn.tc.schema.avro.cdm20.RegistryKeyObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "doc": "The registry key/path",
+                  "name": "key",
+                  "type": "string"
+                },
+                {
+                  "default": null,
+                  "doc": "The value of the key",
+                  "name": "value",
+                  "type": [
+                    "null",
+                    {
+                      "type": "record",
+                      "doc": "* Values represent transient data, mainly parameters to\n     * events. Values are created and used once within an event's\n     * execution and are relevant mainly during fine-grained tracking\n     * (such as with tag/taint propagation).  Values have tags\n     * describing their provenance. Sometimes the actual value's value\n     * is reported in addition to the value's metadata\n     *\n     * The size of the value is the number of elements of type\n     * valueDataType. This should be -1 for primitive and complex\n     * types.  For arrays, the size is the array length. i.e., if\n     * size >= 0, then this value is an array.  A complex value (such as\n     * an object) can contain other values (primitives or other\n     * complex values) within it, as components.\n     *\n     * Examples: <br>\n     *\n     * an integer will have size=-1 and valueDataType=INT, and\n     * valueBytes.length=4 bytes <br>\n     *\n     * an int[4] will have size=4 and valueDataType=INT, and\n     * valueBytes.length=16 bytes (4*4) <br>\n     *\n     * a string s=\"abc\" has size=3 and valueDataType=CHAR, and\n     * valueBytes.length=12 bytes (UTF32_BE encoding; 4 bytes per\n     * char) <br>\n     *\n     * an MyClass obj has size=-1, valueDataType=COMPLEX,\n     * runtimeDataType=\"MyClass\", valueBytes=<pointer> <br>",
+                      "name": "com.bbn.tc.schema.avro.cdm20.Value",
+                      "fields": [
+                        {
+                          "default": -1,
+                          "doc": "The size of the value: the number of elements of type valueDataType; -1 for non-arrays",
+                          "name": "size",
+                          "type": "int"
+                        },
+                        {
+                          "doc": "The type indicates whether it's a source, sink, or control value",
+                          "name": "type",
+                          "type": {
+                            "type": "enum",
+                            "doc": "* A value type is either source, sink, or control This is for\n     * Event parameters to distinguish source/sink values vs control\n     * parameters (such as a file descriptor).",
+                            "name": "com.bbn.tc.schema.avro.cdm20.ValueType",
+                            "symbols": [
+                              "VALUE_TYPE_SRC",
+                              "VALUE_TYPE_SINK",
+                              "VALUE_TYPE_CONTROL"
+                            ]
+                          }
+                        },
+                        {
+                          "doc": "The actual datatype of the value elements, e.g., int, double, byte, etc. (Optional)\n         *  Strings are treated as char[] so type=CHAR\n         *  String[] is a COMPLEX value whose components are the string values (each modeled as a char[])\n         *  Complex composite objects comprising of primitive values use the COMPLEX type",
+                          "name": "valueDataType",
+                          "type": {
+                            "type": "enum",
+                            "doc": "* A value data type is one of the primitive data types. A string is treated as a char array",
+                            "name": "com.bbn.tc.schema.avro.cdm20.ValueDataType",
+                            "symbols": [
+                              "VALUE_DATA_TYPE_BYTE",
+                              "VALUE_DATA_TYPE_BOOL",
+                              "VALUE_DATA_TYPE_CHAR",
+                              "VALUE_DATA_TYPE_SHORT",
+                              "VALUE_DATA_TYPE_INT",
+                              "VALUE_DATA_TYPE_FLOAT",
+                              "VALUE_DATA_TYPE_LONG",
+                              "VALUE_DATA_TYPE_DOUBLE",
+                              "VALUE_DATA_TYPE_POINTER32",
+                              "VALUE_DATA_TYPE_POINTER64",
+                              "VALUE_DATA_TYPE_COMPLEX"
+                            ]
+                          }
+                        },
+                        {
+                          "default": false,
+                          "doc": "Whether this value is null, needed to indicate null objects (default: false)",
+                          "name": "isNull",
+                          "type": "boolean"
+                        },
+                        {
+                          "default": null,
+                          "doc": "the name of the Value, string. (Optional)",
+                          "name": "name",
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        {
+                          "default": null,
+                          "doc": "The runtime data type of the value (Optional); For example, an object of dataType=COMPLEX, can have\n         *  a runtime data type of say \"MyClass\"",
+                          "name": "runtimeDataType",
+                          "type": [
+                            "null",
+                            "string"
+                          ]
+                        },
+                        {
+                          "default": null,
+                          "doc": "* The actual bytes of the value in Big Endian format, e.g.,\n         * an int is converted to a 4 byte buffer (Optional)\n         *\n         * Strings are represented as an array of UTF32_BE encoded\n         * characters (i.e., 4 bytes per char)",
+                          "name": "valueBytes",
+                          "type": [
+                            "null",
+                            "bytes"
+                          ]
+                        },
+                        {
+                          "default": null,
+                          "doc": "* Assertions about the provenance of this value\n         * (e.g., the file that data is claimed to come from).\n         *\n         * This is a direct assertion about provenance for systems that don't\n         * use tags to track data flows.",
+                          "name": "provenance",
+                          "type": [
+                            "null",
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "record",
+                                "doc": "* An assertion about the provenance of information",
+                                "name": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion",
+                                "fields": [
+                                  {
+                                    "doc": "Which Subject is making this assertion?",
+                                    "name": "asserter",
+                                    "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                                  },
+                                  {
+                                    "default": null,
+                                    "doc": "Object(s) that this Value's data came from.",
+                                    "name": "sources",
+                                    "type": [
+                                      "null",
+                                      {
+                                        "type": "array",
+                                        "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "default": null,
+                                    "doc": "* Further provenance assertions within this assertion.\n\t * For example, to describe a situation in which X asserts that\n\t * Y asserts that Z asserts that V came from {p,q}:\n\t *\n\t * ```\n\t * Event {\n\t *   subject = X,\n\t *   parameters = [\n\t *     Value (V) {\n\t *       provenance = [\n\t *         ProvenanceAssertion {\n\t *           asserter = UUID of X,\n\t *           sources = [ UUID of p, UUID of q ],\n\t *           provenance = [\n\t *             ProvenanceAssertion {\n\t *               asserter = UUID of Y,\n\t *               provenance = [\n\t *                 ProvenanceAssertion {\n\t *                   asserter = UUID of Z,\n\t *                 },\n\t *               ],\n\t *             },\n\t *           ],\n\t *         },\n\t *       ],\n\t *     },\n\t *   ],\n\t * }\n\t * ```\n\t * Z should have a provenance assertion\n\t * e.g.,\n         * \"X asserts that Y asserts that Z comes from {p,q}\".",
+                                    "name": "provenance",
+                                    "type": [
+                                      "null",
+                                      {
+                                        "type": "array",
+                                        "items": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "default": null,
+                          "doc": "* The value's tag expression describing its provenance (Optional)\n         * Since value could be an array, the tag can use run length encoding if needed.",
+                          "name": "tag",
+                          "type": [
+                            "null",
+                            {
+                              "type": "array",
+                              "items": {
+                                "type": "record",
+                                "doc": "* This record is a single tuple in a run length encoding of tags",
+                                "name": "com.bbn.tc.schema.avro.cdm20.TagRunLengthTuple",
+                                "fields": [
+                                  {
+                                    "default": 0,
+                                    "name": "numValueElements",
+                                    "type": "int"
+                                  },
+                                  {
+                                    "name": "tagId",
+                                    "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "default": null,
+                          "doc": "A complex value might comprise other component values if needed (Optional)",
+                          "name": "components",
+                          "type": [
+                            "null",
+                            {
+                              "type": "array",
+                              "items": "com.bbn.tc.schema.avro.cdm20.Value"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The entry size in bytes (Optional)",
+                  "name": "size",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a packet socket. Instantiates an AbstractObject.",
+              "name": "com.bbn.tc.schema.avro.cdm20.PacketSocketObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "doc": "Physical-layer protocol",
+                  "name": "proto",
+                  "type": "com.bbn.tc.schema.avro.cdm20.SHORT"
+                },
+                {
+                  "doc": "Interface number",
+                  "name": "ifIndex",
+                  "type": "int"
+                },
+                {
+                  "doc": "ARP hardware type",
+                  "name": "haType",
+                  "type": "com.bbn.tc.schema.avro.cdm20.SHORT"
+                },
+                {
+                  "doc": "Packet type",
+                  "name": "pktType",
+                  "type": {
+                    "type": "fixed",
+                    "name": "com.bbn.tc.schema.avro.cdm20.BYTE",
+                    "size": 1
+                  }
+                },
+                {
+                  "doc": "Physical-layer address",
+                  "name": "addr",
+                  "type": "bytes"
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a network flow object. Instantiates an AbstractObject.",
+              "name": "com.bbn.tc.schema.avro.cdm20.NetFlowObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "default": null,
+                  "doc": "* The local IP address for this flow. Optional for when not\n         * obtained initially.",
+                  "name": "localAddress",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The local network port for this flow. Optional for AF_UNIX\n         * sockets (unnamed and abstract), or for when not obtained\n         * initially.",
+                  "name": "localPort",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The remote IP address for this flow. Optional for binds\n         * that are a listening action and not a full connection, or\n         * for when not obtained initially.",
+                  "name": "remoteAddress",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The remote network port for this flow. Optional for binds\n         * that are a listening action and not a full connection. Also\n         * optional for AF_UNIX sockets (unnamed and abstract) and for\n         * when not obtained intially.",
+                  "name": "remotePort",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The IP protocol number e.g., TCP=6",
+                  "name": "ipProtocol",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The initial sequence number for a TCP connection (use the\n         * SYN from the initiator). This is to correlate flows across\n         * hosts for improved cross-host tracking.",
+                  "name": "initTcpSeqNum",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The file descriptor (Optional)",
+                  "name": "fileDescriptor",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a page in memory. Instantiates an AbstractObject.\n     * TODO: is memory really an object (with permissions and so on) or is it a transient data?",
+              "name": "com.bbn.tc.schema.avro.cdm20.MemoryObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "doc": "The memory address",
+                  "name": "memoryAddress",
+                  "type": "long"
+                },
+                {
+                  "default": null,
+                  "doc": "(Optional) decomposed memory addressed into pageNumber and pageOffset",
+                  "name": "pageNumber",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "name": "pageOffset",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The entry size in bytes (Optional)",
+                  "name": "size",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Represents a generic source or sink on the host device that is can be a file, memory, or netflow.\n     * This is the most basic representation of a source or sink, basically specifying its type only.",
+              "name": "com.bbn.tc.schema.avro.cdm20.SrcSinkObject",
+              "fields": [
+                {
+                  "doc": "Universally unique identifier for the object",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "doc": "The base object attributes",
+                  "name": "baseObject",
+                  "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+                },
+                {
+                  "doc": "The type of the object",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* There are many types of sources such as sensors.  The type of a\n     * sensor could be base (close to hardware) or composite.  This is\n     * mostly (only?) applicable to the Android platform.  See\n     * https://source.android.com/devices/sensors/index.html for\n     * details.",
+                    "name": "com.bbn.tc.schema.avro.cdm20.SrcSinkType",
+                    "symbols": [
+                      "SRCSINK_ACCELEROMETER",
+                      "SRCSINK_TEMPERATURE",
+                      "SRCSINK_GYROSCOPE",
+                      "SRCSINK_MAGNETIC_FIELD",
+                      "SRCSINK_HEART_RATE",
+                      "SRCSINK_LIGHT",
+                      "SRCSINK_PROXIMITY",
+                      "SRCSINK_PRESSURE",
+                      "SRCSINK_RELATIVE_HUMIDITY",
+                      "SRCSINK_LINEAR_ACCELERATION",
+                      "SRCSINK_MOTION",
+                      "SRCSINK_STEP_DETECTOR",
+                      "SRCSINK_STEP_COUNTER",
+                      "SRCSINK_TILT_DETECTOR",
+                      "SRCSINK_ROTATION_VECTOR",
+                      "SRCSINK_GRAVITY",
+                      "SRCSINK_GEOMAGNETIC_ROTATION_VECTOR",
+                      "SRCSINK_GPS",
+                      "SRCSINK_AUDIO",
+                      "SRCSINK_SYSTEM_PROPERTY",
+                      "SRCSINK_ENV_VARIABLE",
+                      "SRCSINK_ACCESSIBILITY_SERVICE",
+                      "SRCSINK_ACTIVITY_MANAGEMENT",
+                      "SRCSINK_ALARM_SERVICE",
+                      "SRCSINK_ANDROID_AUTO",
+                      "SRCSINK_ANDROID_RADIO",
+                      "SRCSINK_ANDROID_TV",
+                      "SRCSINK_ANDROID_VR",
+                      "SRCSINK_AUDIO_IO",
+                      "SRCSINK_AUTOFILL",
+                      "SRCSINK_BACKUP_MANAGER",
+                      "SRCSINK_BINDER",
+                      "SRCSINK_BLUETOOTH",
+                      "SRCSINK_BOOT_EVENT",
+                      "SRCSINK_BROADCAST_RECEIVER_MANAGEMENT",
+                      "SRCSINK_CAMERA",
+                      "SRCSINK_CLIPBOARD",
+                      "SRCSINK_COMPANION_DEVICE",
+                      "SRCSINK_COMPONENT_MANAGEMENT",
+                      "SRCSINK_CONTENT_PROVIDER",
+                      "SRCSINK_CONTENT_PROVIDER_MANAGEMENT",
+                      "SRCSINK_DATABASE",
+                      "SRCSINK_DEVICE_ADMIN",
+                      "SRCSINK_DEVICE_SEARCH",
+                      "SRCSINK_DEVICE_USER",
+                      "SRCSINK_DISPLAY",
+                      "SRCSINK_DROPBOX",
+                      "SRCSINK_EMAIL",
+                      "SRCSINK_EXPERIMENTAL",
+                      "SRCSINK_FILE",
+                      "SRCSINK_FILE_SYSTEM",
+                      "SRCSINK_FILE_SYSTEM_MANAGEMENT",
+                      "SRCSINK_FINGERPRINT",
+                      "SRCSINK_FLASHLIGHT",
+                      "SRCSINK_GATEKEEPER",
+                      "SRCSINK_HDMI",
+                      "SRCSINK_IDLE_DOCK_SCREEN",
+                      "SRCSINK_IMS",
+                      "SRCSINK_INFRARED",
+                      "SRCSINK_INSTALLED_PACKAGES",
+                      "SRCSINK_JSSE_TRUST_MANAGER",
+                      "SRCSINK_KEYCHAIN",
+                      "SRCSINK_KEYGUARD",
+                      "SRCSINK_LOCATION",
+                      "SRCSINK_LOWPAN",
+                      "SRCSINK_MACHINE_LEARNING",
+                      "SRCSINK_MBMS",
+                      "SRCSINK_MEDIA",
+                      "SRCSINK_MEDIA_CAPTURE",
+                      "SRCSINK_MEDIA_LOCAL_MANAGEMENT",
+                      "SRCSINK_MEDIA_LOCAL_PLAYBACK",
+                      "SRCSINK_MEDIA_NETWORK_CONNECTION",
+                      "SRCSINK_MEDIA_REMOTE_PLAYBACK",
+                      "SRCSINK_MIDI",
+                      "SRCSINK_NATIVE",
+                      "SRCSINK_NETWORK",
+                      "SRCSINK_NETWORK_MANAGEMENT",
+                      "SRCSINK_NFC",
+                      "SRCSINK_NOTIFICATION",
+                      "SRCSINK_OVERLAY_MANAGER",
+                      "SRCSINK_PAC_PROXY",
+                      "SRCSINK_PERMISSIONS",
+                      "SRCSINK_PERSISTANT_DATA",
+                      "SRCSINK_POSIX",
+                      "SRCSINK_POWER_MANAGEMENT",
+                      "SRCSINK_PRINT_SERVICE",
+                      "SRCSINK_PROCESS_MANAGEMENT",
+                      "SRCSINK_QUICK_SETTINGS",
+                      "SRCSINK_RECEIVER_MANAGEMENT",
+                      "SRCSINK_RCS",
+                      "SRCSINK_RPC",
+                      "SRCSINK_SCREEN_AUDIO_CAPTURE",
+                      "SRCSINK_SERIAL_PORT",
+                      "SRCSINK_SERVICE_CONNECTION",
+                      "SRCSINK_SERVICE_MANAGEMENT",
+                      "SRCSINK_SHORTCUTS",
+                      "SRCSINK_SMS_MMS",
+                      "SRCSINK_SPEECH_INTERACTION",
+                      "SRCSINK_STATUS_BAR",
+                      "SRCSINK_SYNC_FRAMEWORK",
+                      "SRCSINK_SYSTEM_UPDATE",
+                      "SRCSINK_TASK_STACK",
+                      "SRCSINK_TELEPHONY",
+                      "SRCSINK_TEST",
+                      "SRCSINK_TEXT_SERVICES",
+                      "SRCSINK_THREADING",
+                      "SRCSINK_TIME_EVENT",
+                      "SRCSINK_UI",
+                      "SRCSINK_UID_EVENT",
+                      "SRCSINK_UI_AUTOMATION",
+                      "SRCSINK_UI_MODE",
+                      "SRCSINK_UI_RPC",
+                      "SRCSINK_USAGE_STATS",
+                      "SRCSINK_USB",
+                      "SRCSINK_USER_ACCOUNTS_MANAGEMENT",
+                      "SRCSINK_USER_INPUT",
+                      "SRCSINK_VIBRATOR",
+                      "SRCSINK_WAKE_LOCK",
+                      "SRCSINK_WALLPAPER_MANAGER",
+                      "SRCSINK_WAP",
+                      "SRCSINK_WEB_BROWSER",
+                      "SRCSINK_WIDGETS",
+                      "SRCSINK_IPC",
+                      "SRCSINK_UNKNOWN"
+                    ]
+                  }
+                },
+                {
+                  "default": null,
+                  "doc": "The file descriptor (Optional)",
+                  "name": "fileDescriptor",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* Events represent actions executed by subjects on data objects\n     * or other subjects.  Events are generally system calls, but\n     * could also include function calls, instruction executions, or\n     * even more abstract notions. Events are the core entity in the\n     * data model and they are the main abstraction for representing\n     * information flow between data objects and subjects.",
+              "name": "com.bbn.tc.schema.avro.cdm20.Event",
+              "fields": [
+                {
+                  "doc": "A universally unique identifier for the event",
+                  "name": "uuid",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "default": null,
+                  "doc": "* A logical sequence number for ordering events relative to\n         * each other within a subject's execution context\n         *\n         * This attribute is only optional for inferred events, such\n         * as an object's attribute change that was observed without\n         * an explicit event or system call.",
+                  "name": "sequence",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "doc": "The type of the event",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* EventType enumerates the most common system calls. Since there\n     * are hundreds of possible system calls, enumerating all of them\n     * and managing the list across OS versions is a\n     * challenge. EVENT_OTHER is the catch all for events not enumerated here. Any events\n     * that are expected to be of importance, should be included in this list.",
+                    "name": "com.bbn.tc.schema.avro.cdm20.EventType",
+                    "symbols": [
+                      "EVENT_ACCEPT",
+                      "EVENT_ADD_OBJECT_ATTRIBUTE",
+                      "EVENT_BIND",
+                      "EVENT_BLIND",
+                      "EVENT_BOOT",
+                      "EVENT_CHANGE_PRINCIPAL",
+                      "EVENT_CHECK_FILE_ATTRIBUTES",
+                      "EVENT_CLONE",
+                      "EVENT_CLOSE",
+                      "EVENT_CONNECT",
+                      "EVENT_CORRELATION",
+                      "EVENT_CREATE_OBJECT",
+                      "EVENT_CREATE_THREAD",
+                      "EVENT_DUP",
+                      "EVENT_EXECUTE",
+                      "EVENT_EXIT",
+                      "EVENT_FLOWS_TO",
+                      "EVENT_FCNTL",
+                      "EVENT_FORK",
+                      "EVENT_LINK",
+                      "EVENT_LOADLIBRARY",
+                      "EVENT_LOGCLEAR",
+                      "EVENT_LOGIN",
+                      "EVENT_LOGOUT",
+                      "EVENT_LSEEK",
+                      "EVENT_MMAP",
+                      "EVENT_MODIFY_FILE_ATTRIBUTES",
+                      "EVENT_MODIFY_PROCESS",
+                      "EVENT_MOUNT",
+                      "EVENT_MPROTECT",
+                      "EVENT_OPEN",
+                      "EVENT_OTHER",
+                      "EVENT_READ",
+                      "EVENT_READ_SOCKET_PARAMS",
+                      "EVENT_RECVFROM",
+                      "EVENT_RECVMSG",
+                      "EVENT_RENAME",
+                      "EVENT_SENDTO",
+                      "EVENT_SENDMSG",
+                      "EVENT_SERVICEINSTALL",
+                      "EVENT_SHM",
+                      "EVENT_SIGNAL",
+                      "EVENT_STARTSERVICE",
+                      "EVENT_TRUNCATE",
+                      "EVENT_UMOUNT",
+                      "EVENT_UNIT",
+                      "EVENT_UNLINK",
+                      "EVENT_UPDATE",
+                      "EVENT_WAIT",
+                      "EVENT_WRITE",
+                      "EVENT_WRITE_SOCKET_PARAMS",
+                      "EVENT_TEE",
+                      "EVENT_SPLICE",
+                      "EVENT_VMSPLICE",
+                      "EVENT_INIT_MODULE",
+                      "EVENT_FINIT_MODULE"
+                    ]
+                  }
+                },
+                {
+                  "default": null,
+                  "doc": "* The thread id to which this event belongs.  Required for\n         * all events, except the EVENT_ADD_OBJECT_ATTRIBUTE and\n         * EVENT_FLOWS_TO event.",
+                  "name": "threadId",
+                  "type": [
+                    "null",
+                    "int"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* UUID of Subject that generated this event.  The subject is\n         * required for all events, except the\n         * EVENT_ADD_OBJECT_ATTRIBUTE and EVENT_FLOWS_TO event.",
+                  "name": "subject",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* UUID of Object/Subject this event acts on. For events that\n         * have two arguments, this attribute contains the first\n         * argument (following the argument order in the underlying\n         * system call). This attribute is optional because it may not\n         * be relevant for some events.",
+                  "name": "predicateObject",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "If applicable, the object's absolute file path (Optional)",
+                  "name": "predicateObjectPath",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* Optional UUID of Object/Subject for events that take two\n         * arguments (e.g., link, rename, etc). This attribute\n         * contains the second argument (following the argument order\n         * in the underlying system call).",
+                  "name": "predicateObject2",
+                  "type": [
+                    "null",
+                    "com.bbn.tc.schema.avro.cdm20.UUID"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "If applicable, the second object's absolute file path (Optional)",
+                  "name": "predicateObject2Path",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "doc": "* The time at which the event occurred. Timestamps allow\n         * reasoning about order of events on a host when the same\n         * clock is used. A timestamp stores the number of nanoseconds\n         * from the unix epoch, 1 January 1970 00:00:00.000000 UTC.\n         *\n         * TODO: When different clocks are used on a host or across\n         * hosts, we need to also define a clock source\n         *\n         * NOTE: When an object update is inferred without an explicit\n         * system call event, TA1s may not have an accurate timestamp\n         * of when the object was updated. In that case, the timestamp\n         * used in the update event is the same as the timestamp used\n         * in the next system call event that uses the updated object.",
+                  "name": "timestampNanos",
+                  "type": "long"
+                },
+                {
+                  "default": null,
+                  "doc": "* Event names (Optional). Multiple names may be provided to\n         * allow for reporting many parameterless system calls in a\n         * single Event record.",
+                  "name": "names",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "string"
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Event parameters represented as values, see Value (Optional)",
+                  "name": "parameters",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "com.bbn.tc.schema.avro.cdm20.Value"
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Location refers to the location of the data affecting the event\n         *  (e.g., the read offset in the file for the read system call event). (Optional)",
+                  "name": "location",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "Size refers to the size of the data affecting the event\n         *  (e.g., the number of bytes read from the file for the read system call event). (Optional)",
+                  "name": "size",
+                  "type": [
+                    "null",
+                    "long"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The program point where the event was triggered (e.g., executable and line number). (Optional)",
+                  "name": "programPoint",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "order": "ignore",
+                  "default": null,
+                  "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                  "name": "properties",
+                  "type": [
+                    "null",
+                    {
+                      "type": "map",
+                      "values": "string"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* This record captures a relationship edge between two units, one\n     * dependent on the other. This relationship is inferred from a\n     * combination of underlying events.",
+              "name": "com.bbn.tc.schema.avro.cdm20.UnitDependency",
+              "fields": [
+                {
+                  "name": "unit",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                },
+                {
+                  "name": "dependentUnit",
+                  "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* TimeMarker records are used to delineate time periods in a data\n     * stream to help consumers know their current read position in the\n     * data stream.",
+              "name": "com.bbn.tc.schema.avro.cdm20.TimeMarker",
+              "fields": [
+                {
+                  "doc": "Timestamp in nanoseconds",
+                  "name": "tsNanos",
+                  "type": "long"
+                }
+              ]
+            },
+            {
+              "type": "record",
+              "doc": "* EndMarker records marks the end of a data stream.",
+              "name": "com.bbn.tc.schema.avro.cdm20.EndMarker",
+              "fields": [
+                {
+                  "doc": "session number in the corresponding StartMarker",
+                  "name": "sessionNumber",
+                  "type": "int"
+                },
+                {
+                  "order": "ignore",
+                  "doc": "* Reports countc of each record type that has been published\n         * since the the start of the data stream.",
+                  "name": "recordCounts",
+                  "type": {
+                    "type": "map",
+                    "values": "string"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CDMVersion",
+          "type": "string"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "*",
+            "name": "com.bbn.tc.schema.avro.cdm20.RecordType",
+            "symbols": [
+              "RECORD_HOST",
+              "RECORD_PRINCIPAL",
+              "RECORD_PROVENANCE_TAG_NODE",
+              "RECORD_UNKNOWN_PROVENANCE_NODE",
+              "RECORD_SUBJECT",
+              "RECORD_FILE_OBJECT",
+              "RECORD_IPC_OBJECT",
+              "RECORD_REGISTRY_KEY_OBJECT",
+              "RECORD_PACKET_SOCKET_OBJECT",
+              "RECORD_NET_FLOW_OBJECT",
+              "RECORD_MEMORY_OBJECT",
+              "RECORD_SRC_SINK_OBJECT",
+              "RECORD_EVENT",
+              "RECORD_UNIT_DEPENDENCY",
+              "RECORD_TIME_MARKER",
+              "RECORD_END_MARKER"
+            ]
+          }
+        },
+        {
+          "name": "hostId",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "sessionNumber",
+          "type": "int"
+        },
+        {
+          "name": "source",
+          "type": {
+            "type": "enum",
+            "doc": "* InstrumentationSource identifies the source reporting provenance information.",
+            "name": "com.bbn.tc.schema.avro.cdm20.InstrumentationSource",
+            "symbols": [
+              "SOURCE_ANDROID_JAVA_CLEARSCOPE",
+              "SOURCE_ANDROID_NATIVE_CLEARSCOPE",
+              "SOURCE_FREEBSD_OPENBSM_TRACE",
+              "SOURCE_FREEBSD_DTRACE_CADETS",
+              "SOURCE_FREEBSD_TESLA_CADETS",
+              "SOURCE_FREEBSD_LOOM_CADETS",
+              "SOURCE_FREEBSD_MACIF_CADETS",
+              "SOURCE_LINUX_SYSCALL_TRACE",
+              "SOURCE_LINUX_NETFILTER_TRACE",
+              "SOURCE_LINUX_PROC_TRACE",
+              "SOURCE_LINUX_BEEP_TRACE",
+              "SOURCE_LINUX_THEIA",
+              "SOURCE_WINDOWS_DIFT_FAROS",
+              "SOURCE_WINDOWS_PSA_FAROS",
+              "SOURCE_WINDOWS_FIVEDIRECTIONS",
+              "SOURCE_WINDOWS_MARPLE",
+              "SOURCE_PVM_CADETS"
+            ]
+          }
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Host": [
+        {
+          "name": "uuid",
+          "type": {
+            "type": "fixed",
+            "doc": "* A host MUST NOT reuse UUIDs at all within their system, even\n     * across restarts, and definitely not for 2 distinct objects",
+            "name": "com.bbn.tc.schema.avro.cdm20.UUID",
+            "size": 16
+          }
+        },
+        {
+          "name": "hostName",
+          "type": "string"
+        },
+        {
+          "name": "ta1Version",
+          "type": "string"
+        },
+        {
+          "name": "hostIdentifiers",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "doc": "Host identifier, such as serial number, IMEI number",
+                "name": "com.bbn.tc.schema.avro.cdm20.HostIdentifier",
+                "fields": [
+                  {
+                    "name": "idType",
+                    "type": "string"
+                  },
+                  {
+                    "name": "idValue",
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "osDetails",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "hostType",
+          "type": {
+            "type": "enum",
+            "doc": "* HostType enumerates the host roles or device types",
+            "name": "com.bbn.tc.schema.avro.cdm20.HostType",
+            "symbols": [
+              "HOST_MOBILE",
+              "HOST_SERVER",
+              "HOST_DESKTOP",
+              "HOST_OTHER"
+            ]
+          }
+        },
+        {
+          "name": "interfaces",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "doc": "Interface name and addresses",
+                "name": "com.bbn.tc.schema.avro.cdm20.Interface",
+                "fields": [
+                  {
+                    "name": "name",
+                    "type": "string"
+                  },
+                  {
+                    "name": "macAddress",
+                    "type": "string"
+                  },
+                  {
+                    "default": null,
+                    "name": "ipAddresses",
+                    "type": [
+                      "null",
+                      {
+                        "type": "array",
+                        "items": "string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.HostIdentifier": [
+        {
+          "name": "idType",
+          "type": "string"
+        },
+        {
+          "name": "idValue",
+          "type": "string"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Interface": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "macAddress",
+          "type": "string"
+        },
+        {
+          "name": "ipAddresses",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Principal": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* PrincipalType identifies the type of user: either local to the\n     * host, or remote users/systems.",
+            "name": "com.bbn.tc.schema.avro.cdm20.PrincipalType",
+            "symbols": [
+              "PRINCIPAL_LOCAL",
+              "PRINCIPAL_REMOTE"
+            ]
+          }
+        },
+        {
+          "name": "userId",
+          "type": "string"
+        },
+        {
+          "name": "username",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "groupIds",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "string"
+            }
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.ProvenanceTagNode": [
+        {
+          "name": "tagId",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "flowObject",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "subject",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "systemCall",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "programPoint",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "prevTagId",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "opcode",
+          "type": [
+            "null",
+            {
+              "type": "enum",
+              "doc": "* The tag opcode describes the provenance relation i.e., how multiple sources are combined to\n     * produce the output. We identify the following provenance relations",
+              "name": "com.bbn.tc.schema.avro.cdm20.TagOpCode",
+              "symbols": [
+                "TAG_OP_UNION",
+                "TAG_OP_ENCODE",
+                "TAG_OP_STRONG",
+                "TAG_OP_MEDIUM",
+                "TAG_OP_WEAK"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "tagIds",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+            }
+          ]
+        },
+        {
+          "name": "itag",
+          "type": [
+            "null",
+            {
+              "type": "enum",
+              "doc": "* The integrity tag may be used to specify the initial integrity of an entity,\n     * or to endorse its content after performing appropriate checking/sanitization.",
+              "name": "com.bbn.tc.schema.avro.cdm20.IntegrityTag",
+              "symbols": [
+                "INTEGRITY_UNTRUSTED",
+                "INTEGRITY_BENIGN",
+                "INTEGRITY_INVULNERABLE"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ctag",
+          "type": [
+            "null",
+            {
+              "type": "enum",
+              "doc": "* The confidentiality tag may be used to specify the initial confidentiality of an entity,\n     * or to declassify its content after performing appropriate checking/sanitization.",
+              "name": "com.bbn.tc.schema.avro.cdm20.ConfidentialityTag",
+              "symbols": [
+                "CONFIDENTIALITY_SECRET",
+                "CONFIDENTIALITY_SENSITIVE",
+                "CONFIDENTIALITY_PRIVATE",
+                "CONFIDENTIALITY_PUBLIC"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.UnknownProvenanceNode": [
+        {
+          "name": "upnTagId",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "subject",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "programPoint",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Subject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* SubjectType enumerates the types of execution contexts supported.\n     *\n     * SUBJECT_PROCESS,    process\n     * SUBJECT_THREAD,     thread within a process\n     * SUBJECT_UNIT        so far we only know of TRACE BEEP using this",
+            "name": "com.bbn.tc.schema.avro.cdm20.SubjectType",
+            "symbols": [
+              "SUBJECT_PROCESS",
+              "SUBJECT_THREAD",
+              "SUBJECT_UNIT",
+              "SUBJECT_BASIC_BLOCK",
+              "SUBJECT_OTHER"
+            ]
+          }
+        },
+        {
+          "name": "cid",
+          "type": "int"
+        },
+        {
+          "name": "parentSubject",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "localPrincipal",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "startTimestampNanos",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "unitId",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "iteration",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "count",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "cmdLine",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "privilegeLevel",
+          "type": [
+            "null",
+            {
+              "type": "enum",
+              "doc": "* Windows allows Subjects (processes) to have the following\n     * enumerated privilege levels.",
+              "name": "com.bbn.tc.schema.avro.cdm20.PrivilegeLevel",
+              "symbols": [
+                "LIMITED",
+                "ELEVATED",
+                "FULL"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "importedLibraries",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "string"
+            }
+          ]
+        },
+        {
+          "name": "exportedLibraries",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "string"
+            }
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.FileObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": {
+            "type": "record",
+            "doc": "*  Objects, in general, represent data sources and sinks which\n     *  could include sockets, files, memory, and any data in general\n     *  that can be an input and/or output to an event.  This record\n     *  is intended to be abstract i.e., one should not instantiate an\n     *  Object but rather instantiate one of its sub types (ie,\n     *  encapsulating records) FileObject, UnnamedPipeObject,\n     *  RegistryKeyObject, NetFlowObject, MemoryObject, or\n     *  SrcSinkObject.",
+            "name": "com.bbn.tc.schema.avro.cdm20.AbstractObject",
+            "fields": [
+              {
+                "default": null,
+                "doc": "Permission bits defined over the object (Optional)",
+                "name": "permission",
+                "type": [
+                  "null",
+                  {
+                    "type": "fixed",
+                    "name": "com.bbn.tc.schema.avro.cdm20.SHORT",
+                    "size": 2
+                  }
+                ]
+              },
+              {
+                "default": null,
+                "doc": "* Used to track when an object is deleted and a new one is\n         * created with the same identifier. This is useful for when\n         * UUIDs are based on something not likely to be unique, such\n         * as file path.",
+                "name": "epoch",
+                "type": [
+                  "null",
+                  "int"
+                ]
+              },
+              {
+                "order": "ignore",
+                "default": null,
+                "doc": "* Arbitrary key, value pairs describing the entity.\n         * NOTE: This attribute is meant as a temporary place holder for items that\n         * will become first-class attributes in the next CDM version.",
+                "name": "properties",
+                "type": [
+                  "null",
+                  {
+                    "type": "map",
+                    "values": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* These types enumerate the types of FileObjects",
+            "name": "com.bbn.tc.schema.avro.cdm20.FileObjectType",
+            "symbols": [
+              "FILE_OBJECT_BLOCK",
+              "FILE_OBJECT_CHAR",
+              "FILE_OBJECT_DIR",
+              "FILE_OBJECT_FILE",
+              "FILE_OBJECT_LINK",
+              "FILE_OBJECT_PEFILE",
+              "FILE_OBJECT_UNIX_SOCKET"
+            ]
+          }
+        },
+        {
+          "name": "fileDescriptor",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "localPrincipal",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "size",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "peInfo",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "hashes",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "doc": "* Cryptographic hash records represent one or more cryptographic hashes for\n     * an object, typically, a FileObject.",
+                "name": "com.bbn.tc.schema.avro.cdm20.CryptographicHash",
+                "fields": [
+                  {
+                    "doc": "The type of hash used",
+                    "name": "type",
+                    "type": {
+                      "type": "enum",
+                      "doc": "Cryptographich hash types",
+                      "name": "com.bbn.tc.schema.avro.cdm20.CryptoHashType",
+                      "symbols": [
+                        "MD5",
+                        "SHA1",
+                        "SHA256",
+                        "SHA512",
+                        "AUTHENTIHASH",
+                        "SSDEEP",
+                        "IMPHASH"
+                      ]
+                    }
+                  },
+                  {
+                    "doc": "The base64 encoded hash value",
+                    "name": "hash",
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.AbstractObject": [
+        {
+          "name": "permission",
+          "type": [
+            "null",
+            {
+              "type": "fixed",
+              "name": "com.bbn.tc.schema.avro.cdm20.SHORT",
+              "size": 2
+            }
+          ]
+        },
+        {
+          "name": "epoch",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.CryptographicHash": [
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "Cryptographich hash types",
+            "name": "com.bbn.tc.schema.avro.cdm20.CryptoHashType",
+            "symbols": [
+              "MD5",
+              "SHA1",
+              "SHA256",
+              "SHA512",
+              "AUTHENTIHASH",
+              "SSDEEP",
+              "IMPHASH"
+            ]
+          }
+        },
+        {
+          "name": "hash",
+          "type": "string"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.IpcObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* These types enumerate the types of IpcObjects",
+            "name": "com.bbn.tc.schema.avro.cdm20.IpcObjectType",
+            "symbols": [
+              "IPC_OBJECT_PIPE_NAMED",
+              "IPC_OBJECT_PIPE_UNNAMED",
+              "IPC_OBJECT_SOCKET_ABSTRACT",
+              "IPC_OBJECT_SOCKET_PAIR",
+              "IPC_OBJECT_SOCKET_PATHNAME",
+              "IPC_OBJECT_SOCKET_UNNAMED",
+              "IPC_OBJECT_WINDOWS_ALPC",
+              "IPC_OBJECT_WINDOWS_MAILSLOT",
+              "IPC_OBJECT_SOCKET_NETLINK"
+            ]
+          }
+        },
+        {
+          "name": "uuid1",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "uuid2",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "fd1",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "fd2",
+          "type": [
+            "null",
+            "int"
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.RegistryKeyObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "key",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "type": [
+            "null",
+            {
+              "type": "record",
+              "doc": "* Values represent transient data, mainly parameters to\n     * events. Values are created and used once within an event's\n     * execution and are relevant mainly during fine-grained tracking\n     * (such as with tag/taint propagation).  Values have tags\n     * describing their provenance. Sometimes the actual value's value\n     * is reported in addition to the value's metadata\n     *\n     * The size of the value is the number of elements of type\n     * valueDataType. This should be -1 for primitive and complex\n     * types.  For arrays, the size is the array length. i.e., if\n     * size >= 0, then this value is an array.  A complex value (such as\n     * an object) can contain other values (primitives or other\n     * complex values) within it, as components.\n     *\n     * Examples: <br>\n     *\n     * an integer will have size=-1 and valueDataType=INT, and\n     * valueBytes.length=4 bytes <br>\n     *\n     * an int[4] will have size=4 and valueDataType=INT, and\n     * valueBytes.length=16 bytes (4*4) <br>\n     *\n     * a string s=\"abc\" has size=3 and valueDataType=CHAR, and\n     * valueBytes.length=12 bytes (UTF32_BE encoding; 4 bytes per\n     * char) <br>\n     *\n     * an MyClass obj has size=-1, valueDataType=COMPLEX,\n     * runtimeDataType=\"MyClass\", valueBytes=<pointer> <br>",
+              "name": "com.bbn.tc.schema.avro.cdm20.Value",
+              "fields": [
+                {
+                  "default": -1,
+                  "doc": "The size of the value: the number of elements of type valueDataType; -1 for non-arrays",
+                  "name": "size",
+                  "type": "int"
+                },
+                {
+                  "doc": "The type indicates whether it's a source, sink, or control value",
+                  "name": "type",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* A value type is either source, sink, or control This is for\n     * Event parameters to distinguish source/sink values vs control\n     * parameters (such as a file descriptor).",
+                    "name": "com.bbn.tc.schema.avro.cdm20.ValueType",
+                    "symbols": [
+                      "VALUE_TYPE_SRC",
+                      "VALUE_TYPE_SINK",
+                      "VALUE_TYPE_CONTROL"
+                    ]
+                  }
+                },
+                {
+                  "doc": "The actual datatype of the value elements, e.g., int, double, byte, etc. (Optional)\n         *  Strings are treated as char[] so type=CHAR\n         *  String[] is a COMPLEX value whose components are the string values (each modeled as a char[])\n         *  Complex composite objects comprising of primitive values use the COMPLEX type",
+                  "name": "valueDataType",
+                  "type": {
+                    "type": "enum",
+                    "doc": "* A value data type is one of the primitive data types. A string is treated as a char array",
+                    "name": "com.bbn.tc.schema.avro.cdm20.ValueDataType",
+                    "symbols": [
+                      "VALUE_DATA_TYPE_BYTE",
+                      "VALUE_DATA_TYPE_BOOL",
+                      "VALUE_DATA_TYPE_CHAR",
+                      "VALUE_DATA_TYPE_SHORT",
+                      "VALUE_DATA_TYPE_INT",
+                      "VALUE_DATA_TYPE_FLOAT",
+                      "VALUE_DATA_TYPE_LONG",
+                      "VALUE_DATA_TYPE_DOUBLE",
+                      "VALUE_DATA_TYPE_POINTER32",
+                      "VALUE_DATA_TYPE_POINTER64",
+                      "VALUE_DATA_TYPE_COMPLEX"
+                    ]
+                  }
+                },
+                {
+                  "default": false,
+                  "doc": "Whether this value is null, needed to indicate null objects (default: false)",
+                  "name": "isNull",
+                  "type": "boolean"
+                },
+                {
+                  "default": null,
+                  "doc": "the name of the Value, string. (Optional)",
+                  "name": "name",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "The runtime data type of the value (Optional); For example, an object of dataType=COMPLEX, can have\n         *  a runtime data type of say \"MyClass\"",
+                  "name": "runtimeDataType",
+                  "type": [
+                    "null",
+                    "string"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The actual bytes of the value in Big Endian format, e.g.,\n         * an int is converted to a 4 byte buffer (Optional)\n         *\n         * Strings are represented as an array of UTF32_BE encoded\n         * characters (i.e., 4 bytes per char)",
+                  "name": "valueBytes",
+                  "type": [
+                    "null",
+                    "bytes"
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* Assertions about the provenance of this value\n         * (e.g., the file that data is claimed to come from).\n         *\n         * This is a direct assertion about provenance for systems that don't\n         * use tags to track data flows.",
+                  "name": "provenance",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "record",
+                        "doc": "* An assertion about the provenance of information",
+                        "name": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion",
+                        "fields": [
+                          {
+                            "doc": "Which Subject is making this assertion?",
+                            "name": "asserter",
+                            "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                          },
+                          {
+                            "default": null,
+                            "doc": "Object(s) that this Value's data came from.",
+                            "name": "sources",
+                            "type": [
+                              "null",
+                              {
+                                "type": "array",
+                                "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+                              }
+                            ]
+                          },
+                          {
+                            "default": null,
+                            "doc": "* Further provenance assertions within this assertion.\n\t * For example, to describe a situation in which X asserts that\n\t * Y asserts that Z asserts that V came from {p,q}:\n\t *\n\t * ```\n\t * Event {\n\t *   subject = X,\n\t *   parameters = [\n\t *     Value (V) {\n\t *       provenance = [\n\t *         ProvenanceAssertion {\n\t *           asserter = UUID of X,\n\t *           sources = [ UUID of p, UUID of q ],\n\t *           provenance = [\n\t *             ProvenanceAssertion {\n\t *               asserter = UUID of Y,\n\t *               provenance = [\n\t *                 ProvenanceAssertion {\n\t *                   asserter = UUID of Z,\n\t *                 },\n\t *               ],\n\t *             },\n\t *           ],\n\t *         },\n\t *       ],\n\t *     },\n\t *   ],\n\t * }\n\t * ```\n\t * Z should have a provenance assertion\n\t * e.g.,\n         * \"X asserts that Y asserts that Z comes from {p,q}\".",
+                            "name": "provenance",
+                            "type": [
+                              "null",
+                              {
+                                "type": "array",
+                                "items": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "* The value's tag expression describing its provenance (Optional)\n         * Since value could be an array, the tag can use run length encoding if needed.",
+                  "name": "tag",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "record",
+                        "doc": "* This record is a single tuple in a run length encoding of tags",
+                        "name": "com.bbn.tc.schema.avro.cdm20.TagRunLengthTuple",
+                        "fields": [
+                          {
+                            "default": 0,
+                            "name": "numValueElements",
+                            "type": "int"
+                          },
+                          {
+                            "name": "tagId",
+                            "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "default": null,
+                  "doc": "A complex value might comprise other component values if needed (Optional)",
+                  "name": "components",
+                  "type": [
+                    "null",
+                    {
+                      "type": "array",
+                      "items": "com.bbn.tc.schema.avro.cdm20.Value"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "type": [
+            "null",
+            "long"
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Value": [
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* A value type is either source, sink, or control This is for\n     * Event parameters to distinguish source/sink values vs control\n     * parameters (such as a file descriptor).",
+            "name": "com.bbn.tc.schema.avro.cdm20.ValueType",
+            "symbols": [
+              "VALUE_TYPE_SRC",
+              "VALUE_TYPE_SINK",
+              "VALUE_TYPE_CONTROL"
+            ]
+          }
+        },
+        {
+          "name": "valueDataType",
+          "type": {
+            "type": "enum",
+            "doc": "* A value data type is one of the primitive data types. A string is treated as a char array",
+            "name": "com.bbn.tc.schema.avro.cdm20.ValueDataType",
+            "symbols": [
+              "VALUE_DATA_TYPE_BYTE",
+              "VALUE_DATA_TYPE_BOOL",
+              "VALUE_DATA_TYPE_CHAR",
+              "VALUE_DATA_TYPE_SHORT",
+              "VALUE_DATA_TYPE_INT",
+              "VALUE_DATA_TYPE_FLOAT",
+              "VALUE_DATA_TYPE_LONG",
+              "VALUE_DATA_TYPE_DOUBLE",
+              "VALUE_DATA_TYPE_POINTER32",
+              "VALUE_DATA_TYPE_POINTER64",
+              "VALUE_DATA_TYPE_COMPLEX"
+            ]
+          }
+        },
+        {
+          "name": "isNull",
+          "type": "boolean"
+        },
+        {
+          "name": "name",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "runtimeDataType",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "valueBytes",
+          "type": [
+            "null",
+            "bytes"
+          ]
+        },
+        {
+          "name": "provenance",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "doc": "* An assertion about the provenance of information",
+                "name": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion",
+                "fields": [
+                  {
+                    "doc": "Which Subject is making this assertion?",
+                    "name": "asserter",
+                    "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                  },
+                  {
+                    "default": null,
+                    "doc": "Object(s) that this Value's data came from.",
+                    "name": "sources",
+                    "type": [
+                      "null",
+                      {
+                        "type": "array",
+                        "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+                      }
+                    ]
+                  },
+                  {
+                    "default": null,
+                    "doc": "* Further provenance assertions within this assertion.\n\t * For example, to describe a situation in which X asserts that\n\t * Y asserts that Z asserts that V came from {p,q}:\n\t *\n\t * ```\n\t * Event {\n\t *   subject = X,\n\t *   parameters = [\n\t *     Value (V) {\n\t *       provenance = [\n\t *         ProvenanceAssertion {\n\t *           asserter = UUID of X,\n\t *           sources = [ UUID of p, UUID of q ],\n\t *           provenance = [\n\t *             ProvenanceAssertion {\n\t *               asserter = UUID of Y,\n\t *               provenance = [\n\t *                 ProvenanceAssertion {\n\t *                   asserter = UUID of Z,\n\t *                 },\n\t *               ],\n\t *             },\n\t *           ],\n\t *         },\n\t *       ],\n\t *     },\n\t *   ],\n\t * }\n\t * ```\n\t * Z should have a provenance assertion\n\t * e.g.,\n         * \"X asserts that Y asserts that Z comes from {p,q}\".",
+                    "name": "provenance",
+                    "type": [
+                      "null",
+                      {
+                        "type": "array",
+                        "items": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "tag",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "doc": "* This record is a single tuple in a run length encoding of tags",
+                "name": "com.bbn.tc.schema.avro.cdm20.TagRunLengthTuple",
+                "fields": [
+                  {
+                    "default": 0,
+                    "name": "numValueElements",
+                    "type": "int"
+                  },
+                  {
+                    "name": "tagId",
+                    "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "components",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "com.bbn.tc.schema.avro.cdm20.Value"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion": [
+        {
+          "name": "asserter",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "sources",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "com.bbn.tc.schema.avro.cdm20.UUID"
+            }
+          ]
+        },
+        {
+          "name": "provenance",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "com.bbn.tc.schema.avro.cdm20.ProvenanceAssertion"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.TagRunLengthTuple": [
+        {
+          "name": "numValueElements",
+          "type": "int"
+        },
+        {
+          "name": "tagId",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.PacketSocketObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "proto",
+          "type": "com.bbn.tc.schema.avro.cdm20.SHORT"
+        },
+        {
+          "name": "ifIndex",
+          "type": "int"
+        },
+        {
+          "name": "haType",
+          "type": "com.bbn.tc.schema.avro.cdm20.SHORT"
+        },
+        {
+          "name": "pktType",
+          "type": {
+            "type": "fixed",
+            "name": "com.bbn.tc.schema.avro.cdm20.BYTE",
+            "size": 1
+          }
+        },
+        {
+          "name": "addr",
+          "type": "bytes"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.NetFlowObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "localAddress",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "localPort",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "remoteAddress",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "remotePort",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "ipProtocol",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "initTcpSeqNum",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "fileDescriptor",
+          "type": [
+            "null",
+            "int"
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.MemoryObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "memoryAddress",
+          "type": "long"
+        },
+        {
+          "name": "pageNumber",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "pageOffset",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "size",
+          "type": [
+            "null",
+            "long"
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.SrcSinkObject": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "baseObject",
+          "type": "com.bbn.tc.schema.avro.cdm20.AbstractObject"
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* There are many types of sources such as sensors.  The type of a\n     * sensor could be base (close to hardware) or composite.  This is\n     * mostly (only?) applicable to the Android platform.  See\n     * https://source.android.com/devices/sensors/index.html for\n     * details.",
+            "name": "com.bbn.tc.schema.avro.cdm20.SrcSinkType",
+            "symbols": [
+              "SRCSINK_ACCELEROMETER",
+              "SRCSINK_TEMPERATURE",
+              "SRCSINK_GYROSCOPE",
+              "SRCSINK_MAGNETIC_FIELD",
+              "SRCSINK_HEART_RATE",
+              "SRCSINK_LIGHT",
+              "SRCSINK_PROXIMITY",
+              "SRCSINK_PRESSURE",
+              "SRCSINK_RELATIVE_HUMIDITY",
+              "SRCSINK_LINEAR_ACCELERATION",
+              "SRCSINK_MOTION",
+              "SRCSINK_STEP_DETECTOR",
+              "SRCSINK_STEP_COUNTER",
+              "SRCSINK_TILT_DETECTOR",
+              "SRCSINK_ROTATION_VECTOR",
+              "SRCSINK_GRAVITY",
+              "SRCSINK_GEOMAGNETIC_ROTATION_VECTOR",
+              "SRCSINK_GPS",
+              "SRCSINK_AUDIO",
+              "SRCSINK_SYSTEM_PROPERTY",
+              "SRCSINK_ENV_VARIABLE",
+              "SRCSINK_ACCESSIBILITY_SERVICE",
+              "SRCSINK_ACTIVITY_MANAGEMENT",
+              "SRCSINK_ALARM_SERVICE",
+              "SRCSINK_ANDROID_AUTO",
+              "SRCSINK_ANDROID_RADIO",
+              "SRCSINK_ANDROID_TV",
+              "SRCSINK_ANDROID_VR",
+              "SRCSINK_AUDIO_IO",
+              "SRCSINK_AUTOFILL",
+              "SRCSINK_BACKUP_MANAGER",
+              "SRCSINK_BINDER",
+              "SRCSINK_BLUETOOTH",
+              "SRCSINK_BOOT_EVENT",
+              "SRCSINK_BROADCAST_RECEIVER_MANAGEMENT",
+              "SRCSINK_CAMERA",
+              "SRCSINK_CLIPBOARD",
+              "SRCSINK_COMPANION_DEVICE",
+              "SRCSINK_COMPONENT_MANAGEMENT",
+              "SRCSINK_CONTENT_PROVIDER",
+              "SRCSINK_CONTENT_PROVIDER_MANAGEMENT",
+              "SRCSINK_DATABASE",
+              "SRCSINK_DEVICE_ADMIN",
+              "SRCSINK_DEVICE_SEARCH",
+              "SRCSINK_DEVICE_USER",
+              "SRCSINK_DISPLAY",
+              "SRCSINK_DROPBOX",
+              "SRCSINK_EMAIL",
+              "SRCSINK_EXPERIMENTAL",
+              "SRCSINK_FILE",
+              "SRCSINK_FILE_SYSTEM",
+              "SRCSINK_FILE_SYSTEM_MANAGEMENT",
+              "SRCSINK_FINGERPRINT",
+              "SRCSINK_FLASHLIGHT",
+              "SRCSINK_GATEKEEPER",
+              "SRCSINK_HDMI",
+              "SRCSINK_IDLE_DOCK_SCREEN",
+              "SRCSINK_IMS",
+              "SRCSINK_INFRARED",
+              "SRCSINK_INSTALLED_PACKAGES",
+              "SRCSINK_JSSE_TRUST_MANAGER",
+              "SRCSINK_KEYCHAIN",
+              "SRCSINK_KEYGUARD",
+              "SRCSINK_LOCATION",
+              "SRCSINK_LOWPAN",
+              "SRCSINK_MACHINE_LEARNING",
+              "SRCSINK_MBMS",
+              "SRCSINK_MEDIA",
+              "SRCSINK_MEDIA_CAPTURE",
+              "SRCSINK_MEDIA_LOCAL_MANAGEMENT",
+              "SRCSINK_MEDIA_LOCAL_PLAYBACK",
+              "SRCSINK_MEDIA_NETWORK_CONNECTION",
+              "SRCSINK_MEDIA_REMOTE_PLAYBACK",
+              "SRCSINK_MIDI",
+              "SRCSINK_NATIVE",
+              "SRCSINK_NETWORK",
+              "SRCSINK_NETWORK_MANAGEMENT",
+              "SRCSINK_NFC",
+              "SRCSINK_NOTIFICATION",
+              "SRCSINK_OVERLAY_MANAGER",
+              "SRCSINK_PAC_PROXY",
+              "SRCSINK_PERMISSIONS",
+              "SRCSINK_PERSISTANT_DATA",
+              "SRCSINK_POSIX",
+              "SRCSINK_POWER_MANAGEMENT",
+              "SRCSINK_PRINT_SERVICE",
+              "SRCSINK_PROCESS_MANAGEMENT",
+              "SRCSINK_QUICK_SETTINGS",
+              "SRCSINK_RECEIVER_MANAGEMENT",
+              "SRCSINK_RCS",
+              "SRCSINK_RPC",
+              "SRCSINK_SCREEN_AUDIO_CAPTURE",
+              "SRCSINK_SERIAL_PORT",
+              "SRCSINK_SERVICE_CONNECTION",
+              "SRCSINK_SERVICE_MANAGEMENT",
+              "SRCSINK_SHORTCUTS",
+              "SRCSINK_SMS_MMS",
+              "SRCSINK_SPEECH_INTERACTION",
+              "SRCSINK_STATUS_BAR",
+              "SRCSINK_SYNC_FRAMEWORK",
+              "SRCSINK_SYSTEM_UPDATE",
+              "SRCSINK_TASK_STACK",
+              "SRCSINK_TELEPHONY",
+              "SRCSINK_TEST",
+              "SRCSINK_TEXT_SERVICES",
+              "SRCSINK_THREADING",
+              "SRCSINK_TIME_EVENT",
+              "SRCSINK_UI",
+              "SRCSINK_UID_EVENT",
+              "SRCSINK_UI_AUTOMATION",
+              "SRCSINK_UI_MODE",
+              "SRCSINK_UI_RPC",
+              "SRCSINK_USAGE_STATS",
+              "SRCSINK_USB",
+              "SRCSINK_USER_ACCOUNTS_MANAGEMENT",
+              "SRCSINK_USER_INPUT",
+              "SRCSINK_VIBRATOR",
+              "SRCSINK_WAKE_LOCK",
+              "SRCSINK_WALLPAPER_MANAGER",
+              "SRCSINK_WAP",
+              "SRCSINK_WEB_BROWSER",
+              "SRCSINK_WIDGETS",
+              "SRCSINK_IPC",
+              "SRCSINK_UNKNOWN"
+            ]
+          }
+        },
+        {
+          "name": "fileDescriptor",
+          "type": [
+            "null",
+            "int"
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.Event": [
+        {
+          "name": "uuid",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "sequence",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "type",
+          "type": {
+            "type": "enum",
+            "doc": "* EventType enumerates the most common system calls. Since there\n     * are hundreds of possible system calls, enumerating all of them\n     * and managing the list across OS versions is a\n     * challenge. EVENT_OTHER is the catch all for events not enumerated here. Any events\n     * that are expected to be of importance, should be included in this list.",
+            "name": "com.bbn.tc.schema.avro.cdm20.EventType",
+            "symbols": [
+              "EVENT_ACCEPT",
+              "EVENT_ADD_OBJECT_ATTRIBUTE",
+              "EVENT_BIND",
+              "EVENT_BLIND",
+              "EVENT_BOOT",
+              "EVENT_CHANGE_PRINCIPAL",
+              "EVENT_CHECK_FILE_ATTRIBUTES",
+              "EVENT_CLONE",
+              "EVENT_CLOSE",
+              "EVENT_CONNECT",
+              "EVENT_CORRELATION",
+              "EVENT_CREATE_OBJECT",
+              "EVENT_CREATE_THREAD",
+              "EVENT_DUP",
+              "EVENT_EXECUTE",
+              "EVENT_EXIT",
+              "EVENT_FLOWS_TO",
+              "EVENT_FCNTL",
+              "EVENT_FORK",
+              "EVENT_LINK",
+              "EVENT_LOADLIBRARY",
+              "EVENT_LOGCLEAR",
+              "EVENT_LOGIN",
+              "EVENT_LOGOUT",
+              "EVENT_LSEEK",
+              "EVENT_MMAP",
+              "EVENT_MODIFY_FILE_ATTRIBUTES",
+              "EVENT_MODIFY_PROCESS",
+              "EVENT_MOUNT",
+              "EVENT_MPROTECT",
+              "EVENT_OPEN",
+              "EVENT_OTHER",
+              "EVENT_READ",
+              "EVENT_READ_SOCKET_PARAMS",
+              "EVENT_RECVFROM",
+              "EVENT_RECVMSG",
+              "EVENT_RENAME",
+              "EVENT_SENDTO",
+              "EVENT_SENDMSG",
+              "EVENT_SERVICEINSTALL",
+              "EVENT_SHM",
+              "EVENT_SIGNAL",
+              "EVENT_STARTSERVICE",
+              "EVENT_TRUNCATE",
+              "EVENT_UMOUNT",
+              "EVENT_UNIT",
+              "EVENT_UNLINK",
+              "EVENT_UPDATE",
+              "EVENT_WAIT",
+              "EVENT_WRITE",
+              "EVENT_WRITE_SOCKET_PARAMS",
+              "EVENT_TEE",
+              "EVENT_SPLICE",
+              "EVENT_VMSPLICE",
+              "EVENT_INIT_MODULE",
+              "EVENT_FINIT_MODULE"
+            ]
+          }
+        },
+        {
+          "name": "threadId",
+          "type": [
+            "null",
+            "int"
+          ]
+        },
+        {
+          "name": "subject",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "predicateObject",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "predicateObjectPath",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "predicateObject2",
+          "type": [
+            "null",
+            "com.bbn.tc.schema.avro.cdm20.UUID"
+          ]
+        },
+        {
+          "name": "predicateObject2Path",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "timestampNanos",
+          "type": "long"
+        },
+        {
+          "name": "names",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "string"
+            }
+          ]
+        },
+        {
+          "name": "parameters",
+          "type": [
+            "null",
+            {
+              "type": "array",
+              "items": "com.bbn.tc.schema.avro.cdm20.Value"
+            }
+          ]
+        },
+        {
+          "name": "location",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "size",
+          "type": [
+            "null",
+            "long"
+          ]
+        },
+        {
+          "name": "programPoint",
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        {
+          "name": "properties",
+          "type": [
+            "null",
+            {
+              "type": "map",
+              "values": "string"
+            }
+          ]
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.UnitDependency": [
+        {
+          "name": "unit",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        },
+        {
+          "name": "dependentUnit",
+          "type": "com.bbn.tc.schema.avro.cdm20.UUID"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.TimeMarker": [
+        {
+          "name": "tsNanos",
+          "type": "long"
+        }
+      ],
+      "com.bbn.tc.schema.avro.cdm20.EndMarker": [
+        {
+          "name": "sessionNumber",
+          "type": "int"
+        },
+        {
+          "name": "recordCounts",
+          "type": {
+            "type": "map",
+            "values": "string"
+          }
+        }
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "compressed_bytes": 322112794,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 19894,
+        "RECORD_IPC_OBJECT": 14,
+        "RECORD_MEMORY_OBJECT": 44,
+        "RECORD_NET_FLOW_OBJECT": 36,
+        "RECORD_SUBJECT": 10,
+        "RECORD_TIME_MARKER": 2
+      },
+      "event_count": 19894,
+      "event_type_counts": {
+        "EVENT_ACCEPT": 55,
+        "EVENT_BIND": 22,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2410,
+        "EVENT_CLOSE": 1478,
+        "EVENT_CONNECT": 19,
+        "EVENT_CREATE_OBJECT": 2621,
+        "EVENT_CREATE_THREAD": 10,
+        "EVENT_EXIT": 13,
+        "EVENT_FCNTL": 301,
+        "EVENT_LOADLIBRARY": 2,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 73,
+        "EVENT_OPEN": 2492,
+        "EVENT_OTHER": 1877,
+        "EVENT_READ": 6164,
+        "EVENT_RECVFROM": 132,
+        "EVENT_RECVMSG": 28,
+        "EVENT_RENAME": 12,
+        "EVENT_SENDMSG": 66,
+        "EVENT_SENDTO": 531,
+        "EVENT_WRITE": 1588
+      },
+      "event_name_counts": {
+        "EVENT_ACCEPT": 55,
+        "EVENT_BIND": 22,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2410,
+        "EVENT_CLOSE": 1478,
+        "EVENT_CONNECT": 19,
+        "EVENT_CREATE_OBJECT": 2621,
+        "EVENT_CREATE_THREAD": 10,
+        "EVENT_DIRECTORY_ENUMERATE": 30,
+        "EVENT_EXIT": 13,
+        "EVENT_FCNTL": 301,
+        "EVENT_FREE_OBJECT": 1877,
+        "EVENT_LOADLIBRARY": 2,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 73,
+        "EVENT_OPEN": 2492,
+        "EVENT_OTHER": 1877,
+        "EVENT_READ": 6164,
+        "EVENT_RECVFROM": 132,
+        "EVENT_RECVMSG": 28,
+        "EVENT_RENAME": 12,
+        "EVENT_SENDMSG": 66,
+        "EVENT_SENDTO": 531,
+        "EVENT_WRITE": 1588
+      },
+      "event_fields_populated": {
+        "uuid": 19894,
+        "timestampNanos": 19894,
+        "subject": 19894,
+        "predicateObject": 19881,
+        "predicateObject2": 1206,
+        "predicateObjectPath": 10293,
+        "predicateObject2Path": 12
+      },
+      "event_time_min_nanos": 1557356398045000000,
+      "event_time_max_nanos": 1557356978909000000,
+      "event_time_min_utc": "2019-05-08T22:59:58.045000000Z",
+      "event_time_max_utc": "2019-05-08T23:09:38.909000000Z",
+      "event_timestamp_regressions": 258,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 19998,
+        "00000000000000000000000000000000": 2
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_IPC_OBJECT": [
+          "baseObject",
+          "fd1",
+          "fd2",
+          "type",
+          "uuid",
+          "uuid1",
+          "uuid2"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ],
+        "RECORD_NET_FLOW_OBJECT": [
+          "baseObject",
+          "fileDescriptor",
+          "initTcpSeqNum",
+          "ipProtocol",
+          "localAddress",
+          "localPort",
+          "remoteAddress",
+          "remotePort",
+          "uuid"
+        ],
+        "RECORD_SUBJECT": [
+          "cid",
+          "cmdLine",
+          "count",
+          "exportedLibraries",
+          "importedLibraries",
+          "iteration",
+          "localPrincipal",
+          "parentSubject",
+          "privilegeLevel",
+          "properties",
+          "startTimestampNanos",
+          "type",
+          "unitId",
+          "uuid"
+        ],
+        "RECORD_TIME_MARKER": [
+          "tsNanos"
+        ]
+      },
+      "property_key_counts": {
+        "Affinity": 23,
+        "BaseAddress": 4472,
+        "BasePriority": 23,
+        "CreateOptions": 1372,
+        "DefaultBase": 2,
+        "ExtraInfo": 2780,
+        "FileAttributes": 1372,
+        "FileIndex": 30,
+        "FileKey": 2810,
+        "FileName": 32,
+        "FileObject": 2810,
+        "Flags": 4472,
+        "ImageBase": 2,
+        "ImageChecksum": 2,
+        "ImageSize": 2,
+        "InfoClass": 2810,
+        "IoFlags": 960,
+        "IoPriority": 23,
+        "Length": 30,
+        "PagePriority": 23,
+        "ProcessID": 25,
+        "ProcessId": 4472,
+        "RegionSize": 4472,
+        "Reserved0": 2,
+        "Reserved1": 2,
+        "Reserved2": 2,
+        "Reserved3": 2,
+        "Reserved4": 2,
+        "Service": 23,
+        "ShareAccess": 1372,
+        "SignatureLevel": 2,
+        "SignatureType": 2,
+        "StackBase": 23,
+        "StackLimit": 23,
+        "SubProcessTag": 23,
+        "TThreadID": 23,
+        "TebBase": 23,
+        "ThreadFlags": 23,
+        "TimeDateStamp": 2,
+        "UserStackBase": 23,
+        "UserStackLimit": 23,
+        "Win32StartAddr": 23,
+        "attributes": 14,
+        "correlationID": 28,
+        "end_time": 531,
+        "groupOperationID": 94,
+        "handle": 2580,
+        "object": 14,
+        "operation": 94,
+        "operationID": 28,
+        "options": 14,
+        "providerGUID": 66,
+        "providerName": 66,
+        "providerPath": 66,
+        "start_time": 531,
+        "targetObject": 2580
+      },
+      "candidate_label_key_counts": {}
+    },
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "compressed_bytes": 316485144,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 19973,
+        "RECORD_MEMORY_OBJECT": 27
+      },
+      "event_count": 19973,
+      "event_type_counts": {
+        "EVENT_CHECK_FILE_ATTRIBUTES": 841,
+        "EVENT_CLOSE": 944,
+        "EVENT_CREATE_OBJECT": 16893,
+        "EVENT_FCNTL": 3,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 1,
+        "EVENT_OPEN": 1032,
+        "EVENT_OTHER": 13,
+        "EVENT_READ": 175,
+        "EVENT_SENDTO": 65,
+        "EVENT_WRITE": 6
+      },
+      "event_name_counts": {
+        "EVENT_CHECK_FILE_ATTRIBUTES": 841,
+        "EVENT_CLOSE": 944,
+        "EVENT_CREATE_OBJECT": 16893,
+        "EVENT_DIRECTORY_ENUMERATE": 48,
+        "EVENT_FCNTL": 3,
+        "EVENT_FREE_OBJECT": 13,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 1,
+        "EVENT_OPEN": 1032,
+        "EVENT_OTHER": 13,
+        "EVENT_READ": 175,
+        "EVENT_SENDTO": 65,
+        "EVENT_WRITE": 6
+      },
+      "event_fields_populated": {
+        "uuid": 19973,
+        "timestampNanos": 19973,
+        "subject": 19973,
+        "predicateObject": 19973,
+        "predicateObject2": 16889,
+        "predicateObjectPath": 2020,
+        "predicateObject2Path": 0
+      },
+      "event_time_min_nanos": 1557396154773000000,
+      "event_time_max_nanos": 1557396157585000000,
+      "event_time_min_utc": "2019-05-09T10:02:34.773000000Z",
+      "event_time_max_utc": "2019-05-09T10:02:37.585000000Z",
+      "event_timestamp_regressions": 121,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 20000
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ]
+      },
+      "property_key_counts": {
+        "BaseAddress": 16902,
+        "CreateOptions": 486,
+        "ExtraInfo": 844,
+        "FileAttributes": 486,
+        "FileIndex": 48,
+        "FileKey": 892,
+        "FileName": 48,
+        "FileObject": 892,
+        "Flags": 16902,
+        "InfoClass": 892,
+        "IoFlags": 106,
+        "Length": 48,
+        "ProcessId": 16902,
+        "RegionSize": 16902,
+        "ShareAccess": 486,
+        "attributes": 4,
+        "end_time": 65,
+        "handle": 1442,
+        "object": 4,
+        "options": 4,
+        "start_time": 65,
+        "targetObject": 1442
+      },
+      "candidate_label_key_counts": {}
+    },
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.20.gz",
+      "compressed_bytes": 309366409,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 17824,
+        "RECORD_IPC_OBJECT": 17,
+        "RECORD_MEMORY_OBJECT": 1250,
+        "RECORD_NET_FLOW_OBJECT": 4,
+        "RECORD_SUBJECT": 904,
+        "RECORD_TIME_MARKER": 1
+      },
+      "event_count": 17824,
+      "event_type_counts": {
+        "EVENT_ACCEPT": 18,
+        "EVENT_BIND": 3,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2676,
+        "EVENT_CLOSE": 2034,
+        "EVENT_CONNECT": 2,
+        "EVENT_CREATE_OBJECT": 1573,
+        "EVENT_CREATE_THREAD": 901,
+        "EVENT_EXECUTE": 3,
+        "EVENT_EXIT": 361,
+        "EVENT_FCNTL": 155,
+        "EVENT_FORK": 3,
+        "EVENT_LOADLIBRARY": 297,
+        "EVENT_LOGIN": 1,
+        "EVENT_LOGOUT": 1,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 46,
+        "EVENT_OPEN": 2366,
+        "EVENT_OTHER": 589,
+        "EVENT_READ": 1231,
+        "EVENT_RECVFROM": 1864,
+        "EVENT_RENAME": 2,
+        "EVENT_SENDTO": 3328,
+        "EVENT_SIGNAL": 12,
+        "EVENT_WRITE": 358
+      },
+      "event_name_counts": {
+        "EVENT_ACCEPT": 18,
+        "EVENT_BIND": 3,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2676,
+        "EVENT_CLOSE": 2034,
+        "EVENT_CONNECT": 2,
+        "EVENT_CREATE_OBJECT": 1573,
+        "EVENT_CREATE_THREAD": 901,
+        "EVENT_DIRECTORY_ENUMERATE": 17,
+        "EVENT_EXECUTE": 3,
+        "EVENT_EXIT": 361,
+        "EVENT_FCNTL": 155,
+        "EVENT_FORK": 3,
+        "EVENT_FREE_OBJECT": 588,
+        "EVENT_LOADLIBRARY": 297,
+        "EVENT_LOGIN": 1,
+        "EVENT_LOGOUT": 1,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 46,
+        "EVENT_OPEN": 2366,
+        "EVENT_OTHER": 589,
+        "EVENT_PRINCIPAL_PRIVILEGE_ASSIGNMENT": 1,
+        "EVENT_READ": 1231,
+        "EVENT_RECVFROM": 1864,
+        "EVENT_RENAME": 2,
+        "EVENT_SENDTO": 3328,
+        "EVENT_SIGNAL": 12,
+        "EVENT_SIGNAL_TERMINATE": 12,
+        "EVENT_WRITE": 358
+      },
+      "event_fields_populated": {
+        "uuid": 17824,
+        "timestampNanos": 17824,
+        "subject": 17824,
+        "predicateObject": 17460,
+        "predicateObject2": 887,
+        "predicateObjectPath": 5964,
+        "predicateObject2Path": 2
+      },
+      "event_time_min_nanos": 1557419550535000000,
+      "event_time_max_nanos": 1557419757880000000,
+      "event_time_min_utc": "2019-05-09T16:32:30.535000000Z",
+      "event_time_max_utc": "2019-05-09T16:35:57.880000000Z",
+      "event_timestamp_regressions": 420,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 19999,
+        "00000000000000000000000000000000": 1
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_IPC_OBJECT": [
+          "baseObject",
+          "fd1",
+          "fd2",
+          "type",
+          "uuid",
+          "uuid1",
+          "uuid2"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ],
+        "RECORD_NET_FLOW_OBJECT": [
+          "baseObject",
+          "fileDescriptor",
+          "initTcpSeqNum",
+          "ipProtocol",
+          "localAddress",
+          "localPort",
+          "remoteAddress",
+          "remotePort",
+          "uuid"
+        ],
+        "RECORD_SUBJECT": [
+          "cid",
+          "cmdLine",
+          "count",
+          "exportedLibraries",
+          "importedLibraries",
+          "iteration",
+          "localPrincipal",
+          "parentSubject",
+          "privilegeLevel",
+          "properties",
+          "startTimestampNanos",
+          "type",
+          "unitId",
+          "uuid"
+        ],
+        "RECORD_TIME_MARKER": [
+          "tsNanos"
+        ]
+      },
+      "property_key_counts": {
+        "Affinity": 1250,
+        "ApplicationId": 18,
+        "BaseAddress": 2155,
+        "BasePriority": 1250,
+        "CommandLine": 18,
+        "CreateOptions": 662,
+        "DefaultBase": 297,
+        "DirectoryTableBase": 18,
+        "ExitStatus": 18,
+        "ExtraInfo": 2846,
+        "FileAttributes": 662,
+        "FileIndex": 17,
+        "FileKey": 2863,
+        "FileName": 314,
+        "FileObject": 2863,
+        "Flags": 2173,
+        "IPAddress": 1,
+        "IPPort": 1,
+        "ImageBase": 297,
+        "ImageChecksum": 297,
+        "ImageFileName": 18,
+        "ImageSize": 297,
+        "InfoClass": 2863,
+        "IoFlags": 497,
+        "IoPriority": 1250,
+        "Length": 17,
+        "PackageFullName": 18,
+        "PagePriority": 1250,
+        "ParentId": 18,
+        "ProcessID": 1547,
+        "ProcessId": 2173,
+        "RegionSize": 2155,
+        "Reserved0": 297,
+        "Reserved1": 297,
+        "Reserved2": 297,
+        "Reserved3": 297,
+        "Reserved4": 297,
+        "SecurityID": 18,
+        "Service": 1250,
+        "SessionId": 18,
+        "ShareAccess": 662,
+        "SignatureLevel": 297,
+        "SignatureType": 297,
+        "StackBase": 1250,
+        "StackLimit": 1250,
+        "SubProcessTag": 1250,
+        "TThreadID": 1250,
+        "TebBase": 1250,
+        "ThreadFlags": 1250,
+        "TimeDateStamp": 297,
+        "UniqueProcessKey": 18,
+        "UserSID": 18,
+        "UserStackBase": 1250,
+        "UserStackLimit": 1250,
+        "Username": 19,
+        "Win32StartAddr": 1250,
+        "attributes": 3,
+        "domain": 2,
+        "end_time": 3328,
+        "handle": 3724,
+        "logonType": 2,
+        "object": 3,
+        "options": 3,
+        "principal": 3,
+        "start_time": 3328,
+        "targetObject": 3724,
+        "threadID": 6,
+        "type": 6,
+        "user": 2,
+        "value": 6
+      },
+      "candidate_label_key_counts": {}
+    },
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.23.gz",
+      "compressed_bytes": 310576694,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 19591,
+        "RECORD_IPC_OBJECT": 7,
+        "RECORD_MEMORY_OBJECT": 355,
+        "RECORD_NET_FLOW_OBJECT": 5,
+        "RECORD_REGISTRY_KEY_OBJECT": 3,
+        "RECORD_SUBJECT": 39
+      },
+      "event_count": 19591,
+      "event_type_counts": {
+        "EVENT_ACCEPT": 19,
+        "EVENT_BIND": 11,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2820,
+        "EVENT_CLOSE": 1113,
+        "EVENT_CONNECT": 8,
+        "EVENT_CREATE_OBJECT": 1194,
+        "EVENT_CREATE_THREAD": 38,
+        "EVENT_EXECUTE": 1,
+        "EVENT_EXIT": 20,
+        "EVENT_FCNTL": 137,
+        "EVENT_FORK": 1,
+        "EVENT_LINK": 6,
+        "EVENT_LOADLIBRARY": 17,
+        "EVENT_LOGOUT": 1,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 8,
+        "EVENT_OPEN": 1753,
+        "EVENT_OTHER": 1593,
+        "EVENT_READ": 10365,
+        "EVENT_RECVFROM": 15,
+        "EVENT_RECVMSG": 13,
+        "EVENT_RENAME": 2,
+        "EVENT_SENDMSG": 18,
+        "EVENT_SENDTO": 156,
+        "EVENT_SIGNAL": 2,
+        "EVENT_UNLINK": 8,
+        "EVENT_WRITE": 272
+      },
+      "event_name_counts": {
+        "EVENT_ACCEPT": 19,
+        "EVENT_BIND": 11,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 2820,
+        "EVENT_CLOSE": 1113,
+        "EVENT_CONNECT": 8,
+        "EVENT_CREATE_OBJECT": 1194,
+        "EVENT_CREATE_THREAD": 38,
+        "EVENT_DIRECTORY_ENUMERATE": 81,
+        "EVENT_EXECUTE": 1,
+        "EVENT_EXIT": 20,
+        "EVENT_FCNTL": 137,
+        "EVENT_FORK": 1,
+        "EVENT_FREE_OBJECT": 1593,
+        "EVENT_LINK": 6,
+        "EVENT_LOADLIBRARY": 17,
+        "EVENT_LOGOUT": 1,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 8,
+        "EVENT_OPEN": 1753,
+        "EVENT_OTHER": 1593,
+        "EVENT_READ": 10365,
+        "EVENT_RECVFROM": 15,
+        "EVENT_RECVMSG": 13,
+        "EVENT_RENAME": 2,
+        "EVENT_SENDMSG": 18,
+        "EVENT_SENDTO": 156,
+        "EVENT_SIGNAL": 2,
+        "EVENT_SIGNAL_TERMINATE": 2,
+        "EVENT_UNLINK": 8,
+        "EVENT_WRITE": 272
+      },
+      "event_fields_populated": {
+        "uuid": 19591,
+        "timestampNanos": 19591,
+        "subject": 19591,
+        "predicateObject": 19570,
+        "predicateObject2": 274,
+        "predicateObjectPath": 7490,
+        "predicateObject2Path": 2
+      },
+      "event_time_min_nanos": 1557436202221000000,
+      "event_time_max_nanos": 1557436301105000000,
+      "event_time_min_utc": "2019-05-09T21:10:02.221000000Z",
+      "event_time_max_utc": "2019-05-09T21:11:41.105000000Z",
+      "event_timestamp_regressions": 418,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 20000
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_IPC_OBJECT": [
+          "baseObject",
+          "fd1",
+          "fd2",
+          "type",
+          "uuid",
+          "uuid1",
+          "uuid2"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ],
+        "RECORD_NET_FLOW_OBJECT": [
+          "baseObject",
+          "fileDescriptor",
+          "initTcpSeqNum",
+          "ipProtocol",
+          "localAddress",
+          "localPort",
+          "remoteAddress",
+          "remotePort",
+          "uuid"
+        ],
+        "RECORD_REGISTRY_KEY_OBJECT": [
+          "baseObject",
+          "key",
+          "size",
+          "uuid",
+          "value"
+        ],
+        "RECORD_SUBJECT": [
+          "cid",
+          "cmdLine",
+          "count",
+          "exportedLibraries",
+          "importedLibraries",
+          "iteration",
+          "localPrincipal",
+          "parentSubject",
+          "privilegeLevel",
+          "properties",
+          "startTimestampNanos",
+          "type",
+          "unitId",
+          "uuid"
+        ]
+      },
+      "property_key_counts": {
+        "Affinity": 57,
+        "ApplicationId": 3,
+        "BaseAddress": 2779,
+        "BasePriority": 57,
+        "CommandLine": 3,
+        "CreateOptions": 889,
+        "DefaultBase": 17,
+        "DirectoryTableBase": 3,
+        "ExitStatus": 3,
+        "ExtraInfo": 2965,
+        "FileAttributes": 889,
+        "FileIndex": 81,
+        "FileKey": 3046,
+        "FileName": 100,
+        "FileObject": 3046,
+        "Flags": 2782,
+        "ImageBase": 17,
+        "ImageChecksum": 17,
+        "ImageFileName": 3,
+        "ImageSize": 17,
+        "InfoClass": 3046,
+        "IoFlags": 5657,
+        "IoPriority": 57,
+        "Length": 81,
+        "PackageFullName": 3,
+        "PagePriority": 57,
+        "ParentId": 3,
+        "ProcessID": 74,
+        "ProcessId": 2782,
+        "RegionSize": 2779,
+        "Reserved0": 17,
+        "Reserved1": 17,
+        "Reserved2": 17,
+        "Reserved3": 17,
+        "Reserved4": 17,
+        "SecurityID": 3,
+        "Service": 57,
+        "SessionId": 3,
+        "ShareAccess": 889,
+        "SignatureLevel": 17,
+        "SignatureType": 17,
+        "StackBase": 57,
+        "StackLimit": 57,
+        "SubProcessTag": 57,
+        "TThreadID": 57,
+        "TebBase": 57,
+        "ThreadFlags": 57,
+        "TimeDateStamp": 17,
+        "UniqueProcessKey": 3,
+        "UserSID": 3,
+        "UserStackBase": 57,
+        "UserStackLimit": 57,
+        "Username": 3,
+        "Win32StartAddr": 57,
+        "attributes": 4,
+        "correlationID": 8,
+        "deviceType": 5,
+        "domain": 1,
+        "end_time": 156,
+        "groupOperationID": 26,
+        "handle": 1900,
+        "inputType": 5,
+        "logonType": 1,
+        "object": 4,
+        "operation": 26,
+        "operationID": 8,
+        "options": 4,
+        "principal": 1,
+        "providerGUID": 18,
+        "providerName": 18,
+        "providerPath": 18,
+        "start_time": 156,
+        "targetObject": 1900,
+        "threadID": 2,
+        "type": 27,
+        "user": 1,
+        "value": 27
+      },
+      "candidate_label_key_counts": {}
+    },
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.27.gz",
+      "compressed_bytes": 317627464,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 19090,
+        "RECORD_IPC_OBJECT": 15,
+        "RECORD_MEMORY_OBJECT": 826,
+        "RECORD_NET_FLOW_OBJECT": 3,
+        "RECORD_SUBJECT": 65,
+        "RECORD_TIME_MARKER": 1
+      },
+      "event_count": 19090,
+      "event_type_counts": {
+        "EVENT_ACCEPT": 25,
+        "EVENT_BIND": 10,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 3704,
+        "EVENT_CLOSE": 2232,
+        "EVENT_CONNECT": 9,
+        "EVENT_CREATE_OBJECT": 2252,
+        "EVENT_CREATE_THREAD": 56,
+        "EVENT_EXECUTE": 9,
+        "EVENT_EXIT": 24,
+        "EVENT_FCNTL": 506,
+        "EVENT_FORK": 9,
+        "EVENT_LOADLIBRARY": 208,
+        "EVENT_LOGIN": 2,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 131,
+        "EVENT_OPEN": 3073,
+        "EVENT_OTHER": 1095,
+        "EVENT_READ": 4528,
+        "EVENT_RECVFROM": 54,
+        "EVENT_RECVMSG": 14,
+        "EVENT_RENAME": 5,
+        "EVENT_SENDMSG": 33,
+        "EVENT_SENDTO": 222,
+        "EVENT_SIGNAL": 2,
+        "EVENT_WRITE": 887
+      },
+      "event_name_counts": {
+        "EVENT_ACCEPT": 25,
+        "EVENT_BIND": 10,
+        "EVENT_CHECK_FILE_ATTRIBUTES": 3704,
+        "EVENT_CLOSE": 2232,
+        "EVENT_CONNECT": 9,
+        "EVENT_CREATE_OBJECT": 2252,
+        "EVENT_CREATE_THREAD": 56,
+        "EVENT_DIRECTORY_ENUMERATE": 16,
+        "EVENT_EXECUTE": 9,
+        "EVENT_EXIT": 24,
+        "EVENT_FCNTL": 506,
+        "EVENT_FORK": 9,
+        "EVENT_FREE_OBJECT": 1093,
+        "EVENT_LOADLIBRARY": 208,
+        "EVENT_LOGIN": 2,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 131,
+        "EVENT_OPEN": 3073,
+        "EVENT_OTHER": 1095,
+        "EVENT_PRINCIPAL_PRIVILEGE_ASSIGNMENT": 2,
+        "EVENT_READ": 4528,
+        "EVENT_RECVFROM": 54,
+        "EVENT_RECVMSG": 14,
+        "EVENT_RENAME": 5,
+        "EVENT_SENDMSG": 33,
+        "EVENT_SENDTO": 222,
+        "EVENT_SIGNAL": 2,
+        "EVENT_SIGNAL_TERMINATE": 2,
+        "EVENT_WRITE": 887
+      },
+      "event_fields_populated": {
+        "uuid": 19090,
+        "timestampNanos": 19090,
+        "subject": 19090,
+        "predicateObject": 19062,
+        "predicateObject2": 744,
+        "predicateObjectPath": 10679,
+        "predicateObject2Path": 5
+      },
+      "event_time_min_nanos": 1557469049869000000,
+      "event_time_max_nanos": 1557469119879000000,
+      "event_time_min_utc": "2019-05-10T06:17:29.869000000Z",
+      "event_time_max_utc": "2019-05-10T06:18:39.879000000Z",
+      "event_timestamp_regressions": 231,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 19999,
+        "00000000000000000000000000000000": 1
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_IPC_OBJECT": [
+          "baseObject",
+          "fd1",
+          "fd2",
+          "type",
+          "uuid",
+          "uuid1",
+          "uuid2"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ],
+        "RECORD_NET_FLOW_OBJECT": [
+          "baseObject",
+          "fileDescriptor",
+          "initTcpSeqNum",
+          "ipProtocol",
+          "localAddress",
+          "localPort",
+          "remoteAddress",
+          "remotePort",
+          "uuid"
+        ],
+        "RECORD_SUBJECT": [
+          "cid",
+          "cmdLine",
+          "count",
+          "exportedLibraries",
+          "importedLibraries",
+          "iteration",
+          "localPrincipal",
+          "parentSubject",
+          "privilegeLevel",
+          "properties",
+          "startTimestampNanos",
+          "type",
+          "unitId",
+          "uuid"
+        ],
+        "RECORD_TIME_MARKER": [
+          "tsNanos"
+        ]
+      },
+      "property_key_counts": {
+        "Affinity": 78,
+        "ApplicationId": 20,
+        "BaseAddress": 3277,
+        "BasePriority": 78,
+        "CommandLine": 20,
+        "CreateOptions": 1327,
+        "DefaultBase": 208,
+        "DirectoryTableBase": 20,
+        "ExitStatus": 20,
+        "ExtraInfo": 4312,
+        "FileAttributes": 1327,
+        "FileIndex": 16,
+        "FileKey": 4328,
+        "FileName": 224,
+        "FileObject": 4328,
+        "Flags": 3297,
+        "IPAddress": 2,
+        "IPPort": 2,
+        "ImageBase": 208,
+        "ImageChecksum": 208,
+        "ImageFileName": 20,
+        "ImageSize": 208,
+        "InfoClass": 4328,
+        "IoFlags": 1116,
+        "IoPriority": 78,
+        "Length": 16,
+        "PackageFullName": 20,
+        "PagePriority": 78,
+        "ParentId": 20,
+        "ProcessID": 286,
+        "ProcessId": 3297,
+        "RegionSize": 3277,
+        "Reserved0": 208,
+        "Reserved1": 208,
+        "Reserved2": 208,
+        "Reserved3": 208,
+        "Reserved4": 208,
+        "SecurityID": 20,
+        "Service": 78,
+        "SessionId": 20,
+        "ShareAccess": 1327,
+        "SignatureLevel": 208,
+        "SignatureType": 208,
+        "StackBase": 78,
+        "StackLimit": 78,
+        "SubProcessTag": 78,
+        "TThreadID": 78,
+        "TebBase": 78,
+        "ThreadFlags": 78,
+        "TimeDateStamp": 208,
+        "UniqueProcessKey": 20,
+        "UserSID": 20,
+        "UserStackBase": 78,
+        "UserStackLimit": 78,
+        "Username": 22,
+        "Win32StartAddr": 78,
+        "attributes": 37,
+        "correlationID": 14,
+        "domain": 2,
+        "end_time": 222,
+        "groupOperationID": 47,
+        "handle": 3993,
+        "logonType": 2,
+        "object": 37,
+        "operation": 47,
+        "operationID": 14,
+        "options": 37,
+        "principal": 4,
+        "providerGUID": 33,
+        "providerName": 33,
+        "providerPath": 33,
+        "start_time": 222,
+        "targetObject": 3993,
+        "threadID": 18,
+        "type": 2,
+        "user": 2,
+        "value": 2
+      },
+      "candidate_label_key_counts": {}
+    },
+    {
+      "path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections\\ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "compressed_bytes": 315341536,
+      "format": "gzip-wrapped Avro object container",
+      "avro_codec": "null",
+      "schema_name": "com.bbn.tc.schema.avro.cdm20.TCCDMDatum",
+      "schema_sha256": "69cb3f215ef0eb2e8064c410781c669db7f36e642bbc7a296ae55ce75a4c26ae",
+      "records_inspected": 20000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 16126,
+        "RECORD_MEMORY_OBJECT": 3118,
+        "RECORD_SUBJECT": 756
+      },
+      "event_count": 16126,
+      "event_type_counts": {
+        "EVENT_CHECK_FILE_ATTRIBUTES": 4828,
+        "EVENT_CLOSE": 625,
+        "EVENT_CREATE_OBJECT": 3225,
+        "EVENT_CREATE_THREAD": 756,
+        "EVENT_EXIT": 894,
+        "EVENT_FCNTL": 23,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 1,
+        "EVENT_OPEN": 655,
+        "EVENT_OTHER": 985,
+        "EVENT_READ": 642,
+        "EVENT_RECVFROM": 408,
+        "EVENT_RENAME": 1,
+        "EVENT_SENDTO": 3033,
+        "EVENT_WRITE": 50
+      },
+      "event_name_counts": {
+        "EVENT_CHECK_FILE_ATTRIBUTES": 4828,
+        "EVENT_CLOSE": 625,
+        "EVENT_CREATE_OBJECT": 3225,
+        "EVENT_CREATE_THREAD": 756,
+        "EVENT_DIRECTORY_ENUMERATE": 14,
+        "EVENT_EXIT": 894,
+        "EVENT_FCNTL": 23,
+        "EVENT_FREE_OBJECT": 985,
+        "EVENT_MODIFY_FILE_ATTRIBUTES": 1,
+        "EVENT_OPEN": 655,
+        "EVENT_OTHER": 985,
+        "EVENT_READ": 642,
+        "EVENT_RECVFROM": 408,
+        "EVENT_RENAME": 1,
+        "EVENT_SENDTO": 3033,
+        "EVENT_WRITE": 50
+      },
+      "event_fields_populated": {
+        "uuid": 16126,
+        "timestampNanos": 16126,
+        "subject": 16126,
+        "predicateObject": 15232,
+        "predicateObject2": 2738,
+        "predicateObjectPath": 6733,
+        "predicateObject2Path": 1
+      },
+      "event_time_min_nanos": 1558122875342000000,
+      "event_time_max_nanos": 1558122889483000000,
+      "event_time_min_utc": "2019-05-17T19:54:35.342000000Z",
+      "event_time_max_utc": "2019-05-17T19:54:49.483000000Z",
+      "event_timestamp_regressions": 182,
+      "cdm_version_counts": {
+        "20": 20000
+      },
+      "instrumentation_source_counts": {
+        "SOURCE_WINDOWS_FIVEDIRECTIONS": 20000
+      },
+      "host_uuid_counts": {
+        "2ab88dcdcbe641dfac699f6d6058e398": 20000
+      },
+      "session_numbers": [
+        4427
+      ],
+      "datum_fields_observed": {
+        "RECORD_EVENT": [
+          "location",
+          "names",
+          "parameters",
+          "predicateObject",
+          "predicateObject2",
+          "predicateObject2Path",
+          "predicateObjectPath",
+          "programPoint",
+          "properties",
+          "sequence",
+          "size",
+          "subject",
+          "threadId",
+          "timestampNanos",
+          "type",
+          "uuid"
+        ],
+        "RECORD_MEMORY_OBJECT": [
+          "baseObject",
+          "memoryAddress",
+          "pageNumber",
+          "pageOffset",
+          "size",
+          "uuid"
+        ],
+        "RECORD_SUBJECT": [
+          "cid",
+          "cmdLine",
+          "count",
+          "exportedLibraries",
+          "importedLibraries",
+          "iteration",
+          "localPrincipal",
+          "parentSubject",
+          "privilegeLevel",
+          "properties",
+          "startTimestampNanos",
+          "type",
+          "unitId",
+          "uuid"
+        ]
+      },
+      "property_key_counts": {
+        "Affinity": 1650,
+        "BaseAddress": 4208,
+        "BasePriority": 1650,
+        "CreateOptions": 322,
+        "ExtraInfo": 4852,
+        "FileAttributes": 322,
+        "FileIndex": 14,
+        "FileKey": 4866,
+        "FileName": 14,
+        "FileObject": 4866,
+        "Flags": 4208,
+        "InfoClass": 4866,
+        "IoFlags": 454,
+        "IoPriority": 1650,
+        "Length": 14,
+        "PagePriority": 1650,
+        "ProcessID": 1650,
+        "ProcessId": 4208,
+        "RegionSize": 4208,
+        "Service": 1650,
+        "ShareAccess": 322,
+        "StackBase": 1650,
+        "StackLimit": 1650,
+        "SubProcessTag": 1650,
+        "TThreadID": 1650,
+        "TebBase": 1650,
+        "ThreadFlags": 1650,
+        "UserStackBase": 1650,
+        "UserStackLimit": 1650,
+        "Win32StartAddr": 1650,
+        "attributes": 1,
+        "end_time": 3033,
+        "handle": 945,
+        "object": 1,
+        "options": 1,
+        "start_time": 3033,
+        "targetObject": 945
+      },
+      "candidate_label_key_counts": {}
+    }
+  ],
+  "errors": []
+}

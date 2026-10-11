@@ -1,0 +1,2 @@
+# Dataset inspection only; model dependencies are added when the task is defined.
+fastavro==1.12.2

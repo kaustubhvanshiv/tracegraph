@@ -1,0 +1,33 @@
+{
+  "status": "candidate incident metadata, not event labels",
+  "source_archive": "D:\\Deep Learning\\darpa-tc-e5-support\\Ground_Truth-20261011T062242Z-1-001.zip",
+  "source_member": "Ground_Truth/TA51_Final_report_E5.pdf",
+  "report_version": "Revision 1.0, June 28, 2019",
+  "target_stream": "ta1-fivedirections-1-e5-official-1",
+  "reported_target_hostname": "ta1-fivedirections-1",
+  "reported_target_ip": "128.55.12.55",
+  "timezone_policy": "EDT (UTC-04:00); May 17 explicitly confirmed by date output on page 126. May 16 is provisional pending telemetry cross-check.",
+  "incidents": [
+    {
+      "incident_id": "e5-fivedirections1-verifier-persistence",
+      "report_section": "9.4",
+      "report_pages": [91, 92, 93],
+      "candidate_start_utc": "2019-05-16T18:24:00Z",
+      "candidate_end_utc": "2019-05-17T21:00:00Z",
+      "boundary_status": "search interval; report says persistence remained enabled through engagement; not an interval in which all events are malicious",
+      "indicators": ["dbgstat.dll", "tester.exe", "215.237.119.171", "68.149.51.179"],
+      "notes": "Section heading says 11:03, but detailed delivery begins 14:24; scp and manual installation occur 15:03-15:04. Keep setup and failed attempts distinct from successful installation."
+    },
+    {
+      "incident_id": "e5-fivedirections1-filefilter-elevation",
+      "report_section": "10.11",
+      "report_pages": [126, 127, 128],
+      "candidate_start_utc": "2019-05-17T20:11:00Z",
+      "candidate_end_utc": "2019-05-17T20:20:00Z",
+      "boundary_status": "review search interval only; the report has a 14:16 timestamp inconsistent with its 16:15 surrounding sequence",
+      "indicators": ["PD2GziBJ2wpDwP", "7B4qoq3yWIKPQh", "DXu0yAtkCpuUTo"],
+      "notes": "Generated filenames are candidate precise matches. Host/time/action and event provenance still need review before positive labels are assigned. The two incidents share persistence and must stay in one split group."
+    }
+  ],
+  "label_policy": "Indicator occurrence is a review candidate only. Unmatched events stay unknown. Do not use test incident indicators as predictive features."
+}
