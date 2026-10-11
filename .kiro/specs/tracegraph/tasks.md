@@ -770,7 +770,7 @@ ML-11 final ML research documentation
 
 - [ ] ML-02. Ground Truth and Label Definition
   - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
-  - Started 2026-10-11: `data/ml/ground_truth.md` contains a provisional label/split plan. Streaming inspection and ZIP/PDF reading are implemented and tested. Downloaded support archives have been read; a complete scan of segment 121 found three precise report-to-event matches. See `data/ml/datasets/darpa/support_review.md`. Label protocol, verified benign examples, independent incident groups, semantic conversion, and prepared splits remain pending.
+  - Updated 2026-10-11: label import contract and chronological group split checks are defined in `data/ml/ground_truth.md`. `prepare_dataset.py` streamed 2,000,000 segment-121 records, found all three review events, and resolved one parent process. Offline registry conversion preserves CDM semantics in `SecurityEvent`; detailed object/host mappings remain pending. All 17 research tests pass. No binary labels or supervised splits were created: verified benign evidence, positive actor/host verification, and independent groups are missing. See `data/ml/datasets/darpa/preparation_review_manifest.json`. ML-02 remains incomplete.
 
   - [ ] ML-02.1 Define the prediction target precisely
     - Based on the selected dataset analysis from ML-01, write a formal definition in `data/ml/ground_truth.md`:

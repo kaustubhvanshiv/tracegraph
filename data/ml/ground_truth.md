@@ -1,6 +1,7 @@
 # ML-02 — ground truth and split plan
 
-Status on 2026-10-11: **draft, support sources read; event labeling protocol pending**.
+Status on 2026-10-11: **label contract defined; review preparation executed;
+training blocked by evidence coverage**.
 ML-02.1, ML-02.2, and ML-02.4 are not complete. No labeled splits or model
 performance claims exist. The support ZIPs are now available under
 `D:\Deep Learning\darpa-tc-e5-support`; see the
@@ -23,12 +24,12 @@ supersedes the task file's historical `../datasets/` examples for this download.
 
 ## Proposed target and label contract
 
-Candidate prediction target: **whether a CDM Event is a documented ACT attack
+Prediction target: **whether a CDM Event is a documented ACT attack
 action**. This is narrower than whether a host is compromised or a relationship
-is relevant to an investigation. Confirm this target after reading the report
-and annotation format; available annotations may support a different unit.
+is relevant to an investigation. External annotations must be reviewed against
+this target before importing them.
 
-Proposed sample unit: one unique Event. Proposed graph input: its available
+Sample unit: one unique Event. Proposed graph input: its available
 causal context from process/object relationships at or before its timestamp,
 with the history window selected and documented in ML-06. Do not use future
 activity or label-dependent graph construction as an input feature.
@@ -112,6 +113,38 @@ Support ZIP/PDF reading (`read_support.py`) is implemented and tested. A full
 segment-121 coverage scan (`audit_attack_coverage.py`) matched the downloaded
 schema and report-derived indicators. Other segment scans remain prefix-only.
 
-Pending: reference joins, semantic `SecurityEvent` conversion, verified label
-assignment, deterministic splits, and `prepare_dataset.py` from ML-02.4.
+Implemented: `prepare_dataset.py` streams annotation-listed source files,
+indexes subject references in SQLite, validates exact UUID/host/time/action
+matches, deduplicates selected events and quarantines conflicting payloads.
+The offline adapter is registered in a private instance of the existing
+`AdapterRegistry` and validates output against the backend `SecurityEvent`
+schema. It preserves the original CDM action and integer nanoseconds, without
+inventing hostname, process, user, or file semantics. Unknown object categories
+remain `cdm_event`; detailed canonical mappings are still pending.
+
+The label import contract is `review_annotations.json` version 1 with an
+`events` array: event_uuid, host_uuid, timestamp_nanos (integer UTC epoch
+nanoseconds), cdm_event_type, source_file, label, group_id, review_status,
+and evidence. A binary label requires `review_status: verified`, evidence and
+a curated group ID. Candidate annotations always retain null labels.
+Current report matches do not fully establish actor and host identity, so
+all three remain unknown. No downloaded STARC annotation schema is available.
+
+The executable splitter orders whole groups by earliest timestamp, targets
+60/20/20, and rejects interleaved intervals, context overlap, duplicate sample
+IDs, missing groups and missing classes. Context length is supplied explicitly
+in nanoseconds; zero means event-only splitting and cannot validate a future
+graph history window. It writes split IDs only when all checks pass.
+
+Executed a 2,000,000-record segment-121 preparation scan: all three selected
+events found, zero conflicts, zero binary labels, one process reference
+resolved. The remaining two share missing parent UUID
+`1fca97f4e4134d05869b31eb09df8770`. Reference joins are audit metadata only;
+entity availability in a file does not establish event-time-valid features.
+See [the preparation manifest](datasets/darpa/preparation_review_manifest.json).
+
+Pending: complete entity/time/host joins, detailed canonical object semantics,
+verified positives and negatives, independent groups and actual supervised
+splits. The available support report does not prove benign labels for the
+current selected telemetry. ML-02 tasks remain unchecked until these gates pass.
 Research code stays outside production APIs until ML-07 and ML-09 pass.

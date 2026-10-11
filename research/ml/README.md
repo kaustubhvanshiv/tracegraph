@@ -12,7 +12,8 @@ alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`
 | Support ZIP/PDF review | Complete: E5 report, CDM 2.0 schema, operational log |
 | Complete segment-121 scan | 10,000,000 records; 9,650,235 Events |
 | Ground-truth alignment | Three precise file-open matches; review candidates, not assigned labels |
-| Labels, splits, training | Pending: benign examples, label protocol, independent incident groups |
+| Reviewed-event preparation | 2,000,000 records scanned; three candidates retained; one parent process resolved |
+| Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
 
 The other five segments have prefix inspections only. No trained GNN or
 classification results exist. Research is separate from production correlation.
@@ -139,9 +140,47 @@ scan does not establish indicator frequency across the release.
 & $MlPython -m unittest discover -s research/ml/tests -v
 ```
 
-With support dependencies installed, all **11 tests** should pass. They cover
+With support dependencies installed, all **17 tests** should pass. They cover
 corrupt input, sampling limits, timestamp precision/timezones, indicator-label
-separation, safe ZIP paths, and preservation of archives.
+separation, safe ZIP paths, preservation of archives, strict label validation,
+streaming preparation, deduplication, and chronological group/context checks.
+
+## 8. Prepare the reviewed events
+
+Install the updated requirements in your ML environment first. Preparation
+uses the backend's Pydantic models but does not start the backend or database.
+
+```powershell
+& $MlPython -m pip install -r research/ml/requirements-support.txt
+& $MlPython -m research.ml.data_prep.prepare_dataset `
+  --source $DataSource `
+  --annotations data/ml/datasets/darpa/review_annotations.json `
+  --output .cache/ml-runs/my-prepared-review `
+  --records-per-file 2000000
+```
+
+Use a fresh output directory for each run. Exit code **2** means the preparation
+finished but evidence is insufficient for supervised splits. Inspect
+`manifest.json` and `review_events.jsonl` in that directory; the SQLite subject
+index stays local. These are only three selected review events, not a sampled
+training dataset. `--records-per-file 0` scans selected source files fully.
+Only filenames listed in annotations are scanned; other downloaded segments
+are not implicitly covered.
+
+The current run found all three events, with null labels and one resolved
+parent process. Two events share an unresolved parent. No split files were
+written. The adapter preserves CDM actions and nanosecond timestamps in raw
+metadata; ambiguous object types are not mapped to files or processes.
+Reference joins are for audit and are not model features.
+
+To unblock training: obtain event-level annotations or independently review
+host identity and actor/object evidence for positives; identify explicitly
+verified benign events; obtain at least three independent groups with both
+classes in each chronological partition. Keep related attack phases together.
+Then review annotation `label`, `review_status`, `group_id`, and `evidence`
+against the [label contract](../../data/ml/ground_truth.md), rerun preparation
+with the intended `--context-nanos`, and check the achieved split counts.
+Do not change null labels to zero to make the checks pass.
 
 ## Linux and macOS
 
@@ -170,9 +209,9 @@ as independent training and test incidents. Unmatched events remain unknown,
 not automatically benign. Thread subjects must resolve to parent processes
 before constructing process features.
 
-Next: finalize reviewed labels, verified benign examples, entity-reference
-coverage, and independent incident groups; then implement preparation, safe
-splits, and model experiments following ML-02 onward.
+Implemented: reviewed-event preparation and split validation. Remaining:
+verified labels, benign evidence, complete reference/host coverage and
+independent incident groups. Model experiments follow after those gates pass.
 
 ## Collaboration and Git
 

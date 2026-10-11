@@ -1,0 +1,87 @@
+{
+  "status": "blocked_for_training",
+  "selection": "annotation-listed events only; not representative sampling",
+  "files": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 2000000,
+      "complete_scan": false,
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700
+    }
+  ],
+  "record_type_counts": {
+    "RECORD_EVENT": 1901311,
+    "RECORD_MEMORY_OBJECT": 90339,
+    "RECORD_SUBJECT": 6783,
+    "RECORD_IPC_OBJECT": 744,
+    "RECORD_TIME_MARKER": 42,
+    "RECORD_NET_FLOW_OBJECT": 388,
+    "RECORD_FILE_OBJECT": 153,
+    "RECORD_REGISTRY_KEY_OBJECT": 226,
+    "RECORD_SRC_SINK_OBJECT": 14
+  },
+  "annotation_sha256": "1d2b8ce1b74986d1762f43e16dd160a34f4ae190e03f50125efa28d1c41dec44",
+  "sample_count": 3,
+  "label_counts": {
+    "None": 3
+  },
+  "missing_event_uuids": [],
+  "conflicting_event_uuids": [],
+  "resolved_process_count": 1,
+  "context_nanos": 0,
+  "blocking_reasons": [
+    "At least three independent labeled groups required",
+    "Verified benign and attack samples required in every partition"
+  ],
+  "feature_status": "no model features; references for audit only",
+  "review_references": [
+    {
+      "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+      "subject_resolution": {
+        "chain": [
+          {
+            "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+            "type": "SUBJECT_THREAD",
+            "cid": 1028
+          }
+        ],
+        "unresolved_uuid": "1fca97f4e4134d05869b31eb09df8770",
+        "process_resolved": false
+      }
+    },
+    {
+      "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+      "subject_resolution": {
+        "chain": [
+          {
+            "uuid": "8d1252ea10594bb2a5583880fa606aba",
+            "type": "SUBJECT_THREAD",
+            "cid": 6132
+          },
+          {
+            "uuid": "27a66853adc240d8a7ac6788cc6cfd6b",
+            "type": "SUBJECT_PROCESS",
+            "cid": 5432
+          }
+        ],
+        "unresolved_uuid": null,
+        "process_resolved": true
+      }
+    },
+    {
+      "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+      "subject_resolution": {
+        "chain": [
+          {
+            "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+            "type": "SUBJECT_THREAD",
+            "cid": 1028
+          }
+        ],
+        "unresolved_uuid": "1fca97f4e4134d05869b31eb09df8770",
+        "process_resolved": false
+      }
+    }
+  ]
+}
