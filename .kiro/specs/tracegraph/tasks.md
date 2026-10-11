@@ -824,7 +824,8 @@ ML-11 final ML research documentation
 ---
 
 - [ ] ML-03. ML Fundamentals and Optional Classical Baseline
-  - [ ] ML-03.1 Assess whether a classical ML baseline is appropriate
+  - [x] ML-03.1 Assess whether a classical ML baseline is appropriate
+    - Completed 2026-10-11: `research/ml/baseline/README.md` documents why training is not justified with one reviewed positive, zero verified negatives and no independent splits. Optional ML-03.2/ML-03.3 are deferred pending ML-02 evidence; no classifier or metrics were produced. ML-04 toy fundamentals may proceed independently.
     - Determine whether the dataset and prediction target support a meaningful tabular/feature-based ML baseline
     - Document the decision in `research/ml/baseline/README.md`: either the baseline is justified (with feature plan) or it is not justified (with reasoning)
     - Do not implement a baseline purely for complexity — only if it provides a useful comparison point

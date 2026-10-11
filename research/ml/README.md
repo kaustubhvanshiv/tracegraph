@@ -15,6 +15,7 @@ alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`
 | Reviewed-event preparation | 2,000,000 records scanned; three candidates retained; one parent process resolved |
 | Full reference audit | Six files; 60,000,000 records; missing actor/Host/Principal definitions confirmed |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
+| ML-03.1 baseline assessment | Complete: current labeled subset cannot support supervised baseline evaluation |
 
 The other five segments have prefix inspections only. No trained GNN or
 classification results exist. Research is separate from production correlation.
@@ -242,6 +243,13 @@ Replace `& $MlPython` in the Windows examples with
 `research/ml/.venv/bin/python` and use normal quoted paths.
 
 ## Findings and next work
+
+The [classical baseline assessment](baseline/README.md) is complete. With one
+reviewed positive, no verified negatives and no valid partitions, optional
+baseline feature engineering/training is deferred. The next independent task
+is ML-04: a small feed-forward network on synthetic toy data, followed by
+learning-rate/overfitting/regularization demonstrations. Those exercises do
+not validate attack detection on DARPA telemetry.
 
 - [Dataset selection](../../data/ml/comparison/primary_dataset_selection.md).
 - [Local prefix inspection](../../data/ml/datasets/darpa/fivedirections_local_inspection.md).
