@@ -770,9 +770,10 @@ ML-11 final ML research documentation
 
 - [ ] ML-02. Ground Truth and Label Definition
   - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
-  - Updated 2026-10-11: full reference audit decoded all 60,000,000 records across six files and indexed 257,164 Subjects. Missing actor/Host/Principal definitions are absent from the downloaded subset. Local netflow evidence supports host/IP alignment; one exact artifact/time/Firefox-actor match is now a report-reviewed positive, with two candidates unknown and no verified negatives. Preparation rerun retains those labels and refuses supervised splits. All 22 research tests pass. See `data/ml/datasets/darpa/reference_review.md` and `preparation_review_manifest.json`. Missing telemetry, benign evidence, detailed semantic mapping, and independent groups keep ML-02 incomplete.
+  - Verified 2026-10-11: ML-02.1/02.2 definitions and ML-02.3 scenario planning are complete. ML-02.4 remains incomplete on real data. The full audit decoded 60,000,000 records; preparation retains one report-reviewed positive, two unknowns and no verified negatives. Added positive-incident isolation and configurable ID-only split export defaulting to `data/ml/splits/`; the real rerun refuses invalid partitions. All 24 research tests pass. See `data/ml/ml02_verification.md`. Missing telemetry, benign evidence, feature semantics and independent groups prevent overall completion.
 
-  - [ ] ML-02.1 Define the prediction target precisely
+  - [x] ML-02.1 Define the prediction target precisely
+    - Verified 2026-10-11: dataset/path, attack/benign/unknown evidence contract, unique-event sample unit and parameterized event-centered temporal provenance graph unit are defined in `data/ml/ground_truth.md`. No graph architecture selected.
     - Based on the selected dataset analysis from ML-01, write a formal definition in `data/ml/ground_truth.md`:
       - Selected primary dataset name and exact local source path
       - Prediction target (what the model will predict) — chosen from the candidates listed in ML-01.5 question 9
@@ -783,7 +784,8 @@ ML-11 final ML research documentation
     - The prediction target is selected here for the first time. It was deliberately not finalised in ML-01.
     - _Requirements: ML-02_
 
-  - [ ] ML-02.2 Define leakage-safe train/validation/test splits
+  - [x] ML-02.2 Define leakage-safe train/validation/test splits
+    - Verified 2026-10-11: chronological whole-group 60/20/20 policy, incident isolation, duplicate/conflict handling, past-only context boundaries and training-only preprocessing are defined. Actual DARPA partitions remain unavailable; this completes the definition task only.
     - Document the splitting strategy in `data/ml/ground_truth.md`. Random row-level splitting is not assumed to be safe — reason explicitly about the selected dataset:
       - Why random per-event or per-row splitting is or is not safe for this specific dataset (reference ML-01.5 question 10)
       - Chosen split strategy and justification — consider: incident-aware, scenario-aware, host-aware, or time-aware splitting depending on what the selected dataset's structure supports
@@ -791,7 +793,8 @@ ML-11 final ML research documentation
       - How to verify that no positive attack incident has events in both train and test partitions
     - _Requirements: ML-02_
 
-- [ ] ML-02.3 Plan use of the TraceGraph evaluation scenarios as a controlled test set
+- [x] ML-02.3 Plan use of the TraceGraph evaluation scenarios as a controlled test set
+  - Planning completed 2026-10-11: `data/ml/ground_truth.md` maps all four scenarios to intended use, required event-level evidence, label-granularity limitations and separate held-out reporting. Task 29 fixtures remain empty/unvalidated and have not been used for ML evaluation.
 
   - The four evaluation scenarios from Task 29
     (`data/scenarios/basic_attack_sequence/`,

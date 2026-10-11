@@ -69,6 +69,8 @@ def reviewed_label(annotation, raw):
             raise ValueError("Label must be integer 0, 1, or null")
         if annotation.get("review_status") != "verified" or not annotation.get("evidence") or not annotation.get("group_id"):
             raise ValueError("Binary label requires verified evidence and a group ID")
+        if label == 1 and not annotation.get("incident_id"):
+            raise ValueError("Positive label requires an incident ID")
     return label
 
 
@@ -77,6 +79,13 @@ def make_splits(samples, context_nanos=0):
     if context_nanos < 0:
         raise ValueError("Context window must be nonnegative")
     known = [s for s in samples if s["label"] is not None]
+    incident_groups = {}
+    for sample in known:
+        incident = sample.get("incident_id")
+        if sample["label"] == 1 and incident:
+            incident_groups.setdefault(incident, set()).add(sample.get("group_id"))
+    if any(len(ids) > 1 for ids in incident_groups.values()):
+        return None, ["A positive incident is assigned to multiple split groups"]
     if len({s["event_uuid"] for s in samples}) != len(samples):
         return None, ["Duplicate sample identities"]
     groups = {}
@@ -117,7 +126,7 @@ def resolve_subject(db, subject_id):
     return {"chain": chain, "unresolved_uuid": subject_id, "process_resolved": False}
 
 
-def prepare(source, annotations_path, output, limit, context_nanos=0):
+def prepare(source, annotations_path, output, limit, context_nanos=0, split_output=None):
     source, output = source.resolve(), output.resolve()
     if source == output or source in output.parents:
         raise ValueError("Output must be outside the raw source")
@@ -125,6 +134,13 @@ def prepare(source, annotations_path, output, limit, context_nanos=0):
         raise ValueError("Use a fresh output directory; previous results are preserved")
     if limit < 0:
         raise ValueError("Record limit must be nonnegative")
+    if context_nanos < 0:
+        raise ValueError("Context window must be nonnegative")
+    split_directory = Path(split_output).resolve() if split_output is not None else output / "splits"
+    if split_directory == source or source in split_directory.parents:
+        raise ValueError("Split output must be outside raw source")
+    if split_directory.exists() or split_directory == output or split_directory in output.parents:
+        raise ValueError("Use a fresh, separate split directory")
     annotations = json.loads(annotations_path.read_text(encoding="utf-8"))["events"]
     wanted = {a["event_uuid"]: a for a in annotations}
     if len(wanted) != len(annotations):
@@ -200,8 +216,8 @@ def prepare(source, annotations_path, output, limit, context_nanos=0):
         for sample in samples:
             stream.write(json.dumps(sample) + "\n")
     if splits:
-        directory = output / "splits"
-        directory.mkdir()
+        directory = split_directory
+        directory.mkdir(parents=True)
         for name, rows in splits.items():
             (directory / f"{name}.json").write_text(json.dumps([r["event_uuid"] for r in rows], indent=2), encoding="utf-8")
     manifest = {"status": "split_ready" if splits else "blocked_for_training", "selection": "annotation-listed events only; not representative sampling",
@@ -211,6 +227,7 @@ def prepare(source, annotations_path, output, limit, context_nanos=0):
         "resolved_process_count": sum(s["subject_resolution"]["process_resolved"] for s in samples),
         "context_nanos": context_nanos, "blocking_reasons": reasons,
         "feature_status": "no model features; references for audit only"}
+    manifest["split_output"] = str(split_directory) if splits else None
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest
 
@@ -222,8 +239,11 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--records-per-file", type=int, default=2_000_000)
     parser.add_argument("--context-nanos", type=int, default=0)
+    parser.add_argument("--split-output", type=Path,
+                        default=Path(__file__).resolve().parents[3] / "data/ml/splits",
+                        help="Fresh directory for validated split IDs (created only when gates pass)")
     args = parser.parse_args()
-    manifest = prepare(args.source, args.annotations, args.output, args.records_per_file, args.context_nanos)
+    manifest = prepare(args.source, args.annotations, args.output, args.records_per_file, args.context_nanos, args.split_output)
     print(json.dumps(manifest, indent=2))
     return 0 if manifest["status"] == "split_ready" else 2
 

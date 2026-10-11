@@ -1,0 +1,59 @@
+# ML-02 requirement verification — 2026-10-11
+
+Overall conclusion: **ML-02 is partially complete; real-data preparation and
+supervised partition generation remain blocked**.
+
+Prerequisite ML-01.6 is complete: the selected dataset is DARPA TC Engagement 5,
+FiveDirections Windows. The exact download path is recorded in
+[ground_truth.md](ground_truth.md).
+
+| Subtask | Verified status | Evidence |
+|---|---|---|
+| ML-02.1 prediction and label definition | Complete | Exact dataset/path, documented ACT-action target, positive/negative/unknown evidence rules, unique Event sample unit and event-centered temporal provenance graph definition are documented. Graph horizon is a later experiment parameter; architecture is not selected. |
+| ML-02.2 split strategy definition | Complete | Chronological whole-group 60/20/20 target, incident isolation, UUID deduplication/conflict quarantine, past-only context and training-only preprocessing rules are documented. Code rejects insufficient classes/groups and temporal/context overlap. |
+| ML-02.3 controlled-scenario use plan | Complete as planning | All four Task 29 scenarios have intended use, evidence requirements and limitations. They supplement the primary test set. Task 29 itself remains unvalidated; folders contain only `.gitkeep`, so no scenario evaluation or labels are claimed. |
+| ML-02.4 preparation on actual dataset | Incomplete | Streaming reader, privately registered CDM adapter, `SecurityEvent` validation, reviewed label import, reference joins, split checks and ID-only export are implemented. Real-data split generation fails the evidence gates; no supervised partitions exist. |
+
+## Work completed during verification
+
+Made the graph sample definition precise and documented the intended use and
+limitations of each controlled scenario. Corrected checklist statuses for
+definition/planning tasks; their completion does not require a trained model.
+
+Added a check that rejects a positive incident ID assigned to multiple split
+groups, and required positive incident IDs during annotation import. Added
+configurable split export with default `data/ml/splits/`, as required by
+ML-02.4. Export contains IDs only, preserves existing destinations
+and runs only after validation. A synthetic integration fixture verifies
+successful export; it is not used as security training data.
+
+## Validation and actual evidence
+
+The research suite passes **24 tests**. Added tests cover incident IDs crossing
+groups and validated split export to the requested directory without overwrite.
+
+The current annotation set is **one report-reviewed positive, zero verified
+negatives, two unknowns and one campaign**. The selected review events are not
+a representative training sample. The full raw reference audit decoded all
+60 million records across six containers; it established missing entity
+definitions rather than supplying attack labels for unannotated events.
+
+The real preparation rerun inspects a two-million-record prefix of segment
+121, finds all three listed events and rejects supervised splits. See
+[preparation_review_manifest.json](datasets/darpa/preparation_review_manifest.json)
+for counts and blocking reasons. No `data/ml/splits/` directory is created
+by this blocked run.
+
+## What prevents completing ML-02.4
+
+Verified benign events and enough independent positive/benign groups to produce
+chronological train/validation/test partitions containing both classes are
+absent. Additional telemetry/annotations must provide this evidence. Related
+May 16 persistence and May 17 elevation phases cannot be separated into
+independent attack groups. Unknown events cannot be relabeled benign.
+
+Complete required reference/semantic coverage for the eventual features, review
+annotation coverage and provenance, then rerun preparation with the intended
+history horizon. Inspect class/group counts and achieved partition proportions
+before claiming ML-02 complete. No model training or performance conclusion
+is justified by the current preparation outputs.

@@ -36,6 +36,7 @@
     "Verified benign and attack samples required in every partition"
   ],
   "feature_status": "no model features; references for audit only",
+  "split_output": null,
   "review_references": [
     {
       "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",

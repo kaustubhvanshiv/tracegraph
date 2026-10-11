@@ -2,7 +2,8 @@
 
 Status on 2026-10-11: **label contract defined; review preparation executed;
 training blocked by evidence coverage**.
-ML-02.1, ML-02.2, and ML-02.4 are not complete. No labeled splits or model
+ML-02.1 and ML-02.2 definitions and ML-02.3 scenario planning are complete.
+ML-02.4 remains incomplete for the actual dataset. No labeled splits or model
 performance claims exist. The support ZIPs are now available under
 `D:\Deep Learning\darpa-tc-e5-support`; see the
 [support review](datasets/darpa/support_review.md) and
@@ -22,17 +23,36 @@ See the [primary dataset decision](comparison/primary_dataset_selection.md),
 [support-file checklist](download_checklist.md). This absolute Windows path
 supersedes the task file's historical `../datasets/` examples for this download.
 
-## Proposed target and label contract
+## Prediction target and label contract (ML-02.1)
 
 Prediction target: **whether a CDM Event is a documented ACT attack
 action**. This is narrower than whether a host is compromised or a relationship
 is relevant to an investigation. External annotations must be reviewed against
 this target before importing them.
 
-Sample unit: one unique Event. Proposed graph input: its available
-causal context from process/object relationships at or before its timestamp,
-with the history window selected and documented in ML-06. Do not use future
-activity or label-dependent graph construction as an input feature.
+Sample unit: one unique CDM Event, identified by stream and Event UUID.
+The target concerns that action, not the host's compromise state or whether
+two events are related. Label 1 denotes documented attacker activity; label 0
+denotes specifically verified benign activity; null denotes insufficient evidence.
+There is no native binary attack-label field in the inspected CDM records.
+The reviewed external annotation contract supplies the label and provenance.
+The historical DARPA analysis's outside-attack-window negative definition is
+superseded here: lack of attack coverage does not prove an event benign.
+
+Graph unit: one event-centered temporal provenance subgraph `G(e, W)` per
+sample event `e`, with a fixed history horizon `W`. Its seed nodes are the
+event's resolved subject and predicate objects. Include only observed causal
+ancestors connected to those seeds through resolved process-parent and
+subject/object references, with evidence timestamps in `[t(e)-W, t(e)]`,
+from the same partition. Preserve CDM edge actions and entity types. Unresolved
+references are missing evidence, not fabricated nodes with guessed attributes.
+Do not include future events, label metadata, or future-created entity state.
+
+`W` and any computational sampling caps are explicit experiment parameters
+to be selected using training/validation in ML-06; the graph unit is defined
+here without selecting a GNN architecture. Events with insufficient graph
+coverage must be flagged or excluded with counts, consistently across splits.
+No graph input has been constructed for the current three review events.
 
 | Label | Admissible evidence |
 |---|---|
@@ -63,7 +83,7 @@ conflicting matches, positive/negative/unknown counts, and reviewed examples.
 Weak host/time-only matches should be retained separately, not treated as
 verified event-level labels.
 
-## Proposed leakage-safe split policy
+## Leakage-safe split policy (ML-02.2)
 
 Random per-event splitting is unsafe: one process, action burst, duplicate
 event, or campaign can produce many nearly identical records across partitions.
@@ -94,8 +114,10 @@ not chronological order.
 The report establishes that May 16 persistence and May 17 escalation are related
 phases of the same attack. Keep them in one group. The three precise matches
 cannot be divided into independent train/validation/test attacks. This policy
-is not yet executable: sufficient independent groups and verified benign
-examples are missing. No split files have been created.
+is executable in the preparation code, but cannot produce valid real-data
+partitions because sufficient independent groups and verified benign examples
+are missing. No real split files have been created. A synthetic integration
+fixture checks ID-only export; it is not evidence of a DARPA evaluation split.
 
 ## Controlled scenarios (ML-02.3)
 
@@ -106,6 +128,24 @@ them. In particular, a login→process→network→file chain is not sufficient 
 of an attack. Controlled scenarios will supplement, rather than replace, a
 primary dataset test split.
 
+Planning is complete; Task 29 scenario creation/validation and subsequent ML
+execution remain pending. The intended use of each scenario is:
+
+| Scenario | Intended use for this target | Required evidence and limitation |
+|---|---|---|
+| `basic_attack_sequence` | Positive controlled challenge when specific attacker actions are scripted and annotated. | An attack-looking chain alone is insufficient; each positive needs the script action and event mapping. Expected relationships are not attack labels. |
+| `unrelated_events` | Graph isolation and false-correlation check; negative classification examples only if each action is verified benign. | Unrelated events may still be malicious individually. Absence of graph edges cannot define label 0. |
+| `legitimate_access` | Verified benign hard negatives that resemble attack activity. | Require benign purpose, exact generated actions and event IDs; legitimate access may produce valid relationships without implying attack. |
+| `multi_user_host` | Entity separation and cross-user context-contamination checks. | Shared-host topology supplies no binary labels. Annotate benign/attack actions independently and preserve campaign groups. |
+
+Use complete scenarios as held-out groups; related variants share a group.
+Do not tune features, thresholds or architectures on a scenario designated as
+test. Record event counts, label balance, annotation granularity and expected
+graph coverage once fixtures exist. Synthetic controlled examples cannot
+replace real incident generalization, and their metrics must be reported
+separately from the primary DARPA test split. The empty folders currently
+contain no usable event counts or labels.
+
 ## Preparation status
 
 Implemented and executed: bounded gzip/Avro inspection, embedded schema audit,
@@ -113,7 +153,9 @@ record/event counts, timestamp precision and ordering diagnostics, and field
 availability reporting (`research/ml/data_prep/inspect_fivedirections.py`).
 Support ZIP/PDF reading (`read_support.py`) is implemented and tested. A full
 segment-121 coverage scan (`audit_attack_coverage.py`) matched the downloaded
-schema and report-derived indicators. Other segment scans remain prefix-only.
+schema and report-derived indicators. A later reference audit fully scanned
+all six segments; the original inspection and indicator reports retain their
+original, narrower scopes.
 
 Implemented: `prepare_dataset.py` streams annotation-listed source files,
 indexes subject references in SQLite, validates exact UUID/host/time/action
@@ -129,6 +171,8 @@ The label import contract is `review_annotations.json` version 1 with an
 nanoseconds), cdm_event_type, source_file, label, group_id, review_status,
 and evidence. A binary label requires `review_status: verified`, evidence and
 a curated group ID. Candidate annotations always retain null labels.
+Positive labels additionally require an incident ID for explicit incident
+isolation checks; negative labels use a verified benign block group.
 The current annotations contain one verified report-derived positive and two
 unknown candidates. Host/IP evidence is inferred from local netflow fields;
 missing Host and Principal records remain explicit limitations. This is a
@@ -140,6 +184,15 @@ The executable splitter orders whole groups by earliest timestamp, targets
 IDs, missing groups and missing classes. Context length is supplied explicitly
 in nanoseconds; zero means event-only splitting and cannot validate a future
 graph history window. It writes split IDs only when all checks pass.
+It also rejects a positive incident ID assigned to multiple groups. Sorting is
+deterministic and does not use randomness; a seed is unnecessary for this step.
+Stochastic model/sampling steps must record their own seed later.
+
+The CLI now defaults validated ID-only split export to `data/ml/splits/`;
+`--split-output` can name a fresh run-specific directory. Existing split
+directories are preserved and raw-source destinations rejected. A blocked run
+does not create the split directory. Local review events and entity indexes
+remain in the ignored output run; they are not copied into tracked split files.
 
 Executed a 2,000,000-record segment-121 preparation scan: all three selected
 events found, zero conflicts, one positive and two unknowns, one process reference
@@ -159,5 +212,6 @@ See [the full reference report](datasets/darpa/full_reference_report.json).
 Pending: complete entity/time/host joins, detailed canonical object semantics,
 verified positives and negatives, independent groups and actual supervised
 splits. The available support report does not prove benign labels for the
-current selected telemetry. ML-02 tasks remain unchecked until these gates pass.
+current selected telemetry. Only ML-02.4 and the overall ML-02 task remain
+unchecked; definition/planning completion does not imply training readiness.
 Research code stays outside production APIs until ML-07 and ML-09 pass.

@@ -14,6 +14,8 @@ alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`
 | Ground-truth alignment | Three file-open matches: one report-reviewed positive, two unknowns |
 | Reviewed-event preparation | 2,000,000 records scanned; three candidates retained; one parent process resolved |
 | Full reference audit | Six files; 60,000,000 records; missing actor/Host/Principal definitions confirmed |
+| ML-02.1 / ML-02.2 / ML-02.3 | Target/graph definition, split policy and scenario-use plan complete |
+| ML-02.4 actual dataset preparation | Partial: scripts tested; real supervised splits blocked by label coverage |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
 | ML-03.1 baseline assessment | Complete: current labeled subset cannot support supervised baseline evaluation |
 
@@ -142,12 +144,13 @@ scan does not establish indicator frequency across the release.
 & $MlPython -m unittest discover -s research/ml/tests -v
 ```
 
-With support dependencies installed, all **22 tests** should pass. They cover
+With support dependencies installed, all **24 tests** should pass. They cover
 corrupt input, sampling limits, timestamp precision/timezones, indicator-label
 separation, safe ZIP paths, preservation of archives, strict label validation,
 streaming preparation, deduplication, chronological group/context checks,
 reference conflicts, cyclic parents, process start-time checks, and local versus
-remote IP evidence.
+remote IP evidence, positive incidents assigned to multiple groups, and ID-only
+split export to the requested directory without overwriting existing splits.
 
 ## 8. Prepare the reviewed events
 
@@ -170,6 +173,13 @@ index stays local. These are only three selected review events, not a sampled
 training dataset. `--records-per-file 0` scans selected source files fully.
 Only filenames listed in annotations are scanned; other downloaded segments
 are not implicitly covered.
+
+When all checks pass, the CLI exports only event IDs in `train.json`,
+`validation.json` and `test.json` under `data/ml/splits/`. To keep multiple
+validated runs, supply `--split-output data/ml/splits/<run-name>` with a fresh
+destination. Existing directories are not overwritten. Blocked runs do not
+create a split destination; unknown events are excluded from binary splits.
+Synthetic split-export tests are code validation, not real DARPA split results.
 
 The current run found all three events, with one report-reviewed positive,
 two unknown labels and one resolved parent process. Two events share an
