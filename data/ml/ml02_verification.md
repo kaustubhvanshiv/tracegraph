@@ -1,5 +1,12 @@
 # ML-02 requirement verification — 2026-10-11
 
+Updated 2026-10-13: typed offline CDM normalization and host-scoped reference
+joins are now implemented. The real two-million-record rerun produces three
+file-access events with paths and one time-valid Firefox process image. All
+32 tests pass. ML-02.4 remains incomplete for real supervised partitions;
+the verified-benign and independent-group evidence gaps are unchanged. See
+[the semantic mapping notes](../../research/ml/data_prep/SEMANTICS.md).
+
 Overall conclusion: **ML-02 is partially complete; real-data preparation and
 supervised partition generation remain blocked**.
 

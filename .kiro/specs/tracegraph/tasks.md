@@ -816,6 +816,7 @@ ML-11 final ML research documentation
   - *_Requirements: ML-02, 19.1–19.5_*
 
   - [ ] ML-02.4 Implement dataset preparation scripts
+    - Progress 2026-10-13: added typed CDM normalization and host-scoped SQLite joins; process metadata requires time-valid subject lineage. The real 2,000,000-record rerun produces three `file/access` events with paths and one Firefox process image. All 32 research tests pass. No labels changed and no real splits were generated: verified negatives and independent groups are still missing. See `research/ml/data_prep/SEMANTICS.md` and the updated preparation manifest.
     - Create `research/ml/data_prep/prepare_dataset.py` that:
       - Reads raw data from the exact local source path recorded in `data/ml/ground_truth.md` (i.e., from `../datasets/...`) using memory-conscious methods appropriate to the dataset size
       - Converts events to `SecurityEvent` format via the existing adapter or a new adapter registered in the adapter registry

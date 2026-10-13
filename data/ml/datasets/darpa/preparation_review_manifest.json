@@ -35,7 +35,19 @@
     "At least three independent labeled groups required",
     "Verified benign and attack samples required in every partition"
   ],
-  "feature_status": "no model features; references for audit only",
+  "feature_status": "canonical event fields only; no model vectors or graphs",
+  "semantic_mapping_version": 1,
+  "normalized_event_type_counts": {
+    "file": 3
+  },
+  "normalized_field_counts": {
+    "process": 1,
+    "file": 3,
+    "user": 0,
+    "source_host": 0,
+    "source_ip": 0,
+    "destination_ip": 0
+  },
   "split_output": null,
   "review_references": [
     {
@@ -49,8 +61,12 @@
           }
         ],
         "unresolved_uuid": "1fca97f4e4134d05869b31eb09df8770",
-        "process_resolved": false
-      }
+        "process_resolved": false,
+        "reason": "missing_or_conflicting_reference"
+      },
+      "normalized_event_type": "file",
+      "normalized_action": "access",
+      "predicate_kind": "RECORD_FILE_OBJECT"
     },
     {
       "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
@@ -68,8 +84,12 @@
           }
         ],
         "unresolved_uuid": null,
-        "process_resolved": true
-      }
+        "process_resolved": true,
+        "reason": null
+      },
+      "normalized_event_type": "file",
+      "normalized_action": "access",
+      "predicate_kind": "RECORD_FILE_OBJECT"
     },
     {
       "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
@@ -82,8 +102,12 @@
           }
         ],
         "unresolved_uuid": "1fca97f4e4134d05869b31eb09df8770",
-        "process_resolved": false
-      }
+        "process_resolved": false,
+        "reason": "missing_or_conflicting_reference"
+      },
+      "normalized_event_type": "file",
+      "normalized_action": "access",
+      "predicate_kind": "RECORD_FILE_OBJECT"
     }
   ]
 }

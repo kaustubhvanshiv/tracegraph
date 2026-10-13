@@ -144,13 +144,16 @@ scan does not establish indicator frequency across the release.
 & $MlPython -m unittest discover -s research/ml/tests -v
 ```
 
-With support dependencies installed, all **24 tests** should pass. They cover
+With support dependencies installed, all **32 tests** should pass. They cover
 corrupt input, sampling limits, timestamp precision/timezones, indicator-label
 separation, safe ZIP paths, preservation of archives, strict label validation,
 streaming preparation, deduplication, chronological group/context checks,
 reference conflicts, cyclic parents, process start-time checks, and local versus
 remote IP evidence, positive incidents assigned to multiple groups, and ID-only
 split export to the requested directory without overwriting existing splits.
+Additional adapter tests cover typed file/memory/registry mappings, host-scoped
+joins, temporal process validity, incoming/outgoing network fields, distinct
+login/logout/thread/execute semantics, and ambiguous command lines.
 
 ## 8. Prepare the reviewed events
 
@@ -185,8 +188,12 @@ The current run found all three events, with one report-reviewed positive,
 two unknown labels and one resolved parent process. Two events share an
 unresolved parent. No split files were
 written. The adapter preserves CDM actions and nanosecond timestamps in raw
-metadata; ambiguous object types are not mapped to files or processes.
-Reference joins are for audit and are not model features.
+metadata. The 2026-10-13 rerun resolves all three selected objects as files
+and emits canonical `file/access` events. One has a time-valid Firefox process
+image; missing users/hostnames remain null. No labels changed and no splits
+exist. See [SEMANTICS.md](data_prep/SEMANTICS.md) for mappings and limitations.
+Canonical event fields and reference metadata are not ML feature vectors or
+trained graph inputs.
 
 To unblock training: obtain event-level annotations or independently review
 host identity and actor/object evidence for positives; identify explicitly

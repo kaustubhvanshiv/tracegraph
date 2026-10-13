@@ -30,6 +30,13 @@ The Java consumer under `tools/ta5-java-consumer.tar.gz` is optional: the curren
 Python reader already decodes these files. No need to download other performers
 or the entire release for the first FiveDirections experiment.
 
+Rechecked 2026-10-13: the [official release manifest](https://github.com/darpa-i2o/Transparent-Computing)
+confirms STARC attack annotations, but does not name their archive/files. No
+new annotation file was retrieved or imported. The local support folder still
+contains the original report/schema ZIPs and event log. To unblock ML-02.4,
+obtain event-level annotation evidence plus telemetry covering verified benign
+host-1 actions and independent campaigns. More raw events alone are not labels.
+
 Suggested local organization outside Git (create these while downloading):
 
 ```text

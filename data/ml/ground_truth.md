@@ -162,9 +162,13 @@ indexes subject references in SQLite, validates exact UUID/host/time/action
 matches, deduplicates selected events and quarantines conflicting payloads.
 The offline adapter is registered in a private instance of the existing
 `AdapterRegistry` and validates output against the backend `SecurityEvent`
-schema. It preserves the original CDM action and integer nanoseconds, without
-inventing hostname, process, user, or file semantics. Unknown object categories
-remain `cdm_event`; detailed canonical mappings are still pending.
+schema. The 2026-10-13 update adds conservative typed semantic mappings and
+host-scoped entity joins. Original CDM actions and integer nanoseconds remain
+in raw metadata; canonical actions distinguish file access, network direction,
+login/logout and thread/process lifecycle. Optional fields require supporting
+definitions and process start times at or before the event. Unknown object
+categories remain `cdm_event`. See
+[the mapping contract](../../research/ml/data_prep/SEMANTICS.md).
 
 The label import contract is `review_annotations.json` version 1 with an
 `events` array: event_uuid, host_uuid, timestamp_nanos (integer UTC epoch
@@ -209,8 +213,14 @@ starts May 16 at 20:17 UTC. The May 16 11 AM EDT benign setup described on
 report page 135 is outside these event ranges and cannot supply negative labels.
 See [the full reference report](datasets/darpa/full_reference_report.json).
 
-Pending: complete entity/time/host joins, detailed canonical object semantics,
-verified positives and negatives, independent groups and actual supervised
+The semantic preparation rerun on 2026-10-13 found three typed FileObjects
+for the selected actions and produced three canonical file-access events with
+their event paths. One contains a valid Firefox process image. User and host
+fields remain null because their definitions are missing. All 32 research
+tests pass; label counts and split blockers are unchanged.
+
+Pending: missing entity/time/host evidence, verified positives and negatives,
+independent groups, experiment-specific graph/feature coverage and actual supervised
 splits. The available support report does not prove benign labels for the
 current selected telemetry. Only ML-02.4 and the overall ML-02 task remain
 unchecked; definition/planning completion does not imply training readiness.

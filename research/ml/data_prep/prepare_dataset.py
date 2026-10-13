@@ -18,40 +18,11 @@ import sys
 from fastavro import reader
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "backend"))
-from app.schemas.parser import ParsedEvent, ParseError
+from app.schemas.parser import ParseError
 from app.schemas.security_event import SecurityEvent
 from app.services.parser_registry import AdapterRegistry
-from research.ml.data_prep.inspect_fivedirections import utc_nanos, uuid_text
-
-
-def json_safe(value):
-    if isinstance(value, bytes):
-        return value.hex()
-    if isinstance(value, dict):
-        return {k: json_safe(v) for k, v in value.items()}
-    if isinstance(value, list):
-        return [json_safe(v) for v in value]
-    return value
-
-
-class CDMReviewAdapter:
-    source_type = "darpa_cdm"
-
-    def parse(self, raw):
-        try:
-            datum = raw["datum"]
-            if raw["type"] != "RECORD_EVENT" or not isinstance(datum["timestampNanos"], int):
-                raise ValueError("Expected a timestamped CDM Event")
-            event_id = uuid_text(datum["uuid"])
-            if not event_id:
-                raise ValueError("Missing Event UUID")
-            # Preserve CDM semantics; OPEN alone does not establish a file object.
-            return ParsedEvent(event_id=event_id, source_type=self.source_type,
-                               timestamp_raw=utc_nanos(datum["timestampNanos"]),
-                               event_type="cdm_event", action=datum["type"],
-                               extra_fields={"cdm": json_safe(raw)})
-        except (KeyError, TypeError, ValueError) as error:
-            return ParseError(reason=str(error), raw_event=json_safe(raw))
+from research.ml.data_prep.inspect_fivedirections import uuid_text
+from research.ml.data_prep.cdm_adapter import CDMReviewAdapter, EntityResolver, ENTITY_KINDS, json_safe
 
 
 def reviewed_label(annotation, raw):
@@ -111,21 +82,6 @@ def make_splits(samples, context_nanos=0):
     return (None, reasons) if reasons else (splits, [])
 
 
-def resolve_subject(db, subject_id):
-    chain, seen = [], set()
-    while subject_id and subject_id not in seen:
-        seen.add(subject_id)
-        row = db.execute("SELECT payload FROM entities WHERE uuid=?", (subject_id,)).fetchone()
-        if row is None:
-            return {"chain": chain, "unresolved_uuid": subject_id, "process_resolved": False}
-        entity = json.loads(row[0])
-        chain.append({"uuid": subject_id, "type": entity.get("type"), "cid": entity.get("cid")})
-        if entity.get("type") == "SUBJECT_PROCESS":
-            return {"chain": chain, "unresolved_uuid": None, "process_resolved": True}
-        subject_id = entity.get("parentSubject")
-    return {"chain": chain, "unresolved_uuid": subject_id, "process_resolved": False}
-
-
 def prepare(source, annotations_path, output, limit, context_nanos=0, split_output=None):
     source, output = source.resolve(), output.resolve()
     if source == output or source in output.parents:
@@ -147,10 +103,11 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         raise ValueError("Duplicate annotation identities")
     output.mkdir(parents=True)
     registry = AdapterRegistry()
-    registry.register(CDMReviewAdapter())
     counts, matches, fingerprints, conflicts, files = Counter(), {}, {}, set(), []
     with closing(sqlite3.connect(output / "entities.sqlite")) as db:
-        db.execute("CREATE TABLE entities(uuid TEXT PRIMARY KEY, payload TEXT NOT NULL)")
+        db.execute("CREATE TABLE entities(host TEXT,uuid TEXT,kind TEXT,payload TEXT,conflict INTEGER DEFAULT 0,PRIMARY KEY(host,uuid))")
+        resolver = EntityResolver(db)
+        registry.register(CDMReviewAdapter(resolver))
         filenames = sorted({a["source_file"] for a in annotations})
         for filename in filenames:
             if Path(filename).name != filename or not filename.endswith(".gz"):
@@ -168,14 +125,14 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
                     counts[raw.get("type")] += 1
                     datum = raw.get("datum") or {}
                     uid = uuid_text(datum.get("uuid"))
-                    if raw.get("type") == "RECORD_SUBJECT" and uid:
+                    host = uuid_text(raw.get("hostId"))
+                    if raw.get("type") in ENTITY_KINDS and uid and host:
                         payload = json.dumps(json_safe(datum), sort_keys=True)
-                        old = db.execute("SELECT payload FROM entities WHERE uuid=?", (uid,)).fetchone()
-                        if old and old[0] != payload:
-                            # Ambiguous entity definitions cannot supply process features.
-                            db.execute("UPDATE entities SET payload=? WHERE uuid=?", ('{}', uid))
+                        old = db.execute("SELECT kind,payload FROM entities WHERE host=? AND uuid=?", (host, uid)).fetchone()
+                        if old and old != (raw.get("type"), payload):
+                            db.execute("UPDATE entities SET conflict=1 WHERE host=? AND uuid=?", (host, uid))
                         elif not old:
-                            db.execute("INSERT INTO entities VALUES (?,?)", (uid, payload))
+                            db.execute("INSERT INTO entities(host,uuid,kind,payload) VALUES (?,?,?,?)", (host, uid, raw.get("type"), payload))
                     if raw.get("type") == "RECORD_EVENT" and uid in wanted:
                         annotation = wanted[uid]
                         if annotation["source_file"] != filename:
@@ -185,15 +142,9 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
                             conflicts.add(uid)
                         fingerprints[uid] = fingerprint
                         label = reviewed_label(annotation, raw)
-                        parsed = registry.dispatch("darpa_cdm", raw)
-                        if isinstance(parsed, ParseError):
-                            raise ValueError(parsed.reason)
-                        normalized = SecurityEvent(event_id=parsed.event_id, source_type=parsed.source_type,
-                            timestamp=parsed.timestamp_raw, event_type=parsed.event_type, action=parsed.action,
-                            raw_data=parsed.extra_fields)
                         matches[uid] = {**annotation, "label": label,
                             "subject_uuid": uuid_text(datum.get("subject")),
-                            "record_index_1based": count, "security_event": normalized.model_dump(mode="json")}
+                            "record_index_1based": count, "_raw": raw}
                     if count % 250_000 == 0:
                         db.commit()
                         print(f"{filename}: {count:,} records", flush=True)
@@ -202,7 +153,13 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         samples = []
         for uid, sample in sorted(matches.items()):
             if uid not in conflicts:
-                sample["subject_resolution"] = resolve_subject(db, sample["subject_uuid"])
+                parsed = registry.dispatch("darpa_cdm", sample.pop("_raw"))
+                if isinstance(parsed, ParseError):
+                    raise ValueError(parsed.reason)
+                values = parsed.model_dump(exclude={"timestamp_raw", "extra_fields"})
+                normalized = SecurityEvent(**values, timestamp=parsed.timestamp_raw, raw_data=parsed.extra_fields)
+                sample["security_event"] = normalized.model_dump(mode="json")
+                sample["subject_resolution"] = parsed.extra_fields["subject_resolution"]
                 samples.append(sample)
         db.commit()
     splits, reasons = make_splits(samples, context_nanos)
@@ -210,8 +167,8 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
     if missing or conflicts:
         splits = None
         reasons.append("Missing or conflicting reviewed events")
-    # Indexed references are audit metadata only; no process features or graphs
-    # are constructed until event-time-valid entity semantics are established.
+    # Canonical event fields are evidence-grounded; no ML feature vectors or
+    # graphs are constructed here. Missing/conflicting definitions stay unknown.
     with (output / "review_events.jsonl").open("w", encoding="utf-8") as stream:
         for sample in samples:
             stream.write(json.dumps(sample) + "\n")
@@ -226,7 +183,11 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         "missing_event_uuids": missing, "conflicting_event_uuids": sorted(conflicts),
         "resolved_process_count": sum(s["subject_resolution"]["process_resolved"] for s in samples),
         "context_nanos": context_nanos, "blocking_reasons": reasons,
-        "feature_status": "no model features; references for audit only"}
+        "feature_status": "canonical event fields only; no model vectors or graphs",
+        "semantic_mapping_version": 1,
+        "normalized_event_type_counts": dict(Counter(s["security_event"]["event_type"] for s in samples)),
+        "normalized_field_counts": {field: sum(s["security_event"].get(field) is not None for s in samples)
+                                    for field in ("process", "file", "user", "source_host", "source_ip", "destination_ip")}}
     manifest["split_output"] = str(split_directory) if splits else None
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     return manifest
