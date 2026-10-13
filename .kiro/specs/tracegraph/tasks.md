@@ -855,8 +855,10 @@ ML-11 final ML research documentation
 
 ---
 
-- [ ] ML-04. Neural Network Fundamentals
-  - [ ] ML-04.1 Implement and study a small feed-forward neural network on a simple task
+- [x] ML-04. Neural Network Fundamentals
+  - Completed 2026-10-13 on CPU using synthetic XNOR only. Six experiment runs demonstrate tensor shapes, nonzero gradients/SGD updates, validation loss, learning-rate instability, overfitting, weight decay and best-checkpoint reuse. See `research/ml/nn_fundamentals/README.md` and its measured results/plots. No DARPA model or detection metric was produced; ML-02 remains incomplete.
+  - [x] ML-04.1 Implement and study a small feed-forward neural network on a simple task
+    - Executed `feedforward_demo.py`: two parameterized layers (2→16→1), minibatch BCE/SGD training for 160 epochs; best toy validation BCE 0.045088 at epoch 158. Reloaded validation logits match exactly; standalone inference reloads training-only scaling and weights.
     - Create `research/ml/nn_fundamentals/feedforward_demo.py` demonstrating:
       - Tensor creation and shapes
       - A two-layer feed-forward network (manually or via PyTorch/TensorFlow)
@@ -868,7 +870,8 @@ ML-11 final ML research documentation
     - This demo should use a toy dataset (e.g., synthetic binary classification), not the security dataset
     - _Requirements: ML-04_
 
-  - [ ] ML-04.2 Demonstrate understanding of training dynamics
+  - [x] ML-04.2 Demonstrate understanding of training dynamics
+    - Executed `training_dynamics.py` (script alternative to notebook): controlled low/appropriate/high learning rates and small noisy-set weight-decay comparison. Train/validation plots are saved. All five experiment checkpoints reload with exact logits; recorded best and final losses show regularization/early-selection tradeoffs.
     - Add a notebook or script `research/ml/nn_fundamentals/training_dynamics.ipynb` that shows:
       - Effect of learning rate (too high, too low, appropriate)
       - Overfitting on a small dataset

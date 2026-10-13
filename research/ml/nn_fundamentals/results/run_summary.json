@@ -1,0 +1,325 @@
+{
+  "date": "2026-10-13",
+  "scope": "Synthetic educational experiments only",
+  "demo": {
+    "scope": "synthetic XNOR exercise only; not security detection",
+    "seed": 17,
+    "python": "3.11.9",
+    "torch": "2.12.0+cpu",
+    "device": "cpu",
+    "configuration": {
+      "hidden": 16,
+      "learning_rate": 0.1,
+      "epochs": 160,
+      "batch_size": 32,
+      "weight_decay": 0.0
+    },
+    "train_size": 512,
+    "validation_size": 256,
+    "flipped_training_labels": 0,
+    "first_step": {
+      "input_shape": [
+        32,
+        2
+      ],
+      "target_shape": [
+        32,
+        1
+      ],
+      "logit_shape": [
+        32,
+        1
+      ],
+      "loss_shape": [],
+      "gradient_l2": 0.1810414344072342,
+      "parameter_change_l2": 0.018104149028658867
+    },
+    "best_epoch": 158,
+    "best_validation_loss": 0.045087769627571106,
+    "checkpoint_reload_max_abs_difference": 0.0,
+    "stopped_reason": null,
+    "initial": {
+      "epoch": 0,
+      "train_loss": 0.7074922323226929,
+      "validation_loss": 0.6875284314155579,
+      "train_accuracy": 0.62890625,
+      "validation_accuracy": 0.671875
+    },
+    "final": {
+      "epoch": 160,
+      "train_loss": 0.057036206126213074,
+      "validation_loss": 0.0453663095831871,
+      "train_accuracy": 0.994140625,
+      "validation_accuracy": 0.99609375
+    }
+  },
+  "dynamics": {
+    "lr_low": {
+      "scope": "synthetic XNOR exercise only; not security detection",
+      "seed": 17,
+      "python": "3.11.9",
+      "torch": "2.12.0+cpu",
+      "device": "cpu",
+      "configuration": {
+        "hidden": 16,
+        "learning_rate": 0.0001,
+        "epochs": 120,
+        "batch_size": 32,
+        "weight_decay": 0.0
+      },
+      "train_size": 320,
+      "validation_size": 256,
+      "flipped_training_labels": 0,
+      "first_step": {
+        "input_shape": [
+          32,
+          2
+        ],
+        "target_shape": [
+          32,
+          1
+        ],
+        "logit_shape": [
+          32,
+          1
+        ],
+        "loss_shape": [],
+        "gradient_l2": 0.26032763719558716,
+        "parameter_change_l2": 2.6032650566776283e-05
+      },
+      "best_epoch": 120,
+      "best_validation_loss": 0.7113682627677917,
+      "checkpoint_reload_max_abs_difference": 0.0,
+      "stopped_reason": null,
+      "initial": {
+        "epoch": 0,
+        "train_loss": 0.6933989524841309,
+        "validation_loss": 0.7150025963783264,
+        "train_accuracy": 0.6656249761581421,
+        "validation_accuracy": 0.60546875
+      },
+      "final": {
+        "epoch": 120,
+        "train_loss": 0.6880283355712891,
+        "validation_loss": 0.7113682627677917,
+        "train_accuracy": 0.6468750238418579,
+        "validation_accuracy": 0.5859375
+      }
+    },
+    "lr_appropriate": {
+      "scope": "synthetic XNOR exercise only; not security detection",
+      "seed": 17,
+      "python": "3.11.9",
+      "torch": "2.12.0+cpu",
+      "device": "cpu",
+      "configuration": {
+        "hidden": 16,
+        "learning_rate": 0.1,
+        "epochs": 120,
+        "batch_size": 32,
+        "weight_decay": 0.0
+      },
+      "train_size": 320,
+      "validation_size": 256,
+      "flipped_training_labels": 0,
+      "first_step": {
+        "input_shape": [
+          32,
+          2
+        ],
+        "target_shape": [
+          32,
+          1
+        ],
+        "logit_shape": [
+          32,
+          1
+        ],
+        "loss_shape": [],
+        "gradient_l2": 0.26032763719558716,
+        "parameter_change_l2": 0.026032758876681328
+      },
+      "best_epoch": 120,
+      "best_validation_loss": 0.10142675787210464,
+      "checkpoint_reload_max_abs_difference": 0.0,
+      "stopped_reason": null,
+      "initial": {
+        "epoch": 0,
+        "train_loss": 0.6933989524841309,
+        "validation_loss": 0.7150025963783264,
+        "train_accuracy": 0.6656249761581421,
+        "validation_accuracy": 0.60546875
+      },
+      "final": {
+        "epoch": 120,
+        "train_loss": 0.08598504215478897,
+        "validation_loss": 0.10142675787210464,
+        "train_accuracy": 0.981249988079071,
+        "validation_accuracy": 0.98828125
+      }
+    },
+    "lr_high": {
+      "scope": "synthetic XNOR exercise only; not security detection",
+      "seed": 17,
+      "python": "3.11.9",
+      "torch": "2.12.0+cpu",
+      "device": "cpu",
+      "configuration": {
+        "hidden": 16,
+        "learning_rate": 20.0,
+        "epochs": 120,
+        "batch_size": 32,
+        "weight_decay": 0.0
+      },
+      "train_size": 320,
+      "validation_size": 256,
+      "flipped_training_labels": 0,
+      "first_step": {
+        "input_shape": [
+          32,
+          2
+        ],
+        "target_shape": [
+          32,
+          1
+        ],
+        "logit_shape": [
+          32,
+          1
+        ],
+        "loss_shape": [],
+        "gradient_l2": 0.26032763719558716,
+        "parameter_change_l2": 5.206552982330322
+      },
+      "best_epoch": 65,
+      "best_validation_loss": 0.6925204992294312,
+      "checkpoint_reload_max_abs_difference": 0.0,
+      "stopped_reason": null,
+      "initial": {
+        "epoch": 0,
+        "train_loss": 0.6933989524841309,
+        "validation_loss": 0.7150025963783264,
+        "train_accuracy": 0.6656249761581421,
+        "validation_accuracy": 0.60546875
+      },
+      "final": {
+        "epoch": 120,
+        "train_loss": 2.4794163703918457,
+        "validation_loss": 2.9863221645355225,
+        "train_accuracy": 0.5687500238418579,
+        "validation_accuracy": 0.48046875
+      }
+    },
+    "small_unregularized": {
+      "scope": "synthetic XNOR exercise only; not security detection",
+      "seed": 17,
+      "python": "3.11.9",
+      "torch": "2.12.0+cpu",
+      "device": "cpu",
+      "configuration": {
+        "hidden": 128,
+        "learning_rate": 0.2,
+        "epochs": 1500,
+        "batch_size": 32,
+        "weight_decay": 0
+      },
+      "train_size": 32,
+      "validation_size": 256,
+      "flipped_training_labels": 9,
+      "first_step": {
+        "input_shape": [
+          32,
+          2
+        ],
+        "target_shape": [
+          32,
+          1
+        ],
+        "logit_shape": [
+          32,
+          1
+        ],
+        "loss_shape": [],
+        "gradient_l2": 0.22712041437625885,
+        "parameter_change_l2": 0.04542408138513565
+      },
+      "best_epoch": 49,
+      "best_validation_loss": 0.4905478358268738,
+      "checkpoint_reload_max_abs_difference": 0.0,
+      "stopped_reason": null,
+      "initial": {
+        "epoch": 0,
+        "train_loss": 0.678704559803009,
+        "validation_loss": 0.6778245568275452,
+        "train_accuracy": 0.625,
+        "validation_accuracy": 0.66796875
+      },
+      "final": {
+        "epoch": 1500,
+        "train_loss": 0.20885616540908813,
+        "validation_loss": 1.1292521953582764,
+        "train_accuracy": 0.9375,
+        "validation_accuracy": 0.58203125
+      }
+    },
+    "small_weight_decay": {
+      "scope": "synthetic XNOR exercise only; not security detection",
+      "seed": 17,
+      "python": "3.11.9",
+      "torch": "2.12.0+cpu",
+      "device": "cpu",
+      "configuration": {
+        "hidden": 128,
+        "learning_rate": 0.2,
+        "epochs": 1500,
+        "batch_size": 32,
+        "weight_decay": 0.02
+      },
+      "train_size": 32,
+      "validation_size": 256,
+      "flipped_training_labels": 9,
+      "first_step": {
+        "input_shape": [
+          32,
+          2
+        ],
+        "target_shape": [
+          32,
+          1
+        ],
+        "logit_shape": [
+          32,
+          1
+        ],
+        "loss_shape": [],
+        "gradient_l2": 0.22712041437625885,
+        "parameter_change_l2": 0.05569399520754814
+      },
+      "best_epoch": 59,
+      "best_validation_loss": 0.5075871348381042,
+      "checkpoint_reload_max_abs_difference": 0.0,
+      "stopped_reason": null,
+      "initial": {
+        "epoch": 0,
+        "train_loss": 0.678704559803009,
+        "validation_loss": 0.6778245568275452,
+        "train_accuracy": 0.625,
+        "validation_accuracy": 0.66796875
+      },
+      "final": {
+        "epoch": 1500,
+        "train_loss": 0.5570831894874573,
+        "validation_loss": 0.5334402322769165,
+        "train_accuracy": 0.71875,
+        "validation_accuracy": 0.796875
+      }
+    }
+  },
+  "standalone_inference_probabilities": [
+    0.9999951124191284,
+    8.602880257058132e-07,
+    0.9999921321868896,
+    4.788458909388282e-07
+  ],
+  "validation": "All six checkpoint logits match exactly; standalone scaled inference matches XNOR quadrant labels; nonzero gradients and weight updates; measured loss/training dynamics assertions passed"
+}
