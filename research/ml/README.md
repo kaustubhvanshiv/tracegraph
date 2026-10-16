@@ -3,6 +3,21 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+## Active plan and next gate
+
+On 2026-10-16, the **ML-R1–ML-R5 revised research plan** from `Shl-Dev` commit
+`341b321` was restored in [tasks.md](../../.kiro/specs/tracegraph/tasks.md).
+The original supervised GNN track remains deferred. Existing inspections,
+preparation tools and the synthetic XNOR exercise are retained as recorded
+work; they do not establish that a DARPA model can be trained or evaluated.
+
+[ML-R1.1 dataset outcome](report/dataset_outcome.md) is complete. None of the
+four proposed learning/reconstruction tasks has sufficient current benchmark
+evidence for a credible experiment. **The ML-R1 stop condition applies: do not
+proceed to ML-R2, select a GNN, or run an LLM comparison.** ML-R1.2's LANL
+secondary-benchmark assessment remains pending. New datasets/models or changed
+scope require the user's approval.
+
 ## Current progress
 
 | Stage | Status |
@@ -18,9 +33,11 @@ alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`
 | ML-02.4 actual dataset preparation | Partial: scripts tested; real supervised splits blocked by label coverage |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
 | ML-03.1 baseline assessment | Complete: current labeled subset cannot support supervised baseline evaluation |
-| ML-04 neural-network fundamentals | Complete on synthetic XNOR: training, dynamics, loss plots and checkpoint reuse |
+| Historical ML-04 neural-network exercise | Completed on synthetic XNOR; retained educational artifact within deferred original track |
+| ML-R1.1 dataset feasibility | Complete: stop finding for current audited evidence; ML-R1.2 remains pending |
 
-The other five segments have prefix inspections only. No trained GNN or
+All six segments were fully decoded in the reference audit; the original
+inspection profile remains prefix-only. No trained DARPA GNN or security
 classification results exist. Research is separate from production correlation.
 
 ## 1. Get the code
@@ -266,13 +283,15 @@ The [classical baseline assessment](baseline/README.md) is complete. With one
 reviewed positive, no verified negatives and no valid partitions, optional
 baseline feature engineering/training is deferred.
 
-[ML-04 neural-network fundamentals](nn_fundamentals/README.md) is complete.
+[Historical ML-04 neural-network fundamentals](nn_fundamentals/README.md) was completed.
 It uses separate CPU dependencies in `requirements-nn.txt` and synthetic data.
 The guide includes commands, tensor/gradient explanations, measured training
 dynamics, plots, and checkpoint inference. Model checkpoints stay local in
 `.cache/`; code, concise summaries and plots are committed. No synthetic result
-is a DARPA detection metric. Next independent work is ML-05 GNN fundamentals;
-ML-02 actual dataset preparation still requires label/incident evidence.
+is a DARPA detection metric. The revised ML-R1–ML-R5 plan now controls sequencing;
+ML-05 is deferred, not the next active task. The
+[dataset outcome report](report/dataset_outcome.md) records current feasibility
+and stop conditions. ML-02 actual preparation still requires label/incident evidence.
 
 - [Dataset selection](../../data/ml/comparison/primary_dataset_selection.md).
 - [Local prefix inspection](../../data/ml/datasets/darpa/fivedirections_local_inspection.md).

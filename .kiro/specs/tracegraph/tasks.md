@@ -569,39 +569,15 @@ These tasks form a parallel research track that builds on the deterministic pipe
 **Prerequisites before starting ML-01:**
 - The TraceGraph core pipeline (Tasks 1–11) must be complete so that the deterministic correlation engine and `SecurityEvent` model exist as reference implementations.
 - Task 11 implements the `TemporalCorrelationEngine`, which produces `combined_score`. That score is the deterministic rule-based signal used as the comparison baseline in ML-09.
-- Tasks 27–30 (Docker deployment, performance instrumentation, evaluation scenarios, final checkpoint) are independent of ML-01 through ML-09. ML-01 can begin as soon as Task 11 is complete. ML-09 uses the Task 29 evaluation scenarios when those scenarios are available and validated, but ML-01 through ML-08 are independently executable.
+- Tasks 27–30 (Docker deployment, performance instrumentation, evaluation scenarios, final checkpoint) are independent of ML-01 through ML-09. ML-01 can begin as soon as Task 11 is complete. ML-09 uses the Task 29 evaluation scenarios when those scenarios are available and validated, but this does not waive the revised ML-R prerequisites or stop conditions.
 
-**Logical progression of the ML track:**
+**Logical progression of the active research track:**
 
-```
-TraceGraph core pipeline (Tasks 1–11)
-        ↓
-Task 11 deterministic correlation engine available (combined_score)
-        ↓
-ML-01 dataset analysis and selection
-        ↓
-ML-02 ground truth / label definition and splits
-        ↓
-ML-03 optional classical ML baseline
-        ↓
-ML-04 neural network fundamentals
-        ↓
-ML-05 GNN fundamentals
-        ↓
-ML-06 GNN task selection
-        ↓
-ML-07 baseline GNN experiment
-        ↓
-ML-08 GNN evaluation
-        ↓
-ML-09 rule-based vs GNN comparison
-          (uses Task 29 evaluation scenarios when available and validated)
-        ↓
-ML-10 GNN integration into the pipeline
-          (blocked until ML-07 and ML-09 are both complete)
-        ↓
-ML-11 final ML research documentation
-```
+ML-01 selection -> ML-R1 feasibility and stop decision -> ML-R2 benchmark
+verification (only if eligible) -> ML-R4 controlled comparison -> ML-R5 findings.
+ML-R3 is optional and independently gated by validated Task 29 scenario labels.
+The original ML-02 through ML-11 sequence is retained as deferred work and can
+be reactivated only when the documented evidence prerequisites are satisfied.
 
 **Critical distinctions to maintain throughout this track:**
 - `combined_score` from the `TemporalCorrelationEngine` (Task 11) is a deterministic relevance indicator — NOT an attack probability.
@@ -767,6 +743,201 @@ ML-11 final ML research documentation
   - Do NOT finalise the ML prediction target.
 
   - *Requirements: ML-01.1, ML-01.2, ML-01.3, ML-01.4, ML-01.5*
+
+## ML Research Track — Revised Plan (ML-R1 through ML-R5)
+
+Reconciled 2026-10-16 with `Shl-Dev` commit
+`341b321629894402272a342ca8d9fd772fccd12c`. This is the active research plan.
+The merge at `2d881e0` retained the older task file and lost this section;
+restoration preserves the existing audits, code and recorded completion notes.
+
+**Current evidence supersedes historical premises:** streaming Avro decoding,
+full six-file reference auditing, an event-level label contract and conservative
+normalization now exist. The annotation sample still has one report-reviewed
+positive, zero verified negatives and two unknowns from one campaign. No valid
+supervised partitions or complete reviewed chain benchmark exist. Historical
+references below to work being absent or two streams being local must be read
+against `research/ml/report/dataset_outcome.md`, not treated as current facts.
+The historical `../datasets/...` paths are unavailable in this checkout; the
+actual audited Windows source is recorded in that report.
+
+**Execution gate:** ML-R1.1 is complete with a stop finding for the audited
+subset. ML-R1.2 is pending. No ML-R2/ML-R4 execution or GNN architecture selection
+is authorized by this restoration. New datasets, models and scope changes
+require the user's approval. The acceptance criteria in `requirements.md`
+remain intact; the revised task plan controls research sequencing and gates.
+
+The original ML-02 through ML-11 descriptions and prior progress remain below
+under [ML Deferred / Future Work](#ml-deferred--future-work). Checked historical
+items record work performed; they do not reactivate the supervised GNN track.
+The completed XNOR demonstration is an educational artifact, not satisfaction
+of DARPA learning/evaluation prerequisites.
+
+---
+
+- [ ] ML-R1. Document Dataset Selection Outcome and Feasible Learning Tasks
+
+  **Prerequisite:** ML-01.6 complete (DARPA TC E5 selected as primary dataset).
+  **Stop condition:** If examination reveals that no available dataset supports any of the four candidate learning tasks with acceptable label quality and sample size, document that finding and stop. Do not proceed to ML-R2.
+
+  - [x] ML-R1.1 Write the dataset selection outcome report
+    - Completed 2026-10-16: `research/ml/report/dataset_outcome.md` assesses all four tasks using the current audited Windows subset. None is executable as a credible learning/comparison experiment with present labels and benchmark coverage. Apply the ML-R1 stop condition: do not proceed to ML-R2. ML-R1.2 remains pending.
+    - Create `research/ml/report/dataset_outcome.md` documenting:
+      - The selected dataset (DARPA TC E5), its local path, and the selection rationale (reference `data/ml/comparison/primary_dataset_selection.md` — do not duplicate it)
+      - The four candidate learning tasks and their relationship to the available data:
+        1. **Classification of individual entities or events as malicious/benign** — requires per-record labels derived from the ground-truth PDF; feasible only after the annotation pipeline is built
+        2. **Learning a relevance signal for candidate relationships or subgraphs** — requires correlated relationship pairs with positive/negative labels; depends on the ingestion pipeline (Tasks 9–11) and event labels
+        3. **Reconstructing an ordered attack chain from evidence** — a retrieval and ranking problem, not a classification problem; labels are the ground-truth attack sequence from the PDF; requires narrative-to-sequence conversion
+        4. **Using an LLM to assemble and explain a chain from retrieved evidence** — does not require per-record labels; requires a benchmark case with a known attack sequence and an evaluation protocol
+      - For each task: whether the DARPA TC E5 data (as currently available, before any Avro pipeline work) supports it, what is missing, and the estimated effort to fill that gap
+      - Unresolved uncertainties: CDM optional field population rates (unknown until Avro deserialization is run), actual record counts per scenario, and whether the two locally available streams (CADETS and FiveDirections) provide enough scenario diversity
+      - An explicit statement of which tasks are executable now, which are executable after specific prerequisite work, and which remain infeasible with the current datasets
+    - Update `data/ml/datasets/README.md` only if there is a factual correction to make (e.g., a field recorded as present is actually absent). Do not extend it with analysis material that belongs in `dataset_outcome.md`.
+    - Do not modify `data/ml/comparison/primary_dataset_selection.md` or any `analysis.md` file.
+    - _Requirements: ML-01, ML-02_
+
+  - [ ] ML-R1.2 Assess LANL as a secondary benchmark for auth-graph tasks
+    - `data/ml/comparison/dataset_comparison.md` identifies LANL as an acceptable secondary dataset for auth-graph experiments: it has 749 verified per-record labels (auth events), real enterprise User and Host entities, and typed auth semantics.
+    - In `research/ml/report/dataset_outcome.md`, add a section assessing whether LANL's auth-event labels are sufficient to support either task 1 (binary edge classification on auth edges) or task 2 (correlation signal learning on auth sequences) given the extreme class imbalance (749 / 1,051,430,459 ≈ 0.000071%).
+    - Document: minimum sample size required for the candidate task, whether oversampling or undersampling is appropriate, and whether the sample size is sufficient for a meaningful experiment.
+    - Do not implement any model or prepare any splits. This is a feasibility assessment only.
+    - _Requirements: ML-01, ML-02_
+
+---
+
+- [ ] ML-R2. Verify DiagChain Availability and Map to SecurityEvent
+
+  **Prerequisite:** ML-R1.1 complete. DiagChain is evaluated only if task 4 (LLM-based chain reconstruction) is confirmed as executable in ML-R1.1.
+  **Stop condition:** If DiagChain's public repository is unavailable, its licence prohibits use, its third-party data terms are unacceptable, or the APT29 case evidence cards cannot be mapped to `SecurityEvent` without inventing fields, document the findings in `research/ml/report/diagchain_assessment.md` and stop. Do not proceed to ML-R4 via DiagChain. If DiagChain is unavailable, assess whether the Task 29 evaluation scenarios (once validated) can serve as the benchmark for ML-R4 instead.
+
+  - [ ] ML-R2.1 Verify DiagChain repository, licence, and data availability
+    - Locate DiagChain's public repository (search for the USENIX Security 2021 paper "WATSON: Abstracting Behaviors from Audit Logs via Aggregation of Contextual Semantics" or the DiagChain-specific publication; record the exact URL found).
+    - Verify: repository is publicly accessible; code licence is compatible with this project; any third-party data used in the benchmark has acceptable terms; the APT29 case (or an equivalent multi-stage APT case) is included or constructible from the provided materials.
+    - Create `research/ml/report/diagchain_assessment.md` recording: repository URL, commit hash or release tag, code licence (exact SPDX identifier), data licence or terms, and whether the APT29 case is available and usable.
+    - If the repository is not found, or the licence is incompatible, record the finding and stop this task.
+    - _Requirements: ML-R2_
+
+  - [ ] ML-R2.2 Map DiagChain evidence-card schema to SecurityEvent
+    - If ML-R2.1 confirms availability: inspect DiagChain's evidence-card schema (the structured representation of attack evidence used for chain reconstruction).
+    - Map each DiagChain evidence field to the corresponding `SecurityEvent` field. Record the mapping in `research/ml/report/diagchain_assessment.md`.
+    - Flag fields in DiagChain that have no corresponding `SecurityEvent` field. Do not invent new `SecurityEvent` fields to accommodate DiagChain — either confirm the mapping using existing fields or document it as a gap.
+    - Assess whether the Sysmon adapter (`backend/app/adapters/sysmon.py`) is semantically compatible with DiagChain's event source format. If the adapter's field mappings do not match DiagChain's semantics (e.g., different action taxonomy, different entity model), document the required changes and stop — do not silently use the adapter with incorrect mappings.
+    - _Requirements: ML-R2_
+
+  - [ ] ML-R2.3 Document DiagChain evaluation protocol applicability
+    - DiagChain defines five evaluation metrics for chain reconstruction. In `research/ml/report/diagchain_assessment.md`, record:
+      - The exact definitions of all five metrics as documented in the DiagChain paper/repository
+      - For each metric: whether it is directly applicable to the ML-R4 comparison, requires adaptation (document the adaptation), or is not applicable (document why)
+    - Do not implement any evaluation code here. This is documentation only.
+    - _Requirements: ML-R2_
+
+---
+
+- [ ] ML-R3. (Optional) Logistic Regression over Correlation Signals
+
+  **Prerequisite:** Task 29 evaluation scenarios implemented and validated (at least two scenarios with ground-truth relationship labels). ML-R3 is independent of ML-R1 and ML-R2.
+  **Stop condition:** If fewer than approximately 200 labelled relationship pairs are available across all validated Task 29 scenarios, the sample size is insufficient for logistic regression to produce meaningful coefficient estimates. Document that finding in `research/ml/report/signal_regression.md` and stop without reporting weights.
+  **This task is optional.** Execute only if the evaluation scenario sample size is sufficient and the experiment would provide a useful comparison point for ML-R4 or ML-R5.
+
+  - [ ] ML-R3.1 Define the regression experiment
+    - Create `research/ml/report/signal_regression.md` documenting:
+      - The label source: ground-truth relationships from Task 29 evaluation scenarios; only validated scenarios (Task 29.2 complete) are used
+      - The seven binary features: `shared_user`, `shared_host`, `shared_ip`, `host_continuity`, `temporal_proximity`, `compatible_action_sequence`, `process_file_context`
+      - The sample unit: one `CorrelatedRelationship` per row
+      - The target variable: whether the relationship is present in the ground-truth graph (1) or not (0)
+      - The class balance across all available scenarios; if severely imbalanced, document the planned treatment
+      - The proposed evaluation: leave-one-scenario-out cross-validation (not random row splitting, to avoid leakage within scenarios)
+      - An explicit sample-size check: if the total number of labelled pairs is below the stop threshold, stop here
+    - _Requirements: ML-R3_
+
+  - [ ] ML-R3.2 (Optional) Run the regression and report results
+    - Only proceed if ML-R3.1 confirms sufficient sample size.
+    - Create `research/ml/baseline/signal_regression.py` that:
+      - Reads `CorrelatedRelationship` objects from the Task 29 scenario ingestion pipeline output
+      - Constructs the seven-feature binary matrix
+      - Fits a logistic regression (scikit-learn `LogisticRegression`, solver `lbfgs`, max_iter=1000) on the training scenarios
+      - Evaluates on each held-out scenario
+      - Reports: learned weights (coefficients), precision, recall, F1, and whether any signal has a negative or near-zero coefficient
+    - Add results to `research/ml/report/signal_regression.md`:
+      - Learned weights for each signal with 95% confidence intervals (bootstrap, n=1000)
+      - Per-scenario and aggregate precision, recall, F1
+      - Whether any learned weight ordering contradicts the current default weight table in `TemporalCorrelationEngine`
+      - An explicit statement: the learned weights are a data-driven observation from a small controlled sample, not a validated replacement for the deterministic weights
+    - Keep the learned weights in `research/ml/baseline/` as a separate artifact. Do not modify `TemporalCorrelationEngine` weight defaults here.
+    - _Requirements: ML-R3_
+
+---
+
+- [ ] ML-R4. LLM Comparison — With and Without Graph Context
+
+  **Prerequisite:** ML-R2.2 complete and DiagChain confirmed available with a usable APT case; OR at least two validated Task 29 scenarios available as a substitute benchmark. The same cases, model, prompt constraints, and token budget must be used for both conditions.
+  **Stop condition:** If neither DiagChain nor the Task 29 scenarios provide a case with a known, ordered attack sequence, document that finding and stop.
+
+  - [ ] ML-R4.1 Define the comparison protocol
+    - Create `research/ml/report/llm_comparison_protocol.md` specifying:
+      - The benchmark case(s) used (DiagChain APT29 or Task 29 scenario names and paths)
+      - The LLM model identifier and version (must be the same for both conditions)
+      - The token budget per prompt (must be the same for both conditions)
+      - **Condition A — LLM only:** The LLM receives only a natural-language description of the investigation title and the set of raw event IDs, without graph structure, entity relationships, or correlation signals
+      - **Condition B — LLM with graph context:** The LLM receives the same information plus the `InvestigationContext` produced by `AIContextBuilder` for the same case (entities, relationships, correlation signals, evidence references)
+      - The five DiagChain metrics (from ML-R2.3) that will be reported; for each metric that requires adaptation, document the adaptation here
+      - The ground-truth attack sequence used to score both conditions (exact source: DiagChain paper or `ground_truth.json` from the Task 29 scenario)
+      - How ties, hallucinated steps, and missing steps are scored
+    - _Requirements: ML-R4_
+
+  - [ ] ML-R4.2 Run the LLM comparison
+    - Create `research/ml/experiments/llm_comparison.py` that:
+      - Runs both Condition A and Condition B on each benchmark case using the protocol from ML-R4.1
+      - Logs the full prompt and full response for each condition and case to `research/ml/experiments/results/llm_comparison/`
+      - Scores each response against the ground-truth attack sequence using the defined metrics
+      - Does not retry on LLM timeout — log the failure and mark the case as incomplete
+    - _Requirements: ML-R4_
+
+  - [ ] ML-R4.3 Record and analyse results
+    - Create `research/ml/experiments/results/llm_comparison/results.md` recording:
+      - For each benchmark case and each condition: all reported metric values
+      - A comparison table: Condition A vs. Condition B for each metric
+      - Narrative analysis: where graph context helped, where it did not, and what types of errors each condition made
+      - An explicit statement of what the sample size supports (e.g., "two cases is insufficient to generalise — this is a proof-of-concept, not a statistically validated finding")
+      - Any adaptations made to DiagChain metrics and how they affect comparability with the original paper
+    - _Requirements: ML-R4_
+
+---
+
+- [ ] ML-R5. Document Results, Limitations, and Disposition of ML Components
+
+  **Prerequisite:** ML-R1.1 complete. ML-R5 should be updated incrementally as ML-R2, ML-R3, and ML-R4 complete. A final pass is required after all preceding ML-R tasks are done or stopped.
+
+  - [ ] ML-R5.1 Write the ML research findings report
+    - Create `research/ml/report/ml_findings.md` documenting:
+      - **Dataset feasibility findings (from ML-R1):** which of the four candidate learning tasks are supported by the available datasets, which are blocked by the labelling gap, and what specific work would unblock the GNN track
+      - **DiagChain assessment (from ML-R2):** whether DiagChain is available and usable, and whether the APT29 case can be mapped to `SecurityEvent` without invented fields
+      - **Signal regression findings (from ML-R3, if executed):** whether the learned weights agree with or contradict the deterministic defaults; the sample size caveat
+      - **LLM comparison findings (from ML-R4):** whether graph context measurably improves chain reconstruction quality on the benchmark cases
+      - **Disposition of each proposed ML component:** for each of the four candidate tasks from ML-R1.1, state one of: *Retain* (evidence supports it), *Revise* (evidence supports a modified version — document the revision), *Defer* (evidence is insufficient due to a specific, resolvable prerequisite — document the prerequisite), or *Abandon* (evidence contradicts the approach — document why)
+      - **Reproducibility:** exact commands to reproduce each experiment that was executed
+    - Negative results are acceptable and must be reported faithfully. Do not adjust findings to justify a predetermined conclusion about model architecture.
+    - _Requirements: ML-R5_
+
+  - [ ] ML-R5.2 Update the deferred GNN track prerequisites
+    - Review the deferred ML-04 through ML-11 tasks (see Deferred / Future Work section below).
+    - In `research/ml/report/ml_findings.md`, add a section titled **"Prerequisites for Reactivating the GNN Track"** that lists, for each deferred task, the specific evidence or artifact that must exist before that task can be started. At minimum:
+      - ML-02.1 (prediction target): requires machine-readable per-record labels derived from the DARPA ground-truth PDF annotation pipeline; the annotation approach and label granularity must be chosen
+      - ML-02.4 (data preparation): requires the Avro deserialization pipeline and the label annotation to be complete
+      - ML-06.2 (GNN task specification): requires ML-02.1 and an empirically validated prediction target
+      - ML-07 (GNN experiment): requires ML-06.2 and the prepared splits from ML-02.4
+    - Do not modify the deferred task descriptions themselves.
+    - _Requirements: ML-R5_
+
+---
+
+## ML Deferred / Future Work
+
+Original ML-02 through ML-11 task descriptions and previous completion notes
+are retained for traceability. ML-04 through ML-11 remain deferred under the
+revised plan until the relevant evidence gates are explicitly satisfied through
+ML-R5.2. Earlier ML-02/ML-03 preparation and assessment artifacts may inform the
+revised feasibility work; their existence is not proof of trainable labels.
 
 - [ ] ML-02. Ground Truth and Label Definition
   - **Prerequisite:** ML-01.6 must be complete. The primary dataset must be selected before any label definition work begins.
@@ -1187,10 +1358,25 @@ Task 11 — deterministic correlation engine available (combined_score)
 ML-01 — dataset analysis and selection
   (independently executable; does not require Tasks 12–30 to be complete)
         ↓
-(ML-02.3: Task 29 evaluation scenarios used here once Task 29 is validated;
- ML-02.1, ML-02.2, and ML-02.4 are not blocked by Task 29)
+ML-R1 — document dataset selection outcome and feasible learning tasks
         ↓
-ML-03 — optional classical ML baseline  (parallel with ML-04)
+ML-R2 — verify DiagChain availability and map to SecurityEvent
+  (requires ML-R1.1, a passed stop decision and executable task 4; currently stopped)
+        ↓
+ML-R3 (optional) — logistic regression over correlation signals
+  (requires Task 29 validated; independent of ML-R1/ML-R2)
+        ↓
+ML-R4 — LLM comparison with and without graph context
+  (requires ML-R2.2 OR Task 29 scenarios as substitute benchmark)
+        ↓
+ML-R5 — document results, limitations, and disposition of ML components
+  (starts after ML-R1; updated incrementally; final pass after all ML-R tasks)
+        ↓
+[If ML-R5 confirms GNN track prerequisites are met — re-activate deferred tasks:]
+        ↓
+ML-02 — ground truth and label definition  (requires DARPA Avro pipeline + PDF annotation)
+        ↓
+ML-03 — optional classical ML baseline
         ↓
 ML-04 — neural network fundamentals
         ↓
@@ -1214,6 +1400,16 @@ ML-11 — final ML research documentation
 
 ML-01.1 → ML-01.2 → ML-01.3 → ML-01.4 → ML-01.5 → ML-01.6
         ↓
+ML-R1.1 → ML-R1.2
+        ↓
+ML-R2.1 → ML-R2.2 → ML-R2.3
+        ↓                          (independent)
+ML-R4.1 → ML-R4.2 → ML-R4.3    ML-R3.1 → ML-R3.2*
+        ↓
+ML-R5.1 → ML-R5.2
+
+[Deferred — re-activate after ML-R5.2 prerequisites met:]
+
 ML-02.1 → ML-02.2 → ML-02.4
               │
               └── ML-02.3 (when Task 29 is available)
