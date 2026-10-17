@@ -3,6 +3,12 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-17 download refresh:** the local inventory now contains 28 archives
+across three FiveDirections streams. All 28 match `bins.md5sum`. See the
+[refresh procedure and results](../../data/ml/datasets/darpa/download_refresh_20261017.md)
+before interpreting the historical six-file measurements below. This work
+continues DARPA data preparation; it does not start a new model experiment.
+
 ## Active plan and next gate
 
 On 2026-10-16, the **ML-R1–ML-R5 revised research plan** from `Shl-Dev` commit
@@ -234,9 +240,39 @@ Do not change null labels to zero to make the checks pass.
 
 This full scan can take several minutes. It builds a local SQLite index of
 subject, principal and host definitions, then joins the three review events.
-`scan_progress.json` records completed files; partial runs cannot be resumed.
-Use a fresh directory for a rerun. A positive limit scans prefixes only and
+`scan_progress.json` records completed files; interrupted runs cannot be resumed.
+Use a fresh output directory. `--file-pattern` selects a stream, and
+`--reuse-audit` reuses a completed local full audit after checking the selected
+files' sizes/modification times and the cached index's definition counts.
+Verify archive checksums separately. A positive limit scans prefixes only and
 cannot establish that a definition is absent from an entire segment.
+
+To incorporate newly downloaded files for the original host, run:
+
+```powershell
+& $MlPython -m research.ml.data_prep.resolve_references `
+  --source $DataSource `
+  --annotations data/ml/datasets/darpa/review_annotations.json `
+  --file-pattern 'ta1-fivedirections-1-*.gz' `
+  --output .cache/ml-runs/my-expanded-host1-audit `
+  --records-per-file 0
+
+& $MlPython -m research.ml.data_prep.prepare_dataset `
+  --source $DataSource `
+  --annotations data/ml/datasets/darpa/review_annotations.json `
+  --reference-audit .cache/ml-runs/my-expanded-host1-audit `
+  --output .cache/ml-runs/my-expanded-preparation `
+  --records-per-file 2000000
+```
+
+The first command scans all matching files on a fresh clone. If a completed
+local reference audit and its SQLite index already exist, optionally add
+`--reuse-audit .cache/ml-runs/my-earlier-full-audit` to avoid decoding unchanged
+files again. A checked-in JSON report alone cannot supply that local index.
+Preparation imports only audited host/principal/subject definitions, still
+checks host identity and subject start times, and preserves annotation labels.
+Exit code **2** means preparation completed but training gates remain blocked;
+read `manifest.json` rather than interpreting it as a successful split export.
 
 `reference_report.json` reports unresolved and conflicting UUIDs, distinguishes
 thread IDs from process IDs, and checks process start time against event time.

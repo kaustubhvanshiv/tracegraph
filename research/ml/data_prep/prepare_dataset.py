@@ -23,6 +23,38 @@ from app.schemas.security_event import SecurityEvent
 from app.services.parser_registry import AdapterRegistry
 from research.ml.data_prep.inspect_fivedirections import uuid_text
 from research.ml.data_prep.cdm_adapter import CDMReviewAdapter, EntityResolver, ENTITY_KINDS, json_safe
+from research.ml.data_prep.resolve_references import reusable_files, validate_cached_index
+
+
+def index_entity(db, host, uid, kind, payload):
+    old = db.execute("SELECT kind,payload FROM entities WHERE host=? AND uuid=?", (host, uid)).fetchone()
+    if old and old != (kind, payload):
+        db.execute("UPDATE entities SET conflict=1 WHERE host=? AND uuid=?", (host, uid))
+    elif not old:
+        db.execute("INSERT INTO entities(host,uuid,kind,payload) VALUES (?,?,?,?)", (host, uid, kind, payload))
+
+
+def import_reference_audit(db, source, previous):
+    """Seed metadata only; labels and selected events still come from annotations.
+
+    Raw metadata remain local. Future-starting processes are still rejected by
+    EntityResolver, and definitions are never borrowed from another host.
+    """
+    paths = list(source.rglob("*.gz"))
+    if len({p.name for p in paths}) != len(paths):
+        raise ValueError("Source contains duplicate basenames")
+    previous = Path(previous).resolve()
+    files = reusable_files(paths, previous)
+    count = 0
+    with closing(sqlite3.connect((previous / "references.sqlite").as_uri() + "?mode=ro", uri=True)) as reference:
+        validate_cached_index(reference, files)
+        for uid, kind, payload, host in reference.execute("SELECT uuid,kind,payload,host FROM entities"):
+            if uid and host:
+                index_entity(db, host, uid, kind, payload)
+                count += 1
+    return {"files": [item["filename"] for item in files], "definitions_imported": count,
+            "report_sha256": hashlib.sha256((previous / "reference_report.json").read_text(encoding="utf-8").encode("utf-8")).hexdigest(),
+            "report_hash_format": "SHA-256 of UTF-8 text with LF newlines"}
 
 
 def reviewed_label(annotation, raw):
@@ -82,7 +114,7 @@ def make_splits(samples, context_nanos=0):
     return (None, reasons) if reasons else (splits, [])
 
 
-def prepare(source, annotations_path, output, limit, context_nanos=0, split_output=None):
+def prepare(source, annotations_path, output, limit, context_nanos=0, split_output=None, reference_audit=None):
     source, output = source.resolve(), output.resolve()
     if source == output or source in output.parents:
         raise ValueError("Output must be outside the raw source")
@@ -106,6 +138,7 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
     counts, matches, fingerprints, conflicts, files = Counter(), {}, {}, set(), []
     with closing(sqlite3.connect(output / "entities.sqlite")) as db:
         db.execute("CREATE TABLE entities(host TEXT,uuid TEXT,kind TEXT,payload TEXT,conflict INTEGER DEFAULT 0,PRIMARY KEY(host,uuid))")
+        references = import_reference_audit(db, source, reference_audit) if reference_audit else None
         resolver = EntityResolver(db)
         registry.register(CDMReviewAdapter(resolver))
         filenames = sorted({a["source_file"] for a in annotations})
@@ -128,11 +161,7 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
                     host = uuid_text(raw.get("hostId"))
                     if raw.get("type") in ENTITY_KINDS and uid and host:
                         payload = json.dumps(json_safe(datum), sort_keys=True)
-                        old = db.execute("SELECT kind,payload FROM entities WHERE host=? AND uuid=?", (host, uid)).fetchone()
-                        if old and old != (raw.get("type"), payload):
-                            db.execute("UPDATE entities SET conflict=1 WHERE host=? AND uuid=?", (host, uid))
-                        elif not old:
-                            db.execute("INSERT INTO entities(host,uuid,kind,payload) VALUES (?,?,?,?)", (host, uid, raw.get("type"), payload))
+                        index_entity(db, host, uid, raw.get("type"), payload)
                     if raw.get("type") == "RECORD_EVENT" and uid in wanted:
                         annotation = wanted[uid]
                         if annotation["source_file"] != filename:
@@ -185,6 +214,7 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         "context_nanos": context_nanos, "blocking_reasons": reasons,
         "feature_status": "canonical event fields only; no model vectors or graphs",
         "semantic_mapping_version": 1,
+        "reference_audit": references,
         "normalized_event_type_counts": dict(Counter(s["security_event"]["event_type"] for s in samples)),
         "normalized_field_counts": {field: sum(s["security_event"].get(field) is not None for s in samples)
                                     for field in ("process", "file", "user", "source_host", "source_ip", "destination_ip")}}
@@ -200,11 +230,13 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--records-per-file", type=int, default=2_000_000)
     parser.add_argument("--context-nanos", type=int, default=0)
+    parser.add_argument("--reference-audit", type=Path,
+                        help="Completed reference audit to supply host-scoped metadata from other segments")
     parser.add_argument("--split-output", type=Path,
                         default=Path(__file__).resolve().parents[3] / "data/ml/splits",
                         help="Fresh directory for validated split IDs (created only when gates pass)")
     args = parser.parse_args()
-    manifest = prepare(args.source, args.annotations, args.output, args.records_per_file, args.context_nanos, args.split_output)
+    manifest = prepare(args.source, args.annotations, args.output, args.records_per_file, args.context_nanos, args.split_output, args.reference_audit)
     print(json.dumps(manifest, indent=2))
     return 0 if manifest["status"] == "split_ready" else 2
 

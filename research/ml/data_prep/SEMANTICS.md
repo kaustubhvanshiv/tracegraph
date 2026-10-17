@@ -15,6 +15,17 @@ selected events after that scan so nonchronological publication does not hide
 an available definition. A conflicting definition is withheld, not arbitrarily
 selected. This index is local and is rebuilt for each fresh run.
 
+The optional `prepare_dataset --reference-audit` argument imports host,
+principal and subject definitions from a completed local reference audit of
+other downloaded segments. Source sizes/modification times and index counts
+must match the audit. Conflicting definitions remain withheld, and the same
+host and process start-time checks apply. The manifest records imported source
+filenames, definition count and the reference report's SHA-256 digest over
+UTF-8 text normalized to LF newlines, so Git's line-ending conversion does not
+invalidate the reference provenance. This is
+offline identity resolution; it does not prove that the metadata would have
+been available to an online detector at the event's ingestion time.
+
 Host scoping prevents another host's same textual UUID from supplying fields.
 Process joins follow thread parent references until a process is reached. Every
 visited subject must have a known start timestamp at or before the event;
@@ -62,6 +73,14 @@ Resolution status, predicate kind and mapping version are audit metadata.
 They must not be mistaken for attack labels or training-ready graph features.
 
 ## Measured run
+
+**2026-10-17 refresh:** the same three-event preparation now imports metadata
+from a completed 10-file host-1 reference audit. Hostname coverage improves
+from 0/3 to 3/3 and linked username coverage from 0/3 to 1/3. Process coverage
+remains 1/3; labels and training gates are unchanged. The research suite now
+passes 38 tests. See the
+[refresh report](../../../data/ml/datasets/darpa/download_refresh_20261017.md).
+The measurements below describe the original 2026-10-13 run.
 
 The 2026-10-13 rerun streamed **2,000,000 segment-121 records**, with 1,901,311
 Events and 153 FileObject definitions. All three annotation-listed review

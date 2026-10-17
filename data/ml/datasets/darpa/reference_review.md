@@ -1,5 +1,14 @@
 # ML-02 reference and label review — 2026-10-11
 
+**2026-10-17 refresh:** the original six-file findings below are historical.
+The expanded audit now covers all 10 downloaded host-1 files (100,000,000
+records). The Host definition and the Firefox process's linked Principal are
+now resolved directly from the base file. The other two candidates' parent
+process remains absent. No annotation labels changed. See the
+[download refresh](download_refresh_20261017.md) and
+[expanded reference report](expanded_reference_report_20261017.json) for
+current scope and preparation results.
+
 ## Evidence sources and scope
 
 Review uses the six downloaded FiveDirections gzip/Avro containers, CDM 2.0

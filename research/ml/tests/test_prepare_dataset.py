@@ -1,12 +1,56 @@
 import unittest
 import gzip
 import json
+import hashlib
 from pathlib import Path
 import tempfile
 from fastavro import writer
 
 from research.ml.data_prep.prepare_dataset import CDMReviewAdapter, make_splits, reviewed_label, prepare
 from app.schemas.parser import ParseError
+from research.ml.data_prep.resolve_references import audit
+
+
+class ReferencePreparationTests(unittest.TestCase):
+    def test_external_metadata_improves_fields_without_assigning_labels(self):
+        schema = {"type": "record", "name": "CDM", "fields": [
+            {"name": "type", "type": "string"}, {"name": "hostId", "type": "string"},
+            {"name": "datum", "type": {"type": "record", "name": "Data", "fields": [
+                {"name": "uuid", "type": "string"}, {"name": "type", "type": "string"},
+                {"name": "timestampNanos", "type": "long", "default": 20},
+                {"name": "startTimestampNanos", "type": "long", "default": 10},
+                *[{"name": key, "type": ["null", "string"], "default": None}
+                  for key in ("hostName", "username", "cmdLine", "localPrincipal", "subject")]]}}]}
+        for definition_host, start, should_resolve in (("h", 10, True), ("other", 10, False), ("h", 30, False)):
+            with self.subTest(definition_host=definition_host, start=start), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                source = root / "raw"
+                source.mkdir()
+                with gzip.open(source / "metadata.gz", "wb") as stream:
+                    writer(stream, schema, [{"type": kind, "hostId": definition_host, "datum": datum}
+                        for kind, datum in (
+                            ("RECORD_HOST", {"uuid": "h", "type": "HOST_DESKTOP", "hostName": "host-one"}),
+                            ("RECORD_PRINCIPAL", {"uuid": "u", "type": "PRINCIPAL_LOCAL", "username": "alice"}),
+                            ("RECORD_SUBJECT", {"uuid": "p", "type": "SUBJECT_PROCESS", "cmdLine": "firefox.exe",
+                                                "localPrincipal": "u", "startTimestampNanos": start}))])
+                with gzip.open(source / "events.gz", "wb") as stream:
+                    writer(stream, schema, [{"type": "RECORD_EVENT", "hostId": "h", "datum": {
+                        "uuid": "e", "type": "EVENT_OPEN", "subject": "p", "timestampNanos": 20}}])
+                annotations = root / "annotations.json"
+                annotations.write_text(json.dumps({"events": [{"event_uuid": "e", "host_uuid": "h",
+                    "subject_uuid": "p", "timestamp_nanos": 20, "cdm_event_type": "EVENT_OPEN",
+                    "source_file": "events.gz", "label": None}]}), encoding="utf-8")
+                reference = root / "reference"
+                audit(source, annotations, reference, file_pattern="metadata.gz")
+                result = prepare(source, annotations, root / "prepared", 0, reference_audit=reference)
+                self.assertEqual(result["resolved_process_count"], int(should_resolve))
+                self.assertEqual(result["normalized_field_counts"]["user"], int(should_resolve))
+                self.assertEqual(result["normalized_field_counts"]["source_host"], int(definition_host == "h"))
+                self.assertEqual(result["label_counts"], {"None": 1})
+                self.assertEqual(result["status"], "blocked_for_training")
+                self.assertEqual(result["reference_audit"]["definitions_imported"], 3)
+                self.assertEqual(result["reference_audit"]["report_sha256"], hashlib.sha256(
+                    (reference / "reference_report.json").read_text(encoding="utf-8").encode("utf-8")).hexdigest())
 
 
 class PreparationTests(unittest.TestCase):

@@ -1,5 +1,15 @@
 # ML-02 requirement verification — 2026-10-11
 
+**2026-10-17 update:** 28 local archives pass checksum verification. The expanded
+reference audit covers all 10 downloaded host-1 files (100 million records);
+the other 18 files have bounded prefix inspections. Preparation can now import
+audited metadata across segments. The same three selected events supply
+hostnames in 3/3 cases and a linked username in 1/3, with process coverage still
+1/3. All 38 research tests pass. Labels remain one report-reviewed positive,
+two unknowns and zero verified negatives; ML-02.4 remains incomplete and no
+supervised splits or training were performed. See the
+[refresh report](datasets/darpa/download_refresh_20261017.md).
+
 Updated 2026-10-13: typed offline CDM normalization and host-scoped reference
 joins are now implemented. The real two-million-record rerun produces three
 file-access events with paths and one time-valid Firefox process image. All

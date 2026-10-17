@@ -1,5 +1,16 @@
 # DARPA TC E5 — additional downloads
 
+**2026-10-17 inventory update:** 28 local archives across FiveDirections-1/2/3
+now match the downloaded `bins.md5sum`: 10, 8 and 10 files respectively, totaling
+8,849,857,844 compressed bytes. The manifest lists 337 files; 309 are absent
+locally. Missing files are not all required downloads. The user reports that
+the shared `starc` folder opens empty; no STARC files were acquired or verified.
+The starting file supplies Host/Principal metadata absent from the original
+six-file audit. See the [download refresh](datasets/darpa/download_refresh_20261017.md)
+for scope, measurements and reproducible next steps. Older priorities below
+describe the original acquisition stage, not a request to redownload support
+materials already present.
+
 **Received 2026-10-11:** The user downloaded ground-truth and schema ZIPs plus
 the operational log to `D:\Deep Learning\darpa-tc-e5-support`. The ground-truth
 archive actually contains `TA51_Final_report_E5.pdf` (Revision 1.0), not the
