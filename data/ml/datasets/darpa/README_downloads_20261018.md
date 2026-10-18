@@ -103,3 +103,53 @@ This isolates the new batch and avoids rescanning all 31 local archives.
 The first command profiles all records; the second retains identity metadata
 and searches the existing evidence specification. Neither command trains a model
 or creates supervised labels.
+
+## Follow-up: user-supplied host-2 part 16
+
+The user downloaded `ta1-fivedirections-2-e5-official-1.bin.16.gz` into the same
+dataset folder. Its 326,601,232 bytes and MD5
+`71de2541c5d141ad5539326efc7f96ed` match the publisher's checksum manifest.
+At verification the local dataset contained **32 archives**; the 31-archive
+figures above describe the earlier three-file refresh.
+
+[The complete part-16 audit](host2_part16_evidence_audit_20261018.json) decoded
+**10,000,000 records**, including **9,630,752 Event records**, and retained
+45,857 Subject definitions locally. Event timestamp bounds are
+**2019-05-08 12:33:25.398 to 2019-05-09 20:02:12.246 UTC**; bounds do not establish
+continuous coverage. The first 20,000 records separately sampled May 9 around
+17:46–17:49 UTC, illustrating why a prefix alone is insufficient.
+
+The configured May 9 host-2 attack window contains 5,544,605 raw Events and
+817 path matches, with 30 candidates retained for review. There are no matching
+Subject command lines in that window. Generic indicator/path hits do not prove
+malice: **no new labels were assigned**. The configured May 10 benign SCP window
+contains zero Events in this file. Reviewed-event preparation and supervised
+splits were not rerun.
+
+### Next manual download batch
+
+Download these two files from the same FiveDirections folder and place them
+beside part 16, keeping the original filenames and gzip compression:
+
+| File | Size | Original Drive link |
+|---|---:|---|
+| `ta1-fivedirections-2-e5-official-1.bin.15.gz` | 325,830,490 bytes | [Download part 15](https://drive.google.com/file/d/1k3QQv4fEnl2rhYuUqL_oKL_jZGdWU9Pz/view) |
+| `ta1-fivedirections-2-e5-official-1.bin.17.gz` | 323,153,443 bytes | [Download part 17](https://drive.google.com/file/d/1Xce-QcFz5FU8YBDJfrsT6j0idZEPxuHW/view) |
+
+Combined size: **648,983,933 bytes (about 649 MB)**. These are adjacent-file
+coverage probes, not verified date-specific downloads or a guaranteed complete
+set. Part 15 may recover earlier attack/process context, while part 17 extends
+the search toward May 10. Their actual dates must be inspected. Source metadata
+and expected MD5 hashes are in [the download queue](host2_download_queue_20261018.json).
+The user has already supplied part 16; it is not requested again.
+
+Browser automation was rejected by the saved permission or managed policy for
+`drive.google.com`; these two files also exceed the connector's 256 MiB limit.
+The user can download them through their normal browser. A changed file suffix
+such as `.crdownload` or an HTML confirmation page is not a complete archive.
+
+To reproduce only the part-16 evidence scan, use a fresh output directory:
+
+~~~powershell
+& '.\research\ml\.venv\Scripts\python.exe' -m research.ml.data_prep.audit_label_evidence --source 'D:\Deep Learning\fivedirections-20261010T174625Z-1-049\fivedirections' --activities data/ml/datasets/darpa/label_review_activities_20261017.json --file-pattern 'ta1-fivedirections-2-e5-official-1.bin.16.gz' --output .cache/ml-runs/my-host2-part16-evidence
+~~~

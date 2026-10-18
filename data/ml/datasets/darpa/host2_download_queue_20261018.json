@@ -1,0 +1,30 @@
+{
+  "assessment_date": "2026-10-18",
+  "source_folder_url": "https://drive.google.com/drive/folders/1GVlHQwjJte3yz0n1a1y4H4TfSe8cu6WJ",
+  "destination_folder": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections",
+  "queue_status": "Awaiting user download; browser access denied and these archives exceed connector limit.",
+  "purpose": "Bound missing May 9 attack coverage and search forward toward the documented May 10 benign SCP activity; not a guaranteed complete download set.",
+  "total_bytes": 648983933,
+  "files": [
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+      "id": "1k3QQv4fEnl2rhYuUqL_oKL_jZGdWU9Pz",
+      "bytes": 325830490,
+      "mime_type": "application/gzip",
+      "url": "https://drive.google.com/file/d/1k3QQv4fEnl2rhYuUqL_oKL_jZGdWU9Pz/view?usp=drivesdk",
+      "expected_md5": "3b48a5eb1d052d8ca7fe695006ce96bd",
+      "date_coverage_verified": false,
+      "selection_reason": "Adjacent to verified May 9 host-2 segment 16; inspect dates and evidence before labeling."
+    },
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+      "id": "1Xce-QcFz5FU8YBDJfrsT6j0idZEPxuHW",
+      "bytes": 323153443,
+      "mime_type": "application/gzip",
+      "url": "https://drive.google.com/file/d/1Xce-QcFz5FU8YBDJfrsT6j0idZEPxuHW/view?usp=drivesdk",
+      "expected_md5": "06ca656bb655b281ae161067ec1299c8",
+      "date_coverage_verified": false,
+      "selection_reason": "Adjacent to verified May 9 host-2 segment 16; inspect dates and evidence before labeling."
+    }
+  ]
+}
