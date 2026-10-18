@@ -1,0 +1,152 @@
+{
+  "files": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.122.gz",
+      "records": 358733,
+      "complete_scan": true,
+      "compressed_bytes": 11670416,
+      "modified_time_ns": 1792300300463635300,
+      "record_type_counts": {
+        "RECORD_EVENT": 350707,
+        "RECORD_MEMORY_OBJECT": 7184,
+        "RECORD_SUBJECT": 636,
+        "RECORD_IPC_OBJECT": 91,
+        "RECORD_TIME_MARKER": 16,
+        "RECORD_NET_FLOW_OBJECT": 5,
+        "RECORD_FILE_OBJECT": 74,
+        "RECORD_REGISTRY_KEY_OBJECT": 15,
+        "RECORD_SRC_SINK_OBJECT": 4,
+        "RECORD_END_MARKER": 1
+      },
+      "min_event_utc": "2019-05-16T20:13:05.352000000Z",
+      "max_event_utc": "2019-05-17T21:38:50.256000000Z",
+      "host_event_ranges": {
+        "2ab88dcdcbe641dfac699f6d6058e398": {
+          "min_utc": "2019-05-16T20:13:05.352000000Z",
+          "max_utc": "2019-05-17T21:38:50.256000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "records": 3890348,
+      "complete_scan": true,
+      "compressed_bytes": 124386417,
+      "modified_time_ns": 1792300357058312600,
+      "record_type_counts": {
+        "RECORD_EVENT": 3797699,
+        "RECORD_SUBJECT": 5412,
+        "RECORD_MEMORY_OBJECT": 84084,
+        "RECORD_REGISTRY_KEY_OBJECT": 1477,
+        "RECORD_FILE_OBJECT": 441,
+        "RECORD_NET_FLOW_OBJECT": 141,
+        "RECORD_IPC_OBJECT": 929,
+        "RECORD_TIME_MARKER": 88,
+        "RECORD_SRC_SINK_OBJECT": 74,
+        "RECORD_PRINCIPAL": 2,
+        "RECORD_END_MARKER": 1
+      },
+      "min_event_utc": "2019-05-15T17:12:45.421000000Z",
+      "max_event_utc": "2019-05-17T21:39:06.370000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-15T17:12:45.421000000Z",
+          "max_utc": "2019-05-17T21:39:06.370000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.111.gz",
+      "records": 850490,
+      "complete_scan": true,
+      "compressed_bytes": 28531125,
+      "modified_time_ns": 1792300365016171100,
+      "record_type_counts": {
+        "RECORD_EVENT": 832846,
+        "RECORD_MEMORY_OBJECT": 14744,
+        "RECORD_SUBJECT": 1390,
+        "RECORD_NET_FLOW_OBJECT": 720,
+        "RECORD_FILE_OBJECT": 310,
+        "RECORD_IPC_OBJECT": 332,
+        "RECORD_TIME_MARKER": 49,
+        "RECORD_REGISTRY_KEY_OBJECT": 78,
+        "RECORD_PRINCIPAL": 2,
+        "RECORD_SRC_SINK_OBJECT": 18,
+        "RECORD_END_MARKER": 1
+      },
+      "min_event_utc": "2019-05-15T18:03:55.035000000Z",
+      "max_event_utc": "2019-05-17T21:39:37.094000000Z",
+      "host_event_ranges": {
+        "a8db8613f66e4f0ca19ef43513bacc10": {
+          "min_utc": "2019-05-15T18:03:55.035000000Z",
+          "max_utc": "2019-05-17T21:39:37.094000000Z"
+        }
+      }
+    }
+  ],
+  "file_pattern": "*.gz",
+  "all_files_fully_scanned": true,
+  "activity_configuration_sha256": "9770022ffede00e1a3e9a58dea337708c7ed3bf3621b1d2e31e35ad2c2dd8d4c",
+  "activity_matches": {
+    "benign-host2-bcdedit-recovery-may7": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "attack-host2-drakon-copykatz-may9": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "benign-host2-scp-may10": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "attack-host3-ssh-scp-may10": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "attack-host2-bits-microapt-may15": {
+      "window_event_count": 207,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "benign-host1-filemon-setup-may16": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    },
+    "attack-host3-drakon-may17": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    }
+  },
+  "labels_assigned": 0,
+  "review_events": [],
+  "scope": "Full record/time scan; complete identity metadata retained locally; candidate string search covers Subject cmdLine and Event paths only",
+  "candidate_caveat": "Known-subject event matching sees only preceding definitions; zero matches does not prove absence. All candidates need full-record reread and source review."
+}

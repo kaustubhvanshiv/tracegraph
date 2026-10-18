@@ -3,6 +3,12 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-18 Drive download refresh:** three checksum-verified final segments
+were added to the local FiveDirections dataset, bringing it to 31 archives.
+See the [download README](../../data/ml/datasets/darpa/README_downloads_20261018.md)
+for source links, measured coverage, reproduction steps and the connector's
+large-file limit. Supervised labels and splits remain subject to review.
+
 **Latest ML-02.4 work:** the
 [label-evidence review](../../data/ml/datasets/darpa/ml02_label_review_20261017.md)
 documents the full coverage search and a specific benign administrative
