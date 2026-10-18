@@ -1,5 +1,13 @@
 # ML-02 — ground truth and split plan
 
+**2026-10-17 label-review update:** the annotation set now contains one
+report-reviewed attack action, one operational-log-reviewed benign execution
+and two unknown candidates. The benign execution is explicitly excluded from
+supervised splits because its clock alignment is unresolved. This does not
+make ML-02.4 complete or supply evaluable partitions. See the
+[current evidence review](datasets/darpa/ml02_label_review_20261017.md);
+older measured snapshots below retain their original scope.
+
 Status on 2026-10-11: **label contract defined; review preparation executed;
 training blocked by evidence coverage**.
 ML-02.1 and ML-02.2 definitions and ML-02.3 scenario planning are complete.
@@ -177,11 +185,12 @@ and evidence. A binary label requires `review_status: verified`, evidence and
 a curated group ID. Candidate annotations always retain null labels.
 Positive labels additionally require an incident ID for explicit incident
 isolation checks; negative labels use a verified benign block group.
-The current annotations contain one verified report-derived positive and two
-unknown candidates. Host/IP evidence is inferred from local netflow fields;
-missing Host and Principal records remain explicit limitations. This is a
-manual source review, not STARC event annotations. No downloaded STARC
-annotation schema is available.
+The current annotations contain one report-reviewed positive, one
+operational-log-reviewed benign execution excluded from splits, and two
+unknown candidates. Host and relevant Principal definitions now resolve in
+the 28-file audit; the two unknowns' host-1 actor parent remains missing.
+These are Codex manual source reviews, not expert/STARC annotations. No
+downloaded STARC annotation schema is available.
 
 The executable splitter orders whole groups by earliest timestamp, targets
 60/20/20, and rejects interleaved intervals, context overlap, duplicate sample
@@ -197,6 +206,24 @@ The CLI now defaults validated ID-only split export to `data/ml/splits/`;
 directories are preserved and raw-source destinations rejected. A blocked run
 does not create the split directory. Local review events and entity indexes
 remain in the ignored output run; they are not copied into tracked split files.
+
+### Reviewed labels and split eligibility
+
+A verified action label and a usable event time are separate requirements.
+An annotation may retain a reviewed 0/1 action label while explicitly setting
+`split_eligible: false` with `split_exclusion_reason`. Such rows remain in local
+review output and reviewed-label counts, but cannot enter train/validation/test
+partitions or satisfy their class/group checks. Eligible counts and exclusions
+are recorded separately. A missing flag preserves existing eligibility policy;
+an exclusion flag must be a boolean and a false value requires a reason.
+
+The May 7 host-2 `BCDEDIT /set nointegritychecks ON` execution is a documented
+administrative recovery action, not an ACT attack. Its raw clock epoch is
+uncertain, so its label is 0 and its split eligibility is false. The annotation
+records exact event/subject identity, operational-log provenance, source time
+and limitations. No global clock correction or PID-only identity join is used.
+No neighboring event or interval is labeled benign. Human/source review and
+complete, independent labeled groups remain prerequisites for an experiment.
 
 Executed a 2,000,000-record segment-121 preparation scan: all three selected
 events found, zero conflicts, one positive and two unknowns, one process reference

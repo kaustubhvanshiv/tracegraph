@@ -67,6 +67,10 @@ def reviewed_label(annotation, raw):
     if actual != expected:
         raise ValueError("Annotation identity/time/action mismatch")
     label = annotation.get("label")
+    if type(annotation.get("split_eligible", True)) is not bool:
+        raise ValueError("split_eligible must be a boolean")
+    if annotation.get("split_eligible") is False and not annotation.get("split_exclusion_reason"):
+        raise ValueError("Excluded sample requires a split exclusion reason")
     if label is not None:
         if type(label) is not int or label not in (0, 1):
             raise ValueError("Label must be integer 0, 1, or null")
@@ -91,6 +95,9 @@ def make_splits(samples, context_nanos=0):
         return None, ["A positive incident is assigned to multiple split groups"]
     if len({s["event_uuid"] for s in samples}) != len(samples):
         return None, ["Duplicate sample identities"]
+    # A reviewed action label does not repair uncertain event chronology.
+    # Keep such samples in the review output, outside training/evaluation.
+    known = [s for s in known if s.get("split_eligible", True) is True]
     groups = {}
     for sample in known:
         group = sample.get("group_id")
@@ -129,7 +136,8 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         raise ValueError("Split output must be outside raw source")
     if split_directory.exists() or split_directory == output or split_directory in output.parents:
         raise ValueError("Use a fresh, separate split directory")
-    annotations = json.loads(annotations_path.read_text(encoding="utf-8"))["events"]
+    annotation_text = annotations_path.read_text(encoding="utf-8")
+    annotations = json.loads(annotation_text)["events"]
     wanted = {a["event_uuid"]: a for a in annotations}
     if len(wanted) != len(annotations):
         raise ValueError("Duplicate annotation identities")
@@ -207,8 +215,19 @@ def prepare(source, annotations_path, output, limit, context_nanos=0, split_outp
         for name, rows in splits.items():
             (directory / f"{name}.json").write_text(json.dumps([r["event_uuid"] for r in rows], indent=2), encoding="utf-8")
     manifest = {"status": "split_ready" if splits else "blocked_for_training", "selection": "annotation-listed events only; not representative sampling",
-        "files": files, "record_type_counts": dict(counts), "annotation_sha256": hashlib.sha256(annotations_path.read_bytes()).hexdigest(),
+        "files": files, "record_type_counts": dict(counts), "annotation_sha256": hashlib.sha256(annotation_text.encode("utf-8")).hexdigest(),
+        "annotation_hash_format": "SHA-256 of UTF-8 text with LF newlines",
         "sample_count": len(samples), "label_counts": dict(Counter(str(s["label"]) for s in samples)),
+        "label_group_counts": {str(label): len({s.get("group_id") for s in samples
+                                              if s["label"] == label and s.get("group_id")}) for label in (0, 1)},
+        "eligible_label_counts": dict(Counter(str(s["label"]) for s in samples
+                                             if s["label"] is not None and s.get("split_eligible", True) is True)),
+        "eligible_label_group_counts": {str(label): len({s.get("group_id") for s in samples
+                    if s["label"] == label and s.get("group_id") and s.get("split_eligible", True) is True}) for label in (0, 1)},
+        "split_excluded_events": [{"event_uuid": s["event_uuid"], "reason": s["split_exclusion_reason"]}
+                                  for s in samples if s.get("split_eligible") is False],
+        "positive_incident_count": len({s.get("incident_id") for s in samples
+                                        if s["label"] == 1 and s.get("incident_id")}),
         "missing_event_uuids": missing, "conflicting_event_uuids": sorted(conflicts),
         "resolved_process_count": sum(s["subject_resolution"]["process_resolved"] for s in samples),
         "context_nanos": context_nanos, "blocking_reasons": reasons,

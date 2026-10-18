@@ -1,5 +1,16 @@
 # DARPA TC E5 — additional downloads
 
+**Latest ML-02.4 finding:** all 28 locally downloaded archives are fully scanned.
+The corresponding host-2/3 streams end on May 8, before the additional
+documented attack and benign SCP cases. Host 1's documented May 16 benign
+setup interval is also absent. See the
+[verified activity coverage and required evidence](datasets/darpa/ml02_label_review_20261017.md).
+The review found one benign administrative execution, but its uncalibrated
+clock excludes it from supervised splits. More raw records alone do not supply
+reviewed labels or independent train/validation/test groups. Archive numbers
+for the missing windows have not been verified; do not infer them from adjacent
+filenames or redownload support materials already present.
+
 **2026-10-17 inventory update:** 28 local archives across FiveDirections-1/2/3
 now match the downloaded `bins.md5sum`: 10, 8 and 10 files respectively, totaling
 8,849,857,844 compressed bytes. The manifest lists 337 files; 309 are absent

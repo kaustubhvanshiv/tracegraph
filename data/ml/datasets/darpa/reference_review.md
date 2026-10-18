@@ -1,5 +1,13 @@
 # ML-02 reference and label review — 2026-10-11
 
+**Latest ML-02.4 review:** all 28 downloaded archives now have complete scans
+(280 million records). A specific host-2 administrative execution has a
+reviewed benign label and is excluded from supervised splits for clock
+uncertainty. The annotation set has four events; the original three events'
+labels remain unchanged. See the
+[current label review](ml02_label_review_20261017.md) and
+[combined reference report](ml02_full_reference_report_20261017.json).
+
 **2026-10-17 refresh:** the original six-file findings below are historical.
 The expanded audit now covers all 10 downloaded host-1 files (100,000,000
 records). The Host definition and the Firefox process's linked Principal are

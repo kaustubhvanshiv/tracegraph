@@ -1,0 +1,116 @@
+{
+  "status": "blocked_for_training",
+  "selection": "annotation-listed events only; not representative sampling",
+  "files": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 6000000,
+      "complete_scan": false,
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "records": 6000000,
+      "complete_scan": false,
+      "compressed_bytes": 336934867,
+      "modified_time_ns": 1792218200851179200
+    }
+  ],
+  "record_type_counts": {
+    "RECORD_EVENT": 11445265,
+    "RECORD_MEMORY_OBJECT": 477320,
+    "RECORD_SUBJECT": 48903,
+    "RECORD_IPC_OBJECT": 4279,
+    "RECORD_TIME_MARKER": 258,
+    "RECORD_NET_FLOW_OBJECT": 8286,
+    "RECORD_FILE_OBJECT": 12208,
+    "RECORD_REGISTRY_KEY_OBJECT": 2887,
+    "RECORD_SRC_SINK_OBJECT": 589,
+    "RECORD_PRINCIPAL": 5
+  },
+  "annotation_sha256": "6e6436fc58ca8c74591fb15e865394c695d100f956b514ef098452f871b6440d",
+  "annotation_hash_format": "SHA-256 of UTF-8 text with LF newlines",
+  "sample_count": 4,
+  "label_counts": {
+    "None": 2,
+    "1": 1,
+    "0": 1
+  },
+  "label_group_counts": {
+    "0": 1,
+    "1": 1
+  },
+  "eligible_label_counts": {
+    "1": 1
+  },
+  "eligible_label_group_counts": {
+    "0": 0,
+    "1": 1
+  },
+  "split_excluded_events": [
+    {
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "reason": "Uncalibrated mixed clock epochs around the documented host-2 four-hour time reset; raw timestamps are preserved and cannot establish reliable chronological/context boundaries"
+    }
+  ],
+  "positive_incident_count": 1,
+  "missing_event_uuids": [],
+  "conflicting_event_uuids": [],
+  "resolved_process_count": 2,
+  "context_nanos": 0,
+  "blocking_reasons": [
+    "At least three independent labeled groups required",
+    "Verified benign and attack samples required in every partition"
+  ],
+  "feature_status": "canonical event fields only; no model vectors or graphs",
+  "semantic_mapping_version": 1,
+  "reference_audit": {
+    "files": [
+      "ta1-fivedirections-1-e5-official-1.bin.1.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.2.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.3.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.3.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.4.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.5.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.6.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+      "ta1-fivedirections-2-e5-official-1.bin.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.1.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.2.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.3.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.4.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.5.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.6.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.7.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.8.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.9.gz",
+      "ta1-fivedirections-3-e5-official-1.bin.gz"
+    ],
+    "definitions_imported": 1445850,
+    "report_sha256": "fd33d7ee5406244b1ddfed91a465d717fffc2d51a3ae098e46c49e6d004533b5",
+    "report_hash_format": "SHA-256 of UTF-8 text with LF newlines"
+  },
+  "normalized_event_type_counts": {
+    "file": 3,
+    "process": 1
+  },
+  "normalized_field_counts": {
+    "process": 2,
+    "file": 3,
+    "user": 2,
+    "source_host": 4,
+    "source_ip": 0,
+    "destination_ip": 0
+  },
+  "split_output": null
+}

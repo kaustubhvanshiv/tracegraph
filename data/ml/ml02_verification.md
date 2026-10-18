@@ -1,5 +1,15 @@
 # ML-02 requirement verification — 2026-10-11
 
+**Latest ML-02.4 execution, 2026-10-17:** all 28 downloaded archives now have
+full scans, totaling 280 million records. The final preparation rerun reads
+12 million source records and normalizes four reviewed events: one attack,
+one benign administrative execution excluded for clock uncertainty, and two
+unknowns. The split-eligible set still has one attack group and no benign
+examples; no supervised splits or training were produced. All 43 research
+tests pass. ML-02.4 remains incomplete for real supervised partitions. See the
+[current label-evidence review](datasets/darpa/ml02_label_review_20261017.md).
+Earlier snapshots below describe prior data and code states.
+
 **2026-10-17 update:** 28 local archives pass checksum verification. The expanded
 reference audit covers all 10 downloaded host-1 files (100 million records);
 the other 18 files have bounded prefix inspections. Preparation can now import

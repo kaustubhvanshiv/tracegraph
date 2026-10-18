@@ -3,6 +3,15 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**Latest ML-02.4 work:** the
+[label-evidence review](../../data/ml/datasets/darpa/ml02_label_review_20261017.md)
+documents the full coverage search and a specific benign administrative
+execution. Its unresolved clock alignment excludes it from supervised splits.
+Reviewed labels and usable training examples are counted separately. Follow
+that report's commands to combine the three streams' local reference indexes
+and rerun preparation. Training requires verified labels, usable event times
+and independent splits.
+
 **2026-10-17 download refresh:** the local inventory now contains 28 archives
 across three FiveDirections streams. All 28 match `bins.md5sum`. See the
 [refresh procedure and results](../../data/ml/datasets/darpa/download_refresh_20261017.md)
@@ -32,9 +41,9 @@ scope require the user's approval.
 | Six-file prefix inspection | 120,000 records; 112,498 Events |
 | Support ZIP/PDF review | Complete: E5 report, CDM 2.0 schema, operational log |
 | Complete segment-121 scan | 10,000,000 records; 9,650,235 Events |
-| Ground-truth alignment | Three file-open matches: one report-reviewed positive, two unknowns |
-| Reviewed-event preparation | 2,000,000 records scanned; three candidates retained; one parent process resolved |
-| Full reference audit | Six files; 60,000,000 records; missing actor/Host/Principal definitions confirmed |
+| Ground-truth alignment | Four reviewed events: one attack, one benign execution excluded for clock uncertainty, two unknowns |
+| Reviewed-event preparation | 12,000,000 records scanned; four events normalized; two actors, four hostnames and two usernames resolved |
+| Full reference audit | All 28 downloaded files; 280,000,000 records; Host/Principal metadata recovered, one host-1 actor parent still missing |
 | ML-02.1 / ML-02.2 / ML-02.3 | Target/graph definition, split policy and scenario-use plan complete |
 | ML-02.4 actual dataset preparation | Partial: scripts tested; real supervised splits blocked by label coverage |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
@@ -42,8 +51,9 @@ scope require the user's approval.
 | Historical ML-04 neural-network exercise | Completed on synthetic XNOR; retained educational artifact within deferred original track |
 | ML-R1.1 dataset feasibility | Complete: stop finding for current audited evidence; ML-R1.2 remains pending |
 
-All six segments were fully decoded in the reference audit; the original
-inspection profile remains prefix-only. No trained DARPA GNN or security
+All 28 local archives were fully decoded across completed reference audits;
+the original inspection profiles remain prefix-only. This is a downloaded
+subset, not the entire DARPA release. No trained DARPA GNN or security
 classification results exist. Research is separate from production correlation.
 
 ## 1. Get the code
@@ -183,20 +193,24 @@ login/logout/thread/execute semantics, and ambiguous command lines.
 
 Install the updated requirements in your ML environment first. Preparation
 uses the backend's Pydantic models but does not start the backend or database.
+For the current four-event review, first build the completed reference index
+in Section 9, or follow the ordered
+[ML-02.4 workflow](../../data/ml/datasets/darpa/ml02_label_review_20261017.md).
 
 ```powershell
 & $MlPython -m pip install -r research/ml/requirements-support.txt
 & $MlPython -m research.ml.data_prep.prepare_dataset `
   --source $DataSource `
   --annotations data/ml/datasets/darpa/review_annotations.json `
+  --reference-audit .cache/ml-runs/my-reference-audit `
   --output .cache/ml-runs/my-prepared-review `
-  --records-per-file 2000000
+  --records-per-file 6000000
 ```
 
 Use a fresh output directory for each run. Exit code **2** means the preparation
 finished but evidence is insufficient for supervised splits. Inspect
 `manifest.json` and `review_events.jsonl` in that directory; the SQLite subject
-index stays local. These are only three selected review events, not a sampled
+index stays local. These are four selected review events, not a sampled
 training dataset. `--records-per-file 0` scans selected source files fully.
 Only filenames listed in annotations are scanned; other downloaded segments
 are not implicitly covered.
@@ -208,7 +222,7 @@ destination. Existing directories are not overwritten. Blocked runs do not
 create a split destination; unknown events are excluded from binary splits.
 Synthetic split-export tests are code validation, not real DARPA split results.
 
-The current run found all three events, with one report-reviewed positive,
+The original 2026-10-13 run found three events, with one report-reviewed positive,
 two unknown labels and one resolved parent process. Two events share an
 unresolved parent. No split files were
 written. The adapter preserves CDM actions and nanosecond timestamps in raw
@@ -218,6 +232,14 @@ image; missing users/hostnames remain null. No labels changed and no splits
 exist. See [SEMANTICS.md](data_prep/SEMANTICS.md) for mappings and limitations.
 Canonical event fields and reference metadata are not ML feature vectors or
 trained graph inputs.
+
+The latest rerun retains four normalized events: one attack, one reviewed
+benign execution excluded for an uncalibrated clock, and two unknowns. Its
+eligible labels still contain only one attack group and no benign examples.
+See the [current manifest](../../data/ml/datasets/darpa/ml02_label_preparation_manifest_20261017.json).
+Rows with `split_eligible: false` remain in review output but cannot contribute
+to supervised partition balance. Annotation hashes use UTF-8 text normalized
+to LF newlines for Windows/Linux reproducibility.
 
 To unblock training: obtain event-level annotations or independently review
 host identity and actor/object evidence for positives; identify explicitly
@@ -239,7 +261,7 @@ Do not change null labels to zero to make the checks pass.
 ```
 
 This full scan can take several minutes. It builds a local SQLite index of
-subject, principal and host definitions, then joins the three review events.
+subject, principal and host definitions, then joins the annotation-listed events.
 `scan_progress.json` records completed files; interrupted runs cannot be resumed.
 Use a fresh output directory. `--file-pattern` selects a stream, and
 `--reuse-audit` reuses a completed local full audit after checking the selected
@@ -256,14 +278,12 @@ To incorporate newly downloaded files for the original host, run:
   --file-pattern 'ta1-fivedirections-1-*.gz' `
   --output .cache/ml-runs/my-expanded-host1-audit `
   --records-per-file 0
-
-& $MlPython -m research.ml.data_prep.prepare_dataset `
-  --source $DataSource `
-  --annotations data/ml/datasets/darpa/review_annotations.json `
-  --reference-audit .cache/ml-runs/my-expanded-host1-audit `
-  --output .cache/ml-runs/my-expanded-preparation `
-  --records-per-file 2000000
 ```
+
+That command audits host 1 only. For the current multi-host annotation set,
+follow the ordered ML-02.4 workflow to audit hosts 2/3 and merge disjoint
+completed caches before preparation. `--reuse-audit` can be repeated for those
+caches; source filenames must not overlap.
 
 The first command scans all matching files on a fresh clone. If a completed
 local reference audit and its SQLite index already exist, optionally add
@@ -280,7 +300,7 @@ Full command lines and principal names stay in the local SQLite index. The
 aggregate report exposes only a Firefox command-line flag for these candidates.
 Entity joins alone do not establish attack or benign labels.
 
-The completed run decoded all **60,000,000 records**, including **58,037,343
+The original six-file run decoded **60,000,000 records**, including **58,037,343
 Events**, and indexed 257,164 Subjects. No Host/Principal definitions or the
 missing parent are present in these six files. Host/IP evidence instead comes
 from 268 local netflow observations of `128.55.12.55` in a two-million-record

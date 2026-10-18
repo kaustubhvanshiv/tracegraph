@@ -21,9 +21,9 @@
       "evidence": {
         "report": "TA51_Final_report_E5.pdf",
         "page": 126,
-        "method": "Exact generated artifact and compatible UTC time; host/IP supported but actor parent definition absent from all six downloaded files; label remains unknown",
+        "method": "Exact generated artifact and compatible UTC time; Host directly resolved, but actor parent remains absent from all 10 downloaded host-1 files; label remains unknown",
         "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
-        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned"
+        "reference_audit": "ml02_full_reference_report_20261017.json: all 28 downloaded archives fully scanned; references scoped to the publishing host"
       }
     },
     {
@@ -46,9 +46,9 @@
       "evidence": {
         "report": "TA51_Final_report_E5.pdf",
         "page": 127,
-        "method": "Exact generated artifact and compatible UTC time; host/IP supported but actor parent definition absent from all six downloaded files; label remains unknown",
+        "method": "Exact generated artifact and compatible UTC time; Host directly resolved, but actor parent remains absent from all 10 downloaded host-1 files; label remains unknown",
         "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
-        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned"
+        "reference_audit": "ml02_full_reference_report_20261017.json: all 28 downloaded archives fully scanned; references scoped to the publishing host"
       }
     },
     {
@@ -73,9 +73,44 @@
         "page": 127,
         "method": "Manual report-to-event alignment: exact generated artifact and Pictures path; compatible 16:15 EDT report timing; matching publishing-host local IP; Firefox parent process PID 5432 started before event; no conflicting actor definitions in the downloaded subset",
         "host_ip_support": "network_host_review.json: 268 local-address observations for 128.55.12.55 under this host UUID",
-        "reference_audit": "full_reference_report.json: all six downloaded segments completely scanned",
+        "reference_audit": "ml02_full_reference_report_20261017.json: all 28 downloaded archives fully scanned; references scoped to the publishing host",
         "label_provenance": "Codex source review; report-derived, not STARC annotation",
-        "limitations": "Host record and principal definition unavailable; host/IP association inferred from local netflow fields; report time has minute-level precision; label covers this artifact-open action only"
+        "limitations": "Host and linked Principal now resolve in the expanded audit. Report time has minute-level precision; label covers this artifact-open action only. Source alignment is not expert/STARC annotation.",
+        "original_review_limitations": "Host record and principal definition unavailable; host/IP association inferred from local netflow fields; report time has minute-level precision; label covers this artifact-open action only"
+      }
+    },
+    {
+      "activity_id": "benign-host2-bcdedit-recovery-may7",
+      "indicator": "BCDEDIT /set nointegritychecks ON",
+      "matched_fields": [
+        "Subject.cmdLine",
+        "predicateObjectPath"
+      ],
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557265116204000000,
+      "timestamp_utc": "2019-05-07T21:38:36.204000000Z",
+      "cdm_event_type": "EVENT_EXECUTE",
+      "subject_uuid": "bc21a86f5e5e462180e5479d4ff2ffdb",
+      "record_index_1based": 5847598,
+      "publishing_session": 10513,
+      "label": 0,
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "group_id": "e5-fivedirections2-admin-recovery-may7",
+      "review_status": "verified",
+      "split_eligible": false,
+      "split_exclusion_reason": "Uncalibrated mixed clock epochs around the documented host-2 four-hour time reset; raw timestamps are preserved and cannot establish reliable chronological/context boundaries",
+      "evidence": {
+        "source": "Engagement-5-Event-Log.md",
+        "source_sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9",
+        "section": "2019-05-07: Five Directions host-2 unexpected shutdown and recovery",
+        "method": "Direct host-2 identity; exact documented BCDEDIT command in Subject bc21a86f5e5e462180e5479d4ff2ffdb (PID 4948); EVENT_EXECUTE references that Subject and the bcdedit.exe image; Subject start equals raw event time; no PID-only join",
+        "subject_record_index_1based": 5847595,
+        "parent_process_uuid": "015644a1ab4f4d0bb76bd16314aad368",
+        "label_provenance": "Codex manual operational-log-to-event review, not a STARC label or expert annotation",
+        "clock_evidence": "The 500,000-record slice 5800001-6300000 contains 2139 adjacent event regressions exceeding three hours, interleaving roughly 17:38 and 21:38 UTC. The operational log explicitly records a temporary four-hour clock reset around 13:40 ET recovery. No global time correction is inferred.",
+        "limitations": "Label covers this administrative execution only; command intent is established by the operational log. Clock uncertainty excludes the event from all supervised partitions, and no surrounding event or entire maintenance window receives label 0.",
+        "reference_audit": "ml02_full_reference_report_20261017.json: all 28 downloaded archives fully scanned; references scoped to the publishing host"
       }
     }
   ]

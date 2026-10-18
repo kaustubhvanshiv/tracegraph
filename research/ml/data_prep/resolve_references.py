@@ -118,16 +118,26 @@ def audit(source, annotations, output, records_per_file=0, file_pattern="*.gz", 
     events = json.loads(annotations.read_text(encoding="utf-8"))["events"]
     if reuse_audit is not None and records_per_file:
         raise ValueError("A reused full audit requires a full scan of the new files")
-    files = reusable_files(paths, Path(reuse_audit)) if reuse_audit is not None else []
+    reuse_sources = ([Path(reuse_audit)] if isinstance(reuse_audit, (str, Path)) else
+                     [Path(p) for p in reuse_audit] if reuse_audit is not None else [])
+    files, cached = [], []
+    for previous in reuse_sources:
+        items = reusable_files(paths, previous)
+        if {item["filename"] for item in items} & {item["filename"] for item in files}:
+            raise ValueError("Reused audits contain overlapping filenames")
+        files.extend(items)
+        cached.append((previous, items))
     reused = {f["filename"] for f in files}
     output.mkdir(parents=True)
     with closing(sqlite3.connect(output / "references.sqlite")) as db:
-        if reuse_audit is not None:
-            with closing(sqlite3.connect((Path(reuse_audit).resolve() / "references.sqlite").as_uri() + "?mode=ro", uri=True)) as old:
-                validate_cached_index(old, files)
-                old.backup(db)
-        else:
-            db.execute("CREATE TABLE entities(uuid TEXT,kind TEXT,payload TEXT,filename TEXT,record_index INTEGER,host TEXT)")
+        db.execute("CREATE TABLE entities(uuid TEXT,kind TEXT,payload TEXT,filename TEXT,record_index INTEGER,host TEXT)")
+        for previous, items in cached:
+            with closing(sqlite3.connect((previous.resolve() / "references.sqlite").as_uri() + "?mode=ro", uri=True)) as old:
+                validate_cached_index(old, items)
+                rows = old.execute("SELECT uuid,kind,payload,filename,record_index,host FROM entities")
+                while batch := rows.fetchmany(5000):
+                    db.executemany("INSERT INTO entities VALUES (?,?,?,?,?,?)", batch)
+            db.commit()
         for path in paths:
             if path.name in reused:
                 print(f"Reused completed scan: {path.name}", flush=True)
@@ -187,7 +197,8 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--records-per-file", type=int, default=0)
     parser.add_argument("--file-pattern", default="*.gz", help="Select gzip basenames within the source")
-    parser.add_argument("--reuse-audit", type=Path, help="Completed local full audit with unchanged source files")
+    parser.add_argument("--reuse-audit", type=Path, action="append",
+                        help="Completed local full audit; repeat for disjoint scans with unchanged source files")
     args = parser.parse_args()
     report = audit(args.source, args.annotations, args.output, args.records_per_file, args.file_pattern, args.reuse_audit)
     print(f"Reviewed {len(report['review_events'])} events; no labels assigned", flush=True)

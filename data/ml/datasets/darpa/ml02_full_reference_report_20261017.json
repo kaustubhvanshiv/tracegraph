@@ -1,0 +1,864 @@
+{
+  "files": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 305438193,
+      "modified_time_ns": 1792217703666685000,
+      "record_type_counts": {
+        "RECORD_EVENT": 9709407,
+        "RECORD_MEMORY_OBJECT": 238667,
+        "RECORD_NET_FLOW_OBJECT": 10512,
+        "RECORD_SUBJECT": 30380,
+        "RECORD_FILE_OBJECT": 5114,
+        "RECORD_REGISTRY_KEY_OBJECT": 2885,
+        "RECORD_TIME_MARKER": 196,
+        "RECORD_IPC_OBJECT": 2720,
+        "RECORD_SRC_SINK_OBJECT": 119
+      },
+      "min_event_utc": "2019-05-07T14:02:38.004000000Z",
+      "max_event_utc": "2019-05-07T16:50:27.962000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 309025261,
+      "modified_time_ns": 1792217757529764700,
+      "record_type_counts": {
+        "RECORD_EVENT": 9580692,
+        "RECORD_MEMORY_OBJECT": 360172,
+        "RECORD_FILE_OBJECT": 4253,
+        "RECORD_NET_FLOW_OBJECT": 7924,
+        "RECORD_SUBJECT": 40996,
+        "RECORD_IPC_OBJECT": 3526,
+        "RECORD_REGISTRY_KEY_OBJECT": 2127,
+        "RECORD_TIME_MARKER": 229,
+        "RECORD_SRC_SINK_OBJECT": 80,
+        "RECORD_PRINCIPAL": 1
+      },
+      "min_event_utc": "2019-05-07T14:00:54.313000000Z",
+      "max_event_utc": "2019-05-07T18:45:00.368000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 308754439,
+      "modified_time_ns": 1792217771605136500,
+      "record_type_counts": {
+        "RECORD_EVENT": 9502503,
+        "RECORD_MEMORY_OBJECT": 407482,
+        "RECORD_SUBJECT": 69436,
+        "RECORD_IPC_OBJECT": 4448,
+        "RECORD_NET_FLOW_OBJECT": 6487,
+        "RECORD_TIME_MARKER": 200,
+        "RECORD_REGISTRY_KEY_OBJECT": 4801,
+        "RECORD_FILE_OBJECT": 4570,
+        "RECORD_SRC_SINK_OBJECT": 73
+      },
+      "min_event_utc": "2019-05-07T13:43:05.508000000Z",
+      "max_event_utc": "2019-05-07T20:25:04.105000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 322112794,
+      "modified_time_ns": 1791697973508060100,
+      "record_type_counts": {
+        "RECORD_EVENT": 9846461,
+        "RECORD_SUBJECT": 13766,
+        "RECORD_MEMORY_OBJECT": 112554,
+        "RECORD_TIME_MARKER": 615,
+        "RECORD_IPC_OBJECT": 4984,
+        "RECORD_NET_FLOW_OBJECT": 7944,
+        "RECORD_REGISTRY_KEY_OBJECT": 244,
+        "RECORD_FILE_OBJECT": 13392,
+        "RECORD_SRC_SINK_OBJECT": 40
+      },
+      "min_event_utc": "2019-05-07T23:07:05.010000000Z",
+      "max_event_utc": "2019-05-09T04:16:00.362000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 316485144,
+      "modified_time_ns": 1791697975692551900,
+      "record_type_counts": {
+        "RECORD_EVENT": 9662613,
+        "RECORD_MEMORY_OBJECT": 275454,
+        "RECORD_NET_FLOW_OBJECT": 6237,
+        "RECORD_IPC_OBJECT": 3873,
+        "RECORD_SUBJECT": 49239,
+        "RECORD_TIME_MARKER": 384,
+        "RECORD_REGISTRY_KEY_OBJECT": 1284,
+        "RECORD_FILE_OBJECT": 902,
+        "RECORD_SRC_SINK_OBJECT": 14
+      },
+      "min_event_utc": "2019-05-07T23:28:35.599000000Z",
+      "max_event_utc": "2019-05-09T13:14:28.852000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 309366409,
+      "modified_time_ns": 1791697969446408800,
+      "record_type_counts": {
+        "RECORD_EVENT": 9443247,
+        "RECORD_SUBJECT": 92312,
+        "RECORD_NET_FLOW_OBJECT": 3699,
+        "RECORD_IPC_OBJECT": 3679,
+        "RECORD_MEMORY_OBJECT": 453963,
+        "RECORD_TIME_MARKER": 193,
+        "RECORD_FILE_OBJECT": 1389,
+        "RECORD_REGISTRY_KEY_OBJECT": 1484,
+        "RECORD_SRC_SINK_OBJECT": 34
+      },
+      "min_event_utc": "2019-05-07T16:22:14.297000000Z",
+      "max_event_utc": "2019-05-09T18:11:51.232000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 310576694,
+      "modified_time_ns": 1791697967335008400,
+      "record_type_counts": {
+        "RECORD_EVENT": 9705247,
+        "RECORD_NET_FLOW_OBJECT": 6461,
+        "RECORD_MEMORY_OBJECT": 244321,
+        "RECORD_REGISTRY_KEY_OBJECT": 1541,
+        "RECORD_IPC_OBJECT": 2631,
+        "RECORD_SUBJECT": 37125,
+        "RECORD_FILE_OBJECT": 2447,
+        "RECORD_TIME_MARKER": 172,
+        "RECORD_SRC_SINK_OBJECT": 55
+      },
+      "min_event_utc": "2019-05-08T00:00:33.204000000Z",
+      "max_event_utc": "2019-05-09T22:33:37.246000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 317627464,
+      "modified_time_ns": 1791697971374009000,
+      "record_type_counts": {
+        "RECORD_EVENT": 9729540,
+        "RECORD_SUBJECT": 34763,
+        "RECORD_TIME_MARKER": 439,
+        "RECORD_MEMORY_OBJECT": 225884,
+        "RECORD_IPC_OBJECT": 4777,
+        "RECORD_NET_FLOW_OBJECT": 4200,
+        "RECORD_REGISTRY_KEY_OBJECT": 255,
+        "RECORD_FILE_OBJECT": 137,
+        "RECORD_SRC_SINK_OBJECT": 5
+      },
+      "min_event_utc": "2019-05-08T17:02:33.841000000Z",
+      "max_event_utc": "2019-05-10T09:57:41.975000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700,
+      "record_type_counts": {
+        "RECORD_EVENT": 9650235,
+        "RECORD_MEMORY_OBJECT": 312609,
+        "RECORD_SUBJECT": 29959,
+        "RECORD_IPC_OBJECT": 3316,
+        "RECORD_TIME_MARKER": 194,
+        "RECORD_NET_FLOW_OBJECT": 1565,
+        "RECORD_FILE_OBJECT": 1155,
+        "RECORD_REGISTRY_KEY_OBJECT": 926,
+        "RECORD_SRC_SINK_OBJECT": 41
+      },
+      "min_event_utc": "2019-05-16T20:17:51.316000000Z",
+      "max_event_utc": "2019-05-17T21:32:40.180000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 308986723,
+      "modified_time_ns": 1792218481290874200,
+      "record_type_counts": {
+        "RECORD_HOST": 1,
+        "RECORD_SUBJECT": 51581,
+        "RECORD_EVENT": 9572528,
+        "RECORD_PRINCIPAL": 5,
+        "RECORD_FILE_OBJECT": 19257,
+        "RECORD_IPC_OBJECT": 2867,
+        "RECORD_MEMORY_OBJECT": 327073,
+        "RECORD_NET_FLOW_OBJECT": 13653,
+        "RECORD_REGISTRY_KEY_OBJECT": 12177,
+        "RECORD_SRC_SINK_OBJECT": 602,
+        "RECORD_TIME_MARKER": 256
+      },
+      "min_event_utc": "2019-05-07T13:02:36.426000000Z",
+      "max_event_utc": "2019-05-07T15:10:48.557000000Z"
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 336934867,
+      "modified_time_ns": 1792218200851179200,
+      "record_type_counts": {
+        "RECORD_EVENT": 9496921,
+        "RECORD_MEMORY_OBJECT": 421105,
+        "RECORD_NET_FLOW_OBJECT": 9265,
+        "RECORD_IPC_OBJECT": 2783,
+        "RECORD_SUBJECT": 33629,
+        "RECORD_SRC_SINK_OBJECT": 1210,
+        "RECORD_REGISTRY_KEY_OBJECT": 16774,
+        "RECORD_TIME_MARKER": 223,
+        "RECORD_FILE_OBJECT": 18085,
+        "RECORD_PRINCIPAL": 5
+      },
+      "min_event_utc": "2019-05-07T14:01:43.768000000Z",
+      "max_event_utc": "2019-05-07T21:39:39.823000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T14:01:43.768000000Z",
+          "max_utc": "2019-05-07T21:39:39.823000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 323452788,
+      "modified_time_ns": 1792218222263140300,
+      "record_type_counts": {
+        "RECORD_EVENT": 9667578,
+        "RECORD_MEMORY_OBJECT": 140400,
+        "RECORD_FILE_OBJECT": 80633,
+        "RECORD_IPC_OBJECT": 3057,
+        "RECORD_SUBJECT": 15449,
+        "RECORD_REGISTRY_KEY_OBJECT": 81741,
+        "RECORD_SRC_SINK_OBJECT": 96,
+        "RECORD_TIME_MARKER": 415,
+        "RECORD_NET_FLOW_OBJECT": 10631
+      },
+      "min_event_utc": "2019-05-07T17:40:39.271000000Z",
+      "max_event_utc": "2019-05-07T21:46:08.231000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:40:39.271000000Z",
+          "max_utc": "2019-05-07T21:46:08.231000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 326479208,
+      "modified_time_ns": 1792218292452556000,
+      "record_type_counts": {
+        "RECORD_EVENT": 9818836,
+        "RECORD_NET_FLOW_OBJECT": 16597,
+        "RECORD_SUBJECT": 21921,
+        "RECORD_MEMORY_OBJECT": 130641,
+        "RECORD_TIME_MARKER": 673,
+        "RECORD_IPC_OBJECT": 5255,
+        "RECORD_REGISTRY_KEY_OBJECT": 4842,
+        "RECORD_FILE_OBJECT": 1207,
+        "RECORD_SRC_SINK_OBJECT": 28
+      },
+      "min_event_utc": "2019-05-07T17:42:03.245000000Z",
+      "max_event_utc": "2019-05-08T03:22:33.567000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:42:03.245000000Z",
+          "max_utc": "2019-05-08T03:22:33.567000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.4.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 314219061,
+      "modified_time_ns": 1792218319979363400,
+      "record_type_counts": {
+        "RECORD_EVENT": 9823847,
+        "RECORD_MEMORY_OBJECT": 117796,
+        "RECORD_IPC_OBJECT": 2877,
+        "RECORD_NET_FLOW_OBJECT": 8812,
+        "RECORD_SUBJECT": 13710,
+        "RECORD_TIME_MARKER": 398,
+        "RECORD_REGISTRY_KEY_OBJECT": 9021,
+        "RECORD_FILE_OBJECT": 23510,
+        "RECORD_SRC_SINK_OBJECT": 29
+      },
+      "min_event_utc": "2019-05-07T17:42:15.948000000Z",
+      "max_event_utc": "2019-05-08T06:41:47.404000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:42:15.948000000Z",
+          "max_utc": "2019-05-08T06:41:47.404000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.5.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 327471228,
+      "modified_time_ns": 1792218345626228000,
+      "record_type_counts": {
+        "RECORD_EVENT": 9829097,
+        "RECORD_NET_FLOW_OBJECT": 13680,
+        "RECORD_IPC_OBJECT": 4301,
+        "RECORD_MEMORY_OBJECT": 120315,
+        "RECORD_SUBJECT": 21463,
+        "RECORD_TIME_MARKER": 639,
+        "RECORD_REGISTRY_KEY_OBJECT": 6777,
+        "RECORD_FILE_OBJECT": 3719,
+        "RECORD_SRC_SINK_OBJECT": 9
+      },
+      "min_event_utc": "2019-05-07T17:55:21.951000000Z",
+      "max_event_utc": "2019-05-08T12:01:28.112000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:55:21.951000000Z",
+          "max_utc": "2019-05-08T12:01:28.112000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.6.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 325193717,
+      "modified_time_ns": 1792218353074036900,
+      "record_type_counts": {
+        "RECORD_EVENT": 9459979,
+        "RECORD_IPC_OBJECT": 3790,
+        "RECORD_SUBJECT": 71907,
+        "RECORD_MEMORY_OBJECT": 450581,
+        "RECORD_NET_FLOW_OBJECT": 9650,
+        "RECORD_TIME_MARKER": 269,
+        "RECORD_SRC_SINK_OBJECT": 127,
+        "RECORD_REGISTRY_KEY_OBJECT": 2593,
+        "RECORD_FILE_OBJECT": 1104
+      },
+      "min_event_utc": "2019-05-07T17:41:55.805000000Z",
+      "max_event_utc": "2019-05-08T14:15:26.696000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:41:55.805000000Z",
+          "max_utc": "2019-05-08T14:15:26.696000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 329631286,
+      "modified_time_ns": 1792218373948987200,
+      "record_type_counts": {
+        "RECORD_EVENT": 9645309,
+        "RECORD_MEMORY_OBJECT": 303770,
+        "RECORD_FILE_OBJECT": 2488,
+        "RECORD_SUBJECT": 33643,
+        "RECORD_NET_FLOW_OBJECT": 6816,
+        "RECORD_TIME_MARKER": 211,
+        "RECORD_IPC_OBJECT": 2818,
+        "RECORD_REGISTRY_KEY_OBJECT": 4786,
+        "RECORD_SRC_SINK_OBJECT": 159
+      },
+      "min_event_utc": "2019-05-07T17:55:04.362000000Z",
+      "max_event_utc": "2019-05-08T16:00:34.238000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T17:55:04.362000000Z",
+          "max_utc": "2019-05-08T16:00:34.238000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 321261984,
+      "modified_time_ns": 1792218377477744800,
+      "record_type_counts": {
+        "RECORD_HOST": 1,
+        "RECORD_SUBJECT": 63511,
+        "RECORD_EVENT": 9482464,
+        "RECORD_MEMORY_OBJECT": 404361,
+        "RECORD_NET_FLOW_OBJECT": 12167,
+        "RECORD_SRC_SINK_OBJECT": 502,
+        "RECORD_FILE_OBJECT": 17780,
+        "RECORD_REGISTRY_KEY_OBJECT": 15204,
+        "RECORD_IPC_OBJECT": 3704,
+        "RECORD_TIME_MARKER": 302,
+        "RECORD_PRINCIPAL": 4
+      },
+      "min_event_utc": "2019-05-07T13:04:42.176000000Z",
+      "max_event_utc": "2019-05-07T15:37:04.124000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-07T13:04:42.176000000Z",
+          "max_utc": "2019-05-07T15:37:04.124000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 313587143,
+      "modified_time_ns": 1792218409331293400,
+      "record_type_counts": {
+        "RECORD_EVENT": 9371587,
+        "RECORD_MEMORY_OBJECT": 528734,
+        "RECORD_SUBJECT": 81279,
+        "RECORD_NET_FLOW_OBJECT": 7881,
+        "RECORD_FILE_OBJECT": 4191,
+        "RECORD_TIME_MARKER": 188,
+        "RECORD_IPC_OBJECT": 4204,
+        "RECORD_REGISTRY_KEY_OBJECT": 1831,
+        "RECORD_SRC_SINK_OBJECT": 104,
+        "RECORD_PRINCIPAL": 1
+      },
+      "min_event_utc": "2019-05-07T13:46:28.110000000Z",
+      "max_event_utc": "2019-05-07T18:40:34.983000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T13:46:28.110000000Z",
+          "max_utc": "2019-05-07T18:40:34.983000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 317279142,
+      "modified_time_ns": 1792218443081612600,
+      "record_type_counts": {
+        "RECORD_EVENT": 9285276,
+        "RECORD_SUBJECT": 98063,
+        "RECORD_NET_FLOW_OBJECT": 11095,
+        "RECORD_MEMORY_OBJECT": 598692,
+        "RECORD_IPC_OBJECT": 3992,
+        "RECORD_FILE_OBJECT": 1521,
+        "RECORD_TIME_MARKER": 228,
+        "RECORD_REGISTRY_KEY_OBJECT": 1044,
+        "RECORD_SRC_SINK_OBJECT": 89
+      },
+      "min_event_utc": "2019-05-07T14:37:31.029000000Z",
+      "max_event_utc": "2019-05-07T20:39:27.993000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T14:37:31.029000000Z",
+          "max_utc": "2019-05-07T20:39:27.993000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 309671701,
+      "modified_time_ns": 1792218454863629700,
+      "record_type_counts": {
+        "RECORD_EVENT": 9558426,
+        "RECORD_MEMORY_OBJECT": 375197,
+        "RECORD_SUBJECT": 49684,
+        "RECORD_IPC_OBJECT": 2981,
+        "RECORD_NET_FLOW_OBJECT": 7417,
+        "RECORD_TIME_MARKER": 187,
+        "RECORD_FILE_OBJECT": 2908,
+        "RECORD_REGISTRY_KEY_OBJECT": 3103,
+        "RECORD_SRC_SINK_OBJECT": 97
+      },
+      "min_event_utc": "2019-05-07T16:44:56.207000000Z",
+      "max_event_utc": "2019-05-07T22:13:00.899000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T16:44:56.207000000Z",
+          "max_utc": "2019-05-07T22:13:00.899000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.4.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 308867019,
+      "modified_time_ns": 1792218603079550400,
+      "record_type_counts": {
+        "RECORD_EVENT": 9244321,
+        "RECORD_MEMORY_OBJECT": 617424,
+        "RECORD_NET_FLOW_OBJECT": 6948,
+        "RECORD_IPC_OBJECT": 3794,
+        "RECORD_SUBJECT": 123754,
+        "RECORD_TIME_MARKER": 164,
+        "RECORD_SRC_SINK_OBJECT": 71,
+        "RECORD_FILE_OBJECT": 1197,
+        "RECORD_REGISTRY_KEY_OBJECT": 2327
+      },
+      "min_event_utc": "2019-05-07T16:44:50.717000000Z",
+      "max_event_utc": "2019-05-07T23:34:00.896000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T16:44:50.717000000Z",
+          "max_utc": "2019-05-07T23:34:00.896000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.5.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 309705579,
+      "modified_time_ns": 1792218655619018200,
+      "record_type_counts": {
+        "RECORD_EVENT": 9584858,
+        "RECORD_IPC_OBJECT": 3008,
+        "RECORD_NET_FLOW_OBJECT": 9844,
+        "RECORD_MEMORY_OBJECT": 360010,
+        "RECORD_SUBJECT": 35967,
+        "RECORD_FILE_OBJECT": 4528,
+        "RECORD_TIME_MARKER": 226,
+        "RECORD_REGISTRY_KEY_OBJECT": 1455,
+        "RECORD_SRC_SINK_OBJECT": 104
+      },
+      "min_event_utc": "2019-05-07T18:05:26.078000000Z",
+      "max_event_utc": "2019-05-08T01:28:08.876000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T18:05:26.078000000Z",
+          "max_utc": "2019-05-08T01:28:08.876000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.6.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 312290797,
+      "modified_time_ns": 1792218666884330700,
+      "record_type_counts": {
+        "RECORD_EVENT": 9499528,
+        "RECORD_SUBJECT": 80347,
+        "RECORD_TIME_MARKER": 433,
+        "RECORD_NET_FLOW_OBJECT": 9606,
+        "RECORD_MEMORY_OBJECT": 396576,
+        "RECORD_IPC_OBJECT": 4593,
+        "RECORD_REGISTRY_KEY_OBJECT": 6370,
+        "RECORD_SRC_SINK_OBJECT": 15,
+        "RECORD_FILE_OBJECT": 2532
+      },
+      "min_event_utc": "2019-05-07T18:39:10.725000000Z",
+      "max_event_utc": "2019-05-08T05:04:34.580000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T18:39:10.725000000Z",
+          "max_utc": "2019-05-08T05:04:34.580000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.7.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 312429114,
+      "modified_time_ns": 1792218676022038900,
+      "record_type_counts": {
+        "RECORD_EVENT": 9631806,
+        "RECORD_NET_FLOW_OBJECT": 9417,
+        "RECORD_SUBJECT": 53195,
+        "RECORD_MEMORY_OBJECT": 292790,
+        "RECORD_TIME_MARKER": 460,
+        "RECORD_IPC_OBJECT": 4876,
+        "RECORD_REGISTRY_KEY_OBJECT": 2706,
+        "RECORD_FILE_OBJECT": 4749,
+        "RECORD_SRC_SINK_OBJECT": 1
+      },
+      "min_event_utc": "2019-05-07T16:45:03.609000000Z",
+      "max_event_utc": "2019-05-08T08:54:34.592000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T16:45:03.609000000Z",
+          "max_utc": "2019-05-08T08:54:34.592000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.8.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 309512155,
+      "modified_time_ns": 1792218684754870400,
+      "record_type_counts": {
+        "RECORD_EVENT": 9552398,
+        "RECORD_NET_FLOW_OBJECT": 8340,
+        "RECORD_SUBJECT": 76753,
+        "RECORD_MEMORY_OBJECT": 357205,
+        "RECORD_TIME_MARKER": 392,
+        "RECORD_IPC_OBJECT": 4150,
+        "RECORD_SRC_SINK_OBJECT": 16,
+        "RECORD_REGISTRY_KEY_OBJECT": 218,
+        "RECORD_FILE_OBJECT": 528
+      },
+      "min_event_utc": "2019-05-08T00:05:56.145000000Z",
+      "max_event_utc": "2019-05-08T12:06:07.554000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-08T00:05:56.145000000Z",
+          "max_utc": "2019-05-08T12:06:07.554000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.9.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 312025731,
+      "modified_time_ns": 1792218710519866900,
+      "record_type_counts": {
+        "RECORD_EVENT": 9353700,
+        "RECORD_MEMORY_OBJECT": 521634,
+        "RECORD_SUBJECT": 106205,
+        "RECORD_NET_FLOW_OBJECT": 7671,
+        "RECORD_IPC_OBJECT": 3546,
+        "RECORD_TIME_MARKER": 223,
+        "RECORD_REGISTRY_KEY_OBJECT": 1428,
+        "RECORD_SRC_SINK_OBJECT": 30,
+        "RECORD_FILE_OBJECT": 5563
+      },
+      "min_event_utc": "2019-05-07T18:37:23.590000000Z",
+      "max_event_utc": "2019-05-08T13:58:31.522000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-07T18:37:23.590000000Z",
+          "max_utc": "2019-05-08T13:58:31.522000000Z"
+        }
+      }
+    },
+    {
+      "filename": "ta1-fivedirections-3-e5-official-1.bin.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 316130667,
+      "modified_time_ns": 1792217477702763600,
+      "record_type_counts": {
+        "RECORD_HOST": 1,
+        "RECORD_SUBJECT": 15788,
+        "RECORD_EVENT": 9688394,
+        "RECORD_MEMORY_OBJECT": 214131,
+        "RECORD_REGISTRY_KEY_OBJECT": 18241,
+        "RECORD_FILE_OBJECT": 46923,
+        "RECORD_SRC_SINK_OBJECT": 700,
+        "RECORD_NET_FLOW_OBJECT": 11914,
+        "RECORD_IPC_OBJECT": 3417,
+        "RECORD_TIME_MARKER": 485,
+        "RECORD_PRINCIPAL": 6
+      },
+      "min_event_utc": "2019-05-03T15:31:04.143000000Z",
+      "max_event_utc": "2019-05-07T17:05:57.885000000Z",
+      "host_event_ranges": {
+        "552ffa2e711a488fa65c52762800923b": {
+          "min_utc": "2019-05-03T15:31:04.143000000Z",
+          "max_utc": "2019-05-07T17:05:57.885000000Z"
+        }
+      }
+    }
+  ],
+  "file_pattern": "*.gz",
+  "reused_file_count": 28,
+  "newly_scanned_file_count": 0,
+  "all_files_fully_scanned": true,
+  "review_events": [
+    {
+      "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+      "timestamp_nanos": 1558123962746000000,
+      "host_resolution": {
+        "uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "status": "resolved",
+        "kind": "RECORD_HOST",
+        "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "source_file": "ta1-fivedirections-1-e5-official-1.bin.gz",
+        "record_index_1based": 1,
+        "hostName": "ta1-fivedirections-1",
+        "hostType": "HOST_DESKTOP",
+        "firefox_command_line": false
+      },
+      "subject_chain": [
+        {
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "status": "resolved",
+          "kind": "RECORD_SUBJECT",
+          "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index_1based": 1481663,
+          "type": "SUBJECT_THREAD",
+          "cid": 1028,
+          "parentSubject": "1fca97f4e4134d05869b31eb09df8770",
+          "localPrincipal": "042ef90b178e43d490106b36c128af1b",
+          "startTimestampNanos": 1558123945380000000,
+          "firefox_command_line": false,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "1fca97f4e4134d05869b31eb09df8770",
+          "status": "missing"
+        }
+      ],
+      "label": null
+    },
+    {
+      "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+      "timestamp_nanos": 1558123996800000000,
+      "host_resolution": {
+        "uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "status": "resolved",
+        "kind": "RECORD_HOST",
+        "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "source_file": "ta1-fivedirections-1-e5-official-1.bin.gz",
+        "record_index_1based": 1,
+        "hostName": "ta1-fivedirections-1",
+        "hostType": "HOST_DESKTOP",
+        "firefox_command_line": false
+      },
+      "subject_chain": [
+        {
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "status": "resolved",
+          "kind": "RECORD_SUBJECT",
+          "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index_1based": 1481663,
+          "type": "SUBJECT_THREAD",
+          "cid": 1028,
+          "parentSubject": "1fca97f4e4134d05869b31eb09df8770",
+          "localPrincipal": "042ef90b178e43d490106b36c128af1b",
+          "startTimestampNanos": 1558123945380000000,
+          "firefox_command_line": false,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "1fca97f4e4134d05869b31eb09df8770",
+          "status": "missing"
+        }
+      ],
+      "label": null
+    },
+    {
+      "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+      "timestamp_nanos": 1558124093225000000,
+      "host_resolution": {
+        "uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "status": "resolved",
+        "kind": "RECORD_HOST",
+        "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "source_file": "ta1-fivedirections-1-e5-official-1.bin.gz",
+        "record_index_1based": 1,
+        "hostName": "ta1-fivedirections-1",
+        "hostType": "HOST_DESKTOP",
+        "firefox_command_line": false
+      },
+      "subject_chain": [
+        {
+          "uuid": "8d1252ea10594bb2a5583880fa606aba",
+          "status": "resolved",
+          "kind": "RECORD_SUBJECT",
+          "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index_1based": 1891296,
+          "type": "SUBJECT_THREAD",
+          "cid": 6132,
+          "parentSubject": "27a66853adc240d8a7ac6788cc6cfd6b",
+          "localPrincipal": "042ef90b178e43d490106b36c128af1b",
+          "startTimestampNanos": 1558124066746000000,
+          "firefox_command_line": false,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "27a66853adc240d8a7ac6788cc6cfd6b",
+          "status": "resolved",
+          "kind": "RECORD_SUBJECT",
+          "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index_1based": 1885196,
+          "type": "SUBJECT_PROCESS",
+          "cid": 5432,
+          "parentSubject": "2953046695104e29866a59e874054cbd",
+          "localPrincipal": "042ef90b178e43d490106b36c128af1b",
+          "startTimestampNanos": 1558124066644000000,
+          "firefox_command_line": true,
+          "started_at_or_before_event": true,
+          "principal_resolution": {
+            "uuid": "042ef90b178e43d490106b36c128af1b",
+            "status": "resolved",
+            "kind": "RECORD_PRINCIPAL",
+            "definition_host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+            "source_file": "ta1-fivedirections-1-e5-official-1.bin.gz",
+            "record_index_1based": 166,
+            "type": "PRINCIPAL_LOCAL",
+            "firefox_command_line": false
+          }
+        }
+      ],
+      "label": null
+    },
+    {
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "timestamp_nanos": 1557265116204000000,
+      "host_resolution": {
+        "uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+        "status": "resolved",
+        "kind": "RECORD_HOST",
+        "definition_host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+        "source_file": "ta1-fivedirections-2-e5-official-1.bin.gz",
+        "record_index_1based": 1,
+        "hostName": "ta1-fivedirections-2",
+        "hostType": "HOST_DESKTOP",
+        "firefox_command_line": false
+      },
+      "subject_chain": [
+        {
+          "uuid": "bc21a86f5e5e462180e5479d4ff2ffdb",
+          "status": "resolved",
+          "kind": "RECORD_SUBJECT",
+          "definition_host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+          "record_index_1based": 5847595,
+          "type": "SUBJECT_PROCESS",
+          "cid": 4948,
+          "parentSubject": "015644a1ab4f4d0bb76bd16314aad368",
+          "localPrincipal": "502ac01f85394ae99ab824bb995aaa9a",
+          "startTimestampNanos": 1557265116204000000,
+          "firefox_command_line": false,
+          "started_at_or_before_event": true,
+          "principal_resolution": {
+            "uuid": "502ac01f85394ae99ab824bb995aaa9a",
+            "status": "resolved",
+            "kind": "RECORD_PRINCIPAL",
+            "definition_host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+            "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+            "record_index_1based": 5601980,
+            "type": "PRINCIPAL_LOCAL",
+            "firefox_command_line": false
+          }
+        }
+      ],
+      "label": null
+    }
+  ],
+  "labels_assigned": 0,
+  "scope": "Downloaded subset only; entity definitions are audit metadata, not model features"
+}

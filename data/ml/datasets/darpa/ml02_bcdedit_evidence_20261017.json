@@ -1,0 +1,50 @@
+{
+  "assessment_date": "2026-10-17",
+  "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+  "scope": "Bounded full-record reread of records 5800001 through 6300000; not a whole-file clock audit",
+  "reviewed_event": {
+    "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+    "record_index_1based": 5847598,
+    "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+    "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+    "timestamp_nanos": 1557265116204000000,
+    "timestamp_utc": "2019-05-07T21:38:36.204000000Z",
+    "cdm_event_type": "EVENT_EXECUTE",
+    "subject_uuid": "bc21a86f5e5e462180e5479d4ff2ffdb",
+    "predicate_uuid": "aee06378dd954894add3f5949a5ff812",
+    "predicate2_uuid": null,
+    "session_number": 10513
+  },
+  "raw_event_fingerprint_sha256": "cbf099fd7747f2808bcc76d552d5689a13ede80b4e130f11e190ab974e6804c4",
+  "documented_command": "BCDEDIT /set nointegritychecks ON",
+  "label": 0,
+  "split_eligible": false,
+  "label_provenance": "Codex manual alignment with the operational log; not expert or STARC annotation",
+  "clock_observations": {
+    "adjacent_event_regressions_over_three_hours": 2139,
+    "examples": [
+      {
+        "record_index": 5844130,
+        "previous_event_utc": "2019-05-07T21:38:32.769000000Z",
+        "event_utc": "2019-05-07T17:37:58.770000000Z",
+        "regression_seconds": 14433.999
+      },
+      {
+        "record_index": 5846880,
+        "previous_event_utc": "2019-05-07T21:38:33.503000000Z",
+        "event_utc": "2019-05-07T17:37:58.772000000Z",
+        "regression_seconds": 14434.731
+      },
+      {
+        "record_index": 5848980,
+        "previous_event_utc": "2019-05-07T21:38:32.076000000Z",
+        "event_utc": "2019-05-07T17:37:58.803000000Z",
+        "regression_seconds": 14433.273
+      }
+    ],
+    "no_correction_applied": true,
+    "interpretation": "Known four-hour clock anomaly plus nonchronological publication; examples do not establish a global offset for every record"
+  },
+  "identity_policy": "Use publishing-host and exact Subject UUID; never merge records by equal PID",
+  "exclusion_reason": "Uncalibrated mixed clock epochs prevent reliable chronological/context boundaries"
+}

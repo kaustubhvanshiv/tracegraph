@@ -39,6 +39,14 @@ implementation still needs its own causal availability and partition audits.
 No time-varying properties, permission histories, labels, or annotation
 indicators are converted into model features here.
 
+Reviewed action labels do not repair uncalibrated clocks. The preparation
+manifest now separates reviewed from eligible label/group counts; annotations
+with `split_eligible: false` and an exclusion reason remain in review output
+but are removed before split construction. Raw nanoseconds are not corrected
+automatically. Annotation digests, like reference report digests, use UTF-8 text
+normalized to LF newlines. See the
+[ML-02.4 evidence review](../../../data/ml/datasets/darpa/ml02_label_review_20261017.md).
+
 ## Canonical mapping policy
 
 | CDM evidence | `SecurityEvent` representation |

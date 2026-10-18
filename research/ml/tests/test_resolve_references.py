@@ -108,6 +108,21 @@ class ReuseTests(unittest.TestCase):
         result = audit(self.source, self.annotations, self.root / "selected", file_pattern="one.gz")
         self.assertEqual([f["filename"] for f in result["files"]], ["one.gz"])
 
+    def test_disjoint_audits_merge_without_rescanning_or_duplicate_rows(self):
+        self.write("two.gz")
+        second = self.root / "second"
+        audit(self.source, self.annotations, second, file_pattern="two.gz")
+        result = audit(self.source, self.annotations, self.root / "combined", reuse_audit=[self.prior, second])
+        fresh = audit(self.source, self.annotations, self.root / "fresh")
+        self.assertEqual(result["files"], fresh["files"])
+        self.assertEqual(result["review_events"], fresh["review_events"])
+        self.assertEqual(result["newly_scanned_file_count"], 0)
+        self.assertEqual(result["reused_file_count"], 2)
+        with closing(sqlite3.connect(self.root / "combined" / "references.sqlite")) as db:
+            self.assertEqual(db.execute("SELECT COUNT(*) FROM entities").fetchone()[0], 2)
+        with self.assertRaisesRegex(ValueError, "overlapping"):
+            audit(self.source, self.annotations, self.root / "overlap", reuse_audit=[self.prior, self.prior])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -54,6 +54,27 @@ class ReferencePreparationTests(unittest.TestCase):
 
 
 class PreparationTests(unittest.TestCase):
+    def test_clock_excluded_label_cannot_make_a_partition_evaluable(self):
+        rows = [{"event_uuid": f"{g}-{label}", "group_id": str(g),
+                 "incident_id": str(g), "timestamp_nanos": g * 100 + label,
+                 "label": label} for g in range(3) for label in (0, 1)]
+        self.assertIsNotNone(make_splits(rows)[0])
+        rows[0].update(split_eligible=False, split_exclusion_reason="Uncalibrated clock")
+        splits, reasons = make_splits(rows)
+        self.assertIsNone(splits)
+        self.assertIn("train lacks both verified classes", reasons)
+
+    def test_split_exclusion_requires_boolean_and_reason(self):
+        raw = {"hostId": "h", "datum": {"uuid": "e", "timestampNanos": 1, "type": "EVENT_OPEN"}}
+        annotation = {"event_uuid": "e", "host_uuid": "h", "timestamp_nanos": 1,
+                      "cdm_event_type": "EVENT_OPEN", "label": None}
+        with self.assertRaisesRegex(ValueError, "boolean"):
+            reviewed_label({**annotation, "split_eligible": "false"}, raw)
+        with self.assertRaisesRegex(ValueError, "exclusion reason"):
+            reviewed_label({**annotation, "split_eligible": False}, raw)
+        self.assertIsNone(reviewed_label({**annotation, "split_eligible": False,
+                                        "split_exclusion_reason": "Clock uncertainty"}, raw))
+
     def test_streaming_run_preserves_unknown_and_refuses_splits(self):
         schema = {"type": "record", "name": "CDM", "fields": [
             {"name": "type", "type": "string"}, {"name": "hostId", "type": "string"},
@@ -73,10 +94,29 @@ class PreparationTests(unittest.TestCase):
             manifest = prepare(source, annotations, root / "out", 2)
             self.assertEqual(manifest["sample_count"], 1)
             self.assertEqual(manifest["label_counts"], {"None": 1})
+            self.assertEqual(manifest["label_group_counts"], {"0": 0, "1": 0})
+            self.assertEqual(manifest["positive_incident_count"], 0)
             self.assertTrue(manifest["files"][0]["complete_scan"])
             self.assertFalse((root / "out" / "splits").exists())
             with self.assertRaises(ValueError):
                 prepare(source, annotations, root / "out", 2)
+            excluded = {"event_uuid": "e", "host_uuid": "h", "timestamp_nanos": 1,
+                "cdm_event_type": "EVENT_OPEN", "source_file": "sample.gz", "label": 0,
+                "review_status": "verified", "evidence": "synthetic test fixture only",
+                "group_id": "admin-block", "split_eligible": False,
+                "split_exclusion_reason": "Uncalibrated clock"}
+            annotations.write_text(json.dumps({"events": [excluded]}, indent=2), encoding="utf-8")
+            excluded_manifest = prepare(source, annotations, root / "excluded", 2)
+            self.assertEqual(excluded_manifest["label_counts"], {"0": 1})
+            self.assertEqual(excluded_manifest["eligible_label_counts"], {})
+            self.assertEqual(excluded_manifest["split_excluded_events"], [
+                {"event_uuid": "e", "reason": "Uncalibrated clock"}])
+            self.assertEqual(excluded_manifest["annotation_sha256"], hashlib.sha256(
+                annotations.read_text(encoding="utf-8").encode("utf-8")).hexdigest())
+            row = json.loads((root / "excluded" / "review_events.jsonl").read_text())
+            self.assertEqual(row["label"], 0)
+            self.assertFalse(row["split_eligible"])
+            self.assertIsNone(excluded_manifest["split_output"])
 
     def test_unknowns_cannot_create_splits(self):
         splits, reasons = make_splits([{"event_uuid": "a", "label": None}])
