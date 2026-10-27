@@ -3,13 +3,20 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-27 ML-02.4 continuation:** all 34 local archives are fully audited,
+totaling 315,099,571 raw records. Two additional manually reviewed attack
+actions normalize successfully. The six-event review set has three attacks,
+one clock-excluded benign action and two unknowns; splits remain blocked.
+See the [current evidence and reproduction report](../../data/ml/datasets/darpa/ml02_label_review_20261027.md)
+and [next download queue](../../data/ml/datasets/darpa/host2_download_queue_20261027.json).
+
 **2026-10-18 Drive download refresh:** three checksum-verified final segments
 were added to the local FiveDirections dataset, bringing it to 31 archives.
 See the [download README](../../data/ml/datasets/darpa/README_downloads_20261018.md)
 for source links, measured coverage, reproduction steps and the connector's
 large-file limit. Supervised labels and splits remain subject to review.
 
-**Latest ML-02.4 work:** the
+**2026-10-17 ML-02.4 work:** the
 [label-evidence review](../../data/ml/datasets/darpa/ml02_label_review_20261017.md)
 documents the full coverage search and a specific benign administrative
 execution. Its unresolved clock alignment excludes it from supervised splits.
@@ -47,9 +54,9 @@ scope require the user's approval.
 | Six-file prefix inspection | 120,000 records; 112,498 Events |
 | Support ZIP/PDF review | Complete: E5 report, CDM 2.0 schema, operational log |
 | Complete segment-121 scan | 10,000,000 records; 9,650,235 Events |
-| Ground-truth alignment | Four reviewed events: one attack, one benign execution excluded for clock uncertainty, two unknowns |
-| Reviewed-event preparation | 12,000,000 records scanned; four events normalized; two actors, four hostnames and two usernames resolved |
-| Full reference audit | All 28 downloaded files; 280,000,000 records; Host/Principal metadata recovered, one host-1 actor parent still missing |
+| Ground-truth alignment | Six reviewed events: three attacks, one benign execution excluded for clock uncertainty, two unknowns |
+| Reviewed-event preparation | Incremental six-event review: four unchanged cached rows plus two newly normalized attack actions; no valid supervised splits |
+| Full reference audit | All 34 downloaded files; 315,099,571 raw records; metadata merged from validated caches, one host-1 actor parent still missing |
 | ML-02.1 / ML-02.2 / ML-02.3 | Target/graph definition, split policy and scenario-use plan complete |
 | ML-02.4 actual dataset preparation | Partial: scripts tested; real supervised splits blocked by label coverage |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
@@ -57,7 +64,7 @@ scope require the user's approval.
 | Historical ML-04 neural-network exercise | Completed on synthetic XNOR; retained educational artifact within deferred original track |
 | ML-R1.1 dataset feasibility | Complete: stop finding for current audited evidence; ML-R1.2 remains pending |
 
-All 28 local archives were fully decoded across completed reference audits;
+All 34 local archives were fully decoded across completed reference audits;
 the original inspection profiles remain prefix-only. This is a downloaded
 subset, not the entire DARPA release. No trained DARPA GNN or security
 classification results exist. Research is separate from production correlation.

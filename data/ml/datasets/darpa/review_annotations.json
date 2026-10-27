@@ -112,6 +112,78 @@
         "limitations": "Label covers this administrative execution only; command intent is established by the operational log. Clock uncertainty excludes the event from all supervised partitions, and no surrounding event or entire maintenance window receives label 0.",
         "reference_audit": "ml02_full_reference_report_20261017.json: all 28 downloaded archives fully scanned; references scoped to the publishing host"
       }
+    },
+    {
+      "activity_id": "attack-host2-drakon-copykatz-may9",
+      "incident_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "indicator": "tropical",
+      "matched_fields": [
+        "predicateObjectPath",
+        "subject",
+        "Subject.parentSubject",
+        "Process.cid"
+      ],
+      "event_uuid": "1d92d20361b242f7984f23422ef135be",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557424177826000000,
+      "timestamp_utc": "2019-05-09T17:49:37.826000000Z",
+      "cdm_event_type": "EVENT_CREATE_OBJECT",
+      "subject_uuid": "a42b3c3ff8834cfa87e9a32507960f92",
+      "record_index_1based": 50998,
+      "label": 1,
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "review_status": "verified",
+      "review_date": "2026-10-27",
+      "evidence": {
+        "report": "TA51_Final_report_E5.pdf",
+        "report_sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+        "page": 27,
+        "method": "Manual action-specific alignment: exact Users/admin/tropical output path and typed FileObject; publishing host directly maps to ta1-fivedirections-2; event thread references the Firefox process UUID for PID 6208, started 17:42:01.679 UTC; 17:49 creation matches the 13:49 EDT logfile setup and 17:50 write matches the 13:50 EDT get_passwords action.",
+        "label_provenance": "Codex source review; report-derived, not expert or STARC annotation",
+        "reference_audit": "full_reference_report_20261027.json: all 34 local archives fully scanned; publishing-host-scoped metadata",
+        "actor_process_uuid": "e9ac31c9c0404626821064a39dfaf516",
+        "predicate_object_uuid": "c9a119fb914d4051a113972088156308",
+        "predicate_definition_record_1based": 50997,
+        "raw_record_sha256": "c617a3e000dfd1d01a02a43875f642b8e216cbe8b95d40b6494c3102dd5e482b",
+        "limitations": "Report timing is minute-level. Label applies only to this specific credential-output action. Other tropical, Firefox or PID-6208 events do not inherit a label. Two actions share one incident/group; group independence is not inferred merely from differing event IDs. Metadata availability is an offline identity audit, not proof of online causal availability."
+      }
+    },
+    {
+      "activity_id": "attack-host2-drakon-copykatz-may9",
+      "incident_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "indicator": "tropical",
+      "matched_fields": [
+        "predicateObjectPath",
+        "subject",
+        "Subject.parentSubject",
+        "Process.cid"
+      ],
+      "event_uuid": "fb20dd62334c48e9a9ea6972c43501f0",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557424213551000000,
+      "timestamp_utc": "2019-05-09T17:50:13.551000000Z",
+      "cdm_event_type": "EVENT_WRITE",
+      "subject_uuid": "24a7eec0f64d43148e4801fb196f8823",
+      "record_index_1based": 73037,
+      "label": 1,
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "review_status": "verified",
+      "review_date": "2026-10-27",
+      "evidence": {
+        "report": "TA51_Final_report_E5.pdf",
+        "report_sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+        "page": 28,
+        "method": "Manual action-specific alignment: exact Users/admin/tropical output path and typed FileObject; publishing host directly maps to ta1-fivedirections-2; event thread references the Firefox process UUID for PID 6208, started 17:42:01.679 UTC; 17:49 creation matches the 13:49 EDT logfile setup and 17:50 write matches the 13:50 EDT get_passwords action.",
+        "label_provenance": "Codex source review; report-derived, not expert or STARC annotation",
+        "reference_audit": "full_reference_report_20261027.json: all 34 local archives fully scanned; publishing-host-scoped metadata",
+        "actor_process_uuid": "e9ac31c9c0404626821064a39dfaf516",
+        "predicate_object_uuid": "c9a119fb914d4051a113972088156308",
+        "predicate_definition_record_1based": 50997,
+        "raw_record_sha256": "c62b902c597367354ff2eba9710700788e19184e8da8c9c22ff07358b491aad3",
+        "limitations": "Report timing is minute-level. Label applies only to this specific credential-output action. Other tropical, Firefox or PID-6208 events do not inherit a label. Two actions share one incident/group; group independence is not inferred merely from differing event IDs. Metadata availability is an offline identity audit, not proof of online causal availability."
+      }
     }
   ]
 }

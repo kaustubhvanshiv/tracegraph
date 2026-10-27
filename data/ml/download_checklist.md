@@ -1,6 +1,17 @@
 # DARPA TC E5 — additional downloads
 
-**Latest ML-02.4 finding:** all 28 locally downloaded archives are fully scanned.
+**2026-10-27 update:** host-2 parts 15 and 17 are present, checksum-verified
+and fully decoded. All 34 local archives are now audited. Two reviewed May 9
+attack actions were added, but the downloaded host-2 data still lack the
+May 10 benign SCP example. The next manual coverage probes are parts 18, 19
+and 20 (about 966 MB total), with unverified dates. See the exact source links
+and checksums in [the new queue](datasets/darpa/host2_download_queue_20261027.json)
+and [the continuation report](datasets/darpa/ml02_label_review_20261027.md).
+More evidence and independent groups are still required; these downloads do
+not guarantee valid splits. The schema, operational log and existing report
+are already available locally.
+
+**2026-10-17 ML-02.4 finding:** all 28 locally downloaded archives are fully scanned.
 The corresponding host-2/3 streams end on May 8, before the additional
 documented attack and benign SCP cases. Host 1's documented May 16 benign
 setup interval is also absent. See the

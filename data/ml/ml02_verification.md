@@ -1,6 +1,14 @@
 # ML-02 requirement verification — 2026-10-11
 
-**Latest ML-02.4 execution, 2026-10-17:** all 28 downloaded archives now have
+**Latest ML-02.4 continuation, 2026-10-27:** all 34 local archives are fully
+audited (315,099,571 records). Two additional manually aligned attack actions
+normalize successfully; the combined review set has three attacks, one
+clock-excluded benign action and two unknowns. There are two eligible attack
+incident groups and no eligible benign examples. Split checks still reject
+training, and ML-02.4 remains partial. All 43 research tests pass. See the
+[current continuation report](datasets/darpa/ml02_label_review_20261027.md).
+
+**ML-02.4 execution, 2026-10-17:** all 28 downloaded archives now have
 full scans, totaling 280 million records. The final preparation rerun reads
 12 million source records and normalizes four reviewed events: one attack,
 one benign administrative execution excluded for clock uncertainty, and two

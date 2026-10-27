@@ -1,5 +1,10 @@
 # DARPA E5 Drive downloads — 2026-10-18
 
+**Later update, 2026-10-27:** parts 15 and 17 are now received and fully audited.
+See the [current ML-02.4 review](ml02_label_review_20261027.md) and
+[next queue](host2_download_queue_20261027.json). The snapshots below retain
+their original scope; they are not a request to download part 15/17 again.
+
 This refresh uses only the user's linked [E5 Data folder](https://drive.google.com/drive/folders/1GVlHQwjJte3yz0n1a1y4H4TfSe8cu6WJ).
 The relevant FiveDirections folder contains 337 gzip archives and `bins.md5sum`;
 all 337 archive names agree with the existing local checksum manifest. STARC

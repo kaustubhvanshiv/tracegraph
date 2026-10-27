@@ -1,5 +1,13 @@
 # ML-02 — ground truth and split plan
 
+**2026-10-27 continuation:** two action-specific host-2 Copykatz output events
+are now manually report-reviewed positives, sharing one incident/group. The
+six-event review set has three attacks, one clock-excluded benign execution
+and two unknowns. Eligible data comprise three attack actions across two
+incident groups and zero benign examples; supervised splits remain blocked.
+See the [new evidence and preparation report](datasets/darpa/ml02_label_review_20261027.md).
+These are Codex report alignments, not expert/STARC annotations.
+
 **2026-10-17 label-review update:** the annotation set now contains one
 report-reviewed attack action, one operational-log-reviewed benign execution
 and two unknown candidates. The benign execution is explicitly excluded from

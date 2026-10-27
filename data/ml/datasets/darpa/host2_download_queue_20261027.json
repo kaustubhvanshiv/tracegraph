@@ -1,0 +1,43 @@
+{
+  "assessment_date": "2026-10-27",
+  "source_folder_url": "https://drive.google.com/drive/folders/1GVlHQwjJte3yz0n1a1y4H4TfSe8cu6WJ",
+  "destination_folder": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections",
+  "status": "Pending manual download; browser automation denied by saved policy and archives exceed the connector 256 MiB limit.",
+  "purpose": "Locate May 10 benign-action telemetry; this batch is not a guarantee of matching the documented action or completing supervised splits.",
+  "total_bytes": 966453015,
+  "files": [
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "id": "1dhyMYVPJovb7FzK2JDv022OU0YUWdFEA",
+      "bytes": 322452529,
+      "mime_type": "application/gzip",
+      "url": "https://drive.google.com/file/d/1dhyMYVPJovb7FzK2JDv022OU0YUWdFEA/view?usp=drivesdk",
+      "expected_md5": "874916e019562431ac919d1e2073f33e",
+      "date_coverage_verified": false,
+      "already_local": false,
+      "selection_reason": "Next contiguous segments after part 17, whose latest recorded Event is May 9 21:49 UTC; coverage probe toward the May 10 documented benign SCP action. Exact dates remain unverified."
+    },
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "id": "1PEG5IGUujj0pjLxSuXPbjfbRGRFca0Wr",
+      "bytes": 323250307,
+      "mime_type": "application/gzip",
+      "url": "https://drive.google.com/file/d/1PEG5IGUujj0pjLxSuXPbjfbRGRFca0Wr/view?usp=drivesdk",
+      "expected_md5": "6de0db9a4ac3c53e03fcc61bf077953c",
+      "date_coverage_verified": false,
+      "already_local": false,
+      "selection_reason": "Next contiguous segments after part 17, whose latest recorded Event is May 9 21:49 UTC; coverage probe toward the May 10 documented benign SCP action. Exact dates remain unverified."
+    },
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+      "id": "19rjsJieAPNjxXNecO98Q9eoSHrtJLrcN",
+      "bytes": 320750179,
+      "mime_type": "application/gzip",
+      "url": "https://drive.google.com/file/d/19rjsJieAPNjxXNecO98Q9eoSHrtJLrcN/view?usp=drivesdk",
+      "expected_md5": "30727423f7b28b44f4d2f35556bb4857",
+      "date_coverage_verified": false,
+      "already_local": false,
+      "selection_reason": "Next contiguous segments after part 17, whose latest recorded Event is May 9 21:49 UTC; coverage probe toward the May 10 documented benign SCP action. Exact dates remain unverified."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "assessment_date": "2026-10-27",
+  "method": "Incremental assembly of four unchanged previously prepared review rows and two newly normalized source events. Original annotation digest and unchanged identity chains validated before reuse; all six rows match the current annotations and pass SecurityEvent validation. No model training or graph construction.",
+  "sample_count": 6,
+  "reviewed_label_counts": {
+    "0": 1,
+    "1": 3,
+    "None": 2
+  },
+  "eligible_label_counts": {
+    "1": 3
+  },
+  "eligible_label_group_counts": {
+    "0": 0,
+    "1": 2
+  },
+  "positive_incident_count": 2,
+  "excluded_events": [
+    {
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "reason": "Uncalibrated mixed clock epochs around the documented host-2 four-hour time reset; raw timestamps are preserved and cannot establish reliable chronological/context boundaries"
+    }
+  ],
+  "status": "blocked_for_training",
+  "reasons": [
+    "At least three independent labeled groups required",
+    "Verified benign and attack samples required in every partition"
+  ],
+  "splits_created": false,
+  "new_labels_assigned": 2,
+  "annotations_sha256": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "current_reference_report_sha256": "8d6825b761df825ceabcd4b9343ba42bbb86231edd68cbe5d3680d75f5f9ec4e",
+  "hash_format": "SHA-256 of UTF-8 text with LF newlines",
+  "preparation_runs": [
+    {
+      "path": ".cache\\ml-runs\\ml02-label-preparation-20261017",
+      "sample_count": 4,
+      "records_read": 12000000,
+      "manifest_sha256": "2bd087240ee1216b127480c90903961fdd4ef375c99761b62cf34a9ed67ec036",
+      "annotation_sha256": "6e6436fc58ca8c74591fb15e865394c695d100f956b514ef098452f871b6440d",
+      "semantic_mapping_version": 1
+    },
+    {
+      "path": ".cache\\ml-runs\\host2-case-preparation-20261027",
+      "sample_count": 2,
+      "records_read": 100000,
+      "manifest_sha256": "7fd4cb3529661ca4e8642b22d63b0d07f12e5b5ae50b8307e0dae7e2eb759349",
+      "annotation_sha256": "b0427b63b91e4fd23d2ba506554dcfe2a40d4adcf71bbca1da5b490353696ff3",
+      "semantic_mapping_version": 1
+    }
+  ],
+  "new_normalized_event_types": {
+    "file": 2
+  },
+  "new_normalized_field_counts": {
+    "process": 2,
+    "file": 2,
+    "user": 2,
+    "source_host": 2,
+    "source_ip": 0,
+    "destination_ip": 0
+  },
+  "new_events": [
+    {
+      "event_uuid": "1d92d20361b242f7984f23422ef135be",
+      "event_type": "file",
+      "action": "create",
+      "process_resolved": true,
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9"
+    },
+    {
+      "event_uuid": "fb20dd62334c48e9a9ea6972c43501f0",
+      "event_type": "file",
+      "action": "access",
+      "process_resolved": true,
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9"
+    }
+  ]
+}
