@@ -1,0 +1,472 @@
+{
+  "audit_date": "2026-10-27",
+  "purpose": "Read-only public annotation compatibility research; no ML protocol change",
+  "official_repository_commit": "244ae2401032ce92ac3b72f49b8039cae67d60d6",
+  "official_repository_files": [
+    "README.md",
+    "README-E3.md"
+  ],
+  "annotation_source": {
+    "repository": "https://github.com/ubc-provenance/PIDSMaker",
+    "commit": "438a05a7c55256f639e5b5945cf4828fe3ee078e",
+    "version_directory": "Ground_Truth/orthrus/E5-FIVEDIRECTIONS",
+    "authority": "Third-party research annotations; not official STARC annotations"
+  },
+  "annotation_unit": "CDM graph nodes (Subject, FileObject, NetFlowObject), not individual binary-labeled Event records",
+  "total_rows": 158,
+  "total_unique_node_uuids": 157,
+  "unique_nodes_by_upstream_kind": {
+    "subject": 40,
+    "file": 82,
+    "netflow": 35
+  },
+  "files": [
+    {
+      "name": "node_fivedirections_e5_bits_0515.csv",
+      "bytes": 6790,
+      "sha256": "0841d453aff67c8254cc1d4a47265ed5cc0c8d7a79c1708ca0ab2019574b8cd4",
+      "rows": 54,
+      "unique_node_uuids": 54,
+      "upstream_node_kinds": {
+        "subject": 12,
+        "file": 17,
+        "netflow": 25
+      },
+      "metadata_unique_matches": 0,
+      "metadata_records_matched": 0,
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_bits_0515.csv",
+      "git_blob_sha1": "add9bb3d7f837a364a05d8b394f3e6f2159d831c",
+      "matched_subjects": []
+    },
+    {
+      "name": "node_fivedirections_e5_copykatz_0509.csv",
+      "bytes": 20995,
+      "sha256": "9ba7f64b45aacb670a395356c14bf2a2a992ce9fccffd6dda40065752e6130de",
+      "rows": 87,
+      "unique_node_uuids": 87,
+      "upstream_node_kinds": {
+        "file": 60,
+        "netflow": 3,
+        "subject": 24
+      },
+      "metadata_unique_matches": 17,
+      "metadata_records_matched": 17,
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_copykatz_0509.csv",
+      "git_blob_sha1": "8c3841a64d6a6e68fc4f48438acf694a8a1ceeb5",
+      "matched_subjects": [
+        {
+          "uuid": "819c1f90b27943288c0927e794a60994",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+          "record_index": 6127817,
+          "subject_type": "SUBJECT_PROCESS",
+          "cid": 4832,
+          "startTimestampNanos": 1557250833881000000,
+          "parentSubject": "4f9cd0c027ff4d1682fafae17a867c8a"
+        },
+        {
+          "uuid": "669a3c354cf24e7490e2240271dcf658",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+          "record_index": 6865933,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 316,
+          "startTimestampNanos": 1557423383239000000,
+          "parentSubject": "d6ec37c48c4a43c5bbb627ae39232862"
+        },
+        {
+          "uuid": "9a5e22109f06452fa8ca107f0851f038",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+          "record_index": 5840856,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 2636,
+          "startTimestampNanos": 1557405238322000000,
+          "parentSubject": "11d2b0558cf54e4cb4be92e1d9b22ceb"
+        },
+        {
+          "uuid": "ddd958ceebb1492f822bb9e2877216f5",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+          "record_index": 5656183,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 3348,
+          "startTimestampNanos": 1557422659694000000,
+          "parentSubject": "28047c9e7b9b4c939d043c3e71ac4e39"
+        },
+        {
+          "uuid": "b849f2f5da314d4f841af88e8d3153b7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 7766578,
+          "subject_type": "SUBJECT_PROCESS",
+          "cid": 5760,
+          "startTimestampNanos": 1557422738851000000,
+          "parentSubject": "b41eae5eaf884fa4b49a5c179bfe67fd"
+        },
+        {
+          "uuid": "e43abfa835244a1c892dec347a171736",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 8131847,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 1172,
+          "startTimestampNanos": 1557422821130000000,
+          "parentSubject": "f8e4770938054ac88dbcee2f4a0bb60e"
+        },
+        {
+          "uuid": "69248712d6234ed1af47d68b83b5d5eb",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+          "record_index": 6255717,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 6012,
+          "startTimestampNanos": 1557250846920000000,
+          "parentSubject": "28268df8eac34c92a5a096f3401cc2fc"
+        },
+        {
+          "uuid": "de72dd8e3dd34175b70d178c10d3e2e9",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 5377081,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 4340,
+          "startTimestampNanos": 1557420954846000000,
+          "parentSubject": "89254be756e342dfa4d1c93d11bcdc22"
+        },
+        {
+          "uuid": "61bbea32b98c495c868ccea4166cf785",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 7856508,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 7536,
+          "startTimestampNanos": 1557422755583000000,
+          "parentSubject": "ae563eded82b4749ac51b5e737d635ac"
+        },
+        {
+          "uuid": "62f756dc0b804f709e8642afb87c0bb8",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+          "record_index": 7781861,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 1084,
+          "startTimestampNanos": 1557423784930000000,
+          "parentSubject": "2855f3916bea4c5d9237a378162cea78"
+        },
+        {
+          "uuid": "ff3b1e4bca1d4a989c4ca8f82e4f4bc4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 9691382,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 4152,
+          "startTimestampNanos": 1557423815236000000,
+          "parentSubject": "e9ac31c9c0404626821064a39dfaf516"
+        },
+        {
+          "uuid": "6e9a7e66bf344f218e8e523338c5b529",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+          "record_index": 6116811,
+          "subject_type": "SUBJECT_PROCESS",
+          "cid": 1460,
+          "startTimestampNanos": 1557422834497000000,
+          "parentSubject": "09c96c7fde8644968087c2e940244ab6"
+        },
+        {
+          "uuid": "e9ac31c9c0404626821064a39dfaf516",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index": 9494889,
+          "subject_type": "SUBJECT_PROCESS",
+          "cid": 6208,
+          "startTimestampNanos": 1557423721679000000,
+          "parentSubject": "b41eae5eaf884fa4b49a5c179bfe67fd"
+        },
+        {
+          "uuid": "cc61d6a2ed914cf088be3691a7de3f31",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+          "record_index": 6656832,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 7036,
+          "startTimestampNanos": 1557423339722000000,
+          "parentSubject": "1a6d75bb28124a11a1740a248069c7d7"
+        },
+        {
+          "uuid": "98a98caa6e524be2a3dadd51230c8bd2",
+          "host_uuid": "552ffa2e711a488fa65c52762800923b",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-3-e5-official-1.bin.gz",
+          "record_index": 4451865,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 5240,
+          "startTimestampNanos": 1557242068385000000,
+          "parentSubject": "3b5a277c04a8447593372fa8c83b68d1"
+        },
+        {
+          "uuid": "28268df8eac34c92a5a096f3401cc2fc",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+          "record_index": 6127661,
+          "subject_type": "SUBJECT_PROCESS",
+          "cid": 2264,
+          "startTimestampNanos": 1557250833848000000,
+          "parentSubject": "833b9b395b034dee85d98ae95601a909"
+        },
+        {
+          "uuid": "6cdad03914a5458f8a64a6df66678a15",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.gz",
+          "record_index": 11905,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 7656,
+          "startTimestampNanos": 1557234164056000000,
+          "parentSubject": "f3048392fd1a4c89b65cec9e44f04349"
+        }
+      ]
+    },
+    {
+      "name": "node_fivedirections_e5_dns_0517.csv",
+      "bytes": 1266,
+      "sha256": "c4ca6910338afec0555128d15f00c9ff1bce80b44ffebfe39d84ab84f8b640e3",
+      "rows": 11,
+      "unique_node_uuids": 11,
+      "upstream_node_kinds": {
+        "netflow": 7,
+        "file": 2,
+        "subject": 2
+      },
+      "metadata_unique_matches": 0,
+      "metadata_records_matched": 0,
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_dns_0517.csv",
+      "git_blob_sha1": "b5029fac3f769369847f62750b2b2add7431170d",
+      "matched_subjects": []
+    },
+    {
+      "name": "node_fivedirections_e5_drakon_0517.csv",
+      "bytes": 787,
+      "sha256": "bedd5adeda44654add866eb54752f87da2e71b8fb711018975dc015aef6e954f",
+      "rows": 6,
+      "unique_node_uuids": 6,
+      "upstream_node_kinds": {
+        "file": 4,
+        "subject": 2
+      },
+      "metadata_unique_matches": 2,
+      "metadata_records_matched": 2,
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_drakon_0517.csv",
+      "git_blob_sha1": "3a661ce7e95bd938904e9bf995f4dcf2832dcb94",
+      "matched_subjects": [
+        {
+          "uuid": "8d1252ea10594bb2a5583880fa606aba",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index": 1891296,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 6132,
+          "startTimestampNanos": 1558124066746000000,
+          "parentSubject": "27a66853adc240d8a7ac6788cc6cfd6b"
+        },
+        {
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "kind": "RECORD_SUBJECT",
+          "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "record_index": 1481663,
+          "subject_type": "SUBJECT_THREAD",
+          "cid": 1028,
+          "startTimestampNanos": 1558123945380000000,
+          "parentSubject": "1fca97f4e4134d05869b31eb09df8770"
+        }
+      ]
+    }
+  ],
+  "implementation_sources": [
+    {
+      "path": "Ground_Truth/orthrus/readme.md",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/readme.md",
+      "git_blob_sha1": "e031ce90d8d45f9e9e058839c44d62ee42fa347b",
+      "bytes": 5343,
+      "sha256": "b68df2b5ad22d42c7b6f32dea8f3768fa7b04ab9c6f706076d41013a8258fbf8"
+    },
+    {
+      "path": "pidsmaker/config/config.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/pidsmaker/config/config.py",
+      "git_blob_sha1": "dcb3175ca296b31ec428c27a70da0acfedf2b32e",
+      "bytes": 73490,
+      "sha256": "c60c9c5073d880a71ec9a82035fc5c5f0b0f838276a5807d814c4da8473267a0"
+    },
+    {
+      "path": "pidsmaker/utils/dataset_utils.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/pidsmaker/utils/dataset_utils.py",
+      "git_blob_sha1": "be7e20298e19065faab3c746532a4ffb3efbf4d7",
+      "bytes": 19906,
+      "sha256": "6bc57733b508c7301fd04e88a9675812c4d2fd4d544169d1e03c99656852c258"
+    },
+    {
+      "path": "pidsmaker/utils/labelling.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/pidsmaker/utils/labelling.py",
+      "git_blob_sha1": "fe704bbbbbfe21145491c20811c88013c9e89c2a",
+      "bytes": 14030,
+      "sha256": "1729100896d5c3d7f924e0cebb10d2fbb639981c0cf081eb728bd234d7b9fe34"
+    },
+    {
+      "path": "dataset_preprocessing/darpa_tc/create_database_e5.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/dataset_preprocessing/darpa_tc/create_database_e5.py",
+      "git_blob_sha1": "c0ed473a8a93a4d4cc1f06b7d1fa208222f058b9",
+      "bytes": 10741,
+      "sha256": "3b0825949b7d9cf4009001db36dd65f42517b1dd0b5666f59faec451eaa1cd15"
+    }
+  ],
+  "shared_node_uuids_across_cases": {
+    "b2cba9f2bc66495faa3aabdac335ca05": [
+      "node_fivedirections_e5_bits_0515.csv",
+      "node_fivedirections_e5_copykatz_0509.csv"
+    ]
+  },
+  "upstream_configuration": {
+    "timezone": "US/Eastern",
+    "train_dates": [
+      "2019-05-08",
+      "2019-05-10",
+      "2019-05-11",
+      "2019-05-13",
+      "2019-05-14"
+    ],
+    "val_dates": [
+      "2019-05-12"
+    ],
+    "test_dates": [
+      "2019-05-09",
+      "2019-05-15",
+      "2019-05-17"
+    ],
+    "unused_dates": [
+      "2019-05-16"
+    ],
+    "attack_to_time_window": [
+      [
+        "E5-FIVEDIRECTIONS/node_fivedirections_e5_bits_0515.csv",
+        "2019-05-15 13:14:00",
+        "2019-05-15 13:35:00"
+      ],
+      [
+        "E5-FIVEDIRECTIONS/node_fivedirections_e5_copykatz_0509.csv",
+        "2019-05-09 13:25:00",
+        "2019-05-09 13:57:00"
+      ],
+      [
+        "E5-FIVEDIRECTIONS/node_fivedirections_e5_dns_0517.csv",
+        "2019-05-17 12:46:00",
+        "2019-05-17 12:57:00"
+      ],
+      [
+        "E5-FIVEDIRECTIONS/node_fivedirections_e5_drakon_0517.csv",
+        "2019-05-17 16:10:00",
+        "2019-05-17 16:16:00"
+      ]
+    ]
+  },
+  "upstream_loader_observations": {
+    "read_ground_truth_uuids": "Reads UUID column and descriptive second column; third column ignored by this function",
+    "get_ground_truth": "Resolves UUID against current graph index and skips UUIDs absent from that graph",
+    "darpa_event_fallback": "Selects event endpoints touching an annotated node within its configured attack window; not adopted here"
+  },
+  "local_comparison": {
+    "index": ".cache/ml-runs/ml02-scp-all-references-20261027/references.sqlite",
+    "sqlite_open_mode": "ro",
+    "stored_kinds": [
+      "RECORD_HOST",
+      "RECORD_SUBJECT",
+      "RECORD_PRINCIPAL"
+    ],
+    "uuid_normalization": "uuid.UUID(text).hex; changes presentation only, preserves byte order",
+    "match_rule": "Exact normalized UUID; returned publishing host retained, no PID/path-only substitution",
+    "unique_subject_matches": 19,
+    "file_and_netflow_definitions_checked": false,
+    "new_raw_files_scanned": 0
+  },
+  "existing_event_subject_correspondences": [
+    {
+      "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+      "existing_label": null,
+      "external_node_case_files": [
+        "node_fivedirections_e5_drakon_0517.csv"
+      ],
+      "label_changed": false
+    },
+    {
+      "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+      "existing_label": null,
+      "external_node_case_files": [
+        "node_fivedirections_e5_drakon_0517.csv"
+      ],
+      "label_changed": false
+    },
+    {
+      "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "subject_uuid": "8d1252ea10594bb2a5583880fa606aba",
+      "existing_label": 1,
+      "external_node_case_files": [
+        "node_fivedirections_e5_drakon_0517.csv"
+      ],
+      "label_changed": false
+    }
+  ],
+  "copykatz_parent_correspondence": {
+    "uuid": "e9ac31c9c0404626821064a39dfaf516",
+    "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+    "kind": "RECORD_SUBJECT",
+    "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+    "record_index": 9494889,
+    "subject_type": "SUBJECT_PROCESS",
+    "cid": 6208,
+    "startTimestampNanos": 1557423721679000000,
+    "parentSubject": "b41eae5eaf884fa4b49a5c179bfe67fd"
+  },
+  "current_gate": {
+    "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+    "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+    "review_events": 6,
+    "eligible_attack_events": 3,
+    "eligible_benign_events": 0,
+    "attack_incident_groups": 2,
+    "new_labels_assigned": 0,
+    "new_splits_created": false,
+    "models_trained": false,
+    "status": "blocked_for_training"
+  },
+  "limitations": [
+    "Metadata-only comparison does not establish raw Event coverage or absence of file/network objects.",
+    "CSV rows are third-party attack-node lists, not verified benign Event annotations.",
+    "A matching actor does not label every action of that actor.",
+    "One file node occurs in two case files; case filenames do not prove independent groups.",
+    "Upstream US/Eastern benchmark setting does not calibrate the external MARPLE alarm formatter.",
+    "No authoritative SCP CDL integer-to-CDM UUID mapping was found in examined sources.",
+    "Adopting node-level evaluation, the node-touch rule or normal-only training dates changes the current protocol and needs user approval."
+  ]
+}

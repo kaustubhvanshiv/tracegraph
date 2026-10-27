@@ -1,5 +1,10 @@
 # ML-02.4 source-alignment resolution audit - 2026-10-27
 
+**Public-web follow-up:** [subsequent research](ml02_public_source_research_20261027.md)
+found third-party E5 FiveDirections node annotations with 19 Subject matches
+in our metadata. They add case evidence but do not supply the SCP alarm's
+time/CDL mapping or verified benign Event labels. The gate below is unchanged.
+
 **Audit completed; the SCP source-to-CDM mapping remains unresolved.**
 No timestamp repair, PID reinterpretation, benign label, model or new download
 batch was introduced. The current eligible set remains three attack actions

@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-27 public-source research:** four published E5 FiveDirections
+node-annotation files were found in PIDSMaker. They contain 158 rows / 157
+distinct node UUIDs; 19 Subjects match our existing metadata. These provide
+external case evidence, not new verified benign Event labels. The current
+label contract and training gate remain unchanged. See the
+[source links, measured comparison and next review steps](../../data/ml/datasets/darpa/ml02_public_source_research_20261027.md).
+
 **2026-10-27 alignment audit:** the SCP alarm's clock/PID mapping could not be
 established from the current report, schema, operational log and 37-file index.
 An expanded existing-data check finds later Prefetch artifacts, not a new
