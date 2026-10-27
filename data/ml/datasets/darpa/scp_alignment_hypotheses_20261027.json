@@ -1,0 +1,221 @@
+{
+  "assessment_date": "2026-10-27",
+  "phase": "Source time and identity resolution audit",
+  "source_report_page_visually_verified": 135,
+  "source_values_confirmed": {
+    "date": "2019-05-10",
+    "printed_time": "03:38:26.71",
+    "printed_pid": "680",
+    "printed_cdl_subject_id": "119657",
+    "printed_cdl_object_id": "835986",
+    "timezone_or_pid_base_declared": false,
+    "record_context": "MARPLE TA2 alarm quoted in the ACT report; not a native CDM record"
+  },
+  "time_hypotheses": [
+    {
+      "report_clock_hypothesis": "UTC",
+      "candidate_event_utc": "2019-05-10T03:38:26.710000000Z",
+      "host2_archive_bounds_containing_candidate_time": [
+        "ta1-fivedirections-2-e5-official-1.bin.20.gz"
+      ],
+      "matches_in_12_reviewed_writes": [],
+      "decision": "not_matched_in_reviewed_writes",
+      "clock_correction_applied": false
+    },
+    {
+      "report_clock_hypothesis": "EDT",
+      "candidate_event_utc": "2019-05-10T07:38:26.710000000Z",
+      "host2_archive_bounds_containing_candidate_time": [],
+      "matches_in_12_reviewed_writes": [],
+      "decision": "not_testable_with_current_time_coverage",
+      "clock_correction_applied": false
+    }
+  ],
+  "pid_hypotheses": [
+    {
+      "number_base_hypothesis": "decimal",
+      "interpreted_pid": 680,
+      "process_definitions_seen": 22,
+      "scp_process_instances_seen": [],
+      "may10_scp_instances_seen": 0,
+      "matches_in_12_reviewed_writes": 0,
+      "representation_assumed_for_labels": false
+    },
+    {
+      "number_base_hypothesis": "hexadecimal",
+      "interpreted_pid": 1664,
+      "process_definitions_seen": 22,
+      "scp_process_instances_seen": [
+        {
+          "subject_uuid": "32319998617043e6b84909932f110710",
+          "start_utc": "2019-05-09T18:39:17.315000000Z",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+          "record_index_1based": 4086853,
+          "receiver_command": true
+        },
+        {
+          "subject_uuid": "726b24a03a3e4fd5bb92d191f59947e0",
+          "start_utc": "2019-05-09T17:25:55.538000000Z",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+          "record_index_1based": 7869490,
+          "receiver_command": false
+        },
+        {
+          "subject_uuid": "784bc703934544faa2420d9f34704cb2",
+          "start_utc": "2019-05-09T22:34:46.867000000Z",
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+          "record_index_1based": 5812487,
+          "receiver_command": false
+        }
+      ],
+      "may10_scp_instances_seen": 0,
+      "matches_in_12_reviewed_writes": 0,
+      "representation_assumed_for_labels": false
+    }
+  ],
+  "thread_id_checks": [
+    {
+      "event_uuid": "2dcc965541b54cb983eb5bc472adeb9c",
+      "subject_uuid": "8d9bbe105a9f46f0a3c52f2638c651b4",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 4172,
+      "resolved_process_pid": 2764,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "e6cf959a97724ceaabe39c2dd71a2a86",
+      "subject_uuid": "ab68ac8526a04818b3143f6fdf3d8e24",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 1956,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "2e147ea26178413488a814efe24b4e6f",
+      "subject_uuid": "cfa9cf4db6de4fb7978cc02c6ffb420c",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 4132,
+      "resolved_process_pid": 4540,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "d215e781cc9e4ab58bdebf26f8c719a1",
+      "subject_uuid": "d962950e37644ab7afedad358ae016fa",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 5548,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "90ae31eecea843ed95fdf08719ed4301",
+      "subject_uuid": "333ee12255794d7db2d7761b84cdee6c",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 6364,
+      "resolved_process_pid": 7968,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "fb6d1eff78de4e169f8a84cdea2f2dbd",
+      "subject_uuid": "d962950e37644ab7afedad358ae016fa",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 5548,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "9afd9356cd1a4dcea98057b50710d1ac",
+      "subject_uuid": "0c893d1288b0402498d7881c0c8573c4",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 5580,
+      "resolved_process_pid": 4812,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "38a4266402b0408799861915e608502f",
+      "subject_uuid": "894fd235a5044da9bab94db3d398ba60",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 4696,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "5fb88d26c4984ed5a2837bfcbd4c112e",
+      "subject_uuid": "f4119ee4366f461787eb7d86d5b86ade",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 7144,
+      "resolved_process_pid": 1656,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "99ff72ceea32432f8a24b26ae3d2bbfa",
+      "subject_uuid": "bf74a82c534e4327ae9c1c84533bb765",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 4508,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "1d18ce8d6ce74493b04c8db2484c4678",
+      "subject_uuid": "44e07e9d7d6e4987a1b329ddede6c608",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 1020,
+      "resolved_process_pid": 7924,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    },
+    {
+      "event_uuid": "f92ddf6146c24c1e99e56d4fafa6957d",
+      "subject_uuid": "a6b6d9e844034a9bac18df60f90e85d4",
+      "subject_type": "SUBJECT_THREAD",
+      "subject_cid": 6580,
+      "resolved_process_pid": 4,
+      "all_subjects_start_at_or_before_event": true,
+      "matches_680_as_thread_id": false,
+      "decision": "Thread IDs cannot replace process IDs under the CDM Subject contract."
+    }
+  ],
+  "may10_scp_pid680_or1664_other_host_check": [],
+  "schema_contract": {
+    "cid": "OS process ID for SUBJECT_PROCESS; thread ID for SUBJECT_THREAD (CDM20.avdl lines 968-969).",
+    "event_time": "Event occurrence time represented as nanoseconds since Unix epoch UTC; same-clock condition and unresolved clock-source TODO (lines 1343-1349).",
+    "time_marker": "Delineates stream read position; not an independent clock calibration (lines 1405-1412).",
+    "uuid": "16-byte identifiers; no provided CDL-integer-ID-to-CDM-UUID mapping (lines 76-86)."
+  },
+  "operational_log_finding": "May 7 host-2 reboot briefly changed the clock by four hours and it auto-corrected within minutes. The May 10 section supplies no host-2 clock or MARPLE-alarm calibration. A global May 10 four-hour repair is not justified.",
+  "source_hashes": {
+    "pdf_sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+    "schema_sha256": "cb17265a7b36a148ebff35aa764c2f0e0b4acc2b0acdab2b3a3dfcea4913397f",
+    "operational_log_sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+  },
+  "scope": "12 fully reread target-filename writes in part 20 and complete Host/Principal/Subject metadata for the 37 downloaded archives. Missing indexed instances do not prove absence from unprovided data. Cross-host checks are diagnostic only; no identities borrowed.",
+  "decision": "Unresolved source-to-CDM mapping. No defensible timestamp/PID correction or benign label can be derived from these materials.",
+  "needed_evidence": [
+    "Alarm timezone and 12/24-hour format, and whether timestamp is event time, receipt time or alert-generation time.",
+    "Whether printed PID is decimal, hex or another identifier; authoritative mapping from CDL Subject 119657/Object 835986 to CDM UUIDs.",
+    "Verified benign event annotations with host/event UUID, source position, raw UTC time, action and independent scenario/group provenance."
+  ],
+  "labels_assigned": 0,
+  "raw_timestamps_changed": false,
+  "new_download_batch_requested": false
+}

@@ -3,6 +3,12 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-27 alignment audit:** the SCP alarm's clock/PID mapping could not be
+established from the current report, schema, operational log and 37-file index.
+An expanded existing-data check finds later Prefetch artifacts, not a new
+verified May 15 attack action. Labels and training gates remain unchanged.
+See the [resolution audit and required annotation evidence](../../data/ml/datasets/darpa/ml02_alignment_resolution_20261027.md).
+
 **2026-10-27 SCP follow-up:** parts 18-20 are now verified and fully audited.
 All 37 local archives cover 345,099,571 raw records. Full-record review did not
 establish the documented benign SCP action; the six-event label set is unchanged

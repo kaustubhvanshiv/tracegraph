@@ -1,5 +1,9 @@
 # ML-02.4 SCP coverage follow-up - 2026-10-27
 
+**Next-step audit completed:** see the [clock/identity resolution audit](ml02_alignment_resolution_20261027.md)
+for tested hypotheses, the additional existing-data check and the precise
+annotation information needed. No new labels or downloads resulted.
+
 **Batch review completed; no additional download batch is requested now.**
 Parts 18, 19 and 20 are received, checksum-verified and fully decoded.
 The remaining obstacle is trustworthy labels and independent cases, not merely

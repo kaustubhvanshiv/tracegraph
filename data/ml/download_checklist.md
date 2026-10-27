@@ -1,5 +1,11 @@
 # DARPA TC E5 — additional downloads
 
+**Alignment audit, 2026-10-27:** no defensible clock/PID conversion was found.
+The next input is authoritative alarm-to-CDM mapping or independently verified
+benign annotations, rather than another broad archive batch. A conditional
+07:38 UTC gap exists if the quoted time means EDT, but that interpretation is
+not established. See the [resolution audit and clarification questions](datasets/darpa/ml02_alignment_resolution_20261027.md).
+
 **Latest SCP follow-up, 2026-10-27:** parts 18-20 are received and verified;
 all 37 local archives are fully audited (345,099,571 raw records). Filename
 matches did not establish the report's specific benign WRITE/PID/time case.

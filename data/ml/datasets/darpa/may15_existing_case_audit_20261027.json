@@ -1,0 +1,332 @@
+{
+  "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+  "source_bytes": 124386417,
+  "records": 3890348,
+  "complete_scan": true,
+  "indicator_record_counts": {
+    "RECORD_EVENT": 12
+  },
+  "retained_indicator_records": 12,
+  "case_window_events": 207,
+  "labels_assigned": 0,
+  "scope": "String fields and properties across all CDM record kinds, including NetFlowObject address fields; host-scoped. Untimed indicator definitions are review candidates only.",
+  "assessment_date": "2026-10-27",
+  "source_file_md5": "55d5cb67a376b5ea8ba07b80a7fbefd3",
+  "source_report_pages": [
+    74,
+    75,
+    76,
+    77,
+    135
+  ],
+  "searched_indicators": [
+    "ctfhost2.exe",
+    "113.165.213.253",
+    "68.149.51.179"
+  ],
+  "netflow_records_inspected": 141,
+  "netflow_indicator_matches": 0,
+  "case_window_event_types": {
+    "EVENT_OPEN": 207
+  },
+  "case_window_min_utc": "2019-05-15T17:12:45.421000000Z",
+  "case_window_max_utc": "2019-05-15T18:04:28.365000000Z",
+  "case_window_distinct_subjects": 72,
+  "case_window_final_actor_resolution_status_counts": {
+    "missing": 207
+  },
+  "case_window_events_with_future_starting_chain_member": 5,
+  "case_window_events_with_unknown_start_or_missing_member": 207,
+  "sample_unresolved_events": [
+    {
+      "event_uuid": "57129ece78134385b4a00878c897f720",
+      "timestamp_utc": "2019-05-15T17:13:16.304000000Z",
+      "subject_uuid": "e0970f78213442369a9983ab97533716",
+      "actor_status": "missing",
+      "future_started_subject": false,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3751023
+    },
+    {
+      "event_uuid": "e70ef6530881457284ea1b757d3ccf46",
+      "timestamp_utc": "2019-05-15T17:13:16.311000000Z",
+      "subject_uuid": "e0970f78213442369a9983ab97533716",
+      "actor_status": "missing",
+      "future_started_subject": false,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3751025
+    },
+    {
+      "event_uuid": "2dcd40709a42482f84d54be984e18e34",
+      "timestamp_utc": "2019-05-15T17:13:16.314000000Z",
+      "subject_uuid": "e0970f78213442369a9983ab97533716",
+      "actor_status": "missing",
+      "future_started_subject": false,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3751027
+    },
+    {
+      "event_uuid": "e871b0becb9b4cb5a1cff008049c1d4b",
+      "timestamp_utc": "2019-05-15T17:13:17.627000000Z",
+      "subject_uuid": "da27ecbea99b4aa0a39319b4f9527c38",
+      "actor_status": "missing",
+      "future_started_subject": false,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3751030
+    },
+    {
+      "event_uuid": "c1f2d5188a1b445e9e3cc46520d4d8c9",
+      "timestamp_utc": "2019-05-15T17:13:26.531000000Z",
+      "subject_uuid": "b5ff6ed8180c410b86e57c5b15cfe21a",
+      "actor_status": "missing",
+      "future_started_subject": false,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3768782
+    }
+  ],
+  "future_start_examples": [
+    {
+      "event_uuid": "1987dec2d25d44d09c371ee1fe73750a",
+      "timestamp_utc": "2019-05-15T17:12:49.609000000Z",
+      "subject_uuid": "82f7bc1ce86840908790fca5abde313e",
+      "actor_status": "missing",
+      "future_started_subject": true,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3849568
+    },
+    {
+      "event_uuid": "a3e5975f50494e28b9d683577c797f84",
+      "timestamp_utc": "2019-05-15T18:04:28.225000000Z",
+      "subject_uuid": "629ef6789fa5488d961c12c75508d65c",
+      "actor_status": "missing",
+      "future_started_subject": true,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3849642
+    },
+    {
+      "event_uuid": "7d9943a7aa464b5fb391d964b146dd08",
+      "timestamp_utc": "2019-05-15T17:15:24.583000000Z",
+      "subject_uuid": "b8303641efd649378a898842f9113cf1",
+      "actor_status": "missing",
+      "future_started_subject": true,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3849866
+    },
+    {
+      "event_uuid": "57596304cd3c454689b054352f3a8375",
+      "timestamp_utc": "2019-05-15T17:15:24.540000000Z",
+      "subject_uuid": "b8303641efd649378a898842f9113cf1",
+      "actor_status": "missing",
+      "future_started_subject": true,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3849868
+    },
+    {
+      "event_uuid": "7a3bcbc5fd5041eab4e755b1679904d1",
+      "timestamp_utc": "2019-05-15T17:12:53.831000000Z",
+      "subject_uuid": "6f4811cefb4040f2b7e0293c5d9e2b62",
+      "actor_status": "missing",
+      "future_started_subject": true,
+      "has_unknown_subject_start": true,
+      "source_record_index": 3853686
+    }
+  ],
+  "indicator_reviews": [
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2848877,
+      "event_uuid": "b06373e2095940d5ab79f649f2509f89",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_OPEN",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "7caacfeac8cf379cbf62748ad495355dfbdc8457489354e981b94380629c90fc"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2848878,
+      "event_uuid": "5ee0f4758f70465ebcfc75eed00cd210",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CLOSE",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "6f2ba2ea273b263bfb2ce036af75d517ebee87e7e84458734517642a3b360163"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2848879,
+      "event_uuid": "de81e658b32d413c8da1fa5b01ebbebf",
+      "timestamp_utc": "2019-05-17T21:19:56.454000000Z",
+      "cdm_event_type": "EVENT_CLOSE",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "a454cea9dab361c30eb5b36b5ff714e6e963c9f30907b6d9d01d68058307a8ea"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850099,
+      "event_uuid": "aa28ad3b8c974e4aacb56142cc98dc09",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_OPEN",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "022d5c0cd72a5232b9911bcdf08de13cefb7eba5d656ea8b5f3f7d4aed57f265"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850100,
+      "event_uuid": "5084e0f011324479ae0ba2d37def63b0",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "f71776132754bfc60b30a5f027badcee0cb3c0414d66097c7e2ccb8a5aea33de"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850101,
+      "event_uuid": "aa29546a130847b99d8a0ab66dd04963",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_FCNTL",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "6edeaa959378c5171aab6d830e64165fb96c15764e713a4da8564d1b02f1e92c"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850102,
+      "event_uuid": "33c81a2bf497457ca08dca95eac025a7",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "cabccfe2447e887b88f2bc15f7604eba5e0c2467922dbc64a061bf5be76622af"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850103,
+      "event_uuid": "4bc9c365bc0446bfb3471ba15571fe45",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "e46d83d82e65001e920ddb7e714de4bbbab4413a234101cb7cae228fe903750b"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850104,
+      "event_uuid": "6fb9f9ad5ed0436eb1282658e0882d44",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "1ba0a594a33ca3ff426e0d5fbc5446a15c265319531eb2e0d1b3c077f4501258"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850105,
+      "event_uuid": "60561fe18dea47f1bea85087462aac37",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "90a47388a5ebeec85f9710331678de01a446de4562a0871e33e0ddd09808791d"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850106,
+      "event_uuid": "36f597b66f4f4ffb93e3b77711b1a38b",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "f06b5b2d4fc468287fab5f95276cfbfc00299ca48683b0cbbff78784a2a407a8"
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "record_index_1based": 2850110,
+      "event_uuid": "8a913339729e407199f99ab69f1985be",
+      "timestamp_utc": "2019-05-17T21:19:56.453000000Z",
+      "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+      "subject_uuid": "2cd193bdbe9042cfaef9ebc9f2d1d8de",
+      "predicate_object_uuid": "f6a5257c89734f47a7b0591bf312dc12",
+      "path": "\\Device\\HarddiskVolume2\\WINDOWS\\Prefetch\\CTFHOST2.EXE-5AB43F1F.pf",
+      "matched_fields": [
+        "predicateObjectPath"
+      ],
+      "label": null,
+      "decision": "Later Prefetch-file access does not establish the report-documented May 15 execution/C2 action. No benign label is inferred either.",
+      "raw_record_sha256": "b6446d98abd5b2e88ca02df757b3e4d9829086ce9b049e6034aaacff33ba4632"
+    }
+  ],
+  "corpus_records_added": 0,
+  "decision": "No third verified attack case added. No literal C2 address match in the inspected network-object fields; all 12 retained indicator hits are later Prefetch activity. Available May 15 actors do not resolve to verified attack processes.",
+  "limitations": "Only the already-downloaded part 101 is rescanned. This does not prove absence across unprovided telemetry. An untimed flow indicator, historical malware filename or missing actor is not itself an attack label.",
+  "raw_record_hash_format": "Cleaned raw JSON, sorted keys, compact separators, default ASCII escaping."
+}

@@ -1,5 +1,11 @@
 # ML-02 — ground truth and split plan
 
+**Source-alignment audit, 2026-10-27:** quoted external alarm times and CDL
+integer IDs are not native CDM timestamps/UUIDs. Decimal/hex PID, thread-ID
+and UTC/EDT checks did not establish the specific benign example. No clock
+repair or new label is justified; see the
+[alignment decision and required evidence](datasets/darpa/ml02_alignment_resolution_20261027.md).
+
 **2026-10-27 continuation:** two action-specific host-2 Copykatz output events
 are now manually report-reviewed positives, sharing one incident/group. The
 six-event review set has three attacks, one clock-excluded benign execution

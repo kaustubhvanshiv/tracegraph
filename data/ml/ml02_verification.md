@@ -1,5 +1,11 @@
 # ML-02 requirement verification — 2026-10-11
 
+**Alignment resolution audit, 2026-10-27:** source-clock and identifier checks
+remain inconclusive. An expanded network/object-field review of an existing
+file does not establish another live attack case. No new labels, clock repairs
+or models were introduced; the eligible set is still three attacks and no
+benign examples. See the [current resolution audit](datasets/darpa/ml02_alignment_resolution_20261027.md).
+
 **Latest SCP follow-up, 2026-10-27:** 37 archives now have complete audits,
 totaling 345,099,571 raw records. Parts 18-20 did not establish a new benign
 label; full-record review distinguishes repeated filename matches from the

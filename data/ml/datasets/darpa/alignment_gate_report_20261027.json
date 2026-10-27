@@ -1,0 +1,22 @@
+{
+  "assessment_date": "2026-10-27",
+  "phase": "Clock/PID mapping and existing May 15 case review",
+  "annotation_sha256": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "reference_report_sha256": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "sample_count": 6,
+  "status": "blocked_for_training",
+  "new_labels_assigned": 0,
+  "timestamps_or_pids_corrected": false,
+  "eligible_label_counts": {
+    "1": 3
+  },
+  "eligible_attack_group_count": 2,
+  "reasons": [
+    "At least three independent labeled groups required",
+    "Verified benign and attack samples required in every partition"
+  ],
+  "splits_created": false,
+  "models_trained": false,
+  "basis": "The completed hypothesis checks and existing-record network review add no verified label or changed identity chain. The previously validated six-row split gate remains applicable. No new Avro normalization or trained model is claimed.",
+  "required_next_evidence": "Authoritative alarm-time/identifier mapping or independent, explicitly verified benign event annotations. Current release files do not establish that mapping."
+}
