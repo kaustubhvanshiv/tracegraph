@@ -1,5 +1,10 @@
 # DARPA E5 FiveDirections: public-source research, 2026-10-27
 
+**Follow-up completed:** the [case review](ml02_public_case_review_20261027.md)
+checks exact target objects and actions in fresh raw prefixes, supplements
+the Subject-only comparison with bounded object-cache lookups, and records
+the unchanged label/split decisions.
+
 **New finding: PIDSMaker publishes four E5 FiveDirections node-annotation
 files.** Nineteen annotated Subject UUIDs occur in our existing metadata.
 This supplies external case evidence, but does not by itself complete the

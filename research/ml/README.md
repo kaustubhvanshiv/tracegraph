@@ -3,6 +3,12 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-27 public annotation case review:** a fresh 2.1-million-record prefix
+scan confirms published target-object UUIDs for all five attack-related review
+Events. Two candidates still lack their process parent; the eligible label set
+remains three attacks / zero benign. A repeatable comparison command and
+case decisions are in the [case review](../../data/ml/datasets/darpa/ml02_public_case_review_20261027.md).
+
 **2026-10-27 public-source research:** four published E5 FiveDirections
 node-annotation files were found in PIDSMaker. They contain 158 rows / 157
 distinct node UUIDs; 19 Subjects match our existing metadata. These provide

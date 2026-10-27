@@ -1,0 +1,555 @@
+{
+  "review_date": "2026-10-27",
+  "public_annotation_audit_sha256_utf8_lf": "8ca0b90ef662ea3a3545913222e849ab103d628b0d2099a8964362b737bce38e",
+  "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "published_source_commit": "438a05a7c55256f639e5b5945cf4828fe3ee078e",
+  "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "reference_files_validated": 37,
+  "csv_files_sha256_verified": 4,
+  "timestamp_policy": "Raw UTC nanoseconds preserved; only the four upstream May-2019 case windows are interpreted with EDT UTC-04:00 for a compatibility comparison.",
+  "raw_record_hash_format": "SHA-256 of UTF-8 json.dumps(clean(raw), sort_keys=True, separators=(comma,colon))",
+  "case_summaries": [
+    {
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_bits_0515.csv",
+      "sha256": "0841d453aff67c8254cc1d4a47265ed5cc0c8d7a79c1708ca0ab2019574b8cd4",
+      "utc_window_nanos": [
+        1557940440000000000,
+        1557941700000000000
+      ],
+      "utc_window": [
+        "2019-05-15T17:14:00.000000000Z",
+        "2019-05-15T17:35:00.000000000Z"
+      ],
+      "direct_node_touch_raw_event_records_in_scanned_prefixes": 0,
+      "case_file": "node_fivedirections_e5_bits_0515.csv",
+      "unique_nodes": 54,
+      "direct_subject_matches_in_six_review_events": 0,
+      "direct_object_matches_in_six_review_events": 0,
+      "resolved_process_matches_in_six_review_events": 0
+    },
+    {
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_copykatz_0509.csv",
+      "sha256": "9ba7f64b45aacb670a395356c14bf2a2a992ce9fccffd6dda40065752e6130de",
+      "utc_window_nanos": [
+        1557422700000000000,
+        1557424620000000000
+      ],
+      "utc_window": [
+        "2019-05-09T17:25:00.000000000Z",
+        "2019-05-09T17:57:00.000000000Z"
+      ],
+      "direct_node_touch_raw_event_records_in_scanned_prefixes": 5420,
+      "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+      "unique_nodes": 87,
+      "direct_subject_matches_in_six_review_events": 0,
+      "direct_object_matches_in_six_review_events": 2,
+      "resolved_process_matches_in_six_review_events": 2
+    },
+    {
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_dns_0517.csv",
+      "sha256": "c4ca6910338afec0555128d15f00c9ff1bce80b44ffebfe39d84ab84f8b640e3",
+      "utc_window_nanos": [
+        1558111560000000000,
+        1558112220000000000
+      ],
+      "utc_window": [
+        "2019-05-17T16:46:00.000000000Z",
+        "2019-05-17T16:57:00.000000000Z"
+      ],
+      "direct_node_touch_raw_event_records_in_scanned_prefixes": 0,
+      "case_file": "node_fivedirections_e5_dns_0517.csv",
+      "unique_nodes": 11,
+      "direct_subject_matches_in_six_review_events": 0,
+      "direct_object_matches_in_six_review_events": 0,
+      "resolved_process_matches_in_six_review_events": 0
+    },
+    {
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_drakon_0517.csv",
+      "sha256": "bedd5adeda44654add866eb54752f87da2e71b8fb711018975dc015aef6e954f",
+      "utc_window_nanos": [
+        1558123800000000000,
+        1558124160000000000
+      ],
+      "utc_window": [
+        "2019-05-17T20:10:00.000000000Z",
+        "2019-05-17T20:16:00.000000000Z"
+      ],
+      "direct_node_touch_raw_event_records_in_scanned_prefixes": 3570,
+      "case_file": "node_fivedirections_e5_drakon_0517.csv",
+      "unique_nodes": 6,
+      "direct_subject_matches_in_six_review_events": 3,
+      "direct_object_matches_in_six_review_events": 3,
+      "resolved_process_matches_in_six_review_events": 0
+    }
+  ],
+  "scans": [
+    {
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records_read": 2000000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 1901311,
+        "RECORD_MEMORY_OBJECT": 90339,
+        "RECORD_SUBJECT": 6783,
+        "RECORD_IPC_OBJECT": 744,
+        "RECORD_TIME_MARKER": 42,
+        "RECORD_NET_FLOW_OBJECT": 388,
+        "RECORD_FILE_OBJECT": 153,
+        "RECORD_REGISTRY_KEY_OBJECT": 226,
+        "RECORD_SRC_SINK_OBJECT": 14
+      },
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700,
+      "selected_event_uuids_reread": [
+        "cba5c7333a594b0b9b6f7b3e6489d9c2",
+        "8f5db838a1504f5b9b0ce074a1e356a0",
+        "b2f735d934fc4f92ac98996118533f5c"
+      ]
+    },
+    {
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "records_read": 100000,
+      "complete_scan": false,
+      "record_type_counts": {
+        "RECORD_EVENT": 95128,
+        "RECORD_FILE_OBJECT": 22,
+        "RECORD_MEMORY_OBJECT": 4256,
+        "RECORD_REGISTRY_KEY_OBJECT": 77,
+        "RECORD_SUBJECT": 447,
+        "RECORD_NET_FLOW_OBJECT": 35,
+        "RECORD_IPC_OBJECT": 29,
+        "RECORD_TIME_MARKER": 5,
+        "RECORD_SRC_SINK_OBJECT": 1
+      },
+      "compressed_bytes": 326601232,
+      "modified_time_ns": 1792306996331802800,
+      "selected_event_uuids_reread": [
+        "1d92d20361b242f7984f23422ef135be",
+        "fb20dd62334c48e9a9ea6972c43501f0"
+      ]
+    }
+  ],
+  "node_definitions": [
+    {
+      "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "kind": "RECORD_SUBJECT",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1481663,
+      "raw_record_sha256": "530b568553345962b938b42b744c9965184d488a9b3490ab5f2f3a75b1517c83",
+      "cdm_object_type": "SUBJECT_THREAD",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 4,
+          "node_kind": "subject"
+        }
+      ]
+    },
+    {
+      "uuid": "4e91bd1eb1ed40ecb94a6707ab1d9359",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "kind": "RECORD_FILE_OBJECT",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1568067,
+      "raw_record_sha256": "1d6c5df74d33a0d1db409a0e237c6699161c53e38b5aa5561c7f9ebdf0a3d197",
+      "cdm_object_type": "FILE_OBJECT_FILE",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 6,
+          "node_kind": "file"
+        }
+      ]
+    },
+    {
+      "uuid": "6a45dc7569f644dc9bf0dad746a41deb",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "kind": "RECORD_FILE_OBJECT",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1778583,
+      "raw_record_sha256": "0f79a51f8b1ea0dcf3e02d287603c6e10130c022d0ce19dadf5b26f90398f84a",
+      "cdm_object_type": "FILE_OBJECT_FILE",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 5,
+          "node_kind": "file"
+        }
+      ]
+    },
+    {
+      "uuid": "8d1252ea10594bb2a5583880fa606aba",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "kind": "RECORD_SUBJECT",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1891296,
+      "raw_record_sha256": "455f0f0667230bfa09c6cc18367f651f2eb73ee6b324a8ede92878ad71ab0d7d",
+      "cdm_object_type": "SUBJECT_THREAD",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 3,
+          "node_kind": "subject"
+        }
+      ]
+    },
+    {
+      "uuid": "3cf5a2818d0c4f7d85dfe1221ce80996",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "kind": "RECORD_FILE_OBJECT",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1946603,
+      "raw_record_sha256": "309583c09eabab5f3afe628df7c6dfcebc23565f4bcff94b6bfbece759031514",
+      "cdm_object_type": "FILE_OBJECT_FILE",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 1,
+          "node_kind": "file"
+        }
+      ]
+    },
+    {
+      "uuid": "c9a119fb914d4051a113972088156308",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "kind": "RECORD_FILE_OBJECT",
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "record_index_1based": 50997,
+      "raw_record_sha256": "d8f6ac27a9c0eade67ccc6736a77caafac7ebb6ae33cd394a495b9a28e8ab452",
+      "cdm_object_type": "FILE_OBJECT_FILE",
+      "upstream_memberships": [
+        {
+          "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+          "line_1based": 50,
+          "node_kind": "file"
+        }
+      ]
+    }
+  ],
+  "event_comparisons": [
+    {
+      "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "timestamp_nanos": 1558123962746000000,
+      "timestamp_utc": "2019-05-17T20:12:42.746000000Z",
+      "cdm_event_type": "EVENT_OPEN",
+      "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+      "predicate_object_uuid": "4e91bd1eb1ed40ecb94a6707ab1d9359",
+      "predicate_object_path": "\\Device\\HarddiskVolume2\\Users\\admin\\Documents\\Pictures\\PD2GziBJ2wpDwP",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1568068,
+      "raw_source_reread_this_review": true,
+      "raw_record_sha256": "a72bad1bf51eadc3118412e6d619f14714b913a3f64819c95b4ebaae8ca6e734",
+      "upstream_matches": [
+        {
+          "role": "subject",
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 4,
+          "node_kind": "subject",
+          "within_upstream_window": true
+        },
+        {
+          "role": "predicateObject",
+          "uuid": "4e91bd1eb1ed40ecb94a6707ab1d9359",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 6,
+          "node_kind": "file",
+          "within_upstream_window": true
+        }
+      ],
+      "subject_chain": [
+        {
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "status": "resolved",
+          "type": "SUBJECT_THREAD",
+          "cid": 1028,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "1fca97f4e4134d05869b31eb09df8770",
+          "status": "missing",
+          "type": null,
+          "cid": null,
+          "started_at_or_before_event": null
+        }
+      ],
+      "process_chain_resolved_and_time_valid": false,
+      "current_label": null,
+      "decision_label": null,
+      "group_id": "e5-fivedirections1-verifier-filefilter",
+      "split_eligible": true,
+      "decision": "Retain unknown: direct thread and generated object match published Drakon nodes, but required actor parent remains missing; no node-touch label import."
+    },
+    {
+      "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "timestamp_nanos": 1558123996800000000,
+      "timestamp_utc": "2019-05-17T20:13:16.800000000Z",
+      "cdm_event_type": "EVENT_OPEN",
+      "subject_uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+      "predicate_object_uuid": "6a45dc7569f644dc9bf0dad746a41deb",
+      "predicate_object_path": "\\Device\\HarddiskVolume2\\Users\\admin\\Documents\\Pictures\\7B4qoq3yWIKPQh",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1778584,
+      "raw_source_reread_this_review": true,
+      "raw_record_sha256": "b97ae5456ccb755179b55437b7a74b9ff0dbe1cad40232036ac183c495c88402",
+      "upstream_matches": [
+        {
+          "role": "subject",
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 4,
+          "node_kind": "subject",
+          "within_upstream_window": true
+        },
+        {
+          "role": "predicateObject",
+          "uuid": "6a45dc7569f644dc9bf0dad746a41deb",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 5,
+          "node_kind": "file",
+          "within_upstream_window": true
+        }
+      ],
+      "subject_chain": [
+        {
+          "uuid": "b890ef7a5c86467d95ab7030c9dfa7e3",
+          "status": "resolved",
+          "type": "SUBJECT_THREAD",
+          "cid": 1028,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "1fca97f4e4134d05869b31eb09df8770",
+          "status": "missing",
+          "type": null,
+          "cid": null,
+          "started_at_or_before_event": null
+        }
+      ],
+      "process_chain_resolved_and_time_valid": false,
+      "current_label": null,
+      "decision_label": null,
+      "group_id": "e5-fivedirections1-verifier-filefilter",
+      "split_eligible": true,
+      "decision": "Retain unknown: direct thread and generated object match published Drakon nodes, but required actor parent remains missing; no node-touch label import."
+    },
+    {
+      "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "timestamp_nanos": 1558124093225000000,
+      "timestamp_utc": "2019-05-17T20:14:53.225000000Z",
+      "cdm_event_type": "EVENT_OPEN",
+      "subject_uuid": "8d1252ea10594bb2a5583880fa606aba",
+      "predicate_object_uuid": "3cf5a2818d0c4f7d85dfe1221ce80996",
+      "predicate_object_path": "\\Device\\HarddiskVolume2\\Users\\admin\\Documents\\Pictures\\DXu0yAtkCpuUTo",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index_1based": 1946604,
+      "raw_source_reread_this_review": true,
+      "raw_record_sha256": "0ace403a9136309d5bebf5832ee4af4852d7a43890cd6dbb5336a7a759d28c94",
+      "upstream_matches": [
+        {
+          "role": "subject",
+          "uuid": "8d1252ea10594bb2a5583880fa606aba",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 3,
+          "node_kind": "subject",
+          "within_upstream_window": true
+        },
+        {
+          "role": "predicateObject",
+          "uuid": "3cf5a2818d0c4f7d85dfe1221ce80996",
+          "case_file": "node_fivedirections_e5_drakon_0517.csv",
+          "line_1based": 1,
+          "node_kind": "file",
+          "within_upstream_window": true
+        }
+      ],
+      "subject_chain": [
+        {
+          "uuid": "8d1252ea10594bb2a5583880fa606aba",
+          "status": "resolved",
+          "type": "SUBJECT_THREAD",
+          "cid": 6132,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "27a66853adc240d8a7ac6788cc6cfd6b",
+          "status": "resolved",
+          "type": "SUBJECT_PROCESS",
+          "cid": 5432,
+          "started_at_or_before_event": true
+        }
+      ],
+      "process_chain_resolved_and_time_valid": true,
+      "current_label": 1,
+      "decision_label": 1,
+      "group_id": "e5-fivedirections1-verifier-filefilter",
+      "split_eligible": true,
+      "decision": "Retain existing action-specific report-reviewed positive; published matches are corroborating case evidence only."
+    },
+    {
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557265116204000000,
+      "timestamp_utc": "2019-05-07T21:38:36.204000000Z",
+      "cdm_event_type": "EVENT_EXECUTE",
+      "subject_uuid": "bc21a86f5e5e462180e5479d4ff2ffdb",
+      "predicate_object_uuid": "aee06378dd954894add3f5949a5ff812",
+      "predicate_object_path": "bcdedit.exe",
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "record_index_1based": 5847598,
+      "raw_source_reread_this_review": false,
+      "raw_record_sha256": "5d9de335178362fbb527fa95351ba1e50a3f03f27387345c156b97fabe1461a9",
+      "upstream_matches": [],
+      "subject_chain": [
+        {
+          "uuid": "bc21a86f5e5e462180e5479d4ff2ffdb",
+          "status": "resolved",
+          "type": "SUBJECT_PROCESS",
+          "cid": 4948,
+          "started_at_or_before_event": true
+        }
+      ],
+      "process_chain_resolved_and_time_valid": true,
+      "current_label": 0,
+      "decision_label": 0,
+      "group_id": "e5-fivedirections2-admin-recovery-may7",
+      "split_eligible": false,
+      "decision": "Retain reviewed benign label and clock exclusion; no published-node match or clock repair."
+    },
+    {
+      "event_uuid": "1d92d20361b242f7984f23422ef135be",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557424177826000000,
+      "timestamp_utc": "2019-05-09T17:49:37.826000000Z",
+      "cdm_event_type": "EVENT_CREATE_OBJECT",
+      "subject_uuid": "a42b3c3ff8834cfa87e9a32507960f92",
+      "predicate_object_uuid": "c9a119fb914d4051a113972088156308",
+      "predicate_object_path": "\\Device\\HarddiskVolume2\\Users\\admin\\tropical",
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "record_index_1based": 50998,
+      "raw_source_reread_this_review": true,
+      "raw_record_sha256": "c617a3e000dfd1d01a02a43875f642b8e216cbe8b95d40b6494c3102dd5e482b",
+      "upstream_matches": [
+        {
+          "role": "predicateObject",
+          "uuid": "c9a119fb914d4051a113972088156308",
+          "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+          "line_1based": 50,
+          "node_kind": "file",
+          "within_upstream_window": true
+        },
+        {
+          "role": "resolved_actor_process",
+          "uuid": "e9ac31c9c0404626821064a39dfaf516",
+          "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+          "line_1based": 62,
+          "node_kind": "subject",
+          "within_upstream_window": true
+        }
+      ],
+      "subject_chain": [
+        {
+          "uuid": "a42b3c3ff8834cfa87e9a32507960f92",
+          "status": "resolved",
+          "type": "SUBJECT_THREAD",
+          "cid": 6840,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "e9ac31c9c0404626821064a39dfaf516",
+          "status": "resolved",
+          "type": "SUBJECT_PROCESS",
+          "cid": 6208,
+          "started_at_or_before_event": true
+        }
+      ],
+      "process_chain_resolved_and_time_valid": true,
+      "current_label": 1,
+      "decision_label": 1,
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "split_eligible": true,
+      "decision": "Retain existing action-specific report-reviewed positive; published matches are corroborating case evidence only."
+    },
+    {
+      "event_uuid": "fb20dd62334c48e9a9ea6972c43501f0",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "timestamp_nanos": 1557424213551000000,
+      "timestamp_utc": "2019-05-09T17:50:13.551000000Z",
+      "cdm_event_type": "EVENT_WRITE",
+      "subject_uuid": "24a7eec0f64d43148e4801fb196f8823",
+      "predicate_object_uuid": "c9a119fb914d4051a113972088156308",
+      "predicate_object_path": "\\Device\\HarddiskVolume2\\Users\\admin\\tropical",
+      "source_file": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "record_index_1based": 73037,
+      "raw_source_reread_this_review": true,
+      "raw_record_sha256": "c62b902c597367354ff2eba9710700788e19184e8da8c9c22ff07358b491aad3",
+      "upstream_matches": [
+        {
+          "role": "predicateObject",
+          "uuid": "c9a119fb914d4051a113972088156308",
+          "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+          "line_1based": 50,
+          "node_kind": "file",
+          "within_upstream_window": true
+        },
+        {
+          "role": "resolved_actor_process",
+          "uuid": "e9ac31c9c0404626821064a39dfaf516",
+          "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+          "line_1based": 62,
+          "node_kind": "subject",
+          "within_upstream_window": true
+        }
+      ],
+      "subject_chain": [
+        {
+          "uuid": "24a7eec0f64d43148e4801fb196f8823",
+          "status": "resolved",
+          "type": "SUBJECT_THREAD",
+          "cid": 6504,
+          "started_at_or_before_event": true
+        },
+        {
+          "uuid": "e9ac31c9c0404626821064a39dfaf516",
+          "status": "resolved",
+          "type": "SUBJECT_PROCESS",
+          "cid": 6208,
+          "started_at_or_before_event": true
+        }
+      ],
+      "process_chain_resolved_and_time_valid": true,
+      "current_label": 1,
+      "decision_label": 1,
+      "group_id": "e5-fivedirections2-drakon-copykatz-may9",
+      "split_eligible": true,
+      "decision": "Retain existing action-specific report-reviewed positive; published matches are corroborating case evidence only."
+    }
+  ],
+  "records_reread_this_review": 2100000,
+  "new_labels_assigned": 0,
+  "models_trained": false,
+  "splits_created": false,
+  "current_gate": {
+    "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+    "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+    "review_events": 6,
+    "eligible_attack_events": 3,
+    "eligible_benign_events": 0,
+    "attack_incident_groups": 2,
+    "new_labels_assigned": 0,
+    "new_splits_created": false,
+    "models_trained": false,
+    "status": "blocked_for_training"
+  },
+  "scope_limits": [
+    "Two bounded source prefixes, not a full 37-archive scan.",
+    "Direct node-touch counts are candidate diagnostics, not verified attack labels or new training samples.",
+    "No-hit cases do not establish absence from the full dataset.",
+    "No raw timestamp or PID was corrected.",
+    "No independence is inferred from the count of CSV files or node UUIDs."
+  ]
+}

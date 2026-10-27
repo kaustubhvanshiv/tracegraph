@@ -1,0 +1,31 @@
+{
+  "review_date": "2026-10-27",
+  "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "sample_count": 6,
+  "canonical_events_validated": 6,
+  "raw_source_events_reread": 5,
+  "source_records_reread": 2100000,
+  "new_labels_assigned": 0,
+  "reviewed_label_counts": {
+    "0": 1,
+    "1": 3,
+    "None": 2
+  },
+  "eligible_label_counts": {
+    "1": 3
+  },
+  "eligible_attack_group_count": 2,
+  "status": "blocked_for_training",
+  "blocking_reasons": [
+    "At least three independent labeled groups required",
+    "Verified benign and attack samples required in every partition"
+  ],
+  "splits_created": false,
+  "models_trained": false,
+  "timestamps_or_pids_changed": false,
+  "reproduction_verified": true,
+  "scans_performed": 2,
+  "source_records_per_scan": 2100000,
+  "output_source_guard_verified": true,
+  "csv_hash_guard_verified": true
+}

@@ -1,0 +1,156 @@
+{
+  "scope": "Previously prepared bounded-prefix entity caches, not all raw FileObject/NetFlowObject definitions",
+  "results": [
+    {
+      "cache_run": "ml02-label-preparation-20261017",
+      "case_file": "node_fivedirections_e5_bits_0515.csv",
+      "matches": [
+        {
+          "uuid": "f98892ce965d4bf4bb2f59a21fe9ea31",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 16
+        },
+        {
+          "uuid": "578cd1b228f1463cb631b518627835a0",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 49
+        },
+        {
+          "uuid": "b5997726f6954a4099544f1189db4566",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 50
+        }
+      ]
+    },
+    {
+      "cache_run": "ml02-label-preparation-20261017",
+      "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+      "matches": [
+        {
+          "uuid": "0f835a9013b7401d834db574a3c6eabb",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 70
+        }
+      ]
+    },
+    {
+      "cache_run": "ml02-label-preparation-20261017",
+      "case_file": "node_fivedirections_e5_dns_0517.csv",
+      "matches": []
+    },
+    {
+      "cache_run": "ml02-label-preparation-20261017",
+      "case_file": "node_fivedirections_e5_drakon_0517.csv",
+      "matches": [
+        {
+          "uuid": "3cf5a2818d0c4f7d85dfe1221ce80996",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 1
+        },
+        {
+          "uuid": "6a45dc7569f644dc9bf0dad746a41deb",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 5
+        },
+        {
+          "uuid": "4e91bd1eb1ed40ecb94a6707ab1d9359",
+          "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 6
+        }
+      ]
+    },
+    {
+      "cache_run": "host2-case-preparation-20261027",
+      "case_file": "node_fivedirections_e5_bits_0515.csv",
+      "matches": []
+    },
+    {
+      "cache_run": "host2-case-preparation-20261027",
+      "case_file": "node_fivedirections_e5_copykatz_0509.csv",
+      "matches": [
+        {
+          "uuid": "c9a119fb914d4051a113972088156308",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "node_kind": "file",
+          "cdm_kind": "RECORD_FILE_OBJECT",
+          "conflict": false,
+          "type_agrees": true,
+          "upstream_line_1based": 50
+        }
+      ]
+    },
+    {
+      "cache_run": "host2-case-preparation-20261027",
+      "case_file": "node_fivedirections_e5_dns_0517.csv",
+      "matches": []
+    },
+    {
+      "cache_run": "host2-case-preparation-20261027",
+      "case_file": "node_fivedirections_e5_drakon_0517.csv",
+      "matches": []
+    }
+  ],
+  "preparation_cache_provenance": [
+    {
+      "cache_run": "ml02-label-preparation-20261017",
+      "manifest_sha256_utf8_lf": "2bd087240ee1216b127480c90903961fdd4ef375c99761b62cf34a9ed67ec036",
+      "bounded_source_files": [
+        {
+          "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+          "records": 6000000,
+          "complete_scan": false,
+          "compressed_bytes": 315341536,
+          "modified_time_ns": 1791697965512666700
+        },
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+          "records": 6000000,
+          "complete_scan": false,
+          "compressed_bytes": 336934867,
+          "modified_time_ns": 1792218200851179200
+        }
+      ]
+    },
+    {
+      "cache_run": "host2-case-preparation-20261027",
+      "manifest_sha256_utf8_lf": "7fd4cb3529661ca4e8642b22d63b0d07f12e5b5ae50b8307e0dae7e2eb759349",
+      "bounded_source_files": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+          "records": 100000,
+          "complete_scan": false,
+          "compressed_bytes": 326601232,
+          "modified_time_ns": 1792306996331802800
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # ML-02 — ground truth and split plan
 
+**Public annotation case review, 2026-10-27:** exact artifact UUIDs for the five
+attack/candidate review Events are corroborated by the pinned public node lists.
+The two candidates' missing process parent is not repaired by those lists; labels remain
+three attacks, one clock-excluded benign and two unknowns. Eligible benign
+coverage is still zero. See the [action decisions and repeatable comparison](datasets/darpa/ml02_public_case_review_20261027.md).
+
 **Source-alignment audit, 2026-10-27:** quoted external alarm times and CDL
 integer IDs are not native CDM timestamps/UUIDs. Decimal/hex PID, thread-ID
 and UTC/EDT checks did not establish the specific benign example. No clock
