@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-27 SCP follow-up:** parts 18-20 are now verified and fully audited.
+All 37 local archives cover 345,099,571 raw records. Full-record review did not
+establish the documented benign SCP action; the six-event label set is unchanged
+and training remains blocked. No further broad download batch is requested
+before clarifying source annotations and independent-case coverage. See the
+[current SCP review and reproduction guide](../../data/ml/datasets/darpa/ml02_scp_followup_20261027.md).
+
 **2026-10-27 ML-02.4 continuation:** all 34 local archives are fully audited,
 totaling 315,099,571 raw records. Two additional manually reviewed attack
 actions normalize successfully. The six-event review set has three attacks,
@@ -56,7 +63,7 @@ scope require the user's approval.
 | Complete segment-121 scan | 10,000,000 records; 9,650,235 Events |
 | Ground-truth alignment | Six reviewed events: three attacks, one benign execution excluded for clock uncertainty, two unknowns |
 | Reviewed-event preparation | Incremental six-event review: four unchanged cached rows plus two newly normalized attack actions; no valid supervised splits |
-| Full reference audit | All 34 downloaded files; 315,099,571 raw records; metadata merged from validated caches, one host-1 actor parent still missing |
+| Full reference audit | All 37 downloaded files; 345,099,571 raw records; metadata merged from validated caches, one host-1 actor parent still missing |
 | ML-02.1 / ML-02.2 / ML-02.3 | Target/graph definition, split policy and scenario-use plan complete |
 | ML-02.4 actual dataset preparation | Partial: scripts tested; real supervised splits blocked by label coverage |
 | Labels, splits, training | Contract and split checks implemented; verified evidence and independent groups missing |
@@ -64,7 +71,7 @@ scope require the user's approval.
 | Historical ML-04 neural-network exercise | Completed on synthetic XNOR; retained educational artifact within deferred original track |
 | ML-R1.1 dataset feasibility | Complete: stop finding for current audited evidence; ML-R1.2 remains pending |
 
-All 34 local archives were fully decoded across completed reference audits;
+All 37 local archives were fully decoded across completed reference audits;
 the original inspection profiles remain prefix-only. This is a downloaded
 subset, not the entire DARPA release. No trained DARPA GNN or security
 classification results exist. Research is separate from production correlation.

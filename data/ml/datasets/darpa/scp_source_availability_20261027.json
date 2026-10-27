@@ -1,0 +1,32 @@
+{
+  "assessment_date": "2026-10-27",
+  "ground_truth_folder_url": "https://drive.google.com/drive/folders/19rZOi3EDyv8Oa9yv8Tp7lRgL7F8b5fQ7",
+  "listed_files": [
+    {
+      "id": "1cc3C5JW-Kn-VdXqeBGwvHBKSdR_YmSGj",
+      "name": "TA51_Final_report_E5.pdf",
+      "mime_type": "application/pdf",
+      "bytes": 3457780,
+      "url": "https://drive.google.com/file/d/1cc3C5JW-Kn-VdXqeBGwvHBKSdR_YmSGj/view"
+    },
+    {
+      "id": "1ihJmGUnWSofgXzwePSdZz9N-lashOZVt",
+      "name": "TA51_Final_report_E5.docx",
+      "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 2297885,
+      "url": "https://docs.google.com/document/d/1ihJmGUnWSofgXzwePSdZz9N-lashOZVt/edit"
+    }
+  ],
+  "separately_named_updated_report_listed": false,
+  "starc_folder_url": "https://drive.google.com/drive/folders/1QF3MsRP3fDGfTIGhIL1RrA6lceaD1hYD",
+  "starc_visible_children": 0,
+  "pdf_verification": {
+    "source_url": "https://drive.google.com/file/d/1cc3C5JW-Kn-VdXqeBGwvHBKSdR_YmSGj/view",
+    "bytes": 3457780,
+    "sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+    "method": "Fetched current PDF through the authorized Google Drive connector and SHA-256 hashed the complete bytes; compared with the existing local E5 report.",
+    "identical_to_existing_local_report": true,
+    "local_verification_copy": ".cache/ml-support/Ground_Truth/drive_checked_E5_20261027.pdf"
+  },
+  "decision": "No different report or machine-readable STARC annotations were found in these source folders. Re-downloading the existing support PDF adds no evidence; clarify annotation/time mapping and independent cases before requesting further raw archives."
+}

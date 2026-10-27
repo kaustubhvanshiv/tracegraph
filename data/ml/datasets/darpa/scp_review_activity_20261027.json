@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "status": "Search activities only; matching records are not labels",
+  "source_sha256": {
+    "TA51_Final_report_E5.pdf": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+    "Engagement-5-Event-Log.md": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+  },
+  "time_policy": "Report-local EDT is UTC-04:00 when explicit. Broad search windows accommodate approximate times; no whole window is labeled. The operational log notes a temporary four-hour host-2 clock change on May 7.",
+  "activities": [
+    {
+      "activity_id": "benign-host2-scp-may10",
+      "candidate_class": 0,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "start_utc": "2019-05-10T00:00:00Z",
+      "end_utc": "2019-05-11T04:00:00Z",
+      "search_regex": "(?:^|[\\\\/])www\\.army\\.mil\\.nz\\.docx$",
+      "evidence": {
+        "source": "TA51_Final_report_E5.pdf",
+        "pages": [
+          135
+        ],
+        "documented_action": "False-positive SCP write example, PID 680, www.army.mil.nz.docx at 03:38:26.71",
+        "limitations": "Timezone of the quoted TA2 alarm is unspecified. The broad window searches both UTC and EDT interpretations. Other SCP operations must not inherit this benign label.",
+        "review_requirements": "Require EVENT_WRITE to the documented Windows/Temp/Pictures path, a typed FileObject, direct thread/process UUID chain to SCP receiver PID 680, matching host, compatible source time and no contradictory actor definitions. Filename matches alone are not labels."
+      }
+    }
+  ],
+  "assessment_date": "2026-10-27",
+  "revision_reason": "Focused exact-file review of the newly supplied host-2 parts 18-20. Exclude generic SCP matches so bounded candidates retain the documented benign action."
+}

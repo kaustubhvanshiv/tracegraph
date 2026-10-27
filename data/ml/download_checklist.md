@@ -1,6 +1,13 @@
 # DARPA TC E5 — additional downloads
 
-**2026-10-27 update:** host-2 parts 15 and 17 are present, checksum-verified
+**Latest SCP follow-up, 2026-10-27:** parts 18-20 are received and verified;
+all 37 local archives are fully audited (345,099,571 raw records). Filename
+matches did not establish the report's specific benign WRITE/PID/time case.
+No further broad download batch is requested: clarify the source annotation
+and time mapping before selecting additional telemetry. The label/split gate
+remains blocked. See the [SCP review](datasets/darpa/ml02_scp_followup_20261027.md).
+
+**Earlier 2026-10-27 update:** host-2 parts 15 and 17 are present, checksum-verified
 and fully decoded. All 34 local archives are now audited. Two reviewed May 9
 attack actions were added, but the downloaded host-2 data still lack the
 May 10 benign SCP example. The next manual coverage probes are parts 18, 19

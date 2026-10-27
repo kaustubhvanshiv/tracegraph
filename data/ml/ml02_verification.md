@@ -1,6 +1,13 @@
 # ML-02 requirement verification — 2026-10-11
 
-**Latest ML-02.4 continuation, 2026-10-27:** all 34 local archives are fully
+**Latest SCP follow-up, 2026-10-27:** 37 archives now have complete audits,
+totaling 345,099,571 raw records. Parts 18-20 did not establish a new benign
+label; full-record review distinguishes repeated filename matches from the
+specific source example. Existing six-row identity chains and annotations are
+unchanged. The split gate still rejects training. See the
+[current SCP follow-up](datasets/darpa/ml02_scp_followup_20261027.md).
+
+**Earlier ML-02.4 continuation, 2026-10-27:** all 34 local archives are fully
 audited (315,099,571 records). Two additional manually aligned attack actions
 normalize successfully; the combined review set has three attacks, one
 clock-excluded benign action and two unknowns. There are two eligible attack

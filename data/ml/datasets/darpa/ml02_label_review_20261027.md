@@ -1,5 +1,10 @@
 # ML-02.4 continuation - 2026-10-27
 
+**Subsequent SCP follow-up:** parts 18-20 are now received and fully audited.
+The [37-file review](ml02_scp_followup_20261027.md) documents the unchanged
+label gate and why no further broad download batch is requested. Measurements
+below describe the earlier 34-file continuation.
+
 **Outcome: two additional manually reviewed attack actions prepared; supervised
 training remains blocked.** The current annotation set has six events: three
 attack actions, one benign execution excluded for uncertain clock alignment,

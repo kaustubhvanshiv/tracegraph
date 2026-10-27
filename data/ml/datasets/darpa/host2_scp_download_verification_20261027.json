@@ -1,0 +1,32 @@
+{
+  "assessment_date": "2026-10-27",
+  "batch": "host2-parts18-20",
+  "source_path": "D:\\Deep Learning\\fivedirections-20261010T174625Z-1-049\\fivedirections",
+  "current_archive_count": 37,
+  "current_compressed_bytes": 10956483982,
+  "new_archive_count": 3,
+  "new_compressed_bytes": 966453015,
+  "all_new_checksums_match": true,
+  "files": [
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "bytes": 322452529,
+      "md5": "874916e019562431ac919d1e2073f33e",
+      "source_url": "https://drive.google.com/file/d/1dhyMYVPJovb7FzK2JDv022OU0YUWdFEA/view?usp=drivesdk"
+    },
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "bytes": 323250307,
+      "md5": "6de0db9a4ac3c53e03fcc61bf077953c",
+      "source_url": "https://drive.google.com/file/d/1PEG5IGUujj0pjLxSuXPbjfbRGRFca0Wr/view?usp=drivesdk"
+    },
+    {
+      "name": "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+      "bytes": 320750179,
+      "md5": "30727423f7b28b44f4d2f35556bb4857",
+      "source_url": "https://drive.google.com/file/d/19rjsJieAPNjxXNecO98Q9eoSHrtJLrcN/view?usp=drivesdk"
+    }
+  ],
+  "search_configuration": "scp_review_activity_20261027.json",
+  "status": "Acquisition verified; evidence scans reported separately. No labels inferred from filenames."
+}

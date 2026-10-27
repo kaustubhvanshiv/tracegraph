@@ -1,0 +1,3048 @@
+{
+  "files": [
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 323250307,
+      "modified_time_ns": 1793101048838478700,
+      "record_type_counts": {
+        "RECORD_EVENT": 9563830,
+        "RECORD_MEMORY_OBJECT": 363389,
+        "RECORD_NET_FLOW_OBJECT": 4668,
+        "RECORD_SUBJECT": 61145,
+        "RECORD_IPC_OBJECT": 3523,
+        "RECORD_TIME_MARKER": 222,
+        "RECORD_FILE_OBJECT": 723,
+        "RECORD_REGISTRY_KEY_OBJECT": 2469,
+        "RECORD_SRC_SINK_OBJECT": 31
+      },
+      "min_event_utc": "2019-05-08T20:00:33.272000000Z",
+      "max_event_utc": "2019-05-10T00:59:00.325000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-08T20:00:33.272000000Z",
+          "max_utc": "2019-05-10T00:59:00.325000000Z"
+        }
+      }
+    }
+  ],
+  "file_pattern": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+  "all_files_fully_scanned": true,
+  "activity_configuration_sha256": "b9f97e34a47bd534b0a18b53ab0a6cad7013c7da61c00d7b77d8e32373bd88a7",
+  "activity_matches": {
+    "benign-host2-scp-may10": {
+      "window_event_count": 6577576,
+      "subject_match_count": 0,
+      "path_match_count": 208,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": [
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5122249,
+          "event_uuid": "805d9003ffa14861bdc3da492fe52d24",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5122250,
+          "event_uuid": "c222f3ab9b554a6fb8713129998f2d17",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478077000000,
+          "timestamp_utc": "2019-05-10T00:17:58.077000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5122251,
+          "event_uuid": "91409b02c816464f993d1356f767a573",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478078000000,
+          "timestamp_utc": "2019-05-10T00:17:58.078000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125923,
+          "event_uuid": "97217451875845d78b991473b7e970b4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125924,
+          "event_uuid": "79e2f220726648f1a279e185480b854a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125925,
+          "event_uuid": "c1dfcdb2ce5c41318577c70794b18c7b",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125926,
+          "event_uuid": "9ea18b8d17654558866df5719a2bb3de",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125927,
+          "event_uuid": "3291472293bb4c129e4f4d52e95f403c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125928,
+          "event_uuid": "ee56b0d6968f401797b4593f26f06402",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125929,
+          "event_uuid": "72fed5da5d8f4a509691e2113584363a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478074000000,
+          "timestamp_utc": "2019-05-10T00:17:58.074000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125930,
+          "event_uuid": "27b666c660e4415780b2ebf1aa6afe42",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478075000000,
+          "timestamp_utc": "2019-05-10T00:17:58.075000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125931,
+          "event_uuid": "54f04d2f0f0d4876b96f4ab2703fbaba",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478075000000,
+          "timestamp_utc": "2019-05-10T00:17:58.075000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5125941,
+          "event_uuid": "0615aafd49984975b20600ed4ed8a837",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478077000000,
+          "timestamp_utc": "2019-05-10T00:17:58.077000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128689,
+          "event_uuid": "e681cccd2a984e75a4f12f32f06f1bcd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128690,
+          "event_uuid": "b4bc52dd97ae4145a6edbbbbdb43720d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128691,
+          "event_uuid": "a7b55978eb104ac5ab7f42848d5d0eef",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128692,
+          "event_uuid": "8a2b48cd41e44054817f657cb35baf16",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128693,
+          "event_uuid": "dd5672b572d14239ab158079440482db",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128694,
+          "event_uuid": "1295de04c41f47c18578b6e4bc0d8370",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128695,
+          "event_uuid": "ded7228565ca4226a55127215cebe8db",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128696,
+          "event_uuid": "6ea370af0e7c471b88ff14edfba195aa",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5128706,
+          "event_uuid": "06230c95acd040c782d4640cf07aa918",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478978000000,
+          "timestamp_utc": "2019-05-10T00:17:58.978000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5131440,
+          "event_uuid": "34a1205538a74ed2a4d1bca2a8e82c89",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478976000000,
+          "timestamp_utc": "2019-05-10T00:17:58.976000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5131441,
+          "event_uuid": "88224cae8aeb46398355cd6e64abc4bd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478978000000,
+          "timestamp_utc": "2019-05-10T00:17:58.978000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5131442,
+          "event_uuid": "7334ce2a6199402a93077106ba1f4894",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447478979000000,
+          "timestamp_utc": "2019-05-10T00:17:58.979000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "b01e03a32c1f40ae8058d0d3e4d0b7c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5796101,
+          "event_uuid": "5c9e369a414741ed87e2d95a64544314",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5796102,
+          "event_uuid": "57665b71d3184cffb11d89736a1805d5",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729800000000,
+          "timestamp_utc": "2019-05-10T00:22:09.800000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798534,
+          "event_uuid": "e7010f30159346a482300846d619fe22",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798535,
+          "event_uuid": "286af35654f44d02bb2911af10f5f0e2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798536,
+          "event_uuid": "59a792428f3e437f97199e5c36eb9808",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798537,
+          "event_uuid": "0767621c378f43e5a27c5fed37e28f22",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798538,
+          "event_uuid": "a0b71bf5f0994e649593cf691bf127ce",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798539,
+          "event_uuid": "4e61989a7ffc418f94fcc6d18f59c347",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798540,
+          "event_uuid": "443ee59b86cd482c812420450460e4a4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798541,
+          "event_uuid": "942dfc348923467fa1b2525f58ff4469",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729797000000,
+          "timestamp_utc": "2019-05-10T00:22:09.797000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798552,
+          "event_uuid": "b0727d3b8ac14ff8a6b64c9fd4060581",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729799000000,
+          "timestamp_utc": "2019-05-10T00:22:09.799000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798553,
+          "event_uuid": "e4c45841777a48bfa82a417ed6f575c3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729799000000,
+          "timestamp_utc": "2019-05-10T00:22:09.799000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798554,
+          "event_uuid": "f85b2b0185ea4c7ab984c843f3b88ccd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729799000000,
+          "timestamp_utc": "2019-05-10T00:22:09.799000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 5798555,
+          "event_uuid": "4243be596f73451eb798cdac90328fb5",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557447729800000000,
+          "timestamp_utc": "2019-05-10T00:22:09.800000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "e1123d392e3a4dea9278165b55f00f8d",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6323703,
+          "event_uuid": "09b7b44e59f64bf29735a7689a6686ed",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6323747,
+          "event_uuid": "b5a754f3211140d7af9e92ca5bc173d7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6323748,
+          "event_uuid": "109cec49584a4f0380ee7aca2e6f4269",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6323759,
+          "event_uuid": "75d45ae87c3c403ca57b4ca3dd15b34b",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111534000000,
+          "timestamp_utc": "2019-05-10T00:28:31.534000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6323999,
+          "event_uuid": "d7b9bc1b884a43df8fa0115864130964",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111422000000,
+          "timestamp_utc": "2019-05-10T00:28:31.422000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324000,
+          "event_uuid": "2f597a1ac738457dbe5de7033383020a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111422000000,
+          "timestamp_utc": "2019-05-10T00:28:31.422000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324001,
+          "event_uuid": "362282f4118c4482a6a30fe88bff1f5e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324003,
+          "event_uuid": "257d74f569c643068ed6f8be8f614202",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324004,
+          "event_uuid": "cf6e99aff96a49c5a3d124ec92f19e55",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324007,
+          "event_uuid": "5ea46acca6b949bdab551e1879b2cd68",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111423000000,
+          "timestamp_utc": "2019-05-10T00:28:31.423000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324030,
+          "event_uuid": "14215354fd634a5c92d0561893897ab0",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324031,
+          "event_uuid": "de841d75ea264d2dbec6516a29ce2145",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324032,
+          "event_uuid": "9d2edaca976f4c7386fbc9d22998a9c0",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324036,
+          "event_uuid": "328bd043375f419583edfe21490f54d3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324037,
+          "event_uuid": "f04c7ad9ae534021866423bb2ee43213",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324038,
+          "event_uuid": "3aaff1b438f6459384f8c95f2a58a9e2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324039,
+          "event_uuid": "bf4145c4bada4656a617eb06affd9347",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324040,
+          "event_uuid": "8b40acfc7a894cd6ba14de0c9266abe3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324041,
+          "event_uuid": "63a27934d56846e4ab380372f4152955",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111518000000,
+          "timestamp_utc": "2019-05-10T00:28:31.518000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324042,
+          "event_uuid": "5a35f98fd4af4acab6b83413de8d5035",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111519000000,
+          "timestamp_utc": "2019-05-10T00:28:31.519000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "fcf9de34cc0c4f9583d4d12628a1beab",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324043,
+          "event_uuid": "e8339f453bc74f428e2c1e7d3875f582",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111519000000,
+          "timestamp_utc": "2019-05-10T00:28:31.519000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "fcf9de34cc0c4f9583d4d12628a1beab",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324044,
+          "event_uuid": "67831ec32fe447fcbfe460765b70b7c0",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448111523000000,
+          "timestamp_utc": "2019-05-10T00:28:31.523000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "c0d5968b5cd74cdfb2626b541e6e7804",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324593,
+          "event_uuid": "11f65221891943b3a731d126f75d1a91",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324594,
+          "event_uuid": "e7da5192ecdb49238b815e0e53075618",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324595,
+          "event_uuid": "b56f1d8c9bae4c3bbcc48096ebac2101",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6324596,
+          "event_uuid": "e401eaaf66e2429a814355d56db02b62",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6325690,
+          "event_uuid": "b710abbaf3084f8d8e82d21cfacdf4ed",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6325691,
+          "event_uuid": "aba025db8c35485cbcb85917315beb9e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112523000000,
+          "timestamp_utc": "2019-05-10T00:28:32.523000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6325705,
+          "event_uuid": "53afa74483cc42debe79dc00eb16b02c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448112555000000,
+          "timestamp_utc": "2019-05-10T00:28:32.555000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6333516,
+          "event_uuid": "f3a5643e70e94ca3858b84482fa0c408",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448115576000000,
+          "timestamp_utc": "2019-05-10T00:28:35.576000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "894fd235a5044da9bab94db3d398ba60",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 6333517,
+          "event_uuid": "365d99cf790a4874b0656ffb900e3085",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557448115576000000,
+          "timestamp_utc": "2019-05-10T00:28:35.576000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "894fd235a5044da9bab94db3d398ba60",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863455,
+          "event_uuid": "681b1740574a46c3bc570531f461bf7c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582863000000,
+          "timestamp_utc": "2019-05-10T00:53:02.863000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863456,
+          "event_uuid": "9e31708b18da474d9f0cd93740b208a6",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582863000000,
+          "timestamp_utc": "2019-05-10T00:53:02.863000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863457,
+          "event_uuid": "cbef331cd60b4cb1a3dcb2c5fe6a9c7d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863458,
+          "event_uuid": "eec25063588340d2a35ba5540e08dcb9",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863460,
+          "event_uuid": "6de8059c373c4d37962aa9b283994781",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863462,
+          "event_uuid": "5dee3e5fae4044e7aee3bb4c9cb2521d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863464,
+          "event_uuid": "418fba155f6d4aa29108ceebcbef735d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863465,
+          "event_uuid": "eb476cda8dfb426da5951620d930749d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863466,
+          "event_uuid": "22358e1164d449c89803c7056da9a107",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863469,
+          "event_uuid": "1d1ccb57d5104293b45f5225cceba8c4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863471,
+          "event_uuid": "88fc8df834c64f77abe4631cb4a09963",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863472,
+          "event_uuid": "90293d0847f04de89d25e71e296892d4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863473,
+          "event_uuid": "9a25bf1e8ba841f1af1b2e852a0eff0c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863474,
+          "event_uuid": "1d15e6830a0840538653afd2a84dacf7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863475,
+          "event_uuid": "93ffcaf72c3140e9ac37af8b0189360d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582869000000,
+          "timestamp_utc": "2019-05-10T00:53:02.869000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863476,
+          "event_uuid": "f56e05c0530e4839ba38e9f0b268b030",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582869000000,
+          "timestamp_utc": "2019-05-10T00:53:02.869000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "dc60c17afcf0489c80f6578bc9084589",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863477,
+          "event_uuid": "d9ff116f8f5d46ddbfb536bccc0813f7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582869000000,
+          "timestamp_utc": "2019-05-10T00:53:02.869000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "dc60c17afcf0489c80f6578bc9084589",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863482,
+          "event_uuid": "36f216f78f5e4f3fadbb42cd78b6356f",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582873000000,
+          "timestamp_utc": "2019-05-10T00:53:02.873000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863768,
+          "event_uuid": "d5d4bde4d0a44c4fa0d4637841e4da9e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863769,
+          "event_uuid": "bb2182a9130743ce92802acb55f043f2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582868000000,
+          "timestamp_utc": "2019-05-10T00:53:02.868000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8863788,
+          "event_uuid": "3f3f2d472c294706b22c60fb0435b693",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582878000000,
+          "timestamp_utc": "2019-05-10T00:53:02.878000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8864613,
+          "event_uuid": "50ad93e486794c10b195e990330d16a3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449582864000000,
+          "timestamp_utc": "2019-05-10T00:53:02.864000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "8508d0e854f04f878f4e4c376c95e331",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8866743,
+          "event_uuid": "35acb1c52a5d40479e4b74365e40f69b",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8866744,
+          "event_uuid": "d585aa671dda471f9a534042e96dea09",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8866745,
+          "event_uuid": "3ce27e692e904e1cb2148ec3be8e5399",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8866746,
+          "event_uuid": "8454ae1098974454b6f53eb4eb54a193",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8868771,
+          "event_uuid": "18ce2775893447019fd24d1315473128",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8868772,
+          "event_uuid": "8e0af92e23d941ba8613786c246706b5",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583878000000,
+          "timestamp_utc": "2019-05-10T00:53:03.878000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8868773,
+          "event_uuid": "0b1548e0ff524393a75ecedcde123b85",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449583893000000,
+          "timestamp_utc": "2019-05-10T00:53:03.893000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "c6f3bb1ad7054bd8a83ccd5648bc4ce7",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8878364,
+          "event_uuid": "d20fbf25b5bb4337bdbb3111606a772f",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449589821000000,
+          "timestamp_utc": "2019-05-10T00:53:09.821000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "894fd235a5044da9bab94db3d398ba60",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8878365,
+          "event_uuid": "0e8369422a9248418ba3205bffcf50da",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449589821000000,
+          "timestamp_utc": "2019-05-10T00:53:09.821000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "894fd235a5044da9bab94db3d398ba60",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8949735,
+          "event_uuid": "ec8f79e1c87b41b39ab786e7615058f4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635622000000,
+          "timestamp_utc": "2019-05-10T00:53:55.622000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "28fa0fbd9b5945649cf20e1c59891e06",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8949736,
+          "event_uuid": "8bb6844715344efaad088dcf579a55bf",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635622000000,
+          "timestamp_utc": "2019-05-10T00:53:55.622000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "28fa0fbd9b5945649cf20e1c59891e06",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8949739,
+          "event_uuid": "ac7b6a10c5e24fb5bdd17ce018ecaa1d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8949740,
+          "event_uuid": "c12a59c945a54adfb1105dd638bd82e8",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635625000000,
+          "timestamp_utc": "2019-05-10T00:53:55.625000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8949741,
+          "event_uuid": "06044aa952e745deba0b9be7028f9bb1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635626000000,
+          "timestamp_utc": "2019-05-10T00:53:55.626000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952511,
+          "event_uuid": "d85e329e150044dc869385f9ce620930",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635620000000,
+          "timestamp_utc": "2019-05-10T00:53:55.620000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952512,
+          "event_uuid": "24427b15859347c78239d794c12c10de",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635620000000,
+          "timestamp_utc": "2019-05-10T00:53:55.620000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952513,
+          "event_uuid": "d49cc00ed08941d5a9710ad5991ab1a1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635620000000,
+          "timestamp_utc": "2019-05-10T00:53:55.620000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952514,
+          "event_uuid": "42df0aedd8c64e47a26c6663a734708d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952515,
+          "event_uuid": "c4061491da894fb995e5e94079963ea8",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952516,
+          "event_uuid": "dca1344dda7a4948af9bfeb7f7e1b55b",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952517,
+          "event_uuid": "0434d2ae72bb41bcaec24a6058faf7c4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952518,
+          "event_uuid": "c1937f5779574407b06f3c0e4a4543f1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952519,
+          "event_uuid": "359ec6368df5495ebd0f0d8e7edb7984",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "28fa0fbd9b5945649cf20e1c59891e06",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952520,
+          "event_uuid": "6153d8bcc1fa46aa909faf878e95d06b",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635621000000,
+          "timestamp_utc": "2019-05-10T00:53:55.621000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "28fa0fbd9b5945649cf20e1c59891e06",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952521,
+          "event_uuid": "531b044e112f4c0e80f031b97a212548",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635622000000,
+          "timestamp_utc": "2019-05-10T00:53:55.622000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "28fa0fbd9b5945649cf20e1c59891e06",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8952530,
+          "event_uuid": "ac9727dff7064865b631a41ef28cc09c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449635625000000,
+          "timestamp_utc": "2019-05-10T00:53:55.625000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "f9782cc510ab444586d59f2b6c6f7ed6",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985761,
+          "event_uuid": "624682ccecd64a6a9367a378fd22f6e2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640787000000,
+          "timestamp_utc": "2019-05-10T00:54:00.787000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985762,
+          "event_uuid": "ed28717c18a84d97b47dbe0d551df5b3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640788000000,
+          "timestamp_utc": "2019-05-10T00:54:00.788000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985833,
+          "event_uuid": "dd3d1b69eb574e7d82a363c8f8f368f3",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640793000000,
+          "timestamp_utc": "2019-05-10T00:54:00.793000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985837,
+          "event_uuid": "30b5b4ec15de4b2ba440b54bf73d6613",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640794000000,
+          "timestamp_utc": "2019-05-10T00:54:00.794000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985838,
+          "event_uuid": "8c42a86bef9d4f648faca31dc8f3c219",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640794000000,
+          "timestamp_utc": "2019-05-10T00:54:00.794000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985839,
+          "event_uuid": "6c1e548417bb47da8c4940dcc16be4bd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640794000000,
+          "timestamp_utc": "2019-05-10T00:54:00.794000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985862,
+          "event_uuid": "50e38a145b044318912ec442d204fd5e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640798000000,
+          "timestamp_utc": "2019-05-10T00:54:00.798000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985863,
+          "event_uuid": "2ff296f3f2ba4f9490f0e9a07b63d4ab",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640798000000,
+          "timestamp_utc": "2019-05-10T00:54:00.798000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985864,
+          "event_uuid": "8f12c6d39b004423aa5e9cf2c40f8eee",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640798000000,
+          "timestamp_utc": "2019-05-10T00:54:00.798000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985869,
+          "event_uuid": "4637dd624fab402cbf811a8181dad21e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640799000000,
+          "timestamp_utc": "2019-05-10T00:54:00.799000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985870,
+          "event_uuid": "a5bf9ea3150e45cfbb3b37aba6b3f02e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640799000000,
+          "timestamp_utc": "2019-05-10T00:54:00.799000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985871,
+          "event_uuid": "1c0290b929aa423d8689d107c75310f7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640799000000,
+          "timestamp_utc": "2019-05-10T00:54:00.799000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985872,
+          "event_uuid": "ae57d8f27667427e86f50aa7bddbb2f2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640799000000,
+          "timestamp_utc": "2019-05-10T00:54:00.799000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985873,
+          "event_uuid": "d8258b69b4544f07b52afd6f35ad75b1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640800000000,
+          "timestamp_utc": "2019-05-10T00:54:00.800000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985874,
+          "event_uuid": "9b17196f16a544bea5a43ea5b0810305",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640800000000,
+          "timestamp_utc": "2019-05-10T00:54:00.800000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985876,
+          "event_uuid": "644b8f919f894733a331fa32c1a1cd76",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640801000000,
+          "timestamp_utc": "2019-05-10T00:54:00.801000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "37d6d3958f4f4fc4bbb29a4b72294038",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985877,
+          "event_uuid": "667d87d0eeb94387bdaf41312e6e2668",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640801000000,
+          "timestamp_utc": "2019-05-10T00:54:00.801000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "37d6d3958f4f4fc4bbb29a4b72294038",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8985880,
+          "event_uuid": "4b288acc9b024087b83e9bed9302ae48",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640806000000,
+          "timestamp_utc": "2019-05-10T00:54:00.806000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8986820,
+          "event_uuid": "3e161b02149c490c8eb1d864fd44a971",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640794000000,
+          "timestamp_utc": "2019-05-10T00:54:00.794000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8986821,
+          "event_uuid": "4671b3411e1b4784a1162a594bddfa82",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640800000000,
+          "timestamp_utc": "2019-05-10T00:54:00.800000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8986840,
+          "event_uuid": "4deee24f57284bcd8f42f1692917385a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640808000000,
+          "timestamp_utc": "2019-05-10T00:54:00.808000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "196bb51408814bd0bcf2668dead77ea3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8988237,
+          "event_uuid": "d1f6522eacf14cedb1de2f7495f0f451",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449640794000000,
+          "timestamp_utc": "2019-05-10T00:54:00.794000000Z",
+          "cdm_event_type": "EVENT_CREATE_OBJECT",
+          "subject_uuid": "1b5c4ef6dc7744d3a2ab08c71ca2ec95",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8992586,
+          "event_uuid": "06ea7e534b5441f59c51f9f646919fbb",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8992587,
+          "event_uuid": "27bcd5fc682a4282a7628d48d48c500f",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8992588,
+          "event_uuid": "fa3f89125d754778bfcd2dd0045b1297",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8993624,
+          "event_uuid": "f228eb7678cc4ef097c820f9c296c175",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8993625,
+          "event_uuid": "46a8072508284829bdd492dc5e233c7d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8993626,
+          "event_uuid": "80127ba246244687afee2acc2d7f5672",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 8993627,
+          "event_uuid": "2c34f330b1ae41f3a53241869cebae7a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449641821000000,
+          "timestamp_utc": "2019-05-10T00:54:01.821000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "9c1ee6d266594b4f81a1292c3c7d285a",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9002092,
+          "event_uuid": "4297e0dfdca04f15881ac844769b4479",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449644807000000,
+          "timestamp_utc": "2019-05-10T00:54:04.807000000Z",
+          "cdm_event_type": "EVENT_WRITE",
+          "subject_uuid": "ed6927ac51824afe8fdbccc9695835c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9002093,
+          "event_uuid": "1a1161c802fe4acc83da2172e1895ec8",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449644808000000,
+          "timestamp_utc": "2019-05-10T00:54:04.808000000Z",
+          "cdm_event_type": "EVENT_MODIFY_FILE_ATTRIBUTES",
+          "subject_uuid": "ed6927ac51824afe8fdbccc9695835c3",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004057,
+          "event_uuid": "dbd2f33a585d40538e3668df3da9be8d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004058,
+          "event_uuid": "d1bb0e9b84b34884bc526e6a2e9fb7b1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004059,
+          "event_uuid": "fd5dc53c176f4da4a0ebd70b69f20e90",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004060,
+          "event_uuid": "edb38fa1fa34491eb179a61a45256fca",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004061,
+          "event_uuid": "76754a9ebeb74404a58a041d538c402a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004062,
+          "event_uuid": "49af282bfc234c9b982fa80157d3acd1",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004063,
+          "event_uuid": "0d49cec062e54f2b999f82b7a2015952",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_FCNTL",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004064,
+          "event_uuid": "5fbeeb70df4e408daa71d32910471e7e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004065,
+          "event_uuid": "0c010e20d7434755b876afae0a6310ab",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004066,
+          "event_uuid": "65ed5e52fc864bf58f6a1c70e07d982a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004067,
+          "event_uuid": "c59bd131c60e49208e77b31ab4d426b2",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004068,
+          "event_uuid": "13d61467bec24afdb482995a65d876af",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004069,
+          "event_uuid": "0164be8772504dbf8deb6bde5f3c9a7f",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004070,
+          "event_uuid": "11703fd590824e2f9245333ad0c8d9ec",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004071,
+          "event_uuid": "e1d4014798ff4789b2ac3029f875abc8",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004072,
+          "event_uuid": "af5d8f79b6c04e078b57676e21309885",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004073,
+          "event_uuid": "3b58dc5f1b2a422ea1837a702062e029",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004074,
+          "event_uuid": "f443b4891ec7438bbb4b7d1baef13b7d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004075,
+          "event_uuid": "05d2c8dc11a54da7a9847d29f149b04d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004076,
+          "event_uuid": "460d0eab04fa40eb96ada7f062baeeac",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004077,
+          "event_uuid": "9adfe313ae2a4a40a78ce325fef1d1ea",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004081,
+          "event_uuid": "652ea70cd8454d65ba48f64d98846eab",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004082,
+          "event_uuid": "6d5560d876614608bf463a90f6520b4a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004083,
+          "event_uuid": "664ab5ce9ed64ecd990016fb68fae14a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004326,
+          "event_uuid": "62c5e64af2bd4546b8c6f307379e840d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645804000000,
+          "timestamp_utc": "2019-05-10T00:54:05.804000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004327,
+          "event_uuid": "d1bed5f1f9c9450eb5db558ba11382bb",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645804000000,
+          "timestamp_utc": "2019-05-10T00:54:05.804000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004328,
+          "event_uuid": "c4390e2012d840878165a120c3b37693",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645807000000,
+          "timestamp_utc": "2019-05-10T00:54:05.807000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004331,
+          "event_uuid": "97b2e63f1c1d4cecbe5433ebe35594dd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004332,
+          "event_uuid": "b3cd9d0310e04743ad598a3ac96f9c10",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645808000000,
+          "timestamp_utc": "2019-05-10T00:54:05.808000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004336,
+          "event_uuid": "8fd6380205234d3898e8f8cd5c5bf444",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645745000000,
+          "timestamp_utc": "2019-05-10T00:54:05.745000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004337,
+          "event_uuid": "0965f74ff74d44eba4f84d7f83ae2ea9",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645840000000,
+          "timestamp_utc": "2019-05-10T00:54:05.840000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004338,
+          "event_uuid": "707c5a0ccc1949eca896854453134013",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645744000000,
+          "timestamp_utc": "2019-05-10T00:54:05.744000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004339,
+          "event_uuid": "813eb8b7ac484702ad5896b61b0c14c4",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645841000000,
+          "timestamp_utc": "2019-05-10T00:54:05.841000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9004371,
+          "event_uuid": "fc0ae5f2e6084e2b96d9c7978b1b3993",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645911000000,
+          "timestamp_utc": "2019-05-10T00:54:05.911000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005059,
+          "event_uuid": "354670e60b8f4529a6c0ec98f3f830e6",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449646254000000,
+          "timestamp_utc": "2019-05-10T00:54:06.254000000Z",
+          "cdm_event_type": "EVENT_CLOSE",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005328,
+          "event_uuid": "47bd4d1bbd7b42b69410e92af0bac8bf",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645774000000,
+          "timestamp_utc": "2019-05-10T00:54:05.774000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005329,
+          "event_uuid": "1d13887757a44e21ad1e2a692f586760",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005330,
+          "event_uuid": "edefe40fd2a84a818bf1ddf3a0839d5c",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005331,
+          "event_uuid": "323348add5864bd5b89fc7796ba1e463",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005333,
+          "event_uuid": "4065a55c3f204cf58eb8c313893eccb5",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005334,
+          "event_uuid": "6383654cb32c4c8ebd16e1743ceae496",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005335,
+          "event_uuid": "0698e6ad5e4740c48679980eb797047a",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645775000000,
+          "timestamp_utc": "2019-05-10T00:54:05.775000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "19db1c364e5845868f0e0459ba393726",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005338,
+          "event_uuid": "8034aeeed19e433dba5f8baa5e882a0e",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005339,
+          "event_uuid": "c963c357f0ed4326a1ed3d958a9049d8",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005340,
+          "event_uuid": "b2e14e240c284fad8d401d1f0030d1b7",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005341,
+          "event_uuid": "3d31343dc67341aa9e3ded8b2ecf408d",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_CHECK_FILE_ATTRIBUTES",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005343,
+          "event_uuid": "e684622493a24823bcf0a86bba2fa2bd",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005344,
+          "event_uuid": "95cae7735f0d46e89aa28f5f22337594",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005347,
+          "event_uuid": "47ae1a1892324f88b17003d2e093d804",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005348,
+          "event_uuid": "669400acadee439eabb2b95e9d7d7f00",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645776000000,
+          "timestamp_utc": "2019-05-10T00:54:05.776000000Z",
+          "cdm_event_type": "EVENT_READ",
+          "subject_uuid": "0be3d0648298450bbae7d85a5093956b",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        },
+        {
+          "source_file": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+          "record_index_1based": 9005371,
+          "event_uuid": "6d3ab295e0444730847d6e4982de6229",
+          "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+          "timestamp_nanos": 1557449645804000000,
+          "timestamp_utc": "2019-05-10T00:54:05.804000000Z",
+          "cdm_event_type": "EVENT_OPEN",
+          "subject_uuid": "205e49b229c24d96a72fa57d6ff2e92c",
+          "matched_path_fields": [
+            "predicateObjectPath"
+          ],
+          "already_seen_subject_match": false,
+          "label": null
+        }
+      ]
+    }
+  },
+  "labels_assigned": 0,
+  "review_events": [],
+  "scope": "Full record/time scan; complete identity metadata retained locally; candidate string search covers Subject cmdLine and Event paths only",
+  "candidate_caveat": "Known-subject event matching sees only preceding definitions; zero matches does not prove absence. All candidates need full-record reread and source review."
+}

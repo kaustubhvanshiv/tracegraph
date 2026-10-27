@@ -1,0 +1,47 @@
+{
+  "files": [
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "compressed_bytes": 322452529,
+      "modified_time_ns": 1793100948400882900,
+      "record_type_counts": {
+        "RECORD_EVENT": 9555998,
+        "RECORD_MEMORY_OBJECT": 367496,
+        "RECORD_SUBJECT": 62646,
+        "RECORD_TIME_MARKER": 164,
+        "RECORD_IPC_OBJECT": 2806,
+        "RECORD_REGISTRY_KEY_OBJECT": 2417,
+        "RECORD_NET_FLOW_OBJECT": 7123,
+        "RECORD_FILE_OBJECT": 1322,
+        "RECORD_SRC_SINK_OBJECT": 28
+      },
+      "min_event_utc": "2019-05-08T18:34:21.630000000Z",
+      "max_event_utc": "2019-05-09T23:06:47.488000000Z",
+      "host_event_ranges": {
+        "223cbbce1bc5451e9d2e5b3a762f31c7": {
+          "min_utc": "2019-05-08T18:34:21.630000000Z",
+          "max_utc": "2019-05-09T23:06:47.488000000Z"
+        }
+      }
+    }
+  ],
+  "file_pattern": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+  "all_files_fully_scanned": true,
+  "activity_configuration_sha256": "b9f97e34a47bd534b0a18b53ab0a6cad7013c7da61c00d7b77d8e32373bd88a7",
+  "activity_matches": {
+    "benign-host2-scp-may10": {
+      "window_event_count": 0,
+      "subject_match_count": 0,
+      "path_match_count": 0,
+      "known_subject_event_count": 0,
+      "subject_candidates": [],
+      "event_candidates": []
+    }
+  },
+  "labels_assigned": 0,
+  "review_events": [],
+  "scope": "Full record/time scan; complete identity metadata retained locally; candidate string search covers Subject cmdLine and Event paths only",
+  "candidate_caveat": "Known-subject event matching sees only preceding definitions; zero matches does not prove absence. All candidates need full-record reread and source review."
+}
