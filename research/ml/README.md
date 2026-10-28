@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-28 benign/split readiness:** the published validation day and three
+training days are absent from current raw Event bounds. Published normal-day
+membership also requires a host/action review and a different split protocol;
+it cannot supply our missing benign Event labels automatically. A processed
+38.6 GB DARPA source was checked by metadata only. See the
+[readiness findings and next-phase choices](../../data/ml/datasets/darpa/ml02_benign_split_readiness_20261028.md).
+
 **2026-10-27 public annotation case review:** a fresh 2.1-million-record prefix
 scan confirms published target-object UUIDs for all five attack-related review
 Events. Two candidates still lack their process parent; the eligible label set

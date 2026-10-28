@@ -1,5 +1,10 @@
 # ML-02 — ground truth and split plan
 
+**Benign/split readiness, 2026-10-28:** the published normal-day assignments
+cannot replace reviewed benign Event evidence or our chronological split rules.
+The local subset lacks the published validation day. The label contract remains
+unchanged; see the [readiness review and protocol choices](datasets/darpa/ml02_benign_split_readiness_20261028.md).
+
 **Public annotation case review, 2026-10-27:** exact artifact UUIDs for the five
 attack/candidate review Events are corroborated by the pinned public node lists.
 The two candidates' missing process parent is not repaired by those lists; labels remain

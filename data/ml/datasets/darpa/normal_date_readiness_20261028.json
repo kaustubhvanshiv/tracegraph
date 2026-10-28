@@ -1,0 +1,314 @@
+{
+  "assessment_date": "2026-10-28",
+  "scope": "Benign-label and split-date readiness assessment for current three-host E5 FiveDirections raw subset; no benchmark adopted",
+  "source_commit": "438a05a7c55256f639e5b5945cf4828fe3ee078e",
+  "implementation_sources": [
+    {
+      "path": "dataset_preprocessing/darpa_tc/filelist.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/dataset_preprocessing/darpa_tc/filelist.py",
+      "bytes": 24895,
+      "git_blob_sha1": "67c2a372efe38b1b8ed07c0c1a0f49550014b892",
+      "sha256": "c3ef1612f15d97b7ef62c43a8f44254439e7c94567447fe4302daac87d2c7256"
+    },
+    {
+      "path": "dataset_preprocessing/README.md",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/dataset_preprocessing/README.md",
+      "bytes": 413,
+      "git_blob_sha1": "e39b6ba264e0e964adcaca67749875ecfcc9a821",
+      "sha256": "ac3045b68a51beb80ecff161d783718e6043a939bc11d3f93f8c52cb4f8fa273"
+    },
+    {
+      "path": "docs/docs/download-files.md",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/docs/docs/download-files.md",
+      "bytes": 1288,
+      "git_blob_sha1": "fc19a40a5b40f43c2bdf66e946c5fd57e4a33c31",
+      "sha256": "b78641e394b9b580b05dbc519aeab802cb67926ba80840d5ba010ab30ef85b4b"
+    },
+    {
+      "path": "dataset_preprocessing/create_database.sh",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/dataset_preprocessing/create_database.sh",
+      "bytes": 1555,
+      "git_blob_sha1": "6f9b7444bbf91d620062af329af17af846a45294",
+      "sha256": "8e814f8e80af6433109a5137aa54865332ca961e241dfbe888054b053086d823"
+    },
+    {
+      "path": "download_datasets.sh",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/download_datasets.sh",
+      "bytes": 2644,
+      "git_blob_sha1": "3c72ec4d2d41fb542711452ddbfda79f83443ece",
+      "sha256": "ff3efced8625d7362c277632bfb60c849803a78a327b1cfa65cad1a5694a4d57"
+    },
+    {
+      "path": "pidsmaker/config/config.py",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/pidsmaker/config/config.py",
+      "bytes": 73490,
+      "git_blob_sha1": "dcb3175ca296b31ec428c27a70da0acfedf2b32e",
+      "sha256": "c60c9c5073d880a71ec9a82035fc5c5f0b0f838276a5807d814c4da8473267a0"
+    }
+  ],
+  "source_documents": {
+    "act_report_sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+    "act_pages_visually_reviewed": [
+      41,
+      54
+    ],
+    "operational_log_sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+  },
+  "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "local_archives_validated": 37,
+  "new_raw_records_scanned": 0,
+  "comparison_timezone": "EDT UTC-04:00 for May 2019 calendar dates; original Event nanoseconds unchanged",
+  "upstream_dates": {
+    "train_dates": [
+      "2019-05-08",
+      "2019-05-10",
+      "2019-05-11",
+      "2019-05-13",
+      "2019-05-14"
+    ],
+    "val_dates": [
+      "2019-05-12"
+    ],
+    "test_dates": [
+      "2019-05-09",
+      "2019-05-15",
+      "2019-05-17"
+    ],
+    "unused_dates": [
+      "2019-05-16"
+    ]
+  },
+  "calendar_coverage": [
+    {
+      "role": "train",
+      "local_date": "2019-05-08",
+      "utc_start_inclusive": "2019-05-08T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-09T04:00:00+00:00",
+      "bounds_overlapping_file_count": 19,
+      "bounds_overlapping_files": [
+        "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.4.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.5.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.6.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.6.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.7.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.8.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.9.gz"
+      ],
+      "bounds_overlapping_files_by_host_number": {
+        "1": 5,
+        "2": 10,
+        "3": 4
+      },
+      "interpretation": "Bounds overlap only; continuous coverage, daily Event count and benign purpose are not established"
+    },
+    {
+      "role": "train",
+      "local_date": "2019-05-10",
+      "utc_start_inclusive": "2019-05-10T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-11T04:00:00+00:00",
+      "bounds_overlapping_file_count": 2,
+      "bounds_overlapping_files": [
+        "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.20.gz"
+      ],
+      "bounds_overlapping_files_by_host_number": {
+        "1": 1,
+        "2": 1
+      },
+      "interpretation": "Bounds overlap only; continuous coverage, daily Event count and benign purpose are not established"
+    },
+    {
+      "role": "train",
+      "local_date": "2019-05-11",
+      "utc_start_inclusive": "2019-05-11T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-12T04:00:00+00:00",
+      "bounds_overlapping_file_count": 0,
+      "bounds_overlapping_files": [],
+      "bounds_overlapping_files_by_host_number": {},
+      "interpretation": "No available raw Event timestamps in this date window"
+    },
+    {
+      "role": "train",
+      "local_date": "2019-05-13",
+      "utc_start_inclusive": "2019-05-13T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-14T04:00:00+00:00",
+      "bounds_overlapping_file_count": 0,
+      "bounds_overlapping_files": [],
+      "bounds_overlapping_files_by_host_number": {},
+      "interpretation": "No available raw Event timestamps in this date window"
+    },
+    {
+      "role": "train",
+      "local_date": "2019-05-14",
+      "utc_start_inclusive": "2019-05-14T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-15T04:00:00+00:00",
+      "bounds_overlapping_file_count": 0,
+      "bounds_overlapping_files": [],
+      "bounds_overlapping_files_by_host_number": {},
+      "interpretation": "No available raw Event timestamps in this date window"
+    },
+    {
+      "role": "validation",
+      "local_date": "2019-05-12",
+      "utc_start_inclusive": "2019-05-12T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-13T04:00:00+00:00",
+      "bounds_overlapping_file_count": 0,
+      "bounds_overlapping_files": [],
+      "bounds_overlapping_files_by_host_number": {},
+      "interpretation": "No available raw Event timestamps in this date window"
+    },
+    {
+      "role": "test",
+      "local_date": "2019-05-09",
+      "utc_start_inclusive": "2019-05-09T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-10T04:00:00+00:00",
+      "bounds_overlapping_file_count": 11,
+      "bounds_overlapping_files": [
+        "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.20.gz"
+      ],
+      "bounds_overlapping_files_by_host_number": {
+        "1": 5,
+        "2": 6
+      },
+      "interpretation": "Bounds overlap only; continuous coverage, daily Event count and benign purpose are not established"
+    },
+    {
+      "role": "test",
+      "local_date": "2019-05-15",
+      "utc_start_inclusive": "2019-05-15T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-16T04:00:00+00:00",
+      "bounds_overlapping_file_count": 2,
+      "bounds_overlapping_files": [
+        "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.111.gz"
+      ],
+      "bounds_overlapping_files_by_host_number": {
+        "2": 1,
+        "3": 1
+      },
+      "interpretation": "Bounds overlap only; continuous coverage, daily Event count and benign purpose are not established"
+    },
+    {
+      "role": "test",
+      "local_date": "2019-05-17",
+      "utc_start_inclusive": "2019-05-17T04:00:00+00:00",
+      "utc_end_exclusive": "2019-05-18T04:00:00+00:00",
+      "bounds_overlapping_file_count": 4,
+      "bounds_overlapping_files": [
+        "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+        "ta1-fivedirections-1-e5-official-1.bin.122.gz",
+        "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+        "ta1-fivedirections-3-e5-official-1.bin.111.gz"
+      ],
+      "bounds_overlapping_files_by_host_number": {
+        "1": 2,
+        "2": 1,
+        "3": 1
+      },
+      "interpretation": "Bounds overlap only; continuous coverage, daily Event count and benign purpose are not established"
+    }
+  ],
+  "chronological_policy_compatibility": {
+    "latest_train_date": "2019-05-14",
+    "earliest_validation_date": "2019-05-12",
+    "latest_validation_date": "2019-05-12",
+    "earliest_test_date": "2019-05-09",
+    "train_before_validation": false,
+    "validation_before_test": false
+  },
+  "report_documented_attack_on_upstream_training_date": {
+    "date": "2019-05-10",
+    "report_pages": [
+      41,
+      54,
+      55,
+      56
+    ],
+    "publishing_host_uuid": "552ffa2e711a488fa65c52762800923b",
+    "reported_host": "ta1-fivedirections-3",
+    "reported_ip": "128.55.12.109",
+    "activity": "ACT stolen-credential SSH access and SCP exfiltration; console around 14:43-15:05 EDT",
+    "explicit_event_uuid_mapping_available": false,
+    "current_host3_file_bounds_overlap_this_date": false,
+    "consequence": "May 10 cannot be declared universally benign across all three FiveDirections hosts solely from upstream train_dates; actual authors' processed host scope/filtering remains unverified. No current training contamination is claimed because no split exists."
+  },
+  "raw_import_helper": {
+    "get_filelist_handled_names": [
+      "CADETS_E3",
+      "CADETS_E5",
+      "THEIA_E3",
+      "THEIA_E5"
+    ],
+    "fivedirections_e5_branch_present": false,
+    "consequence": "Inspected raw-import helper does not specify FiveDirections file selection. This does not show that the processed dataset or framework is generally unsupported."
+  },
+  "processed_dataset_option": {
+    "file_id": "1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4",
+    "name": "fivedirections_e5.dump",
+    "mime_type": "application/octet-stream",
+    "url": "https://drive.google.com/file/d/1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4/view?usp=drivesdk",
+    "bytes": 38603947024,
+    "decimal_gb": 38.6,
+    "gib": 35.95,
+    "modified_time": "2026-01-05T20:43:15.000Z",
+    "read_scope": "Drive metadata only",
+    "source_visibility_status": "access_not_verified",
+    "content_download_access_verified": false,
+    "contents_inspected": false,
+    "actual_dump_format_validated": false,
+    "host_date_label_manifest_validated": false,
+    "downloaded": false,
+    "source_is_original_darpa_release_folder": false,
+    "next_phase_requires_user_approval": true
+  },
+  "current_benign_leads": [
+    {
+      "case": "May 7 BCDEDIT administrative recovery",
+      "outcome": "One exact benign execution remains excluded for mixed clock epochs."
+    },
+    {
+      "case": "May 10 reported benign SCP action",
+      "outcome": "Alarm clock/CDL/PID mapping remains unresolved; no new label."
+    },
+    {
+      "case": "May 16 host-1 filemon driver setup",
+      "outcome": "Previously audited source coverage lacks the required interval; filename-only matches or later exploitation are not benign proof."
+    },
+    {
+      "case": "Other operational shutdown/recovery notes",
+      "outcome": "No additional exact FiveDirections command/UUID action was established from the operational log."
+    }
+  ],
+  "gate_basis": "Existing validated gate reused after unchanged annotation and reference provenance checks; no new normalization or split generation this phase",
+  "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "review_events": 6,
+  "eligible_attack_events": 3,
+  "eligible_benign_events": 0,
+  "independent_attack_groups": 2,
+  "new_labels_assigned": 0,
+  "splits_created": false,
+  "models_trained": false,
+  "decision": "Do not assign label 0 from published training-day membership or import the external split dates. Keep current Event target and labels unchanged pending explicit scope/protocol approval."
+}
