@@ -1,6 +1,16 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
-**Active route, 2026-10-28: uniform metadata completed.** The original frozen
+**Active route, 2026-10-28: background/group review completed.** There are
+500 seeded unknown-label review candidates from 7,034 observed host-1 nodes;
+60 candidate identities recur in the attack pilot. No verified benign labels
+were added. The current cases are assigned to one conservative evaluation group,
+without claiming a common campaign or independent partitions. All 34 relevant
+software checks pass. See the [review guide](BACKGROUND_REVIEW.md),
+[measured result](../../../data/ml/datasets/darpa/node_benchmark/background_group_review_20261028.md)
+and [v2 readiness audit](../../../data/ml/datasets/darpa/node_benchmark/background_group_protocol_audit_20261028.json).
+Four preparation gaps remain; the review pool is not training data.
+
+**Uniform metadata pass, 2026-10-28:** the original frozen
 295,442-node universe received a uniform search, resolving 45,806 additional
 native types (45,782 unlisted and 24 listed nodes). There are 267,164 resolved
 and 28,278 unresolved types; reference labels stay 45 supported / 295,397 unknown.

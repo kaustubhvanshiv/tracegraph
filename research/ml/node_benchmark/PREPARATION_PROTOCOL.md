@@ -11,6 +11,14 @@ and [measured audit](../../../data/ml/datasets/darpa/node_benchmark/preparation_
 make this review repeatable. The review is complete; the current dataset is
 not ready for binary supervised training or actual partition export.
 
+**Latest review:** the [background/grouping step](BACKGROUND_REVIEW.md) prepared
+500 unknown-label review IDs and accepted a conservative single evaluation group
+for the current pilot. Sixty selected identities recur in the attack pilot;
+no independence or benign-intent claim follows. The
+[v2 audit](../../../data/ml/datasets/darpa/node_benchmark/background_group_protocol_audit_20261028.json)
+has four remaining readiness gaps. The original label and split rules below
+are retained; v2 adds review-input checks rather than relaxing them.
+
 **Subsequent implementation:** the [uniform metadata pass](UNIFORM_METADATA.md)
 has now completed for the frozen pilot universe. It resolves 45,806 additional
 types, including 45,782 unlisted nodes, and clears the metadata-selection blocker.
@@ -122,8 +130,9 @@ These are review-budget settings, not an experiment or a model hyperparameter.
 Every candidate starts NULL. Only reviewed, correctly mapped evidence can
 supply a classification label. Report the review yield and unknown/exclusion
 counts; do not feed unreviewed nodes to the original pipeline as label 0.
-There are currently **no declared background windows**, so no candidate draw
-has been run. Controlled Task 29 scenarios may supplement evaluation when
+There are currently **no accepted training background windows**. A separate
+500-ID unknown-label review draw is now prepared; it is not an accepted training
+cohort. Controlled Task 29 scenarios may supplement evaluation when
 validated; they do not supply missing native DARPA labels.
 
 ## 4. Split whole groups chronologically
@@ -162,9 +171,13 @@ future attributes and held-out fitted statistics are excluded predictors.
 Feature engineering and model choice remain later tasks. No binary precision,
 recall, F1, PR-AUC or ROC-AUC is reported from reference-only/unknown data.
 
-## 5. Run the review and interpret its result
+## 5. Reproduce the initial review and interpret its result
 
 From the repository root, use the existing Python environment:
+
+This command reproduces the initial v1 review with the targeted repair artifact.
+For the current v2 review with the uniform graph and separate review manifests,
+use the command in [the background/group guide](BACKGROUND_REVIEW.md).
 
 ```powershell
 research/ml/.venv/Scripts/python.exe -m research.ml.node_benchmark.audit_protocol `
@@ -185,12 +198,13 @@ partitions or train. Python exit code **2** means the completed review found
 preparation blockers. Exit code 0 would only mean no implemented blocker fired;
 it would not approve future labels, partitions or training.
 
-The initial six blockers included annotation-directed metadata. The completed
-uniform pass clears that blocker. The current five are missing independent
-background windows, missing binary node ground truth, too few whole groups,
-missing campaign/context review and an unset history horizon. Clearing one does
-not satisfy the others. More raw downloads alone are not a label or group fix;
-this review requests no additional download.
+The initial six blockers included annotation-directed metadata, cleared by the
+uniform pass. The conservative grouping review subsequently supplies a safe
+one-group constraint for the current cases. The current four gaps are an
+accepted background training cohort, binary node ground truth, sufficient
+independent whole groups and a frozen history horizon. The unknown-label pool
+does not resolve those gaps. More raw downloads alone are not a label or group
+fix; this review requests no additional download.
 
 Verification:
 
@@ -198,9 +212,10 @@ Verification:
 research/ml/.venv/Scripts/python.exe -m unittest research.ml.tests.test_node_protocol -v
 ```
 
-The frozen pilot inventory and uniform metadata step are implemented. The next
-preparation work is to review independent background/action evidence and campaign
-groups, freezing any expanded cohort before applying the same metadata rule.
+The frozen pilot inventory, uniform metadata and initial background/group review
+are implemented. Further preparation requires reviewed action-intent evidence
+and justified independent groups, freezing any expanded cohort before applying
+the same metadata rule.
 Candidate windows, new labels and actual partitions must be checked under this
 contract before feature or training implementation. The audit itself creates
 only a diagnostic JSON.

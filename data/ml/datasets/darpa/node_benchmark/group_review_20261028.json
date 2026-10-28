@@ -1,0 +1,85 @@
+{
+  "review_id": "fivedirections-pilot-holdout-review-20261028",
+  "status": "accepted_conservative_single_holdout",
+  "graph_sha256": "89e5f5d92f2cb02f9c039c8e41809c2cb081449b137fb83ac4ade0d30145d82e",
+  "scope": "Current two node-pilot cases only; not a release-wide campaign partition",
+  "assignments": {
+    "copykatz-20190509-host2": "e5-fivedirections-pilot-joint-holdout",
+    "drakon-20190517-host1": "e5-fivedirections-pilot-joint-holdout"
+  },
+  "independence_claim": false,
+  "common_actor_or_campaign_claim": false,
+  "decision_basis": "Keep current cases together for evaluation until independence is established. This is a conservative holdout constraint, not an assertion that both attacks share one threat actor.",
+  "sources": {
+    "act_report_sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+    "operational_log_sha256_utf8_lf": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+  },
+  "evidence_decisions": [
+    {
+      "pages": [
+        8
+      ],
+      "finding": "The engagement did not simulate named threat actors; hosts/capabilities were assigned by day. A shared tool or infrastructure is not campaign identity proof."
+    },
+    {
+      "pages": [
+        26,
+        27
+      ],
+      "finding": "May 9 target heading/IP/console identify host 2; contradictory host-1 prose is not used for identity."
+    },
+    {
+      "pages": [
+        91,
+        92,
+        126,
+        127
+      ],
+      "finding": "May 17 host-1 verifier/Drakon explicitly continues May 16 persistence. Those phases must stay in the same incident family."
+    },
+    {
+      "pages": [
+        108,
+        109,
+        110
+      ],
+      "finding": "The host-3 target-IP table conflicts with setup/console evidence. Only explicit hostname/IP evidence is usable; no third pilot case or benign label is added."
+    },
+    {
+      "pages": [
+        135
+      ],
+      "finding": "False-positive SCP and May 16 driver setup remain action-specific evidence, not whole-window/process benign labels."
+    }
+  ],
+  "reviewed_process_leads": [
+    {
+      "uuid": "698fea266ed64c8483dbca11cfae8532",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "start_nanos": 1558123988293000000,
+      "cmdline": "sc  query filemon",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index": 1729647,
+      "decision": "Not a new benign label: the time/host align with attack activity, not the earlier documented benign setup."
+    },
+    {
+      "uuid": "0a8db07816b24909b522929388dcb05f",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "start_nanos": 1558123991193000000,
+      "cmdline": "sc  start filemon",
+      "source_file": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "record_index": 1732251,
+      "decision": "Not a new benign label: the report includes starting this service during the May 17 attack."
+    }
+  ],
+  "shared_public_reference": {
+    "uuid": "b2cba9f2bc66495faa3aabdac335ca05",
+    "cases": [
+      "copykatz",
+      "bits"
+    ],
+    "meaning": "Potential native-entity sample overlap, not proof of a common campaign. BITS is outside the current pilot."
+  },
+  "original_event_annotations_and_groups_changed": false,
+  "partitions_created": false
+}

@@ -3,6 +3,14 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-28 background/group review completed:** a declared five-minute DARPA
+window produced 500 reproducible unknown-label review candidates from 7,034
+observed nodes. Sixty candidate identities overlap the attack pilot. The current
+two cases are kept in one conservative evaluation group; this is not a common
+campaign claim or an actual split. All 34 relevant software checks pass.
+Four readiness gaps remain. See the
+[result and reproduction steps](node_benchmark/BACKGROUND_REVIEW.md).
+
 **2026-10-28 uniform metadata completed:** the frozen 295,442-node pilot received
 the same native-definition search for listed and unlisted nodes. It resolved
 45,806 additional types, including 45,782 unlisted nodes; 28,278 types remain
