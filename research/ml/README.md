@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-28 preparation protocol reviewed:** uniform metadata scope,
+unknown/background-label handling and chronological whole-group 60/20/20 splits
+are now documented with a repeatable read-only audit. All 21 relevant software
+checks pass. The audit records six preparation gaps; no samples, feature vectors,
+partitions or models were created. See the
+[protocol, current evidence and reproduction steps](node_benchmark/PREPARATION_PROTOCOL.md).
+
 **2026-10-28 native metadata follow-up completed:** exact native definitions
 resolved 24 of the 26 untyped reference UUIDs. The graph now has 45 typed
 published-reference matches (39 Copykatz, six Drakon); two Subject UUIDs remain

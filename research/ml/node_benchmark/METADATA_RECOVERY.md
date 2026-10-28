@@ -86,6 +86,10 @@ rules for all sampled nodes, independently of reference membership. Otherwise,
 metadata availability and newly usable relations could reveal which nodes were
 targeted for annotation review rather than describe attack behavior.
 
+The [reviewed preparation protocol](PREPARATION_PROTOCOL.md) now defines the
+uniform recovery, background review and partition rules, with a read-only audit
+of the current graph and remaining prerequisites.
+
 ## Verify
 
 ```powershell

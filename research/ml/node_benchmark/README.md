@@ -1,6 +1,14 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
-**Active route, 2026-10-28: native metadata follow-up completed.** Exact native
+**Active route, 2026-10-28: preparation protocol reviewed.** The
+[metadata/background/split contract](PREPARATION_PROTOCOL.md) and its
+[machine-readable audit](../../../data/ml/datasets/darpa/node_benchmark/preparation_protocol_audit_20261028.json)
+are ready. All 21 relevant software checks pass, including seven new protocol
+checks. Preparation still lacks a uniform metadata pass, an independently
+selected background cohort, binary node ground truth, enough reviewed whole
+groups and a frozen history horizon. The audit creates only diagnostics.
+
+**Native metadata follow-up, 2026-10-28:** exact native
 definitions resolved 24 of 26 untyped references, increasing accepted typed
 reference matches from 21 to 45. Two Subject UUIDs remain unknown. The original
 graph is preserved; a separate enriched SQLite graph remains local. Events,
