@@ -1,6 +1,6 @@
 {
   "manifest_path": "C:\\codes\\PBL sem 7\\tracegraph\\data\\ml\\datasets\\darpa\\node_benchmark\\source_manifest_20261028.json",
-  "manifest_sha256_utf8_lf": "2a7e4f6f53125cd12b1866930178dfd8b1b17be3698417511af2f3e2339625c7",
+  "manifest_sha256_utf8_lf": "8c53160838798a0462b42e7171f8d7c6485e3057f4ac2d65dfd5484810da1ec1",
   "source_file_id": "1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4",
   "source_url": "https://drive.google.com/file/d/1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4/view?usp=drivesdk",
   "input_path": "D:\\Deep Learning\\fivedirections_e5.dump",
@@ -11,6 +11,7 @@
   "publisher_checksum_verified": false,
   "dataset_contents_validated": false,
   "host_date_label_scope_validated": false,
+  "full_database_restore_storage_ready": false,
   "safe_to_train": false,
   "splits_created": false,
   "models_trained": false,

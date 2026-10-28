@@ -31,6 +31,7 @@ def inspect_input(manifest_path: Path, input_path: Path, compute_sha256=False):
         "publisher_checksum_verified": False,
         "dataset_contents_validated": False,
         "host_date_label_scope_validated": False,
+        "full_database_restore_storage_ready": manifest.get("full_database_restore_storage_ready", False),
         "safe_to_train": False,
         "splits_created": False,
         "models_trained": False,

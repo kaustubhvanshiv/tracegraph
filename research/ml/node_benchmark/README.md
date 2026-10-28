@@ -1,6 +1,6 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
-**Status, 2026-10-28: preparation selected; awaiting the processed source file.**
+**Status, 2026-10-28: preparation selected; full dump download on hold pending a storage plan.**
 This is a separate benchmark track within the same DARPA E5 dataset. The
 existing Event-level labels, ML-02.4 gate and raw CDM files remain unchanged.
 No model has been selected, installed or trained.
@@ -11,10 +11,11 @@ The authors' processed source provides a concrete alternative to inspect.
 It does not automatically solve label quality or evaluation design.
 See the [readiness audit](../../../data/ml/datasets/darpa/ml02_benign_split_readiness_20261028.md).
 
-## 1. Download one file manually
+## 1. Source identified; check storage before downloading
 
-Open [the authors' fivedirections_e5.dump](https://drive.google.com/file/d/1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4/view?usp=drivesdk)
-and save the original file as:
+The candidate source is
+[the authors' fivedirections_e5.dump](https://drive.google.com/file/d/1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4/view?usp=drivesdk).
+Its intended local path, if intake proceeds, is:
 
 ```text
 D:\Deep Learning\fivedirections_e5.dump
@@ -28,10 +29,18 @@ Do not delete or modify the existing gzip telemetry or support files.
 
 Only file metadata has been read through the connected Drive plugin. Its
 contents and download access are not yet verified. No large-file download or
-browser-permission workaround was attempted. The local D: volume had about
-159.2 GB free at preparation time; database expansion requirements remain
-unknown until inspection. Downloading the file is not a guarantee that a full
-database restore will fit.
+browser-permission workaround was attempted.
+
+The [authors' storage table](https://ubc-provenance.github.io/PIDSMaker/ten-minute-install/)
+estimates **280 GB after loading FiveDirections E5 into PostgreSQL**, in addition
+to retaining the roughly 38.6 GB source file and any working space. This is a
+published estimate, not a measured restore here. The checked free space is about
+159.2 GB on D: and 31.3 GB on C:, so a full restore does not fit either volume.
+
+**Hold the large download for now.** First establish a bounded streaming/subset
+intake approach or a separately approved storage plan. The metadata-size check
+alone does not establish that the dataset can be used locally. Do not remove
+existing data to make room. No database service or restore has been started.
 
 ## 2. Run the lightweight local check
 
@@ -110,4 +119,5 @@ GNN/LLM experiments. A model choice comes after the data/label/split review.
 The source file was not found under `D:\Deep Learning` during this check. The
 recorded [input preflight](../../../data/ml/datasets/darpa/node_benchmark/input_preflight_20261028.json)
 therefore reports `awaiting_download`, with no partitions, training or dataset
-content validation. The source manifest and checker are ready for the next step.
+content validation. That status describes file presence, not a recommendation
+to download it now. The full dump intake is on hold pending the storage plan.

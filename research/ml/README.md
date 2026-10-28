@@ -4,9 +4,10 @@ Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
 **2026-10-28 selected next phase:** separate DARPA node-benchmark preparation
-is ready for source intake. The authors' 38.6 GB processed file is not local;
-the preflight correctly reports `awaiting_download`. See the
-[one-file download and inspection steps](node_benchmark/README.md).
+has a storage prerequisite. The authors' 38.6 GB dump is estimated to occupy
+280 GB when restored, exceeding current free space. Its download is on hold
+pending a bounded intake/storage plan. See the
+[source description and storage requirements](node_benchmark/README.md).
 The original Event labels and ML-02.4 training gate remain unchanged.
 
 **2026-10-28 benign/split readiness:** the published validation day and three

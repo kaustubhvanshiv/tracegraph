@@ -2,7 +2,8 @@
 
 **Next-phase decision:** separate node-benchmark preparation has now been
 selected. Its [source-intake guide](../../../../research/ml/node_benchmark/README.md)
-and preflight are ready; the processed file still needs a manual download.
+and preflight are ready. The authors estimate 280 GB for the restored database,
+so the 38.6 GB dump download is on hold pending a storage-fitting intake plan.
 The Event-level rules and labels described below are unchanged.
 
 **Completed the next readiness check: published training-day membership cannot
