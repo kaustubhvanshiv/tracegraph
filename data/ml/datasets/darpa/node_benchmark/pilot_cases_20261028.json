@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "selection": "Primary-host, half-open case windows; all intersecting downloaded source files fully scanned",
+  "cases": [
+    {
+      "case_id": "copykatz-20190509-host2",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "file_prefix": "ta1-fivedirections-2-",
+      "start_nanos": 1557422700000000000,
+      "end_nanos": 1557424620000000000,
+      "reference_file": "node_fivedirections_e5_copykatz_0509.csv"
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "file_prefix": "ta1-fivedirections-1-",
+      "start_nanos": 1558123800000000000,
+      "end_nanos": 1558124160000000000,
+      "reference_file": "node_fivedirections_e5_drakon_0517.csv"
+    }
+  ]
+}

@@ -3,6 +3,12 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-28 compact graph pilot completed:** the existing raw files produced
+a 1.52 GB SQLite graph with 3,425,979 unique Events, 295,442 entities and
+3,540,766 native Event relations. Published references yield 21 typed matches;
+unlisted nodes remain unknown. No model or split was created. See the
+[measured result and reproduction guide](../../data/ml/datasets/darpa/node_benchmark/compact_graph_pilot_20261028.md).
+
 **2026-10-28 selected next phase:** separate DARPA node-benchmark preparation
 has a storage prerequisite. The authors' 38.6 GB dump is estimated to occupy
 280 GB when restored, exceeding current free space. Its download is on hold

@@ -1,0 +1,371 @@
+{
+  "status": "complete_pilot_not_training_ready",
+  "case_config_sha256_utf8_lf": "9cb0a29fcc62b7576d029d26f48dbe4cc66ae85cd4763047099abad185f487ef",
+  "public_annotation_audit_sha256_utf8_lf": "8ca0b90ef662ea3a3545913222e849ab103d628b0d2099a8964362b737bce38e",
+  "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "graph_semantics": "Native CDM subject-to-predicate reference roles; no inferred information-flow direction",
+  "selection": "All available same-host files whose raw Event bounds intersect each half-open case window",
+  "source_files_validated": 37,
+  "storage_budget_bytes": 4294967296,
+  "scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 720110,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.122.gz",
+      "records": 358733,
+      "complete_scan": true,
+      "selected_event_records": 64,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 11670416,
+      "modified_time_ns": 1792300300463635300
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2214014,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 325830490,
+      "modified_time_ns": 1792308006385366200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 491713,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 326601232,
+      "modified_time_ns": 1792306996331802800
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 73,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323153443,
+      "modified_time_ns": 1792308023745470200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 322452529,
+      "modified_time_ns": 1793100948400882900
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 3,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323250307,
+      "modified_time_ns": 1793101048838478700
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 0,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 320750179,
+      "modified_time_ns": 1793101069963560400
+    }
+  ],
+  "typed_cache_provenance": [
+    {
+      "path": ".cache\\ml-runs\\ml02-label-preparation-20261017",
+      "manifest_sha256_utf8_lf": "2bd087240ee1216b127480c90903961fdd4ef375c99761b62cf34a9ed67ec036",
+      "matched_definitions": 52846
+    },
+    {
+      "path": ".cache\\ml-runs\\host2-case-preparation-20261027",
+      "manifest_sha256_utf8_lf": "7fd4cb3529661ca4e8642b22d63b0d07f12e5b5ae50b8307e0dae7e2eb759349",
+      "matched_definitions": 4420
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "copykatz-20190509-host2",
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "file_prefix": "ta1-fivedirections-2-",
+      "start_nanos": 1557422700000000000,
+      "end_nanos": 1557424620000000000,
+      "reference_file": "node_fivedirections_e5_copykatz_0509.csv",
+      "start_utc": "2019-05-09T17:25:00.000000000Z",
+      "end_utc_exclusive": "2019-05-09T17:57:00.000000000Z",
+      "unique_events": 2705805,
+      "observed_nodes": 212586,
+      "context_only_nodes": 178,
+      "reference_status_counts": {
+        "typed_uuid_match": 16,
+        "uuid_present_unresolved": 25
+      },
+      "published_reference_nodes": 87,
+      "not_in_pilot_reference_uuids": [
+        "0bb349edad96475098cb6636117bc09a",
+        "11e3b2b673bb4a6d895cd8690161ac50",
+        "160beb09a0f741bcb5f4658cd81456a5",
+        "1634298dbcc94222b83e84c5f3bfc563",
+        "1942fc8da31849c3af93f50dca2cb27d",
+        "1b63466ced984bc08aa276cbd2576e15",
+        "20be9cef29e14c628202db33760ff40e",
+        "25484f099d1b431aa240cd7baa1df8fe",
+        "2601b76115b3437f90adf6de2eb3302f",
+        "2791bdd2e6214ee4bcfea7f08260aaeb",
+        "279a16692c3649c6b9719868e79cfb18",
+        "495de842ec2945c9b6576b5b8554414b",
+        "5767e595d9e84fb28dcb4e9c76fd9597",
+        "5a09736e0e1d43739d9dc19bb75d40be",
+        "5a0ea40d20e14b9995bea498940f8179",
+        "5a9abfdfd4a4400ba6fc52186bd1aa48",
+        "5bf03fb2cc9f458182cdd06a122ed093",
+        "62f756dc0b804f709e8642afb87c0bb8",
+        "669a3c354cf24e7490e2240271dcf658",
+        "67091d8f1dd04f0eb6bf4b727ae3f000",
+        "6cdad03914a5458f8a64a6df66678a15",
+        "6d608e0c52d347a28d246ea391071d7c",
+        "6df93dc3f9994e7b881fb6c82f8c89b2",
+        "6e9a7e66bf344f218e8e523338c5b529",
+        "7d683d9660594a48aa8f431b76680f4e",
+        "7fe3401c32ae44d6866001911595adb1",
+        "8e84b1d91fcb4f7ab1904c81fd829f26",
+        "98a98caa6e524be2a3dadd51230c8bd2",
+        "9a5e22109f06452fa8ca107f0851f038",
+        "a2bf52e108ba44febbba2cff700bc85e",
+        "ace1867bfeaa4e90ae95bee02194d132",
+        "baf9928e57014f45ae7ecbc48346f4be",
+        "bce46760a19343bf8632cc83e6676a25",
+        "c2e3472b8fb941aa98efc78fc694e8a0",
+        "c339046c00dc48c49d31262a945c54db",
+        "c386e76937f54da2acb490ba00bb5779",
+        "c5eb997fd5164aa289ab7c5c517b0de2",
+        "cc61d6a2ed914cf088be3691a7de3f31",
+        "ccff71c2318b43469be8d85498505413",
+        "cd8aa2df662b43fb865ebb9707fb104c",
+        "ce533e566c55447cb018ef456e37c772",
+        "d2db8dac65124f828616135f76be347d",
+        "d79481d63bdd4b7eaa98289fc740a8a6",
+        "ddd958ceebb1492f822bb9e2877216f5",
+        "e686da041df1444388d5e0be9ba8316b",
+        "f40440ebfc414a4ba3ae1fbf4acfb2e2"
+      ],
+      "reference_label_counts": {
+        "None": 212748,
+        "1": 16
+      },
+      "observed_typed_reference_matches": 16,
+      "context_only_typed_reference_matches": 0
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "file_prefix": "ta1-fivedirections-1-",
+      "start_nanos": 1558123800000000000,
+      "end_nanos": 1558124160000000000,
+      "reference_file": "node_fivedirections_e5_drakon_0517.csv",
+      "start_utc": "2019-05-17T20:10:00.000000000Z",
+      "end_utc_exclusive": "2019-05-17T20:16:00.000000000Z",
+      "unique_events": 720174,
+      "observed_nodes": 82657,
+      "context_only_nodes": 21,
+      "reference_status_counts": {
+        "typed_uuid_match": 5,
+        "uuid_present_unresolved": 1
+      },
+      "published_reference_nodes": 6,
+      "not_in_pilot_reference_uuids": [],
+      "reference_label_counts": {
+        "None": 82673,
+        "1": 5
+      },
+      "observed_typed_reference_matches": 5,
+      "context_only_typed_reference_matches": 0
+    }
+  ],
+  "models_trained": false,
+  "splits_created": false,
+  "ready_for_training": false,
+  "raw_records_scanned": 70358733,
+  "unique_events": 3425979,
+  "native_event_relations": 3540766,
+  "nodes": 295442,
+  "conflicting_events": 0,
+  "process_context_counts": {
+    "future_start": 19350,
+    "time_valid": 2606925,
+    "unresolved_or_conflicting": 799704
+  },
+  "metadata_status_counts": {
+    "resolved": 221358,
+    "unresolved": 74084
+  },
+  "usable_relation_count": 1127908,
+  "database_bytes": 1516580864,
+  "database_sha256": "b44241cc619482d4540d01a3bb035ac0eb3010083d9451de5b5d568e6dd5bdcf",
+  "limitations": [
+    "Case-conditioned primary-host windows; not a full-release or whole-incident benchmark.",
+    "Metadata joins are offline; they do not prove arrival-time availability.",
+    "Unlisted nodes have NULL labels, not verified benign labels.",
+    "Conflicting Events remain traceable and are excluded from the usable relation view.",
+    "Only fields used here (object kind/subtype) are compared for object-definition conflicts.",
+    "No model features, train/validation/test partitions or detection metrics were produced."
+  ],
+  "raw_scan_builder_sha256_utf8_lf": "24758df36c90b233759fd7df7ce5f8a821d55a55ea1f56c1f0be0d6da78255a9",
+  "metadata_finalizer_builder_sha256_utf8_lf": "b9826df991e5c49bfa111f25e90b3585f3dd724a7e112702d55b685e28040f1a",
+  "metadata_refinement": {
+    "raw_extraction_methods_unchanged": [
+      "select_sources",
+      "iso_nanos",
+      "node",
+      "event",
+      "object_definitions",
+      "apply_metadata",
+      "complete_raw_scan_loop"
+    ],
+    "native_table_row_counts_unchanged": true,
+    "purpose": "Extend source/destination Subject time guards after raw extraction; no archive rescan or relabeling"
+  },
+  "node_kind_counts": {
+    "RECORD_FILE_OBJECT": 3559,
+    "RECORD_IPC_OBJECT": 1451,
+    "RECORD_MEMORY_OBJECT": 194905,
+    "RECORD_NET_FLOW_OBJECT": 1981,
+    "RECORD_PRINCIPAL": 10,
+    "RECORD_REGISTRY_KEY_OBJECT": 784,
+    "RECORD_SRC_SINK_OBJECT": 26,
+    "RECORD_SUBJECT": 18642,
+    "unresolved": 74084
+  },
+  "selected_source_occurrences": 3425979,
+  "case_scope_reference_label_counts": [
+    {
+      "case_id": "copykatz-20190509-host2",
+      "label": null,
+      "observed": false,
+      "count": 178
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "label": null,
+      "observed": true,
+      "count": 212570
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "label": 1,
+      "observed": true,
+      "count": 16
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "label": null,
+      "observed": false,
+      "count": 21
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "label": null,
+      "observed": true,
+      "count": 82652
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "label": 1,
+      "observed": true,
+      "count": 5
+    }
+  ],
+  "validation": {
+    "sqlite_quick_check": "ok",
+    "zero_failure_checks": {
+      "event_outside_case_scope": 0,
+      "dangling_event_edge": 0,
+      "wrong_edge_actor": 0,
+      "cross_host_event_edge": 0,
+      "cross_host_metadata_link": 0,
+      "fabricated_zero_node_labels": 0,
+      "conflicting_event_in_usable_view": 0,
+      "invalid_source_position": 0
+    },
+    "known_review_events_checked": [
+      {
+        "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+        "original_event_label_unchanged": null,
+        "graph_process_context_status": "unresolved_or_conflicting",
+        "raw_fingerprint_and_source_position_match": true
+      },
+      {
+        "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+        "original_event_label_unchanged": null,
+        "graph_process_context_status": "unresolved_or_conflicting",
+        "raw_fingerprint_and_source_position_match": true
+      },
+      {
+        "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+        "original_event_label_unchanged": 1,
+        "graph_process_context_status": "time_valid",
+        "raw_fingerprint_and_source_position_match": true
+      },
+      {
+        "event_uuid": "1d92d20361b242f7984f23422ef135be",
+        "original_event_label_unchanged": 1,
+        "graph_process_context_status": "time_valid",
+        "raw_fingerprint_and_source_position_match": true
+      },
+      {
+        "event_uuid": "fb20dd62334c48e9a9ea6972c43501f0",
+        "original_event_label_unchanged": 1,
+        "graph_process_context_status": "time_valid",
+        "raw_fingerprint_and_source_position_match": true
+      }
+    ],
+    "original_annotations_unchanged": true,
+    "software_tests": {
+      "main_runtime": {
+        "tests_run": 51,
+        "passed": 48,
+        "skipped": 3
+      },
+      "bundled_pdf_runtime": {
+        "tests_run": 3,
+        "passed": 3
+      },
+      "unique_checks_passed": 51,
+      "note": "Three support-reader checks skipped in the main runtime were executed successfully with bundled pypdf; no dependencies installed"
+    },
+    "graph_extractor_tests_passed": 8
+  },
+  "metadata_relation_count": 37113,
+  "unique_observed_paths": 36163,
+  "zero_reference_label_count": 0,
+  "duplicate_source_occurrences": 0,
+  "unresolved_reference_nodes": 26,
+  "typed_reference_matches": 21,
+  "not_in_pilot_reference_nodes": 46
+}

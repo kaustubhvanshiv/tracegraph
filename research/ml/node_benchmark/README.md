@@ -1,5 +1,16 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
+**Active route, 2026-10-28: compact raw-CDM pilot completed.** The existing
+archives produced a 1.52 GB SQLite database with 3,425,979 unique Events,
+295,442 entities and 3,540,766 native Event relations. There are 21 typed
+published-reference matches; unlisted/unresolved labels remain unknown.
+See the [measured pilot report](../../../data/ml/datasets/darpa/node_benchmark/compact_graph_pilot_20261028.md)
+and [builder command/schema](GRAPH_FORMAT.md). No processed dump or model is
+needed for this completed preparation step.
+
+The sections below retain the optional processed-database route and its storage
+limits. They are not prerequisites for the compact pilot.
+
 **Status, 2026-10-28: preparation selected; full dump download on hold pending a storage plan.**
 This is a separate benchmark track within the same DARPA E5 dataset. The
 existing Event-level labels, ML-02.4 gate and raw CDM files remain unchanged.
@@ -106,8 +117,9 @@ a justified chronological holdout; an upstream reproduction, if pursued, must
 report its different assumptions separately.
 
 Actual splits, incident/context isolation, training-only feature transforms,
-normal-period assumptions and threshold selection remain undecided until the
-dump is inspected. Publication reference labels must not appear in model
+normal-period assumptions and threshold selection remain undecided pending the
+pilot coverage/metadata review (or dump inspection if that route is resumed).
+Publication reference labels must not appear in model
 features. Small numbers of attack cases limit generalization claims even when
 the raw graph is large.
 
