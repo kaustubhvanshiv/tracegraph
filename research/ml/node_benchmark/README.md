@@ -1,10 +1,20 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
-**Active route, 2026-10-28: preparation protocol reviewed.** The
+**Active route, 2026-10-28: uniform metadata completed.** The original frozen
+295,442-node universe received a uniform search, resolving 45,806 additional
+native types (45,782 unlisted and 24 listed nodes). There are 267,164 resolved
+and 28,278 unresolved types; reference labels stay 45 supported / 295,397 unknown.
+All 27 relevant software checks pass. The
+[measured result](../../../data/ml/datasets/darpa/node_benchmark/uniform_metadata_20261028.md)
+and [uniform-recovery guide](UNIFORM_METADATA.md) document the local graph and
+[updated readiness audit](../../../data/ml/datasets/darpa/node_benchmark/uniform_protocol_audit_20261028.json).
+The metadata-selection blocker is cleared; five other preparation gaps remain.
+
+**Initial preparation protocol review, 2026-10-28:** the
 [metadata/background/split contract](PREPARATION_PROTOCOL.md) and its
 [machine-readable audit](../../../data/ml/datasets/darpa/node_benchmark/preparation_protocol_audit_20261028.json)
 are ready. All 21 relevant software checks pass, including seven new protocol
-checks. Preparation still lacks a uniform metadata pass, an independently
+checks. At that initial review, preparation lacked a uniform metadata pass, an independently
 selected background cohort, binary node ground truth, enough reviewed whole
 groups and a frozen history horizon. The audit creates only diagnostics.
 

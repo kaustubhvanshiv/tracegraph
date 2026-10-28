@@ -22,6 +22,33 @@ def file_hash(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+UNIFORM_SCOPE = "all_frozen_graph_nodes_without_reference_join"
+
+
+def universe_identity_hash(db):
+    digest, count = hashlib.sha256(), 0
+    for host, uid in db.execute("SELECT host_uuid,uuid FROM nodes ORDER BY host_uuid,uuid"):
+        digest.update((json.dumps([host,uid],separators=(",", ":"))+"\n").encode())
+        count += 1
+    return digest.hexdigest(), count
+
+
+def validate_uniform_scope(recovery, db):
+    if recovery["status"] != "complete_uniform_metadata_not_training_ready":
+        if recovery.get("scope") == UNIFORM_SCOPE:
+            raise ValueError("Uniform metadata scope does not cover the exact frozen graph universe")
+        return
+    digest,count = universe_identity_hash(db)
+    if (recovery.get("scope") != UNIFORM_SCOPE
+            or recovery.get("label_selection_used") is not False
+            or recovery.get("universe_frozen_before_reference_join") is not True
+            or (recovery.get("universe_sha256"),recovery.get("universe_count")) != (digest,count)
+            or recovery.get("target_count") != count
+            or not all(s.get("complete_stream_read") for s in recovery.get("new_scans",[]))
+            or not all(s.get("complete_scan") for s in recovery.get("reused_complete_pilot_scans",[]))):
+        raise ValueError("Uniform metadata scope does not cover the exact frozen graph universe")
+
+
 def validate_policy(policy):
     """Refuse contracts that silently turn unknown/reference data into truth."""
     if policy["version"] != 1:
@@ -80,7 +107,8 @@ def blockers(policy, inventory, changes, recovery):
     reasons = []
     def add(code, reason):
         reasons.append({"code": code, "reason": reason})
-    if recovery.get("target_count"):
+    uniform = recovery.get("status") == "complete_uniform_metadata_not_training_ready" and recovery.get("scope") == UNIFORM_SCOPE
+    if recovery.get("target_count") and not uniform:
         add("annotation_directed_metadata", "The follow-up searched published reference UUIDs only; the enriched graph is review-only until metadata scope is independent of membership.")
     if not policy["sampling"]["background_windows"]:
         add("background_cohort_missing", "Only case-conditioned windows exist in this pilot; no independently selected, coverage-reviewed background windows are declared.")
@@ -99,7 +127,7 @@ def audit(policy_path, original, review, recovery_report_path, event_gate_path, 
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     validate_policy(policy)
     recovery = json.loads(recovery_report_path.read_text(encoding="utf-8"))
-    if recovery["status"] != "complete_metadata_review_not_training_ready":
+    if recovery["status"] not in {"complete_metadata_review_not_training_ready","complete_uniform_metadata_not_training_ready"}:
         raise ValueError("A completed, pinned metadata review is required")
     before_hash, after_hash = file_hash(original), file_hash(review)
     if (before_hash, after_hash) != (recovery["input_graph_sha256"], recovery["database_sha256"]):
@@ -110,17 +138,20 @@ def audit(policy_path, original, review, recovery_report_path, event_gate_path, 
     with closing(sqlite3.connect(review.resolve().as_uri()+"?mode=ro", uri=True)) as db:
         if db.execute("PRAGMA quick_check").fetchone()[0] != "ok":
             raise ValueError("Graph integrity check failed")
+        validate_uniform_scope(recovery,db)
         inventory = profile(db)
         db.execute("ATTACH DATABASE ? AS baseline", (original.resolve().as_uri()+"?mode=ro",))
         identity_differences = db.execute("SELECT COUNT(*) FROM nodes n LEFT JOIN baseline.nodes b ON b.id=n.id WHERE b.id IS NULL OR n.host_uuid IS NOT b.host_uuid OR n.uuid IS NOT b.uuid").fetchone()[0]
         if identity_differences or db.execute("SELECT COUNT(*) FROM baseline.nodes").fetchone()[0] != inventory["nodes"]:
             raise ValueError("The baseline and review graph do not have the same entity identities")
+        listed_ids = {r[0] for r in db.execute("SELECT c.node_id FROM case_nodes c JOIN nodes n ON n.id=c.node_id "
+            "JOIN published_nodes p ON p.case_id=c.case_id AND p.uuid=n.uuid")}
         changes = {"listed_nodes_changed": 0, "unlisted_nodes_changed": 0}
-        for listed, count in db.execute("""SELECT EXISTS(SELECT 1 FROM case_nodes c JOIN published_nodes p
-            ON p.case_id=c.case_id AND p.uuid=n.uuid WHERE c.node_id=n.id),COUNT(*)
-            FROM nodes n JOIN baseline.nodes b ON b.id=n.id WHERE n.kind IS NOT b.kind
-            OR n.subtype IS NOT b.subtype OR n.metadata_status IS NOT b.metadata_status GROUP BY 1"""):
-            changes["listed_nodes_changed" if listed else "unlisted_nodes_changed"] = count
+        # Materialize membership once. A correlated scan of case_nodes for each
+        # changed node becomes quadratic when tens of thousands are repaired.
+        for (node_id,) in db.execute("SELECT n.id FROM nodes n JOIN baseline.nodes b ON b.id=n.id WHERE "
+                "n.kind IS NOT b.kind OR n.subtype IS NOT b.subtype OR n.metadata_status IS NOT b.metadata_status"):
+            changes["listed_nodes_changed" if node_id in listed_ids else "unlisted_nodes_changed"] += 1
         baseline_metadata = [dict(zip(("listed_uuid", "metadata_status", "nodes"), r)) for r in db.execute("""
             SELECT EXISTS(SELECT 1 FROM baseline.published_nodes p WHERE p.case_id=c.case_id AND p.uuid=n.uuid),
                    n.metadata_status,COUNT(*) FROM baseline.case_nodes c JOIN baseline.nodes n ON n.id=c.node_id
@@ -130,6 +161,7 @@ def audit(policy_path, original, review, recovery_report_path, event_gate_path, 
         "audit_code_sha256_utf8_lf": text_hash(Path(__file__)),
         "original_graph_sha256": before_hash, "review_graph_sha256": after_hash,
         "recovery_report_sha256_utf8_lf": text_hash(recovery_report_path),
+        "metadata_recovery_scope": recovery.get("scope","published_reference_uuid_targets_only"),
         "inventory": inventory, "metadata_change_scope": changes,
         "baseline_metadata_by_reference_membership": baseline_metadata,
         "blocking_conditions": blockers(policy, inventory, changes, recovery),

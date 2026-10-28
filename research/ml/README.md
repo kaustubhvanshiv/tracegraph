@@ -3,6 +3,14 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-28 uniform metadata completed:** the frozen 295,442-node pilot received
+the same native-definition search for listed and unlisted nodes. It resolved
+45,806 additional types, including 45,782 unlisted nodes; 28,278 types remain
+unresolved. All 27 relevant software checks pass. The metadata-selection blocker
+is cleared; five preparation gaps remain. See the
+[measured result and reproduction guide](../../data/ml/datasets/darpa/node_benchmark/uniform_metadata_20261028.md).
+The graph remains local; Events, relationships and security labels are unchanged.
+
 **2026-10-28 preparation protocol reviewed:** uniform metadata scope,
 unknown/background-label handling and chronological whole-group 60/20/20 splits
 are now documented with a repeatable read-only audit. All 21 relevant software

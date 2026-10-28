@@ -1,0 +1,445 @@
+{
+  "status": "complete_uniform_metadata_not_training_ready",
+  "scope": "all_frozen_graph_nodes_without_reference_join",
+  "input_graph_sha256": "b44241cc619482d4540d01a3bb035ac0eb3010083d9451de5b5d568e6dd5bdcf",
+  "pilot_report_sha256_utf8_lf": "58b5c2901ead9211a45c6e997e1ee6275b565c655a6e6582815da456c03c80a2",
+  "recovery_code_sha256_utf8_lf": "a02c2ae5779e45f15996f65b623bd43695717f4319cb00d2e45d4a962daae8b3",
+  "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "source_files_validated": 37,
+  "reused_complete_pilot_scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 720110,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.122.gz",
+      "records": 358733,
+      "complete_scan": true,
+      "selected_event_records": 64,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 11670416,
+      "modified_time_ns": 1792300300463635300
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2214014,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 325830490,
+      "modified_time_ns": 1792308006385366200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 491713,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 326601232,
+      "modified_time_ns": 1792306996331802800
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 73,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323153443,
+      "modified_time_ns": 1792308023745470200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 322452529,
+      "modified_time_ns": 1793100948400882900
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 3,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323250307,
+      "modified_time_ns": 1793101048838478700
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 0,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 320750179,
+      "modified_time_ns": 1793101069963560400
+    }
+  ],
+  "new_scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 372,
+      "matching_object_definitions": 372,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 305438193,
+      "modified_time_ns": 1792217703666685000
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 119,
+      "matching_object_definitions": 119,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 309025261,
+      "modified_time_ns": 1792217757529764700
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 30,
+      "matching_object_definitions": 30,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 308754439,
+      "modified_time_ns": 1792217771605136500
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 23,
+      "matching_object_definitions": 23,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 322112794,
+      "modified_time_ns": 1791697973508060100
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 26,
+      "matching_object_definitions": 26,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 316485144,
+      "modified_time_ns": 1791697975692551900
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 13,
+      "matching_object_definitions": 13,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 309366409,
+      "modified_time_ns": 1791697969446408800
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 8,
+      "matching_object_definitions": 8,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 310576694,
+      "modified_time_ns": 1791697967335008400
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 7,
+      "matching_object_definitions": 7,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 317627464,
+      "modified_time_ns": 1791697971374009000
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 14730,
+      "matching_object_definitions": 14730,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 308986723,
+      "modified_time_ns": 1792218481290874200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 6413,
+      "matching_object_definitions": 6413,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 336934867,
+      "modified_time_ns": 1792218200851179200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 1361,
+      "matching_object_definitions": 1361,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 323452788,
+      "modified_time_ns": 1792218222263140300
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 433,
+      "matching_object_definitions": 433,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 326479208,
+      "modified_time_ns": 1792218292452556000
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.4.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 778,
+      "matching_object_definitions": 778,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 314219061,
+      "modified_time_ns": 1792218319979363400
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.5.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 260,
+      "matching_object_definitions": 260,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 327471228,
+      "modified_time_ns": 1792218345626228000
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.6.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 2117,
+      "matching_object_definitions": 2117,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 325193717,
+      "modified_time_ns": 1792218353074036900
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 2048,
+      "matching_object_definitions": 2048,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 329631286,
+      "modified_time_ns": 1792218373948987200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "records": 3890348,
+      "blocks": 3890348,
+      "decoded_records": 0,
+      "matching_object_definitions": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 124386417,
+      "modified_time_ns": 1792300357058312600
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "decoded_records": 19569,
+      "matching_object_definitions": 19569,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 321261984,
+      "modified_time_ns": 1792218377477744800
+    }
+  ],
+  "storage_budget_bytes": 4294967296,
+  "models_trained": false,
+  "splits_created": false,
+  "ready_for_training": false,
+  "label_selection_used": false,
+  "metadata_availability_claim": "offline native types only; not online availability proof",
+  "universe_sha256": "9b18457fa19c3edda937f6b9fc66906b3d3b0fef5ce769dd51d42c3166e55333",
+  "universe_count": 295442,
+  "universe_frozen_before_reference_join": true,
+  "target_count": 295442,
+  "original_metadata_status_counts": {
+    "resolved": 221358,
+    "unresolved": 74084
+  },
+  "newly_resolved_nodes": 45806,
+  "conflicting_object_nodes": 0,
+  "native_table_counts_unchanged": {
+    "events": 3425979,
+    "event_sources": 3425979,
+    "edges": 3540766,
+    "nodes": 295442,
+    "case_nodes": 295442,
+    "paths": 36163,
+    "node_paths": 51556,
+    "metadata_links": 37113,
+    "published_nodes": 93
+  },
+  "node_metadata_status_counts": {
+    "resolved": 267164,
+    "unresolved": 28278
+  },
+  "reference_status_counts": {
+    "typed_uuid_match": 45,
+    "uuid_present_unresolved": 2
+  },
+  "usable_event_relations": 2545123,
+  "process_context_counts": {
+    "future_start": 19350,
+    "time_valid": 2606925,
+    "unresolved_or_conflicting": 799704
+  },
+  "unique_object_nodes_with_fresh_evidence": 48307,
+  "zero_node_labels": 0,
+  "sqlite_quick_check": "ok",
+  "input_graph_unchanged": true,
+  "database_bytes": 1531924480,
+  "database_sha256": "89e5f5d92f2cb02f9c039c8e41809c2cb081449b137fb83ac4ade0d30145d82e",
+  "new_records_streamed": 173890348,
+  "independent_verification": {
+    "events_native_row_differences": 0,
+    "event_sources_native_row_differences": 0,
+    "edges_native_row_differences": 0,
+    "nodes_native_row_differences": 0,
+    "case_nodes_native_row_differences": 0,
+    "paths_native_row_differences": 0,
+    "node_paths_native_row_differences": 0,
+    "metadata_links_native_row_differences": 0,
+    "published_nodes_native_row_differences": 0,
+    "cases_native_row_differences": 0,
+    "sources_native_row_differences": 0,
+    "targeted_reference_definitions_reconfirmed": 24,
+    "newly_resolved_by_membership": [
+      [
+        0,
+        45782
+      ],
+      [
+        1,
+        24
+      ]
+    ],
+    "metadata_status_counts": {
+      "resolved": 267164,
+      "unresolved": 28278
+    },
+    "reference_label_counts": [
+      [
+        null,
+        295397
+      ],
+      [
+        1,
+        45
+      ]
+    ],
+    "observed_and_context_nodes": [
+      [
+        0,
+        199
+      ],
+      [
+        1,
+        295243
+      ]
+    ],
+    "derived_event_context_changes": 0,
+    "independent_raw_definition_samples": [
+      {
+        "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+        "record_index": 170,
+        "kind": "RECORD_FILE_OBJECT",
+        "fingerprint_match": true
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+        "record_index": 54011,
+        "kind": "RECORD_MEMORY_OBJECT",
+        "fingerprint_match": true
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+        "record_index": 78,
+        "kind": "RECORD_NET_FLOW_OBJECT",
+        "fingerprint_match": true
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+        "record_index": 85,
+        "kind": "RECORD_SRC_SINK_OBJECT",
+        "fingerprint_match": true
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+        "record_index": 3102,
+        "kind": "RECORD_REGISTRY_KEY_OBJECT",
+        "fingerprint_match": true
+      }
+    ],
+    "event_annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+    "sqlite_quick_check": "ok",
+    "universe_file_digest_verified": true
+  },
+  "software_validation": {
+    "command": "research/ml/.venv/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata research.ml.tests.test_node_protocol research.ml.tests.test_uniform_metadata -q",
+    "tests_run": 27,
+    "passed": 27,
+    "new_uniform_tests": 6,
+    "note": "Software verification only; no model metrics or training."
+  },
+  "limitations": [
+    "Same two case-conditioned primary-host windows; no representative background or full-release coverage claimed.",
+    "Native kinds/subtypes repaired uniformly; offline definitions do not establish predictive-field availability at an anchor.",
+    "Unknown nodes remain unknown, not benign. Two listed Subject UUIDs remain unresolved.",
+    "First fresh native definition/fingerprint and occurrence/conflict counts retained, not full payloads/all repeated evidence.",
+    "No candidate samples, feature vectors, partitions or models were created."
+  ]
+}

@@ -11,6 +11,13 @@ and [measured audit](../../../data/ml/datasets/darpa/node_benchmark/preparation_
 make this review repeatable. The review is complete; the current dataset is
 not ready for binary supervised training or actual partition export.
 
+**Subsequent implementation:** the [uniform metadata pass](UNIFORM_METADATA.md)
+has now completed for the frozen pilot universe. It resolves 45,806 additional
+types, including 45,782 unlisted nodes, and clears the metadata-selection blocker.
+The [updated audit](../../../data/ml/datasets/darpa/node_benchmark/uniform_protocol_audit_20261028.json)
+still finds five other gaps. The initial comparison below records the earlier
+targeted review; the uniform pass is the current metadata artifact.
+
 ## 1. Keep reference membership separate from security ground truth
 
 | Evidence state | Stored reference label | Meaning |
@@ -50,10 +57,15 @@ sampling, features or which edges are usable before uniform recovery:
 | Listed UUIDs present in the graph | 21 / 47 | 45 / 47 |
 | Unlisted UUIDs | 221,337 / 295,395 | 221,337 / 295,395 |
 
-All 24 changes were to listed nodes. The enriched graph's 1,153,107 usable
+All 24 targeted-review changes were to listed nodes. That graph's 1,153,107 usable
 relations are therefore an evidence-quality diagnostic, not a training graph.
 The original graph is preserved, but its case-conditioned sampling still does
 not provide a representative background cohort or sufficient partitions.
+
+After the later uniform pass, resolved types are 45 / 47 listed nodes and
+267,119 / 295,395 unlisted nodes. Unknown labels remain unchanged. The scope
+requirement is now met inside this existing pilot; metadata availability at a
+prediction anchor and the other preparation rules still need evidence.
 
 Use this order for future preparation:
 
@@ -173,7 +185,8 @@ partitions or train. Python exit code **2** means the completed review found
 preparation blockers. Exit code 0 would only mean no implemented blocker fired;
 it would not approve future labels, partitions or training.
 
-The current six blockers are annotation-directed metadata, missing independent
+The initial six blockers included annotation-directed metadata. The completed
+uniform pass clears that blocker. The current five are missing independent
 background windows, missing binary node ground truth, too few whole groups,
 missing campaign/context review and an unset history horizon. Clearing one does
 not satisfy the others. More raw downloads alone are not a label or group fix;
@@ -185,8 +198,9 @@ Verification:
 research/ml/.venv/Scripts/python.exe -m unittest research.ml.tests.test_node_protocol -v
 ```
 
-The next concrete preparation work is to freeze an annotation-independent
-cohort/source inventory and recover metadata uniformly for it, then review
-background/action evidence and campaign groups. Candidate windows, new labels
-and actual partitions must be checked under this contract before feature or
-training implementation. The current audit creates only a diagnostic JSON.
+The frozen pilot inventory and uniform metadata step are implemented. The next
+preparation work is to review independent background/action evidence and campaign
+groups, freezing any expanded cohort before applying the same metadata rule.
+Candidate windows, new labels and actual partitions must be checked under this
+contract before feature or training implementation. The audit itself creates
+only a diagnostic JSON.

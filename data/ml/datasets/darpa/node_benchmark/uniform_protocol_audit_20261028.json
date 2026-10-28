@@ -1,0 +1,152 @@
+{
+  "protocol_id": "darpa-e5-node-preparation-v1",
+  "review_completed": true,
+  "status": "review_complete_preparation_incomplete",
+  "policy_sha256_utf8_lf": "bcd93c9ce8e52285367903f4e2553fb1a7cb62812c532175622f1122e137175c",
+  "audit_code_sha256_utf8_lf": "9f75b2c0a760b8150476fb9f2ed489e37754558ba23c82c12499b2cbd7234a01",
+  "original_graph_sha256": "b44241cc619482d4540d01a3bb035ac0eb3010083d9451de5b5d568e6dd5bdcf",
+  "review_graph_sha256": "89e5f5d92f2cb02f9c039c8e41809c2cb081449b137fb83ac4ade0d30145d82e",
+  "recovery_report_sha256_utf8_lf": "0c19b1b83c5dc8abf3d8e43df291a2cff241375e5cdbb1356a719921817a6e86",
+  "metadata_recovery_scope": "all_frozen_graph_nodes_without_reference_join",
+  "inventory": {
+    "cases": [
+      {
+        "case_id": "copykatz-20190509-host2",
+        "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+        "start_nanos": 1557422700000000000,
+        "end_nanos": 1557424620000000000,
+        "events": 2705805,
+        "typed_reference_matches": 39
+      },
+      {
+        "case_id": "drakon-20190517-host1",
+        "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+        "start_nanos": 1558123800000000000,
+        "end_nanos": 1558124160000000000,
+        "events": 720174,
+        "typed_reference_matches": 6
+      }
+    ],
+    "case_group_upper_bound_before_campaign_review": 2,
+    "nodes": 295442,
+    "events": 3425979,
+    "event_relations": 3540766,
+    "reference_label_counts": [
+      [
+        null,
+        295397
+      ],
+      [
+        1,
+        45
+      ]
+    ],
+    "metadata_by_reference_membership": [
+      {
+        "listed_uuid": 0,
+        "metadata_status": "resolved",
+        "nodes": 267119
+      },
+      {
+        "listed_uuid": 0,
+        "metadata_status": "unresolved",
+        "nodes": 28276
+      },
+      {
+        "listed_uuid": 1,
+        "metadata_status": "resolved",
+        "nodes": 45
+      },
+      {
+        "listed_uuid": 1,
+        "metadata_status": "unresolved",
+        "nodes": 2
+      }
+    ],
+    "unresolved_reference_uuids": [
+      "02224a0f80d54570a271bfa2b65163c1",
+      "5b11193839a542538400c6cb43557dad"
+    ],
+    "usable_relations_review_only": 2545123,
+    "exact_uuid_shared_across_cases": 0
+  },
+  "metadata_change_scope": {
+    "listed_nodes_changed": 24,
+    "unlisted_nodes_changed": 45782
+  },
+  "baseline_metadata_by_reference_membership": [
+    {
+      "listed_uuid": 0,
+      "metadata_status": "resolved",
+      "nodes": 221337
+    },
+    {
+      "listed_uuid": 0,
+      "metadata_status": "unresolved",
+      "nodes": 74058
+    },
+    {
+      "listed_uuid": 1,
+      "metadata_status": "resolved",
+      "nodes": 21
+    },
+    {
+      "listed_uuid": 1,
+      "metadata_status": "unresolved",
+      "nodes": 26
+    }
+  ],
+  "blocking_conditions": [
+    {
+      "code": "background_cohort_missing",
+      "reason": "Only case-conditioned windows exist in this pilot; no independently selected, coverage-reviewed background windows are declared."
+    },
+    {
+      "code": "binary_node_ground_truth_missing",
+      "reason": "Typed reference membership and unknown nodes do not supply reviewed binary attack/benign node ground truth."
+    },
+    {
+      "code": "insufficient_whole_groups",
+      "reason": "At most two case groups cannot populate three nonempty chronological partitions without dividing/reusing a group."
+    },
+    {
+      "code": "campaign_group_review_missing",
+      "reason": "Distinct case names, host UUIDs or disjoint node UUIDs do not establish independent campaign/context groups."
+    },
+    {
+      "code": "history_horizon_not_frozen",
+      "reason": "Choose and record the actual input history before calculating a purge gap or constructing graphs/features."
+    }
+  ],
+  "original_event_track_unchanged": {
+    "status": "blocked_for_training",
+    "eligible_label_counts": {
+      "1": 3
+    },
+    "eligible_label_group_counts": {
+      "0": 0,
+      "1": 2
+    },
+    "annotations_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+    "gate_sha256_utf8_lf": "17085074a468210124ffa1db1accae5765166af827fc0bd610e332194b958e69",
+    "note": "Separate Event-level evidence; node references never relabel these Events or satisfy its gate."
+  },
+  "background_candidates_created": false,
+  "feature_vectors_created": false,
+  "partitions_created": false,
+  "models_selected_or_trained": false,
+  "training_authorized_by_this_audit": false,
+  "limitations": [
+    "Graph hashes and SQLite integrity checked; raw archives not reread.",
+    "Case count is an upper bound before campaign/context merging, not proof of independence.",
+    "No shared exact UUID is not proof of absence of shared campaign/causal context.",
+    "This audit does not validate future candidate windows, labels, graph histories or actual partitions."
+  ],
+  "software_validation": {
+    "command": "research/ml/.venv/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata research.ml.tests.test_node_protocol research.ml.tests.test_uniform_metadata -q",
+    "tests_run": 27,
+    "passed": 27,
+    "new_uniform_tests": 6,
+    "note": "Software verification only; no model metrics or training."
+  }
+}
