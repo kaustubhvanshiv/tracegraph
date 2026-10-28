@@ -1,5 +1,10 @@
 # ML-02.4 benign-label and split readiness - 2026-10-28
 
+**Next-phase decision:** separate node-benchmark preparation has now been
+selected. Its [source-intake guide](../../../../research/ml/node_benchmark/README.md)
+and preflight are ready; the processed file still needs a manual download.
+The Event-level rules and labels described below are unchanged.
+
 **Completed the next readiness check: published training-day membership cannot
 currently supply our missing benign Event labels.** The downloaded subset also
 lacks the published validation day. No label or split was created.

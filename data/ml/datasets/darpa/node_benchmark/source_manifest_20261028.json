@@ -1,0 +1,71 @@
+{
+  "manifest_version": 1,
+  "created_on": "2026-10-28",
+  "dataset": "DARPA Transparent Computing Engagement 5 - FiveDirections",
+  "track": "Separate published-reference node benchmark; original Event track unchanged",
+  "status": "preparation_selected_awaiting_source_file",
+  "publisher_repository": "https://github.com/ubc-provenance/PIDSMaker",
+  "publisher_commit": "438a05a7c55256f639e5b5945cf4828fe3ee078e",
+  "source": {
+    "file_id": "1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4",
+    "filename": "fivedirections_e5.dump",
+    "url": "https://drive.google.com/file/d/1EkxlbReJgMHW4TwAypPggQBA-RTRVxs4/view?usp=drivesdk",
+    "expected_bytes": 38603947024,
+    "modified_time": "2026-01-05T20:43:15.000Z",
+    "mime_type": "application/octet-stream",
+    "publisher_sha256": null,
+    "publisher_checksum_status": "Not supplied by the metadata response; a local SHA-256 would be a recorded fingerprint, not publisher verification",
+    "content_access_verified": false,
+    "format_verified": false,
+    "metadata_checked_on": "2026-10-28"
+  },
+  "suggested_local_path": "D:/Deep Learning/fivedirections_e5.dump",
+  "raw_cdm_source_unchanged": "D:/Deep Learning/fivedirections-20261010T174625Z-1-049/fivedirections",
+  "published_node_lists": [
+    {
+      "filename": "node_fivedirections_e5_bits_0515.csv",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_bits_0515.csv",
+      "sha256": "0841d453aff67c8254cc1d4a47265ed5cc0c8d7a79c1708ca0ab2019574b8cd4",
+      "rows": 54
+    },
+    {
+      "filename": "node_fivedirections_e5_copykatz_0509.csv",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_copykatz_0509.csv",
+      "sha256": "9ba7f64b45aacb670a395356c14bf2a2a992ce9fccffd6dda40065752e6130de",
+      "rows": 87
+    },
+    {
+      "filename": "node_fivedirections_e5_dns_0517.csv",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_dns_0517.csv",
+      "sha256": "c4ca6910338afec0555128d15f00c9ff1bce80b44ffebfe39d84ab84f8b640e3",
+      "rows": 11
+    },
+    {
+      "filename": "node_fivedirections_e5_drakon_0517.csv",
+      "source_url": "https://github.com/ubc-provenance/PIDSMaker/blob/438a05a7c55256f639e5b5945cf4828fe3ee078e/Ground_Truth/orthrus/E5-FIVEDIRECTIONS/node_fivedirections_e5_drakon_0517.csv",
+      "sha256": "bedd5adeda44654add866eb54752f87da2e71b8fb711018975dc015aef6e954f",
+      "rows": 6
+    }
+  ],
+  "reference_rows": 158,
+  "unique_reference_node_uuids": 157,
+  "proposed_target": "Published-reference node membership, subject to source/scope review; not verified malicious/benign Event classification",
+  "unlisted_node_policy": "Unlisted means not in the selected published reference, not independently verified benign. Any binary benchmark-membership metrics must disclose this distinction.",
+  "split_policy_status": "Not selected; upstream dates cannot be imported unchanged under TraceGraph chronological rules",
+  "known_readiness_issues": [
+    "Current raw subset lacks published validation day May 12 and training days May 11,13,14 (2019 EDT).",
+    "Upstream normal-training date May 10 includes ACT-documented FiveDirections host-3 activity at release level; processed host/filter scope unverified.",
+    "Upstream date order differs from prospective chronological evaluation.",
+    "Processed dump may not preserve native publishing-host/record provenance; inspect contents before choosing scope."
+  ],
+  "next_gates": [
+    "User downloads the one processed file; no automated Drive content download attempted.",
+    "Read-only size/header/fingerprint and archive-table-list inspection.",
+    "Verify tables, node counts, Event counts, timestamps, publishing-host scope and UUID mapping.",
+    "Reconcile published node lists and known ACT cases, including May 10 and persistence.",
+    "Approve a documented label/unknown/group/split protocol before producing partitions.",
+    "Choose a model after readiness passes; no package installation or training yet."
+  ],
+  "splits_created": false,
+  "models_trained": false
+}
