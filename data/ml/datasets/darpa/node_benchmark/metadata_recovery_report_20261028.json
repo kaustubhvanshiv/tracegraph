@@ -1,0 +1,969 @@
+{
+  "status": "complete_metadata_review_not_training_ready",
+  "recovery_code_sha256_utf8_lf": "7e1586705529c5ec5b1b3d2420f0666d1b406de3d90a75acdb46c9c53646733b",
+  "input_graph_sha256": "b44241cc619482d4540d01a3bb035ac0eb3010083d9451de5b5d568e6dd5bdcf",
+  "pilot_report_sha256_utf8_lf": "58b5c2901ead9211a45c6e997e1ee6275b565c655a6e6582815da456c03c80a2",
+  "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "source_files_validated": 37,
+  "target_count": 26,
+  "cached_definition_absence": "Complete validated Host/Principal/Subject index has no exact host/UUID definitions for these targets",
+  "reused_complete_pilot_scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.121.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 720110,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 315341536,
+      "modified_time_ns": 1791697965512666700
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.122.gz",
+      "records": 358733,
+      "complete_scan": true,
+      "selected_event_records": 64,
+      "case_ids": [
+        "drakon-20190517-host1"
+      ],
+      "compressed_bytes": 11670416,
+      "modified_time_ns": 1792300300463635300
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2214014,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 325830490,
+      "modified_time_ns": 1792308006385366200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.16.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 491713,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 326601232,
+      "modified_time_ns": 1792306996331802800
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 73,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323153443,
+      "modified_time_ns": 1792308023745470200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.18.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 2,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 322452529,
+      "modified_time_ns": 1793100948400882900
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.19.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 3,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 323250307,
+      "modified_time_ns": 1793101048838478700
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "selected_event_records": 0,
+      "case_ids": [
+        "copykatz-20190509-host2"
+      ],
+      "compressed_bytes": 320750179,
+      "modified_time_ns": 1793101069963560400
+    }
+  ],
+  "new_scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 305438193,
+      "modified_time_ns": 1792217703666685000
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 309025261,
+      "modified_time_ns": 1792217757529764700
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 308754439,
+      "modified_time_ns": 1792217771605136500
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 322112794,
+      "modified_time_ns": 1791697973508060100
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 316485144,
+      "modified_time_ns": 1791697975692551900
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.20.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 309366409,
+      "modified_time_ns": 1791697969446408800
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.23.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 310576694,
+      "modified_time_ns": 1791697967335008400
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.27.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 317627464,
+      "modified_time_ns": 1791697971374009000
+    },
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 1,
+      "decoded_records": 1,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 308986723,
+      "modified_time_ns": 1792218481290874200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.1.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 336934867,
+      "modified_time_ns": 1792218200851179200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 7,
+      "decoded_records": 7,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 323452788,
+      "modified_time_ns": 1792218222263140300
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.3.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 326479208,
+      "modified_time_ns": 1792218292452556000
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.4.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 314219061,
+      "modified_time_ns": 1792218319979363400
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.5.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 327471228,
+      "modified_time_ns": 1792218345626228000
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.6.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 325193717,
+      "modified_time_ns": 1792218353074036900
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.7.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 329631286,
+      "modified_time_ns": 1792218373948987200
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.101.gz",
+      "records": 3890348,
+      "blocks": 3890348,
+      "candidate_blocks": 0,
+      "decoded_records": 0,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 124386417,
+      "modified_time_ns": 1792300357058312600
+    },
+    {
+      "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+      "records": 10000000,
+      "blocks": 10000000,
+      "candidate_blocks": 16,
+      "decoded_records": 16,
+      "writer_schema_sha256": "6aeb6b8f4772d23842bd167bae44ce0cc761409acb46ad03ff43768abe1a9899",
+      "complete_stream_read": true,
+      "compressed_bytes": 321261984,
+      "modified_time_ns": 1792218377477744800
+    }
+  ],
+  "ready_for_training": false,
+  "models_trained": false,
+  "splits_created": false,
+  "definitions_sha256_utf8_lf": "219f2ed793e512cbad470691c1090c7de4eee20f993aabb3914e1539a79637f4",
+  "targets": [
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 83141,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "02224a0f80d54570a271bfa2b65163c1",
+      "expected_kind": "RECORD_SUBJECT",
+      "outcome": "no_native_definition_in_reviewed_local_sources",
+      "definition_records": 0,
+      "native_type_signatures": [],
+      "evidence": []
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 127999,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "0b1fe2cbf7544a37871b9a7c074293be",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2518050,
+          "raw_sha256": "3d5188fe6ad939cfe184cc5ca2bfdf41d23cc5817afb95c4c4413a7e32e3f560"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 133294,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "14e486cd602b458c8eceab19582bbb8a",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2534234,
+          "raw_sha256": "08b7e27731177a6bde4eb1173cb9db9483495ccf2168654e85c739283280ab6d"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 184459,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "16f490929e994d98b42f1717addded0b",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4189990,
+          "raw_sha256": "e97f1f46a0e7501a1a8e326800948119b1d1d445bed3d93619e7fb29bf2ef61a"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 122073,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "47bff1301e1241fbab47e586e1250a64",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2500310,
+          "raw_sha256": "3e515bfc6a96d274cdb31c0b735992366bf36378466f9b70718fbc38af428b74"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 125203,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "4e4039133e9a4bccb722346262aca487",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2507160,
+          "raw_sha256": "f8a2c3a33c3e23e08d604dec18c40b7c853eb29e4cfe3bbcb9cc683127f316fe"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 115703,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "5052de6ac7374f1e9f40ecc60558bf89",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2476194,
+          "raw_sha256": "13c9675b816db55a1847a984220943fa824c6268209b88b27098f34cafeff0c8"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 130741,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "575b023b5cab404fb1b18089297f60be",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2528280,
+          "raw_sha256": "ec199001b6b03d40acf2c297e0736725ddb4bf6bd55e18e76f41cb45a2f36f0c"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 84081,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "5b11193839a542538400c6cb43557dad",
+      "expected_kind": "RECORD_SUBJECT",
+      "outcome": "no_native_definition_in_reviewed_local_sources",
+      "definition_records": 0,
+      "native_type_signatures": [],
+      "evidence": []
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 83416,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "5ff5ae6490944a54878fc82f8dcc4244",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 22842,
+          "raw_sha256": "a81a8faf3513192c49ea1d073d4ad7fe52b5239ded75074104906b9fcaaf80c7"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 113204,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "6323b871628542f7a5f212e96698a82f",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2470762,
+          "raw_sha256": "3d31d011f765b8aea4fcd8ec1288dc37dc97a9880d3212bc51c6ce16ceeb7309"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 141388,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "697500376a164e39bea6348f5ffa706d",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2567666,
+          "raw_sha256": "1d0e03292788750bc165d9d59b45d94f1b4bceef09603b821a5a9039bc056184"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 184186,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "77c08e8eb78e4663bd4ef216d4607e80",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4180360,
+          "raw_sha256": "27a48f9497b390ba94e1c193ebf87edad89f08869b14413f60c5c5e650c26d70"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 93637,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "88d5efa3adaa4a1192b14ec3ed36807a",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 12641,
+          "raw_sha256": "3d3c00e6af38fa38fe36b942c6a0fe41728efbc5884a90482a2db598412856ff"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 83132,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "8d6b04eb0faa4d019f0ddd925e92bcbd",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_UNIX_SOCKET"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 5092,
+          "raw_sha256": "941a5a2adc9a57baaa7aadd79a9c2bc2a21d99d5213c51b245b9fcc93980cf6e"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 184681,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "933a09c304e44ac7ac9712886772ba7e",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4197616,
+          "raw_sha256": "733eb1bfd5e167b3af13590fc7576002b6332e3e5171cc2b18eac4f985596962"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 138687,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "93fb06ccb8b34e32ba56836fe50e2f23",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2555309,
+          "raw_sha256": "ed3422ad505e5847a713de293ef29428ae1fab7af6a87ac440ffbfa69b370519"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 183429,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "ad200af721ca4cb3bdc69725c84e03d7",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4164660,
+          "raw_sha256": "c180768e17cf5da3637b9c93b10064d82c2ecd9c0c7185706fa27eae20a75b0d"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 83494,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "b2cba9f2bc66495faa3aabdac335ca05",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 1616,
+          "raw_sha256": "dc841a95df0dda44a8186e7a36b609a300c44d04e4c95c102b7bd2ce61f23f3c"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 184954,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "b7bd043dc2ac431a84ff18ec40853e77",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4207036,
+          "raw_sha256": "9e542fec6c5f86a485954ea0ae23183653f6758cfd211487104d9e1c2434c029"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 181151,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "c2c61503ede44302ab2b67f4be504687",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 58588,
+          "raw_sha256": "1ea9c32f783e3374e67bcd01a8d9fd3732ad9f4aa97ec27e27144d53e1aad8c8"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 118884,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "c5475cf556b24f81b15972989c45062d",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2489793,
+          "raw_sha256": "ba2cdf7d1824a4c11178e978f77d2421536fdb4dc509af89b428228e19bd0b10"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 182794,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "cc1520a407b545d38eb782a4eceff961",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4155571,
+          "raw_sha256": "053630b228df02b95376a3d675ff62296d451b6bc7dc5974ea9fd5bfa169ce6f"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 183680,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "d20bb979d2244616835a8f2478132f80",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+          "record_index": 4173199,
+          "raw_sha256": "4db21c5e4095a9246992d1d0d7798c391e4e04fb4b3c6d4de6645bd8f868709f"
+        }
+      ]
+    },
+    {
+      "case_id": "copykatz-20190509-host2",
+      "node_id": 136249,
+      "host_uuid": "223cbbce1bc5451e9d2e5b3a762f31c7",
+      "uuid": "ddeaf7bcc72e4fe6b9cbd972e306640e",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_FILE"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+          "record_index": 2545250,
+          "raw_sha256": "f4b4f71ad058a8bf6e1d8713d67c9d32c12b557bec9b9415eb58d21dc1fe2bf8"
+        }
+      ]
+    },
+    {
+      "case_id": "drakon-20190517-host1",
+      "node_id": 58,
+      "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+      "uuid": "852e765f30d142398398b3107bc1b24e",
+      "expected_kind": "RECORD_FILE_OBJECT",
+      "outcome": "typed_uuid_match",
+      "definition_records": 1,
+      "native_type_signatures": [
+        [
+          "RECORD_FILE_OBJECT",
+          "FILE_OBJECT_UNIX_SOCKET"
+        ]
+      ],
+      "evidence": [
+        {
+          "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+          "record_index": 959,
+          "raw_sha256": "3e7750830f50df4ec812533d1ae435e829744282a00daf6ffd146d789ab0b89f"
+        }
+      ]
+    }
+  ],
+  "native_table_counts_unchanged": {
+    "events": 3425979,
+    "event_sources": 3425979,
+    "edges": 3540766,
+    "nodes": 295442,
+    "case_nodes": 295442,
+    "paths": 36163,
+    "node_paths": 51556,
+    "metadata_links": 37113,
+    "published_nodes": 93
+  },
+  "reference_status_counts": {
+    "typed_uuid_match": 45,
+    "uuid_present_unresolved": 2
+  },
+  "node_metadata_status_counts": {
+    "resolved": 221382,
+    "unresolved": 74060
+  },
+  "usable_event_relations": 1153107,
+  "process_context_counts": {
+    "future_start": 19350,
+    "time_valid": 2606925,
+    "unresolved_or_conflicting": 799704
+  },
+  "zero_node_labels": 0,
+  "input_graph_unchanged": true,
+  "outcome_counts": {
+    "no_native_definition_in_reviewed_local_sources": 2,
+    "typed_uuid_match": 24
+  },
+  "database_bytes": 1516654592,
+  "database_sha256": "41b41c9482bb19f3c8db57e5bcf33591d810edf7f5279442156213e4f4753a17",
+  "new_records_streamed": 173890348,
+  "post_run_verification": {
+    "events_row_differences": 0,
+    "event_sources_row_differences": 0,
+    "edges_row_differences": 0,
+    "nodes_row_differences": 0,
+    "case_nodes_row_differences": 0,
+    "paths_row_differences": 0,
+    "node_paths_row_differences": 0,
+    "metadata_links_row_differences": 0,
+    "published_nodes_row_differences": 0,
+    "changed_target_nodes": 24,
+    "changed_non_target_nodes": 0,
+    "case_counts": [
+      {
+        "case_id": "copykatz-20190509-host2",
+        "events": 2705805,
+        "typed_reference_matches": 39
+      },
+      {
+        "case_id": "drakon-20190517-host1",
+        "events": 720174,
+        "typed_reference_matches": 6
+      }
+    ],
+    "node_reference_labels": [
+      [
+        null,
+        295397
+      ],
+      [
+        1,
+        45
+      ]
+    ],
+    "native_evidence_records": 24,
+    "event_annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+    "sqlite_quick_check": "ok",
+    "input_graph_unchanged": true
+  },
+  "raw_evidence_verification": {
+    "method": "Independent ordinary fastavro reader; exact 1-based positions, full raw fingerprints, host, UUID, kind and datum",
+    "verified_definition_records": 24,
+    "sources": [
+      {
+        "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+        "verified_definition_records": 1,
+        "normal_reader_records_reread": 959
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.2.gz",
+        "verified_definition_records": 7,
+        "normal_reader_records_reread": 4207036
+      },
+      {
+        "filename": "ta1-fivedirections-2-e5-official-1.bin.gz",
+        "verified_definition_records": 16,
+        "normal_reader_records_reread": 2567666
+      }
+    ]
+  },
+  "software_validation": {
+    "command": "research/ml/.venv/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata -q",
+    "tests_run": 14,
+    "passed": 14,
+    "new_recovery_tests": 6,
+    "note": "Software checks, not model training/validation/test scores"
+  },
+  "selection_note": "Annotation-directed recovery for review only; apply label-independent metadata rules to all sampled nodes before model feature/sampling work",
+  "limitations": [
+    "The existing primary-host pilot Event/node selection is unchanged; this is not a full-release or full-incident graph.",
+    "File-object search covers the 26 audited same-host-stream archives; 11 other-host archives are outside this file-object search.",
+    "The complete 37-file Host/Principal/Subject index is validated and reused.",
+    "Missing native definitions are unresolved in this reviewed local subset, not proven absent from the DARPA release.",
+    "Only native kind/subtype disagreement decides type conflicts; other payload properties are retained as evidence.",
+    "Reference membership is not an expert Event attack label; NULL is not benign.",
+    "Recovery is annotation-directed and is not a label-independent feature/sampling pipeline.",
+    "Offline joins do not establish ingestion-time availability; no new Event labels, feature vectors, splits or model scores were produced."
+  ],
+  "post_run_verification_sha256_utf8_lf": "8a21b1c6647f2a023ed6ac30497cce5da2d5ff82de462ca70a8cecf0a01c67fc"
+}

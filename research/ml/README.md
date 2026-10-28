@@ -3,7 +3,15 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
-**2026-10-28 compact graph pilot completed:** the existing raw files produced
+**2026-10-28 native metadata follow-up completed:** exact native definitions
+resolved 24 of the 26 untyped reference UUIDs. The graph now has 45 typed
+published-reference matches (39 Copykatz, six Drakon); two Subject UUIDs remain
+unknown. Original Events and Event annotations are unchanged. See the
+[results and reproduction steps](../../data/ml/datasets/darpa/node_benchmark/metadata_recovery_20261028.md).
+The enriched graph is for annotation review; uniform metadata and sampling
+rules must be reviewed before feature construction or training.
+
+**2026-10-28 initial compact graph pilot completed:** the existing raw files produced
 a 1.52 GB SQLite graph with 3,425,979 unique Events, 295,442 entities and
 3,540,766 native Event relations. Published references yield 21 typed matches;
 unlisted nodes remain unknown. No model or split was created. See the

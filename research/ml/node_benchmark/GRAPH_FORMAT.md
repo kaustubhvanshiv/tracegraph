@@ -5,6 +5,11 @@ need the processed PostgreSQL dump, a database server, CUDA or a model package.
 The graph database and raw data remain outside Git; code, configuration and
 summary reports can be committed.
 
+The subsequent [native metadata recovery](METADATA_RECOVERY.md) preserves this
+original pilot and produces a separate enriched graph for annotation review.
+See the [measured follow-up](../../../data/ml/datasets/darpa/node_benchmark/metadata_recovery_20261028.md)
+before using either artifact for feature or sampling work.
+
 ## Selection and interpretation
 
 The configuration selects the primary publishing host and a half-open UTC

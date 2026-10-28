@@ -1,6 +1,15 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
-**Active route, 2026-10-28: compact raw-CDM pilot completed.** The existing
+**Active route, 2026-10-28: native metadata follow-up completed.** Exact native
+definitions resolved 24 of 26 untyped references, increasing accepted typed
+reference matches from 21 to 45. Two Subject UUIDs remain unknown. The original
+graph is preserved; a separate enriched SQLite graph remains local. Events,
+relationships and Event annotations are unchanged. See the
+[measured recovery report](../../../data/ml/datasets/darpa/node_benchmark/metadata_recovery_20261028.md)
+and [recovery command/evidence rules](METADATA_RECOVERY.md). This annotation-directed
+review does not establish a uniform metadata/sampling or training protocol.
+
+**Initial compact raw-CDM pilot, 2026-10-28:** the existing
 archives produced a 1.52 GB SQLite database with 3,425,979 unique Events,
 295,442 entities and 3,540,766 native Event relations. There are 21 typed
 published-reference matches; unlisted/unresolved labels remain unknown.
