@@ -3,6 +3,11 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 second model trained:** the approved denoising autoencoder selected
+epoch 40 on the RTX 4050. Development MSE is 0.062846 versus 0.033141 for the
+original autoencoder; repeat runs match and the inspected holdout was not read.
+All 33 relevant training/inference/report tests pass. See [results and reproduction](label_free/DENOISING.md).
+
 **2026-10-29 final label-free experiment report and handoff completed:**
 the [final report](label_free/FINAL_REPORT.md) and [teammate reproduction guide](label_free/REPRODUCING.md)
 consolidate the measured model, features, splits, results and limitations.

@@ -1,0 +1,133 @@
+{
+  "status": "denoising_train_development_comparison_complete",
+  "denoising": {
+    "status": "denoising_full_training_complete_holdout_not_evaluated",
+    "mode": "full",
+    "experiment_type": "denoising_autoencoder",
+    "mask_probability": 0.2,
+    "mask_seed": 1051,
+    "constant_columns_masked": false,
+    "selection_input": "clean_development",
+    "variable_columns": 32,
+    "config_sha256_utf8_lf": "11842eab480303a3344cfdb47dd9bcf0f231f01bb7af48ef32f905482d279e3f",
+    "code_sha256_utf8_lf": {
+      "model.py": "bf8ab4a161123f0e80c0edf6aed82a2e416f9cd0135b152c13bd2eeabf9167e8",
+      "training_data.py": "a92f2032002dcbeff450ae788d891387185c16c7a84c83479ec5d1b9f8c77819",
+      "denoising_train.py": "721f56d0969d20718839e7baca2121818cfca42b4b1dd186d80c170226f1da5b",
+      "runtime.py": "a3ae1b0243ee6c990b160d197a6c4b7944cec5eaedcb049f1d7a55944d2f7395"
+    },
+    "dataset_manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+    "feature_schema_sha256": "ea25feb33a32687b31244b8b7b46d7f81734b30b7bf44f846a5aa160270cab09",
+    "scaler_sha256": "3f46f271d6eacff5519f0648e6d33fe73d98da983653261eabdcaa5d1948f900",
+    "seed": 42,
+    "python_version": "3.11.9",
+    "torch_version": "2.15.0+cu132",
+    "device": "cuda",
+    "model_parameter_device": "cuda:0",
+    "training_tensor_device": "cuda:0",
+    "parameter_count": 2210,
+    "partition_samples": {
+      "train": 1184,
+      "development": 76
+    },
+    "security_labels_used": false,
+    "holdout_vectors_read": false,
+    "holdout_metrics": null,
+    "attack_detection_metrics_available": false,
+    "full_training_completed": true,
+    "baseline_metrics": {
+      "train": {
+        "mse": 0.5161290168762207,
+        "mae": 0.2153150588274002
+      },
+      "development": {
+        "mse": 0.14763754606246948,
+        "mae": 0.1643204540014267
+      }
+    },
+    "epochs_completed": 60,
+    "best_epoch": 40,
+    "optimizer_steps": 1140,
+    "initial_metrics": {
+      "epoch": 0,
+      "train": {
+        "mse": 0.5449756979942322,
+        "mae": 0.31364333629608154
+      },
+      "development": {
+        "mse": 0.18469251692295074,
+        "mae": 0.2662085294723511
+      },
+      "masked_input_training_mse": null
+    },
+    "selected_checkpoint_metrics": {
+      "train": {
+        "mse": 0.23064887523651123,
+        "mae": 0.14101509749889374
+      },
+      "development": {
+        "mse": 0.06284555792808533,
+        "mae": 0.10150470584630966
+      }
+    },
+    "runtime": {
+      "device_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "compiled_cuda": "13.2",
+      "compute_capability": [
+        8,
+        9
+      ],
+      "total_vram_bytes": 6438780928,
+      "peak_allocated_bytes": 33977856,
+      "peak_reserved_bytes": 35651584,
+      "matmul_precision": "highest",
+      "cublas_workspace_config": ":4096:8"
+    },
+    "elapsed_seconds": 4.983118799995282,
+    "training_loop_seconds_including_metrics_and_checkpoints": 2.572213200000988,
+    "checkpoint_sha256": "437edff8caadfef34aa631627dd8a0eb737f5f732ae192a4072776a0861694c8",
+    "checkpoint_state_sha256": "c2683f7d41ab815eb5484a27e9cd562a691be177313ced26f360c3047437fe33",
+    "optimizer_changed_weights": true,
+    "checkpoint_reload_verified": true,
+    "history_sha256": "5de11038b38c005e247e514778423a7aad66b32208f0ba8d436e15fa6d112b47",
+    "development_mse_improvement_over_mean_baseline": 0.08479198813438416,
+    "evaluation_scope": "Reconstruction only; unlabeled same-host/day pilot with shared object context",
+    "threshold_created": false
+  },
+  "original_autoencoder_metrics": {
+    "train": {
+      "mse": 0.1107114925980568,
+      "mae": 0.10085973143577576
+    },
+    "development": {
+      "mse": 0.03314121067523956,
+      "mae": 0.06641470640897751
+    }
+  },
+  "mean_reference_metrics": {
+    "train": {
+      "mse": 0.5161290168762207,
+      "mae": 0.2153150588274002
+    },
+    "development": {
+      "mse": 0.14763754606246948,
+      "mae": 0.1643204540014267
+    }
+  },
+  "same_seed_exact_weights": true,
+  "same_seed_exact_history": true,
+  "repeated_run_seconds": 2.3565153000017744,
+  "holdout_access_guard_passed": true,
+  "original_checkpoint_unchanged": true,
+  "original_checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "new_final_evaluation_performed": false,
+  "security_threshold": null,
+  "attack_detection_metrics_available": false,
+  "comparison_scope": "Clean train/development reconstruction only; development is model-selection data",
+  "next_evaluation_requirement": "Fresh source-verified evaluation cohort for both frozen models",
+  "software_tests": {
+    "passed": 33,
+    "skipped": 0,
+    "new_denoising_tests": 2
+  }
+}

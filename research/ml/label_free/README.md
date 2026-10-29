@@ -1,5 +1,11 @@
 # Separate label-free DARPA workflow
 
+**Second model completed, 2026-10-29:** the approved denoising autoencoder ran
+on the RTX 4050; epoch 40 was selected and repeat runs matched exactly. Its
+development MSE is 0.062846 versus 0.033141 for the original model. All 33
+relevant training/inference/report tests pass. The inspected holdout was not
+opened. See [results and teammate commands](DENOISING.md).
+
 **Final report and handoff completed, 2026-10-29:** the
 [consolidated experiment report](FINAL_REPORT.md) and [teammate reproduction guide](REPRODUCING.md)
 are ready. A report-only command rebuilds measured tables from linked public

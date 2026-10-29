@@ -1,5 +1,12 @@
 # Task alignment and progress - 2026-10-29
 
+**Subsequent approved experiment completed:** second-model denoising training
+and train/development comparison are complete. Epoch 40 was selected after
+60 epochs; two full GPU runs match. Development MSE 0.062846 is higher than
+the original model's 0.033141. The inspected holdout was not opened. See
+[results and scope](DENOISING.md). This extends the completed first-model
+pilot without completing a new final evaluation or supervised/GNN tasks.
+
 The latest continuation of the approved label-free workflow is **the final
 experiment report and reproducibility handoff**. LF-01 through LF-07 are
 complete. See the [final report](FINAL_REPORT.md), [teammate handoff](REPRODUCING.md),
