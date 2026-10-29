@@ -23,7 +23,7 @@ for this experiment, not values established by that paper for DARPA.
 
 - Reuse the independently verified DARPA snapshot and saved training-only scaler.
 - Fit on the existing 1,184 training rows; select using the 76 development rows.
-- Retain the same 62 â†’ 16 â†’ 4 â†’ 16 â†’ 62 architecture and 2,210 parameters.
+- Retain the same 62 → 16 → 4 → 16 → 62 architecture and 2,210 parameters.
 - During training only, independently mask each nonconstant normalized input
   coordinate with probability 0.20 by replacing it with zero (its training
   mean). Leave training-constant columns unchanged. Keep the clean vector as
