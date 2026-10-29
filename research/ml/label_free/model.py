@@ -1,6 +1,7 @@
 """Small vector autoencoder for the separately approved label-free pilot."""
 import hashlib
 import json
+import math
 
 import torch
 from torch import nn
@@ -27,13 +28,15 @@ def reconstruction_metrics(model, values):
     model.eval()
     with torch.inference_mode():
         residual = model(values)-values
-        if not torch.isfinite(residual).all() or not torch.isfinite(residual.square()).all():
-            raise ValueError('Nonfinite reconstruction output')
-        return dict(mse=float(residual.square().mean()),mae=float(residual.abs().mean()))
+        return residual_metrics(residual)
 
 
 def baseline_metrics(baseline, values):
-    residual = values-baseline
-    if not torch.isfinite(residual).all() or not torch.isfinite(residual.square()).all():
-        raise ValueError('Nonfinite mean-baseline reconstruction metric')
-    return dict(mse=float(residual.square().mean()),mae=float(residual.abs().mean()))
+    return residual_metrics(values-baseline)
+
+
+def residual_metrics(residual):
+    mse,mae = torch.stack((residual.square().mean(),residual.abs().mean())).detach().cpu().tolist()
+    if not math.isfinite(mse) or not math.isfinite(mae):
+        raise ValueError('Nonfinite reconstruction metric')
+    return dict(mse=mse,mae=mae)

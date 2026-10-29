@@ -5,17 +5,19 @@ import argparse
 import json
 from pathlib import Path
 import platform
-import random
 import shutil
+from time import perf_counter
 
 import torch
 
 from research.ml.label_free.model import ActivityAutoencoder, baseline_metrics, reconstruction_metrics, state_digest
 from research.ml.label_free.training_data import partition, snapshot
+from research.ml.label_free.runtime import all_finite, configure_runtime, runtime_details, synchronize
 from research.ml.node_benchmark.audit_protocol import file_hash, text_hash
 
 
 def train(directory, config_path, output, mode):
+    started = perf_counter()
     if output.exists() or mode not in ('smoke','full'):
         raise ValueError('Use a fresh output directory and an explicit smoke/full mode')
     config = json.loads(config_path.read_text(encoding='utf-8'))
@@ -24,21 +26,22 @@ def train(directory, config_path, output, mode):
     development,dev_ids,dev_actors = partition(directory,metadata,'development')
     if train_ids&dev_ids or train_actors&dev_actors:
         raise ValueError('Training and development sample/actor identities overlap')
-    random.seed(config['seed']);torch.manual_seed(config['seed'])
-    torch.set_num_threads(config['cpu_threads']);torch.use_deterministic_algorithms(True)
-    model = ActivityAutoencoder(config['input_dim'],config['hidden_dim'],config['latent_dim']).float()
+    device = configure_runtime(config)
+    training,development = training.to(device),development.to(device)
+    model = ActivityAutoencoder(config['input_dim'],config['hidden_dim'],config['latent_dim']).float().to(device)
     optimizer = torch.optim.Adam(model.parameters(),lr=config['learning_rate'],weight_decay=config['weight_decay'])
     generator = torch.Generator(device='cpu').manual_seed(config['seed'])
     baseline = training.mean(dim=0)
     initial_digest = state_digest(model)
     output.mkdir(parents=True)
     shutil.copyfile(config_path,output/'config.json')
-    code_hashes = {name:text_hash(Path(__file__).parent/name) for name in ('model.py','training_data.py','train.py')}
+    code_hashes = {name:text_hash(Path(__file__).parent/name) for name in ('model.py','training_data.py','train.py','runtime.py')}
     report = dict(status='running',mode=mode,config_sha256_utf8_lf=text_hash(config_path),code_sha256_utf8_lf=code_hashes,
         dataset_manifest_sha256_utf8_lf=metadata['manifest_sha256_utf8_lf'],
         feature_schema_sha256=metadata['manifest']['feature_schema_sha256'],
         scaler_sha256=metadata['manifest']['scaler_sha256'],seed=config['seed'],
-        python_version=platform.python_version(),torch_version=torch.__version__,device='cpu',
+        python_version=platform.python_version(),torch_version=torch.__version__,device=str(device),
+        model_parameter_device=str(next(model.parameters()).device),training_tensor_device=str(training.device),
         parameter_count=sum(p.numel() for p in model.parameters()),
         partition_samples=dict(train=len(training),development=len(development)),
         security_labels_used=False,holdout_vectors_read=False,holdout_metrics=None,
@@ -67,9 +70,10 @@ def train(directory, config_path, output, mode):
         best_epoch,bad_epochs,optimizer_steps = 0,0,0
         save_checkpoint(0,best_loss)
         budget = config['smoke_epochs'] if mode=='smoke' else config['max_epochs']
+        synchronize(device);loop_started=perf_counter()
         for epoch in range(1,budget+1):
             model.train()
-            order = torch.randperm(len(training),generator=generator)
+            order = torch.randperm(len(training),generator=generator).to(device)
             for batch in order.split(config['batch_size']):
                 optimizer.zero_grad(set_to_none=True)
                 values = training[batch]
@@ -77,10 +81,10 @@ def train(directory, config_path, output, mode):
                 if not torch.isfinite(loss):
                     raise ValueError('Nonfinite training loss')
                 loss.backward()
-                if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
+                if not all_finite([p.grad for p in model.parameters()]):
                     raise ValueError('Nonfinite model gradient')
                 optimizer.step();optimizer_steps+=1
-                if any(not torch.isfinite(p).all() for p in model.parameters()):
+                if not all_finite([p.detach() for p in model.parameters()]):
                     raise ValueError('Nonfinite model parameter')
             item = metrics(epoch)
             current = item['development']['mse']
@@ -90,8 +94,11 @@ def train(directory, config_path, output, mode):
                 significant_reference,bad_epochs = current,0
             else:
                 bad_epochs+=1
+            if epoch%10==0:
+                print(json.dumps(dict(epoch=epoch,train_mse=item['train']['mse'],development_mse=current,best_epoch=best_epoch)),flush=True)
             if mode=='full' and bad_epochs >= config['patience']:
                 break
+        synchronize(device);loop_seconds=perf_counter()-loop_started
         updated_digest = state_digest(model)
         if updated_digest == initial_digest or optimizer_steps < 1:
             raise ValueError('Optimizer did not update the model')
@@ -103,6 +110,8 @@ def train(directory, config_path, output, mode):
         report.update(status='smoke_passed_training_ready' if mode=='smoke' else 'full_training_complete_holdout_not_evaluated',
             full_training_completed=mode=='full',epochs_completed=history[-1]['epoch'],best_epoch=best_epoch,
             optimizer_steps=optimizer_steps,initial_metrics=initial,selected_checkpoint_metrics=selected,
+            runtime=runtime_details(device),elapsed_seconds=perf_counter()-started,
+            training_loop_seconds_including_metrics_and_checkpoints=loop_seconds,
             checkpoint_sha256=file_hash(checkpoint),checkpoint_state_sha256=state_digest(model),
             optimizer_changed_weights=True,checkpoint_reload_verified=True,
             history_sha256=file_hash(output/'history.jsonl'),

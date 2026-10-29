@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 GPU training and final reconstruction evaluation completed:** the
+RTX 4050 ran 200 epochs; development selected epoch 185. Two same-seed full
+runs reproduced identical losses and weights. Holdout MSE is 0.072373 versus
+0.282538 for the mean baseline; MAE is 0.090200 versus 0.181020. All 68 relevant
+tests pass in the CUDA environment. See the [result/chart and GPU steps](label_free/GPU_TRAINING.md).
+This completes the approved label-free pilot, with no attack-detection claim.
+
 **2026-10-29 label-free training readiness verified:** a 2,210-parameter
 autoencoder and the complete training/checkpoint/final-evaluation code are ready.
 Two real DARPA three-epoch smoke runs produced identical losses and weights;

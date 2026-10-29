@@ -29,6 +29,7 @@ class LabelFreeTrainingTests(unittest.TestCase):
         verify(directory,args[1],directory/'verification.json')
         config = json.loads(CONFIG.read_text())
         config.update(input_dim=8,hidden_dim=4,latent_dim=2,max_epochs=4,smoke_epochs=2,patience=2,
+            torch_version=torch.__version__,
             dataset_manifest_sha256_utf8_lf=text_hash(directory/'manifest.json'),
             dataset_verification_sha256_utf8_lf=text_hash(directory/'verification.json'))
         config_path = base/'training.json'
@@ -48,9 +49,27 @@ class LabelFreeTrainingTests(unittest.TestCase):
     def test_invalid_or_supervised_config_is_rejected(self):
         original = json.loads(CONFIG.read_text())
         for key,value in [('security_labels_used',True),('holdout_used_for_training_or_readiness',True),
-                ('learning_rate',float('nan')),('batch_size',0),('device','cuda'),('latent_dim',62)]:
+                ('learning_rate',float('nan')),('batch_size',0),('device','unsupported'),('latent_dim',62)]:
             config = copy.deepcopy(original);config[key] = value
             with self.subTest(setting=key),self.assertRaises(ValueError):validate_config(config)
+
+    def test_cuda_request_never_silently_falls_back_to_cpu(self):
+        config=json.loads(CONFIG.read_text())
+        config.update(device='cuda',torch_version=torch.__version__,matmul_precision='highest',
+                      cublas_workspace_config=':4096:8')
+        with patch('torch.cuda.is_available',return_value=False):
+            with self.assertRaisesRegex(ValueError,'CUDA was requested'):
+                validate_config(config)
+
+    def test_cuda_precision_and_workspace_must_be_explicit(self):
+        original=json.loads(CONFIG.read_text())
+        original.update(device='cuda',torch_version=torch.__version__,matmul_precision='highest',
+                        cublas_workspace_config=':4096:8')
+        for key,value in [('matmul_precision','high'),('cublas_workspace_config',None)]:
+            config=copy.deepcopy(original);config[key]=value
+            with self.subTest(setting=key),patch('torch.cuda.is_available',return_value=True):
+                with self.assertRaisesRegex(ValueError,'precision and deterministic workspace'):
+                    validate_config(config)
 
     def test_smoke_training_never_opens_holdout_and_reloads_selected_weights(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -157,6 +176,25 @@ class LabelFreeTrainingTests(unittest.TestCase):
             report=json.loads((base/'failed/run.json').read_text())
             self.assertEqual(report['status'],'incomplete_failed')
             self.assertFalse(report['full_training_completed'])
+
+    @unittest.skipUnless(torch.cuda.is_available(),'CUDA hardware/runtime unavailable')
+    def test_cuda_full_training_reproduces_and_evaluates_on_the_gpu(self):
+        with tempfile.TemporaryDirectory() as folder:
+            base=Path(folder);directory,config_path=self.fixture(base)
+            config=json.loads(config_path.read_text())
+            config.update(device='cuda',matmul_precision='highest',cublas_workspace_config=':4096:8')
+            config_path.write_text(json.dumps(config),encoding='utf-8')
+            first=train(directory,config_path,base/'a','full')
+            second=train(directory,config_path,base/'b','full')
+            self.assertEqual(first['model_parameter_device'],'cuda:0')
+            self.assertEqual(first['training_tensor_device'],'cuda:0')
+            self.assertGreater(first['runtime']['peak_allocated_bytes'],0)
+            self.assertEqual(first['runtime']['matmul_precision'],'highest')
+            self.assertEqual(first['checkpoint_state_sha256'],second['checkpoint_state_sha256'])
+            self.assertEqual((base/'a/history.jsonl').read_bytes(),(base/'b/history.jsonl').read_bytes())
+            result=evaluate(directory,base/'a',base/'evaluation.json')
+            self.assertEqual(result['model_parameter_device'],'cuda:0')
+            self.assertFalse(result['weights_updated'])
 
 
 if __name__=='__main__':

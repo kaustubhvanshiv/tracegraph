@@ -1,9 +1,17 @@
 # Separate label-free DARPA workflow
 
+**GPU full run completed, 2026-10-29:** 200 epochs on the RTX 4050, with epoch
+185 selected on development. Full-run histories and weights match across two
+same-seed runs. Final holdout reconstruction MSE is 0.072373 versus the mean
+baseline's 0.282538; MAE is 0.090200 versus 0.181020. All 68 GPU-environment
+software tests pass. See [results/chart](../../../data/ml/datasets/darpa/label_free/gpu_training_result_20261029.md)
+and [GPU reproduction commands](GPU_TRAINING.md). These are reconstruction results;
+security labels remain unknown and the original supervised task is unchanged.
+
 **Training-ready, 2026-10-29:** the autoencoder, training/configuration/runtime,
 checkpointing and separate holdout evaluator are implemented. Two identical
 real-data three-epoch smoke runs passed; all 65 relevant software tests pass.
-Full training and final model evaluation are pending. See the
+That earlier CPU readiness milestone preceded full GPU training. See the
 [training commands](TRAINING.md) and [task alignment/status](TASK_STATUS.md).
 
 **Preparation completed on 2026-10-29:** 1,358 native actor-window samples,
@@ -151,5 +159,6 @@ of relabeled/tampered vectors, scaler statistics or concealed shared context.
 
 **Preparation and training-readiness tasks are complete.** The reviewed model,
 loss and configuration are in the [training specification](TASK_SPEC.md).
-Use the [full-run instructions](TRAINING.md) for the next execution step.
+Full GPU training and final reconstruction evaluation are also complete; use
+the [GPU instructions](GPU_TRAINING.md) to reproduce them.
 No detection-performance claim follows from the prepared rows or software-test count.

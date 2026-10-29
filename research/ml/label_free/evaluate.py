@@ -2,11 +2,13 @@
 import argparse
 import json
 from pathlib import Path
+from time import perf_counter
 
 import torch
 
 from research.ml.label_free.model import ActivityAutoencoder, baseline_metrics, reconstruction_metrics, state_digest
 from research.ml.label_free.training_data import partition, snapshot
+from research.ml.label_free.runtime import configure_runtime, runtime_details, synchronize
 from research.ml.node_benchmark.audit_protocol import file_hash, text_hash
 
 
@@ -24,7 +26,7 @@ def evaluate(directory, run_directory, output):
     config = json.loads(config_path.read_text(encoding='utf-8'))
     metadata = snapshot(directory,config)
     for name,digest in run['code_sha256_utf8_lf'].items():
-        if name not in ('model.py','training_data.py','train.py') or text_hash(Path(__file__).parent/name) != digest:
+        if name not in ('model.py','training_data.py','train.py','runtime.py') or text_hash(Path(__file__).parent/name) != digest:
             raise ValueError('Training code changed since the checkpoint was frozen')
     checkpoint = run_directory/'best.pt'
     if file_hash(checkpoint) != run['checkpoint_sha256']:
@@ -36,18 +38,23 @@ def evaluate(directory, run_directory, output):
             or saved['scaler_sha256'] != metadata['manifest']['scaler_sha256']
             or saved['feature_names'] != metadata['feature_names'] or saved['best_epoch'] != run['best_epoch']):
         raise ValueError('Checkpoint, feature order or frozen data provenance differs')
-    model = ActivityAutoencoder(config['input_dim'],config['hidden_dim'],config['latent_dim']).float()
+    device = configure_runtime(config)
+    model = ActivityAutoencoder(config['input_dim'],config['hidden_dim'],config['latent_dim']).float().to(device)
     model.load_state_dict(saved['model_state_dict'],strict=True)
     if state_digest(model) != run['checkpoint_state_sha256']:
         raise ValueError('Selected model weights differ from the training report')
-    torch.set_num_threads(config['cpu_threads']);torch.use_deterministic_algorithms(True)
     heldout,_,_ = partition(directory,metadata,'holdout')
+    heldout=heldout.to(device)
+    synchronize(device);started=perf_counter()
     model_metrics = reconstruction_metrics(model,heldout)
-    baseline = baseline_metrics(saved['training_mean_baseline'],heldout)
+    baseline = baseline_metrics(saved['training_mean_baseline'].to(device),heldout)
+    synchronize(device);evaluation_seconds=perf_counter()-started
     result = dict(status='final_label_free_reconstruction_evaluated',
         frozen_run_sha256_utf8_lf=text_hash(run_path),checkpoint_sha256=run['checkpoint_sha256'],
         config_sha256_utf8_lf=run['config_sha256_utf8_lf'],dataset_manifest_sha256_utf8_lf=metadata['manifest_sha256_utf8_lf'],
         evaluator_sha256_utf8_lf=text_hash(Path(__file__)),holdout_samples=len(heldout),
+        model_parameter_device=str(next(model.parameters()).device),runtime=runtime_details(device),
+        evaluation_seconds_including_mean_baseline=evaluation_seconds,
         reconstruction_metrics=model_metrics,training_mean_baseline_metrics=baseline,
         mse_improvement_over_mean_baseline=baseline['mse']-model_metrics['mse'],
         holdout_used_for_checkpoint_selection=False,weights_updated=False,security_labels_used=False,

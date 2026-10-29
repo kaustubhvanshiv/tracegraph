@@ -1,11 +1,15 @@
 # Training-ready label-free DARPA pilot
 
-**2026-10-29: ready for the full reconstruction run.** The model, input checks,
+**Full GPU training and final holdout evaluation are now complete:** see the
+[GPU guide](GPU_TRAINING.md) and [results/chart](../../../data/ml/datasets/darpa/label_free/gpu_training_result_20261029.md).
+The CPU readiness steps below are retained for reproduction.
+
+**Earlier CPU readiness milestone, 2026-10-29:** the model, input checks,
 loss, optimizer, checkpoint selection, early stopping and separate final evaluator
 are implemented. Two real-data three-epoch smoke runs produced identical loss
 histories and weights. All **65 relevant software tests pass** and `pip check`
-reports no broken dependencies. Full training and real holdout evaluation have
-not been run. See the [task status](TASK_STATUS.md) and
+reports no broken dependencies. At that milestone full training and real
+holdout evaluation had not been run. See the [task status](TASK_STATUS.md) and
 [measured readiness result](../../../data/ml/datasets/darpa/label_free/training_readiness_20261029.md).
 
 ## Scope and model
@@ -88,7 +92,8 @@ research/ml/.venv/Scripts/python.exe -m research.ml.label_free.train `
   --mode full
 ```
 
-This command has not been executed on the real data. It starts from the fixed
+This CPU full-run command has not been executed on the real data; the completed
+GPU run uses [the CUDA configuration](GPU_TRAINING.md). It starts from the fixed
 seed, not smoke weights. Fresh-run training is supported; optimizer-state resume
 is not implemented. The lowest development-MSE checkpoint is saved, including
 initialization as epoch zero. Early stopping uses development MSE only. Training

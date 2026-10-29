@@ -1,0 +1,89 @@
+{
+  "status": "gpu_training_and_frozen_holdout_complete_verified",
+  "gpu_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "driver_version": "610.47",
+  "torch_version": "2.15.0+cu132",
+  "compiled_cuda": "13.2",
+  "device": "cuda:0",
+  "configuration_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+  "task_spec_sha256_utf8_lf": "4a41ae11102f956f6bcfa8e16f18592d2a18be49bc583f826353874b66147433",
+  "requirements_gpu_sha256_utf8_lf": "a153ab0322a85842bbe49f4bb91030011d5c277460d2fd9c123ffb8882f401fe",
+  "epochs": 200,
+  "best_epoch": 185,
+  "optimizer_steps": 3800,
+  "stopping_reason": "maximum_epoch_budget_reached",
+  "full_runs": 2,
+  "same_seed_exact_history_match": true,
+  "same_seed_exact_model_state_match": true,
+  "primary_elapsed_seconds": 10.808604699996067,
+  "repeat_elapsed_seconds": 12.316168099998322,
+  "primary_loop_seconds_including_metrics_and_checkpoints": 7.397587899999053,
+  "repeat_loop_seconds_including_metrics_and_checkpoints": 8.927560800002539,
+  "timing_excludes_package_setup_and_python_import": true,
+  "cpu_gpu_speedup_measured": false,
+  "peak_torch_allocated_bytes": 33961472,
+  "peak_memory_scope": "PyTorch allocator only, not total driver/CUDA context memory",
+  "training_samples": 1184,
+  "development_samples": 76,
+  "holdout_samples": 98,
+  "input_features": 62,
+  "model_parameters": 2210,
+  "selected_checkpoint_metrics": {
+    "train": {
+      "mse": 0.1107114925980568,
+      "mae": 0.10085973143577576
+    },
+    "development": {
+      "mse": 0.03314121067523956,
+      "mae": 0.06641470640897751
+    }
+  },
+  "training_mean_baseline": {
+    "train": {
+      "mse": 0.5161290168762207,
+      "mae": 0.2153150588274002
+    },
+    "development": {
+      "mse": 0.14763754606246948,
+      "mae": 0.1643204540014267
+    }
+  },
+  "holdout_reconstruction": {
+    "mse": 0.07237275689840317,
+    "mae": 0.09019967168569565
+  },
+  "holdout_mean_baseline": {
+    "mse": 0.2825376093387604,
+    "mae": 0.18102014064788818
+  },
+  "holdout_mse_reduction_percent": 74.3847351622386,
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "best_checkpoint_survives_evaluation_unchanged": true,
+  "dataset_files_unchanged": true,
+  "holdout_used_for_training_or_model_selection": false,
+  "security_labels_used": false,
+  "supervised_task_completed": false,
+  "attack_detection_accuracy_established": false,
+  "software_checks": {
+    "gpu_environment_tests_passed": 68,
+    "gpu_tests_skipped": 0,
+    "cpu_environment_tests_passed": 67,
+    "cpu_gpu_only_tests_skipped": 1
+  },
+  "task_status": {
+    "LF01_data": "complete",
+    "LF02_readiness": "complete",
+    "LF03_full_training": "complete",
+    "LF04_holdout_reconstruction": "complete",
+    "original_ML02_4": "incomplete_ground_truth_and_groups",
+    "original_GNN_track": "deferred"
+  },
+  "limitations": [
+    "Unlabeled training data may contain attacks; no certified normal-data claim",
+    "First-selected-partition ownership biases later data toward newly observed actors, which may be threads",
+    "Common object context and identical feature profiles remain; no independent incident or host-generalization claim",
+    "No metadata availability or process-lineage inference is used by these aggregate vectors",
+    "Feature artifacts are model inputs, not anomaly scores, attack predictions or detection metrics"
+  ]
+}

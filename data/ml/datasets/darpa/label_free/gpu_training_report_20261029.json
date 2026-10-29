@@ -1,0 +1,87 @@
+{
+  "status": "full_training_complete_holdout_not_evaluated",
+  "mode": "full",
+  "config_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+  "code_sha256_utf8_lf": {
+    "model.py": "bf8ab4a161123f0e80c0edf6aed82a2e416f9cd0135b152c13bd2eeabf9167e8",
+    "training_data.py": "a92f2032002dcbeff450ae788d891387185c16c7a84c83479ec5d1b9f8c77819",
+    "train.py": "3b89b11159a94c1f661be35cd5247fec49b64352c3aee620f88c2fcc11e52f4a",
+    "runtime.py": "a3ae1b0243ee6c990b160d197a6c4b7944cec5eaedcb049f1d7a55944d2f7395"
+  },
+  "dataset_manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+  "feature_schema_sha256": "ea25feb33a32687b31244b8b7b46d7f81734b30b7bf44f846a5aa160270cab09",
+  "scaler_sha256": "3f46f271d6eacff5519f0648e6d33fe73d98da983653261eabdcaa5d1948f900",
+  "seed": 42,
+  "python_version": "3.11.9",
+  "torch_version": "2.15.0+cu132",
+  "device": "cuda",
+  "model_parameter_device": "cuda:0",
+  "training_tensor_device": "cuda:0",
+  "parameter_count": 2210,
+  "partition_samples": {
+    "train": 1184,
+    "development": 76
+  },
+  "security_labels_used": false,
+  "holdout_vectors_read": false,
+  "holdout_metrics": null,
+  "attack_detection_metrics_available": false,
+  "full_training_completed": true,
+  "baseline_metrics": {
+    "train": {
+      "mse": 0.5161290168762207,
+      "mae": 0.2153150588274002
+    },
+    "development": {
+      "mse": 0.14763754606246948,
+      "mae": 0.1643204540014267
+    }
+  },
+  "epochs_completed": 200,
+  "best_epoch": 185,
+  "optimizer_steps": 3800,
+  "initial_metrics": {
+    "epoch": 0,
+    "train": {
+      "mse": 0.5449756979942322,
+      "mae": 0.31364333629608154
+    },
+    "development": {
+      "mse": 0.18469251692295074,
+      "mae": 0.2662085294723511
+    }
+  },
+  "selected_checkpoint_metrics": {
+    "train": {
+      "mse": 0.1107114925980568,
+      "mae": 0.10085973143577576
+    },
+    "development": {
+      "mse": 0.03314121067523956,
+      "mae": 0.06641470640897751
+    }
+  },
+  "runtime": {
+    "device_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "compiled_cuda": "13.2",
+    "compute_capability": [
+      8,
+      9
+    ],
+    "total_vram_bytes": 6438780928,
+    "peak_allocated_bytes": 33961472,
+    "peak_reserved_bytes": 35651584,
+    "matmul_precision": "highest",
+    "cublas_workspace_config": ":4096:8"
+  },
+  "elapsed_seconds": 10.808604699996067,
+  "training_loop_seconds_including_metrics_and_checkpoints": 7.397587899999053,
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "optimizer_changed_weights": true,
+  "checkpoint_reload_verified": true,
+  "history_sha256": "ce01bc641fe866417f5ccc1376919ba3b82302e3ba7dc7b179aed060ba96b8ea",
+  "development_mse_improvement_over_mean_baseline": 0.11449633538722992,
+  "evaluation_scope": "Reconstruction only; unlabeled same-host/day pilot with shared object context",
+  "threshold_created": false
+}

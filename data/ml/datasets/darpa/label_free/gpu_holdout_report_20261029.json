@@ -1,0 +1,45 @@
+{
+  "status": "final_label_free_reconstruction_evaluated",
+  "frozen_run_sha256_utf8_lf": "88a90635741868f869a20025400538817ce743eec5dfe3884431f7aae191b24a",
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "config_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+  "dataset_manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+  "evaluator_sha256_utf8_lf": "6d88a1dff4cbd3cb9b93255df342bd27f64588c508b78c9e9f27bd630e2bbaea",
+  "holdout_samples": 98,
+  "model_parameter_device": "cuda:0",
+  "runtime": {
+    "device_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "compiled_cuda": "13.2",
+    "compute_capability": [
+      8,
+      9
+    ],
+    "total_vram_bytes": 6438780928,
+    "peak_allocated_bytes": 1115648,
+    "peak_reserved_bytes": 2097152,
+    "matmul_precision": "highest",
+    "cublas_workspace_config": ":4096:8"
+  },
+  "evaluation_seconds_including_mean_baseline": 0.1019808000055491,
+  "reconstruction_metrics": {
+    "mse": 0.07237275689840317,
+    "mae": 0.09019967168569565
+  },
+  "training_mean_baseline_metrics": {
+    "mse": 0.2825376093387604,
+    "mae": 0.18102014064788818
+  },
+  "mse_improvement_over_mean_baseline": 0.2101648524403572,
+  "holdout_used_for_checkpoint_selection": false,
+  "weights_updated": false,
+  "security_labels_used": false,
+  "attack_detection_metrics_available": false,
+  "security_threshold": null,
+  "limitations": [
+    "Unlabeled training data may contain attacks; no certified normal-data claim",
+    "First-selected-partition ownership biases later data toward newly observed actors, which may be threads",
+    "Common object context and identical feature profiles remain; no independent incident or host-generalization claim",
+    "No metadata availability or process-lineage inference is used by these aggregate vectors",
+    "Feature artifacts are model inputs, not anomaly scores, attack predictions or detection metrics"
+  ]
+}

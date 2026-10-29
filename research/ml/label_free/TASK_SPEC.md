@@ -75,3 +75,26 @@ incomplete even if this label-free pilot runs successfully.
 Implementation references: [PyTorch installation](https://pytorch.org/get-started/locally/),
 [reproducibility](https://docs.pytorch.org/docs/2.15/notes/randomness.html),
 and [state-dictionary checkpoint loading](https://docs.pytorch.org/tutorials/beginner/basics/saveloadrun_tutorial.html).
+
+## GPU execution addendum - 2026-10-29
+
+The user subsequently requested full training using the NVIDIA GPU. The
+separate [CUDA configuration](training_config_cuda.json) retains the same model,
+loss, optimizer, batch size, seed, history, data fingerprints and stopping rule.
+It changes the runtime to CUDA-enabled PyTorch 2.15.0+cu132 and CUDA device 0.
+Use a separate ignored environment to preserve the pinned CPU readiness setup.
+
+GPU matrix multiplication uses the `highest` float32 precision setting, with
+deterministic algorithms and `CUBLAS_WORKSPACE_CONFIG=:4096:8`. Training vectors,
+development vectors and model parameters must actually reside on CUDA; a missing
+GPU fails explicitly rather than falling back to CPU. Save checkpoints on CPU
+for storage, then reload/evaluate on the configured device. Record device name,
+compiled CUDA version, device placement, allocated memory and synchronized
+elapsed timing. GPU setup/import time is separate from measured training-loop
+time; no CPU/GPU speedup claim is implied for this small model.
+
+Before final holdout evaluation, repeat the frozen full CUDA run with the same
+seed to check same-runtime histories and weights. This is reproducibility
+verification, not a hyperparameter search. Do not change settings in response
+to holdout outcomes. The 98 real holdout rows remain reserved until the full
+checkpoint is selected and both run configurations are frozen.

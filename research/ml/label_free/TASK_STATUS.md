@@ -1,16 +1,16 @@
 # Task alignment and progress - 2026-10-29
 
-The current user-approved task is to make the **separate label-free DARPA
-workflow ready for training** and verify that it is proceeding correctly.
-The latest readiness result satisfies that scope; full training/evaluation are
-separate pending executions.
+The current user-approved task is **full label-free DARPA training using the
+GPU, followed by frozen holdout evaluation**. Both executions and the
+same-runtime repeatability check are complete. See the
+[GPU result and chart](../../../data/ml/datasets/darpa/label_free/gpu_training_result_20261029.md).
 
 | Task | State | Evidence |
 |---|---|---|
 | LF-01: native data and features | Complete | 1,358 real actor-window rows, 62 features, independent SQL verification |
-| LF-02: model and training readiness | Complete | Written spec/config, locked runtime, executable train/evaluate modules, two identical real-data three-epoch smoke runs, 65 passing software tests |
-| LF-03: full reconstruction training | Not run | Full command is documented; no full-run result/checkpoint has been accepted |
-| LF-04: final reconstruction holdout | Not run | Real holdout has not been evaluated by a model; smoke checkpoints are rejected |
+| LF-02: model and training readiness | Complete | Written spec/config, locked CPU/CUDA runtimes, executable modules, smoke checks and 68 passing GPU-environment software tests |
+| LF-03: full reconstruction training | Complete | 200 epochs on RTX 4050; epoch 185 selected on development; exact repeated full history/weights |
+| LF-04: final reconstruction holdout | Complete | 98 reserved rows evaluated after selection; MSE 0.072373, MAE 0.090200; no weight updates |
 | Original ML-02.4 supervised data preparation | Incomplete | Eligible Event evidence remains three attacks and zero benign actions; node binary truth/independent groups remain insufficient |
 | Original ML-06/07/08 GNN work | Deferred | This is a vector autoencoder, not the graph task specified by those tasks |
 | Production inference integration | Not started | All label-free code remains outside the FastAPI application |
@@ -28,8 +28,10 @@ autoencoder milestone.
 Readiness does not require the neural model to win a final benchmark. It
 requires valid inputs, a defined loss/baseline, finite optimization, reproducible
 execution, verified checkpoint reload and protected holdout usage. Those checks
-pass. The three-epoch development MSE is slightly lower than the mean baseline,
-while MAE is higher; complete performance assessment remains pending.
+pass. At the earlier readiness milestone, three-epoch development MSE was
+slightly lower than the mean baseline while MAE was higher. The completed
+GPU model has lower MSE and MAE than that reference on this limited holdout;
+this does not establish attack-detection performance.
 
-See [launch and verification steps](TRAINING.md), the [model/task specification](TASK_SPEC.md)
+See [GPU execution and reproduction](GPU_TRAINING.md), the [model/task specification](TASK_SPEC.md)
 and [measured readiness result](../../../data/ml/datasets/darpa/label_free/training_readiness_20261029.md).

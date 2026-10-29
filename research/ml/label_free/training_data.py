@@ -9,7 +9,7 @@ from research.ml.node_benchmark.audit_protocol import file_hash, text_hash
 
 def validate_config(config):
     if (config['version'] != 1 or config['objective'] != 'normalized_activity_reconstruction'
-            or config['device'] != 'cpu' or config['dtype'] != 'float32'
+            or config['device'] not in ('cpu','cuda') or config['dtype'] != 'float32'
             or config['optimizer'] != 'adam'
             or config['activation'] != 'relu_hidden_linear_latent_and_output'
             or config['checkpoint_selection'] != 'development_mse_including_initialization'
@@ -30,6 +30,12 @@ def validate_config(config):
         raise ValueError('Learning rate must be positive')
     if torch.__version__ != config['torch_version']:
         raise ValueError('Install the pinned PyTorch runtime before reproducing this run')
+    if config['device']=='cuda':
+        if not torch.cuda.is_available():
+            raise ValueError('CUDA was requested but no compatible CUDA runtime/GPU is available')
+        if (config.get('matmul_precision') != 'highest'
+                or config.get('cublas_workspace_config') not in (':4096:8',':16:8')):
+            raise ValueError('CUDA precision and deterministic workspace must be frozen')
 
 
 def snapshot(directory, config):

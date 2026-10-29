@@ -1,0 +1,10 @@
+{
+  "status": "gpu_full_run_reproducibility_verified",
+  "full_runs": 2,
+  "epochs_per_run": 200,
+  "best_epoch": 185,
+  "exact_loss_history_match": true,
+  "exact_checkpoint_state_match": true,
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "holdout_evaluated_during_selection": false
+}

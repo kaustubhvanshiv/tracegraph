@@ -1,0 +1,2 @@
+# Optional loss/results figure generation.
+matplotlib==3.11.2
