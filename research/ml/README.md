@@ -3,6 +3,15 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 final label-free experiment report and handoff completed:**
+the [final report](label_free/FINAL_REPORT.md) and [teammate reproduction guide](label_free/REPRODUCING.md)
+consolidate the measured model, features, splits, results and limitations.
+A report-only command rebuilds the table from linked evidence without ML
+packages; a fresh SQL check recomputed all 1,358 vectors and the scaler.
+All 85 relevant software tests pass. Clean-machine raw/training reproduction
+has not been performed; supervised/GNN prerequisites remain unmet and production
+integration remains deferred.
+
 **2026-10-29 standalone frozen-model scoring completed:** the saved
 autoencoder and training-only scaler now score named raw features without
 retraining. All 1,358 existing DARPA rows reproduce the frozen metrics on

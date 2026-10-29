@@ -1,0 +1,43 @@
+{
+  "status": "label_free_final_report_and_local_handoff_verified",
+  "source_training_commit": "0f6e73f712c243571b6fb9b129b90bada10b2357",
+  "source_error_analysis_commit": "ed43ebaedfd12fef22c3e3d1d566e2a1e04e9a91",
+  "source_offline_scoring_commit": "053af5fdb6a23a79e9cea305d08a117b78995798",
+  "report_generator_sha256_utf8_lf": "5e9ce08e0aa91b469d36ea521843d4a95206648c9c382346354dc65a283affed",
+  "summary_sha256_utf8_lf": "25d5472a6e638d00a1b4b9e53bb902b4d02a7d26236f3222a73d6f9051f99c37",
+  "results_table_sha256_utf8_lf": "2c323fb8203eba0142ffd6b3064fa67dc6f939f27a098ba9e0d208673ca798e4",
+  "final_report_sha256_utf8_lf": "2c4235577bfc231dc9cb381b24698e9a00e839e9e9e05a3227232bcec3c4a115",
+  "reproduction_guide_sha256_utf8_lf": "fa1782a0845bf77435f176f00b631d92c9e12b404f1b76461eddeb408234846f",
+  "prepared_verification_sha256_utf8_lf": "5a2ca8df0c883b53fac04ec00ed7021d5baa7f4f22b966dd4fe53296d259ab19",
+  "independently_recomputed_rows": 1358,
+  "feature_count": 62,
+  "independent_sql_feature_reaggregation": true,
+  "training_only_scaler_recomputed": true,
+  "report_only_execution_without_site_packages_verified": true,
+  "standard_and_no_site_package_outputs_identical": true,
+  "checkpoint_prepared_partitions_scaler_and_annotations_unchanged": true,
+  "frozen_core_model_training_runtime_code_unchanged": true,
+  "original_annotations_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "software_tests": {
+    "passed": 85,
+    "skipped": 0,
+    "new_reporting_tests": 3,
+    "command": ".cache/ml-envs/darpa-gpu-py311/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata research.ml.tests.test_node_protocol research.ml.tests.test_uniform_metadata research.ml.tests.test_background_review research.ml.tests.test_review_inputs research.ml.tests.test_review_packets research.ml.tests.test_adjudicate_review research.ml.tests.test_label_free research.ml.tests.test_label_free_training research.ml.tests.test_label_free_error_analysis research.ml.tests.test_label_free_inference research.ml.tests.test_label_free_report -q"
+  },
+  "raw_archive_extraction_repeated": false,
+  "training_repeated": false,
+  "new_evaluation_data": false,
+  "independent_clean_machine_reproduction_performed": false,
+  "security_threshold": null,
+  "security_labels_assigned": false,
+  "production_integration": false,
+  "original_supervised_task_complete": false,
+  "original_ml11_gnn_deliverables_complete": false,
+  "limitations": [
+    "Fresh raw extraction/training on an independent clean machine has not been performed",
+    "Raw files, reference-audit cache, prepared rows, environments and weights are local prerequisites outside Git",
+    "Source metadata and provenance hashes may differ on another machine and require a separately reviewed snapshot",
+    "The already inspected holdout cannot provide untouched evidence for later tuning",
+    "This report covers limited vector reconstruction, not attack detection or the original GNN comparison"
+  ]
+}

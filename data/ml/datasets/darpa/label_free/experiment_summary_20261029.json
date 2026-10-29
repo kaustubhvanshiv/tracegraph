@@ -1,0 +1,88 @@
+{
+  "status": "linked_label_free_experiment_summary_verified",
+  "objective": "normalized_activity_reconstruction",
+  "model": "feedforward_autoencoder",
+  "architecture": [
+    62,
+    16,
+    4,
+    16,
+    62
+  ],
+  "parameter_count": 2210,
+  "optimizer": "adam",
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "batch_size": 64,
+  "seed": 42,
+  "epochs": 200,
+  "best_epoch": 185,
+  "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+  "window_nanos": 300000000000,
+  "total_rows": 1358,
+  "results": [
+    {
+      "partition": "train",
+      "rows": 1184,
+      "autoencoder": {
+        "mse": 0.1107114925980568,
+        "mae": 0.10085973143577576
+      },
+      "training_mean_reference": {
+        "mse": 0.5161290168762207,
+        "mae": 0.2153150588274002
+      }
+    },
+    {
+      "partition": "development",
+      "rows": 76,
+      "autoencoder": {
+        "mse": 0.03314121067523956,
+        "mae": 0.06641470640897751
+      },
+      "training_mean_reference": {
+        "mse": 0.14763754606246948,
+        "mae": 0.1643204540014267
+      }
+    },
+    {
+      "partition": "holdout",
+      "rows": 98,
+      "autoencoder": {
+        "mse": 0.07237275689840317,
+        "mae": 0.09019967168569565
+      },
+      "training_mean_reference": {
+        "mse": 0.2825376093387604,
+        "mae": 0.18102014064788818
+      }
+    }
+  ],
+  "source_reports_sha256_utf8_lf": {
+    "plan": "0b7e33153d428bdf50a5f693822107f9a16fb6b55e88a082487539fee2afd77e",
+    "preparation": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+    "verification": "5a2ca8df0c883b53fac04ec00ed7021d5baa7f4f22b966dd4fe53296d259ab19",
+    "training": "88a90635741868f869a20025400538817ce743eec5dfe3884431f7aae191b24a",
+    "evaluation": "1dfca24d5fa545fe5b06737b146a08c6d4885f7997f57c59c3c2891658e94b65",
+    "repeatability": "ed1fe25b401a15ce933f7f277c16dafbf9ec6bccd3093c56b9582e59b5c13e23",
+    "analysis": "023d0d55bfb9ae994cfef094136fb82a9924b7e2805f6acf4ddfc6f97e7d7990",
+    "reuse": "d1343b9c815a836de24497c66980e9459def87c8ad017869af923c8d403cdd31"
+  },
+  "configuration_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "holdout_mse_reduction_against_mean_reference": 0.743847351622386,
+  "scope": "Existing limited same-host/day vector reconstruction experiment; not a new evaluation",
+  "software_checks_from_reuse_milestone": {
+    "passed": 82,
+    "skipped": 0,
+    "new_offline_scoring_tests": 8,
+    "runtime": "Python 3.11.9; PyTorch 2.15.0+cu132",
+    "command": ".cache/ml-envs/darpa-gpu-py311/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata research.ml.tests.test_node_protocol research.ml.tests.test_uniform_metadata research.ml.tests.test_background_review research.ml.tests.test_review_inputs research.ml.tests.test_review_packets research.ml.tests.test_adjudicate_review research.ml.tests.test_label_free research.ml.tests.test_label_free_training research.ml.tests.test_label_free_error_analysis research.ml.tests.test_label_free_inference -q"
+  },
+  "original_supervised_task_complete": false,
+  "gnn_experiment_complete": false,
+  "attack_detection_metrics_available": false,
+  "security_threshold": null,
+  "production_integration": false
+}

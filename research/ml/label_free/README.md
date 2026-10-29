@@ -1,5 +1,12 @@
 # Separate label-free DARPA workflow
 
+**Final report and handoff completed, 2026-10-29:** the
+[consolidated experiment report](FINAL_REPORT.md) and [teammate reproduction guide](REPRODUCING.md)
+are ready. A report-only command rebuilds measured tables from linked public
+evidence; an independent SQL check recomputed all 1,358 vectors and the scaler.
+All 85 relevant software tests pass. This completes LF-07 of the separate
+label-free pilot; original supervised/GNN requirements remain incomplete/deferred.
+
 **Standalone scoring completed, 2026-10-29:** the frozen epoch-185 model and
 training-only scaler now score compatible named features without the training
 folders or retraining. All 1,358 existing real rows reproduced the frozen metrics
