@@ -1,8 +1,8 @@
 # Task alignment and progress - 2026-10-29
 
-The current user-approved task is **full label-free DARPA training using the
-GPU, followed by frozen holdout evaluation**. Both executions and the
-same-runtime repeatability check are complete. See the
+The current user-approved continuation is **post-evaluation reconstruction-error
+analysis**. Full GPU training, final evaluation, repeatability and this diagnostic
+step are complete. See the [error-analysis findings](ERROR_ANALYSIS.md) and
 [GPU result and chart](../../../data/ml/datasets/darpa/label_free/gpu_training_result_20261029.md).
 
 | Task | State | Evidence |
@@ -11,6 +11,7 @@ same-runtime repeatability check are complete. See the
 | LF-02: model and training readiness | Complete | Written spec/config, locked CPU/CUDA runtimes, executable modules, smoke checks and 68 passing GPU-environment software tests |
 | LF-03: full reconstruction training | Complete | 200 epochs on RTX 4050; epoch 185 selected on development; exact repeated full history/weights |
 | LF-04: final reconstruction holdout | Complete | 98 reserved rows evaluated after selection; MSE 0.072373, MAE 0.090200; no weight updates |
+| LF-05: frozen-model error analysis | Complete | Tail/feature/profile diagnostics, 30 verified native review witnesses, 74 passing software tests; no labels or thresholds assigned |
 | Original ML-02.4 supervised data preparation | Incomplete | Eligible Event evidence remains three attacks and zero benign actions; node binary truth/independent groups remain insufficient |
 | Original ML-06/07/08 GNN work | Deferred | This is a vector autoencoder, not the graph task specified by those tasks |
 | Production inference integration | Not started | All label-free code remains outside the FastAPI application |
@@ -33,5 +34,5 @@ slightly lower than the mean baseline while MAE was higher. The completed
 GPU model has lower MSE and MAE than that reference on this limited holdout;
 this does not establish attack-detection performance.
 
-See [GPU execution and reproduction](GPU_TRAINING.md), the [model/task specification](TASK_SPEC.md)
+See [error analysis](ERROR_ANALYSIS.md), [GPU execution and reproduction](GPU_TRAINING.md), the [model/task specification](TASK_SPEC.md)
 and [measured readiness result](../../../data/ml/datasets/darpa/label_free/training_readiness_20261029.md).

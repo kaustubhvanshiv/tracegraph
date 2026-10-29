@@ -1,0 +1,1340 @@
+{
+  "status": "frozen_post_evaluation_error_analysis_complete",
+  "analysis_code_sha256_utf8_lf": "4123ab354922716990442b1eaffef63332e7d3d662f199130679a1142d2c0839",
+  "frozen_run_sha256_utf8_lf": "88a90635741868f869a20025400538817ce743eec5dfe3884431f7aae191b24a",
+  "final_evaluation_sha256_utf8_lf": "1dfca24d5fa545fe5b06737b146a08c6d4885f7997f57c59c3c2891658e94b65",
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "dataset_manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+  "native_event_index_sha256": "2bc2e4a5f94d84ba4aa35aec9e06880b7cb3be60bfa5b73797eb4f82a1907c71",
+  "partition_rows": {
+    "train": 1184,
+    "development": 76,
+    "holdout": 98
+  },
+  "review_budget_per_partition": 10,
+  "review_queue_rows": 30,
+  "review_queue_sha256": "69d3da936ece998cbdb29d4257288fc87ba2d6a47741785e2ba903c5e756885c",
+  "partitions": {
+    "train": {
+      "sample_mse": {
+        "count": 1184,
+        "mean": 0.11071149586591741,
+        "min": 0.0009969578558492152,
+        "p25": 0.0009983110904939873,
+        "median": 0.021535390852005655,
+        "p75": 0.06774417135352218,
+        "p90": 0.21639967522272455,
+        "p95": 0.4334958621984597,
+        "p99": 1.3226737826024233,
+        "max": 10.668765717828622
+      },
+      "sample_mae": {
+        "count": 1184,
+        "mean": 0.10085973205755147,
+        "min": 0.019216853747850343,
+        "p25": 0.019221740251410782,
+        "median": 0.07259266072839138,
+        "p75": 0.12530501167883257,
+        "p90": 0.21065855593751037,
+        "p95": 0.30926293336524313,
+        "p99": 0.502230866836149,
+        "max": 1.4009454755953723
+      },
+      "quantile_method": "linear interpolation at (n-1)*q; descriptive, not security thresholds",
+      "features": [
+        {
+          "feature": "second_predicate_event_count",
+          "mse": 0.656736949355869,
+          "mae": 0.3792793414731686,
+          "squared_error_share": 0.09567688846018572
+        },
+        {
+          "feature": "count_EVENT_UNLINK",
+          "mse": 0.6061908750886066,
+          "mae": 0.16056573559605591,
+          "squared_error_share": 0.08831307085480752
+        },
+        {
+          "feature": "count_EVENT_CREATE_THREAD",
+          "mse": 0.4499307001890267,
+          "mae": 0.33069495291675666,
+          "squared_error_share": 0.06554826777908636
+        },
+        {
+          "feature": "count_EVENT_FCNTL",
+          "mse": 0.3982478633209608,
+          "mae": 0.24439863477380494,
+          "squared_error_share": 0.05801884062688811
+        },
+        {
+          "feature": "count_EVENT_LINK",
+          "mse": 0.3959319288413717,
+          "mae": 0.174527210107929,
+          "squared_error_share": 0.05768144312686612
+        },
+        {
+          "feature": "count_EVENT_READ",
+          "mse": 0.3606038167453956,
+          "mae": 0.2731080285550372,
+          "squared_error_share": 0.05253465818682149
+        },
+        {
+          "feature": "count_EVENT_SIGNAL",
+          "mse": 0.31004576862473476,
+          "mae": 0.2034891186930189,
+          "squared_error_share": 0.045169096167584466
+        },
+        {
+          "feature": "count_EVENT_FORK",
+          "mse": 0.303422845504256,
+          "mae": 0.20598280662670732,
+          "squared_error_share": 0.04420423393880333
+        },
+        {
+          "feature": "count_EVENT_OTHER",
+          "mse": 0.28784337118399056,
+          "mae": 0.31645731816722733,
+          "squared_error_share": 0.04193453428467187
+        },
+        {
+          "feature": "count_EVENT_CREATE_OBJECT",
+          "mse": 0.27421407237983714,
+          "mae": 0.3292312551151357,
+          "squared_error_share": 0.039948946443521004
+        },
+        {
+          "feature": "count_EVENT_EXECUTE",
+          "mse": 0.26907130677583935,
+          "mae": 0.16702712266517147,
+          "squared_error_share": 0.03919972133664499
+        },
+        {
+          "feature": "active_span_seconds",
+          "mse": 0.25750778812399966,
+          "mae": 0.3584722244004543,
+          "squared_error_share": 0.037515087199119355
+        },
+        {
+          "feature": "count_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.24591214498460293,
+          "mae": 0.22082488462203057,
+          "squared_error_share": 0.035825772997504356
+        },
+        {
+          "feature": "count_EVENT_LOADLIBRARY",
+          "mse": 0.24063145733947675,
+          "mae": 0.2467860334200432,
+          "squared_error_share": 0.035056454683206124
+        },
+        {
+          "feature": "count_EVENT_UPDATE",
+          "mse": 0.21204190368947856,
+          "mae": 0.16817790641594124,
+          "squared_error_share": 0.030891378333565336
+        },
+        {
+          "feature": "count_EVENT_RECVFROM",
+          "mse": 0.18611557423390152,
+          "mae": 0.15397826476475676,
+          "squared_error_share": 0.027114294473830916
+        },
+        {
+          "feature": "count_EVENT_LOGIN",
+          "mse": 0.14453573306587553,
+          "mae": 0.15617739288388072,
+          "squared_error_share": 0.021056724803771496
+        },
+        {
+          "feature": "count_EVENT_WRITE",
+          "mse": 0.14218391341651193,
+          "mae": 0.14868234226329102,
+          "squared_error_share": 0.020714099363720758
+        },
+        {
+          "feature": "count_EVENT_RENAME",
+          "mse": 0.13206636228483695,
+          "mae": 0.21299751597532146,
+          "squared_error_share": 0.019240121369845237
+        },
+        {
+          "feature": "count_EVENT_ACCEPT",
+          "mse": 0.11474069765799122,
+          "mae": 0.09637940592585585,
+          "squared_error_share": 0.01671602753954202
+        },
+        {
+          "feature": "count_EVENT_SENDMSG",
+          "mse": 0.09687790590750432,
+          "mae": 0.13427388430982073,
+          "squared_error_share": 0.014113682208469798
+        },
+        {
+          "feature": "count_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.09652856714448155,
+          "mae": 0.14482389339812202,
+          "squared_error_share": 0.014062788702481852
+        },
+        {
+          "feature": "count_EVENT_RECVMSG",
+          "mse": 0.09329610360483791,
+          "mae": 0.13740695582551732,
+          "squared_error_share": 0.013591866434688883
+        },
+        {
+          "feature": "count_EVENT_SENDTO",
+          "mse": 0.08847200379930399,
+          "mae": 0.1326420887411144,
+          "squared_error_share": 0.012889066235206323
+        },
+        {
+          "feature": "event_count",
+          "mse": 0.07551648214499693,
+          "mae": 0.1603287958282021,
+          "squared_error_share": 0.011001637788431082
+        },
+        {
+          "feature": "count_EVENT_CLOSE",
+          "mse": 0.07324279137046182,
+          "mae": 0.15151608299237448,
+          "squared_error_share": 0.010670394573257164
+        },
+        {
+          "feature": "no_predicate_event_count",
+          "mse": 0.06239907736207338,
+          "mae": 0.14223914822513187,
+          "squared_error_share": 0.009090625357146645
+        },
+        {
+          "feature": "predicate_reference_count",
+          "mse": 0.05992681592479439,
+          "mae": 0.1472089171670755,
+          "squared_error_share": 0.00873045332478124
+        },
+        {
+          "feature": "count_EVENT_BIND",
+          "mse": 0.059530322176575855,
+          "mae": 0.06804329143031626,
+          "squared_error_share": 0.008672690032856409
+        },
+        {
+          "feature": "count_EVENT_EXIT",
+          "mse": 0.05890957865478999,
+          "mae": 0.137708895789409,
+          "squared_error_share": 0.008582256855989264
+        },
+        {
+          "feature": "count_EVENT_OPEN",
+          "mse": 0.05650595910802204,
+          "mae": 0.13297201139298645,
+          "squared_error_share": 0.00823208493479251
+        },
+        {
+          "feature": "count_EVENT_CONNECT",
+          "mse": 0.05189350948054319,
+          "mae": 0.07577449826813126,
+          "squared_error_share": 0.007560119044995457
+        },
+        {
+          "feature": "count_EVENT_SERVICEINSTALL",
+          "mse": 0.00030103879892336404,
+          "mae": 0.007982248794448693,
+          "squared_error_share": 4.3856913510087373e-05
+        },
+        {
+          "feature": "count_EVENT_CLONE",
+          "mse": 0.000290342529947449,
+          "mae": 0.009479748936231575,
+          "squared_error_share": 4.229862486080016e-05
+        },
+        {
+          "feature": "count_EVENT_CHANGE_PRINCIPAL",
+          "mse": 0.0002633481097336098,
+          "mae": 0.007449455254253415,
+          "squared_error_share": 3.8365935928983473e-05
+        },
+        {
+          "feature": "count_EVENT_UNIT",
+          "mse": 0.00023513322993406577,
+          "mae": 0.008994097678255089,
+          "squared_error_share": 3.425544403394663e-05
+        },
+        {
+          "feature": "count_EVENT_STARTSERVICE",
+          "mse": 0.00017637334678735254,
+          "mae": 0.004881190186318457,
+          "squared_error_share": 2.5694995605887763e-05
+        },
+        {
+          "feature": "count_EVENT_CORRELATION",
+          "mse": 0.00017016680592262236,
+          "mae": 0.00714780086324223,
+          "squared_error_share": 2.4790794131277872e-05
+        },
+        {
+          "feature": "count_EVENT_SHM",
+          "mse": 0.0001648421364169482,
+          "mae": 0.008001969078503788,
+          "squared_error_share": 2.4015068308509094e-05
+        },
+        {
+          "feature": "count_EVENT_DUP",
+          "mse": 0.00015394762972416404,
+          "mae": 0.0058723214063541715,
+          "squared_error_share": 2.2427899347334306e-05
+        },
+        {
+          "feature": "count_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 0.00014243571656594186,
+          "mae": 0.006100905908907235,
+          "squared_error_share": 2.075078336918986e-05
+        },
+        {
+          "feature": "count_EVENT_BLIND",
+          "mse": 0.00013245833392082557,
+          "mae": 0.0056891675751004995,
+          "squared_error_share": 1.929722585670687e-05
+        },
+        {
+          "feature": "count_EVENT_SPLICE",
+          "mse": 0.0001230580496462169,
+          "mae": 0.006312143975535307,
+          "squared_error_share": 1.7927743066195542e-05
+        },
+        {
+          "feature": "count_EVENT_FLOWS_TO",
+          "mse": 0.00012170384446736811,
+          "mae": 0.0064295198089156826,
+          "squared_error_share": 1.7730455342433383e-05
+        },
+        {
+          "feature": "count_EVENT_TEE",
+          "mse": 0.00012025573978910014,
+          "mae": 0.006115622821026419,
+          "squared_error_share": 1.7519487846364816e-05
+        },
+        {
+          "feature": "count_EVENT_VMSPLICE",
+          "mse": 9.697682409601546e-05,
+          "mae": 0.0061317487919508055,
+          "squared_error_share": 1.412809312976507e-05
+        },
+        {
+          "feature": "count_EVENT_UMOUNT",
+          "mse": 8.663511799997065e-05,
+          "mae": 0.005113519747160231,
+          "squared_error_share": 1.2621459063249135e-05
+        },
+        {
+          "feature": "count_EVENT_LSEEK",
+          "mse": 7.948536405851101e-05,
+          "mae": 0.004895078579932955,
+          "squared_error_share": 1.1579845353154489e-05
+        },
+        {
+          "feature": "count_EVENT_TRUNCATE",
+          "mse": 7.160763696818938e-05,
+          "mae": 0.004669971022726591,
+          "squared_error_share": 1.043217669086933e-05
+        },
+        {
+          "feature": "count_EVENT_WAIT",
+          "mse": 6.776381580811448e-05,
+          "mae": 0.004590217595914264,
+          "squared_error_share": 9.872188633620391e-06
+        },
+        {
+          "feature": "count_EVENT_LOGCLEAR",
+          "mse": 5.308385968398324e-05,
+          "mae": 0.0035551498768236836,
+          "squared_error_share": 7.733535515250093e-06
+        },
+        {
+          "feature": "count_unknown_action",
+          "mse": 4.6958540090312236e-05,
+          "mae": 0.003046675764946141,
+          "squared_error_share": 6.841166782043514e-06
+        },
+        {
+          "feature": "count_EVENT_FINIT_MODULE",
+          "mse": 3.563477212535398e-05,
+          "mae": 0.0033673144495657433,
+          "squared_error_share": 5.191460783934282e-06
+        },
+        {
+          "feature": "count_EVENT_MODIFY_PROCESS",
+          "mse": 2.607488187945404e-05,
+          "mae": 0.002959592149194135,
+          "squared_error_share": 3.798725757154244e-06
+        },
+        {
+          "feature": "count_EVENT_BOOT",
+          "mse": 2.5730435963582088e-05,
+          "mae": 0.002853280695932414,
+          "squared_error_share": 3.7485450668401546e-06
+        },
+        {
+          "feature": "count_EVENT_INIT_MODULE",
+          "mse": 2.189998438295275e-05,
+          "mae": 0.0025909567630642907,
+          "squared_error_share": 3.1905047601519646e-06
+        },
+        {
+          "feature": "count_EVENT_MPROTECT",
+          "mse": 1.0522657610234991e-05,
+          "mae": 0.0016232051843011555,
+          "squared_error_share": 1.5329960335970558e-06
+        },
+        {
+          "feature": "count_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 6.560308183623337e-06,
+          "mae": 0.001262471042266682,
+          "squared_error_share": 9.55740155879147e-07
+        },
+        {
+          "feature": "count_EVENT_READ_SOCKET_PARAMS",
+          "mse": 6.367345725525415e-06,
+          "mae": 0.0011293258031044486,
+          "squared_error_share": 9.27628371399005e-07
+        },
+        {
+          "feature": "count_EVENT_LOGOUT",
+          "mse": 3.0185574083492544e-06,
+          "mae": 0.0011229893034151,
+          "squared_error_share": 4.397592989895902e-07
+        },
+        {
+          "feature": "count_EVENT_MOUNT",
+          "mse": 2.7908823240865618e-06,
+          "mae": 0.0008329494784128336,
+          "squared_error_share": 4.065903967928581e-07
+        },
+        {
+          "feature": "count_EVENT_MMAP",
+          "mse": 2.3389458434992337e-06,
+          "mae": 0.0009267903025977068,
+          "squared_error_share": 3.40749916389475e-07
+        }
+      ],
+      "largest_sample_error_shares": {
+        "1": 0.08138975799936009,
+        "5": 0.19643803656106593,
+        "10": 0.2761544371430135
+      },
+      "aggregate_metrics": {
+        "mse": 0.1107114925980568,
+        "mae": 0.10085973143577576
+      },
+      "mean_baseline_metrics": {
+        "mse": 0.5161290168762207,
+        "mae": 0.2153150588274002
+      },
+      "per_sample_baseline_comparison": {
+        "autoencoder_lower_mse": 1184,
+        "mean_baseline_lower_mse": 0,
+        "tied_mse": 0
+      },
+      "exact_raw_profile_groups": {
+        "exact_raw_profile_seen_in_training": {
+          "rows": 1184,
+          "mean_mse": 0.11071149586591741,
+          "median_mse": 0.021535390852005655
+        },
+        "exact_raw_profile_unseen_in_training": {
+          "rows": 0,
+          "mean_mse": null,
+          "median_mse": null
+        }
+      }
+    },
+    "development": {
+      "sample_mse": {
+        "count": 76,
+        "mean": 0.03314120820587071,
+        "min": 0.0009983110749825792,
+        "p25": 0.0009983110749825792,
+        "median": 0.012413792387060592,
+        "p75": 0.0388303097749491,
+        "p90": 0.0624195434249791,
+        "p95": 0.09706915412336263,
+        "p99": 0.33525286100227025,
+        "max": 0.5676675779659159
+      },
+      "sample_mae": {
+        "count": 76,
+        "mean": 0.06641470635001631,
+        "min": 0.019221745667539748,
+        "p25": 0.019221745667539748,
+        "median": 0.060458543363981126,
+        "p75": 0.09133508634746954,
+        "p90": 0.10567356011926032,
+        "p95": 0.13895759024155502,
+        "p99": 0.24060068682616298,
+        "max": 0.24734301415869156
+      },
+      "quantile_method": "linear interpolation at (n-1)*q; descriptive, not security thresholds",
+      "features": [
+        {
+          "feature": "count_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.37293275790714114,
+          "mae": 0.16544650083309725,
+          "squared_error_share": 0.18149744104102172
+        },
+        {
+          "feature": "count_EVENT_CREATE_THREAD",
+          "mse": 0.3079910439114189,
+          "mae": 0.3359296255205807,
+          "squared_error_share": 0.1498918642791746
+        },
+        {
+          "feature": "active_span_seconds",
+          "mse": 0.2700046195257021,
+          "mae": 0.3671437670525752,
+          "squared_error_share": 0.1314047813557095
+        },
+        {
+          "feature": "second_predicate_event_count",
+          "mse": 0.17792979919201607,
+          "mae": 0.252846699600157,
+          "squared_error_share": 0.0865941716129287
+        },
+        {
+          "feature": "count_EVENT_CREATE_OBJECT",
+          "mse": 0.1146284764519183,
+          "mae": 0.24218193794551648,
+          "squared_error_share": 0.05578693398565567
+        },
+        {
+          "feature": "count_EVENT_OTHER",
+          "mse": 0.11115268702461005,
+          "mae": 0.2439952826029376,
+          "squared_error_share": 0.054095350521134795
+        },
+        {
+          "feature": "count_EVENT_READ",
+          "mse": 0.08108812567967873,
+          "mae": 0.10017196265490431,
+          "squared_error_share": 0.03946364860053136
+        },
+        {
+          "feature": "no_predicate_event_count",
+          "mse": 0.06383214439617739,
+          "mae": 0.12343953941997729,
+          "squared_error_share": 0.03106557581340684
+        },
+        {
+          "feature": "count_EVENT_EXIT",
+          "mse": 0.06126765416277186,
+          "mae": 0.11421803581087213,
+          "squared_error_share": 0.029817499839738443
+        },
+        {
+          "feature": "count_EVENT_FORK",
+          "mse": 0.05114441691986078,
+          "mae": 0.13572462010932596,
+          "squared_error_share": 0.024890762738523482
+        },
+        {
+          "feature": "count_EVENT_OPEN",
+          "mse": 0.04767008292458884,
+          "mae": 0.11022667155454033,
+          "squared_error_share": 0.02319988759791516
+        },
+        {
+          "feature": "count_EVENT_LOADLIBRARY",
+          "mse": 0.04621063823625311,
+          "mae": 0.11966941525277339,
+          "squared_error_share": 0.022489610823731108
+        },
+        {
+          "feature": "count_EVENT_CLOSE",
+          "mse": 0.04540139106857647,
+          "mae": 0.09899985751039103,
+          "squared_error_share": 0.022095769609761975
+        },
+        {
+          "feature": "count_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.04385496991840467,
+          "mae": 0.07273197468174131,
+          "squared_error_share": 0.021343163474803507
+        },
+        {
+          "feature": "count_EVENT_LINK",
+          "mse": 0.0344108586881924,
+          "mae": 0.15749592164923487,
+          "squared_error_share": 0.016746940738003587
+        },
+        {
+          "feature": "predicate_reference_count",
+          "mse": 0.02337232424842066,
+          "mae": 0.11840993950241491,
+          "squared_error_share": 0.011374750413653973
+        },
+        {
+          "feature": "event_count",
+          "mse": 0.021571986549947485,
+          "mae": 0.10053536805667375,
+          "squared_error_share": 0.010498569176274111
+        },
+        {
+          "feature": "count_EVENT_UNLINK",
+          "mse": 0.018016237948406916,
+          "mae": 0.10160939669922779,
+          "squared_error_share": 0.008768071496782258
+        },
+        {
+          "feature": "count_EVENT_RECVFROM",
+          "mse": 0.017377818643246046,
+          "mae": 0.1045309511062346,
+          "squared_error_share": 0.008457368111946495
+        },
+        {
+          "feature": "count_EVENT_LOGIN",
+          "mse": 0.015447413207611086,
+          "mae": 0.08302785764987532,
+          "squared_error_share": 0.007517886022184181
+        },
+        {
+          "feature": "count_EVENT_RECVMSG",
+          "mse": 0.01504886212722723,
+          "mae": 0.10655137425974796,
+          "squared_error_share": 0.007323920757186421
+        },
+        {
+          "feature": "count_EVENT_SENDTO",
+          "mse": 0.014241643186624131,
+          "mae": 0.08655910782123867,
+          "squared_error_share": 0.006931066632755263
+        },
+        {
+          "feature": "count_EVENT_SIGNAL",
+          "mse": 0.013643405544281737,
+          "mae": 0.055078763514757156,
+          "squared_error_share": 0.006639918700809326
+        },
+        {
+          "feature": "count_EVENT_UPDATE",
+          "mse": 0.013401484892758737,
+          "mae": 0.09099909128915322,
+          "squared_error_share": 0.0065221817140323855
+        },
+        {
+          "feature": "count_EVENT_RENAME",
+          "mse": 0.012807905289831018,
+          "mae": 0.09063042759111054,
+          "squared_error_share": 0.006233300738303372
+        },
+        {
+          "feature": "count_EVENT_EXECUTE",
+          "mse": 0.012741741299808646,
+          "mae": 0.08204916305840015,
+          "squared_error_share": 0.006201100309074481
+        },
+        {
+          "feature": "count_EVENT_FCNTL",
+          "mse": 0.012620281474077899,
+          "mae": 0.07658948200313669,
+          "squared_error_share": 0.006141988721014662
+        },
+        {
+          "feature": "count_EVENT_SENDMSG",
+          "mse": 0.01228268692607284,
+          "mae": 0.09239738498275217,
+          "squared_error_share": 0.0059776895403361565
+        },
+        {
+          "feature": "count_EVENT_WRITE",
+          "mse": 0.009557800975657253,
+          "mae": 0.06020560468498029,
+          "squared_error_share": 0.00465155281288835
+        },
+        {
+          "feature": "count_EVENT_ACCEPT",
+          "mse": 0.007816288748258566,
+          "mae": 0.06986063463907492,
+          "squared_error_share": 0.003804000523332669
+        },
+        {
+          "feature": "count_EVENT_CONNECT",
+          "mse": 0.0026731777028778467,
+          "mae": 0.03742034380373202,
+          "squared_error_share": 0.0013009715618520503
+        },
+        {
+          "feature": "count_EVENT_BIND",
+          "mse": 0.00202926668281347,
+          "mae": 0.031179978512227535,
+          "squared_error_share": 0.0009875954909065792
+        },
+        {
+          "feature": "count_EVENT_UNIT",
+          "mse": 6.508209708100983e-05,
+          "mae": 0.006344650749509272,
+          "squared_error_share": 3.167389784709617e-05
+        },
+        {
+          "feature": "count_EVENT_CHANGE_PRINCIPAL",
+          "mse": 6.212441732238829e-05,
+          "mae": 0.0051641392300983795,
+          "squared_error_share": 3.023446594891387e-05
+        },
+        {
+          "feature": "count_EVENT_SHM",
+          "mse": 5.622068305692545e-05,
+          "mae": 0.006454202689622578,
+          "squared_error_share": 2.7361259884150568e-05
+        },
+        {
+          "feature": "count_EVENT_CLONE",
+          "mse": 5.375910593841127e-05,
+          "mae": 0.005991038596747737,
+          "squared_error_share": 2.6163269258594686e-05
+        },
+        {
+          "feature": "count_EVENT_CORRELATION",
+          "mse": 3.260436817317656e-05,
+          "mae": 0.005045251210073107,
+          "squared_error_share": 1.5867765072180494e-05
+        },
+        {
+          "feature": "count_EVENT_VMSPLICE",
+          "mse": 2.864380647487882e-05,
+          "mae": 0.004269541706889868,
+          "squared_error_share": 1.3940254554305554e-05
+        },
+        {
+          "feature": "count_EVENT_SPLICE",
+          "mse": 2.8032833350341423e-05,
+          "mae": 0.004621451855392048,
+          "squared_error_share": 1.364290856820694e-05
+        },
+        {
+          "feature": "count_EVENT_SERVICEINSTALL",
+          "mse": 2.584332459421681e-05,
+          "mae": 0.0030767189256087142,
+          "squared_error_share": 1.2577327098229245e-05
+        },
+        {
+          "feature": "count_EVENT_FLOWS_TO",
+          "mse": 2.5282768601037358e-05,
+          "mae": 0.004225609995620816,
+          "squared_error_share": 1.2304517922405617e-05
+        },
+        {
+          "feature": "count_EVENT_TEE",
+          "mse": 2.468963811334166e-05,
+          "mae": 0.004293619115885936,
+          "squared_error_share": 1.2015855520303125e-05
+        },
+        {
+          "feature": "count_EVENT_DUP",
+          "mse": 2.0139695323478046e-05,
+          "mae": 0.0037419344298541546,
+          "squared_error_share": 9.801507341619089e-06
+        },
+        {
+          "feature": "count_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 2.0126114453452626e-05,
+          "mae": 0.0031629552157889855,
+          "squared_error_share": 9.7948978574575e-06
+        },
+        {
+          "feature": "count_EVENT_TRUNCATE",
+          "mse": 1.8587017845412017e-05,
+          "mae": 0.0029320794672362113,
+          "squared_error_share": 9.04585640172182e-06
+        },
+        {
+          "feature": "count_EVENT_BLIND",
+          "mse": 1.6702520319337343e-05,
+          "mae": 0.0030537932302410666,
+          "squared_error_share": 8.128716591987396e-06
+        },
+        {
+          "feature": "count_EVENT_WAIT",
+          "mse": 1.5979231919217047e-05,
+          "mae": 0.0030072106409964987,
+          "squared_error_share": 7.77670945136186e-06
+        },
+        {
+          "feature": "count_EVENT_UMOUNT",
+          "mse": 1.578554969932688e-05,
+          "mae": 0.003173257873736714,
+          "squared_error_share": 7.682448953886432e-06
+        },
+        {
+          "feature": "count_EVENT_LSEEK",
+          "mse": 1.5668223223975237e-05,
+          "mae": 0.0034406376806528946,
+          "squared_error_share": 7.62534896845692e-06
+        },
+        {
+          "feature": "count_EVENT_LOGCLEAR",
+          "mse": 1.0991295277718612e-05,
+          "mae": 0.002005512831122982,
+          "squared_error_share": 5.34920015561871e-06
+        },
+        {
+          "feature": "count_EVENT_STARTSERVICE",
+          "mse": 9.694083034802867e-06,
+          "mae": 0.0020774718324996925,
+          "squared_error_share": 4.717878026939107e-06
+        },
+        {
+          "feature": "count_EVENT_MODIFY_PROCESS",
+          "mse": 8.569563674068617e-06,
+          "mae": 0.0023246963790274763,
+          "squared_error_share": 4.170601387794492e-06
+        },
+        {
+          "feature": "count_EVENT_BOOT",
+          "mse": 7.2168935707202885e-06,
+          "mae": 0.001673658243625572,
+          "squared_error_share": 3.512289246731395e-06
+        },
+        {
+          "feature": "count_EVENT_FINIT_MODULE",
+          "mse": 5.7571918245601316e-06,
+          "mae": 0.0018483015285853885,
+          "squared_error_share": 2.801887368661068e-06
+        },
+        {
+          "feature": "count_EVENT_INIT_MODULE",
+          "mse": 5.018196839635143e-06,
+          "mae": 0.0013078351713422883,
+          "squared_error_share": 2.4422362094045498e-06
+        },
+        {
+          "feature": "count_unknown_action",
+          "mse": 4.0249197097091085e-06,
+          "mae": 0.001652845163143387,
+          "squared_error_share": 1.9588320205694296e-06
+        },
+        {
+          "feature": "count_EVENT_MPROTECT",
+          "mse": 2.5715353774492508e-06,
+          "mae": 0.000874946984511457,
+          "squared_error_share": 1.2515046765339673e-06
+        },
+        {
+          "feature": "count_EVENT_LOGOUT",
+          "mse": 1.863652259037326e-06,
+          "mae": 0.0010521355281142813,
+          "squared_error_share": 9.069949175390394e-07
+        },
+        {
+          "feature": "count_EVENT_MMAP",
+          "mse": 1.5132427748672312e-06,
+          "mae": 0.0009451915699939587,
+          "squared_error_share": 7.364590143636676e-07
+        },
+        {
+          "feature": "count_EVENT_READ_SOCKET_PARAMS",
+          "mse": 9.221724834745634e-07,
+          "mae": 0.0007206368456153493,
+          "squared_error_share": 4.487992604574365e-07
+        },
+        {
+          "feature": "count_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 8.86073999950554e-07,
+          "mae": 0.00069495373999847,
+          "squared_error_share": 4.3123099313268584e-07
+        },
+        {
+          "feature": "count_EVENT_MOUNT",
+          "mse": 6.170924354082829e-07,
+          "mae": 0.000678833896113486,
+          "squared_error_share": 3.003241081338934e-07
+        }
+      ],
+      "largest_sample_error_shares": {
+        "1": 0.22537833231651766,
+        "5": 0.47761348530682385,
+        "10": 0.6010729630368752
+      },
+      "aggregate_metrics": {
+        "mse": 0.03314121067523956,
+        "mae": 0.06641470640897751
+      },
+      "mean_baseline_metrics": {
+        "mse": 0.14763754606246948,
+        "mae": 0.1643204540014267
+      },
+      "per_sample_baseline_comparison": {
+        "autoencoder_lower_mse": 76,
+        "mean_baseline_lower_mse": 0,
+        "tied_mse": 0
+      },
+      "exact_raw_profile_groups": {
+        "exact_raw_profile_seen_in_training": {
+          "rows": 29,
+          "mean_mse": 0.004056825609505939,
+          "median_mse": 0.0009983110749825792
+        },
+        "exact_raw_profile_unseen_in_training": {
+          "rows": 47,
+          "mean_mse": 0.05108689108447875,
+          "median_mse": 0.02549526541324517
+        }
+      }
+    },
+    "holdout": {
+      "sample_mse": {
+        "count": 98,
+        "mean": 0.07237276094175539,
+        "min": 0.0009969585810561214,
+        "p25": 0.008576833465639071,
+        "median": 0.014622674442939625,
+        "p75": 0.039006586575553316,
+        "p90": 0.1033355588490125,
+        "p95": 0.44958767424386276,
+        "p99": 0.9150981046745906,
+        "max": 0.9227775513247735
+      },
+      "sample_mae": {
+        "count": 98,
+        "mean": 0.09019966620517518,
+        "min": 0.019216861414362588,
+        "p25": 0.05042222063263668,
+        "median": 0.06674514583386143,
+        "p75": 0.09358342389450333,
+        "p90": 0.14413636428794085,
+        "p95": 0.33533593355424485,
+        "p99": 0.48347950903800196,
+        "max": 0.48731273478422793
+      },
+      "quantile_method": "linear interpolation at (n-1)*q; descriptive, not security thresholds",
+      "features": [
+        {
+          "feature": "count_EVENT_SIGNAL",
+          "mse": 0.7355711673418129,
+          "mae": 0.2312152963511798,
+          "squared_error_share": 0.16392978424170251
+        },
+        {
+          "feature": "count_EVENT_CREATE_THREAD",
+          "mse": 0.4090531188996873,
+          "mae": 0.36735435331962546,
+          "squared_error_share": 0.09116179712011596
+        },
+        {
+          "feature": "count_EVENT_EXECUTE",
+          "mse": 0.40123196168653,
+          "mae": 0.20333448584590638,
+          "squared_error_share": 0.0894187698354732
+        },
+        {
+          "feature": "count_EVENT_LOADLIBRARY",
+          "mse": 0.3835337181521704,
+          "mae": 0.26230064733904235,
+          "squared_error_share": 0.08547452980424793
+        },
+        {
+          "feature": "active_span_seconds",
+          "mse": 0.3278144343317503,
+          "mae": 0.4186786510506455,
+          "squared_error_share": 0.0730569003751445
+        },
+        {
+          "feature": "count_EVENT_LINK",
+          "mse": 0.3160126093491309,
+          "mae": 0.2429612048198374,
+          "squared_error_share": 0.07042673933980839
+        },
+        {
+          "feature": "second_predicate_event_count",
+          "mse": 0.20834987498826232,
+          "mae": 0.27399803165878567,
+          "squared_error_share": 0.046432964708281094
+        },
+        {
+          "feature": "count_EVENT_FCNTL",
+          "mse": 0.2029398087867662,
+          "mae": 0.16242275090546024,
+          "squared_error_share": 0.045227274457602114
+        },
+        {
+          "feature": "count_EVENT_OTHER",
+          "mse": 0.18647181854731218,
+          "mae": 0.3240571815748604,
+          "squared_error_share": 0.04155720933446266
+        },
+        {
+          "feature": "count_EVENT_CREATE_OBJECT",
+          "mse": 0.16536432795504305,
+          "mae": 0.29687771490033793,
+          "squared_error_share": 0.03685318267830833
+        },
+        {
+          "feature": "count_EVENT_READ",
+          "mse": 0.15854340143225124,
+          "mae": 0.15287690305588197,
+          "squared_error_share": 0.03533306734092974
+        },
+        {
+          "feature": "no_predicate_event_count",
+          "mse": 0.11343890387329988,
+          "mae": 0.1844502273870974,
+          "squared_error_share": 0.025281054862124425
+        },
+        {
+          "feature": "count_EVENT_EXIT",
+          "mse": 0.11281261988006505,
+          "mae": 0.1769975460305506,
+          "squared_error_share": 0.025141480876025933
+        },
+        {
+          "feature": "count_EVENT_UPDATE",
+          "mse": 0.1015455658641945,
+          "mae": 0.15578215006662874,
+          "squared_error_share": 0.022630499184701725
+        },
+        {
+          "feature": "count_EVENT_RENAME",
+          "mse": 0.0797235367034012,
+          "mae": 0.15236841613540844,
+          "squared_error_share": 0.01776723008054085
+        },
+        {
+          "feature": "count_EVENT_UNLINK",
+          "mse": 0.07634606171119898,
+          "mae": 0.15173669433107181,
+          "squared_error_share": 0.017014524195188813
+        },
+        {
+          "feature": "count_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.07531521833789157,
+          "mae": 0.14952072896519486,
+          "squared_error_share": 0.016784789889011543
+        },
+        {
+          "feature": "event_count",
+          "mse": 0.06668386075717528,
+          "mae": 0.15498005154029448,
+          "squared_error_share": 0.014861200916603798
+        },
+        {
+          "feature": "predicate_reference_count",
+          "mse": 0.05311022066948054,
+          "mae": 0.1586595912825088,
+          "squared_error_share": 0.011836172218168793
+        },
+        {
+          "feature": "count_EVENT_FORK",
+          "mse": 0.044850583426449125,
+          "mae": 0.14612651874824445,
+          "squared_error_share": 0.009995425039268454
+        },
+        {
+          "feature": "count_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.03858265906073568,
+          "mae": 0.08850038583789553,
+          "squared_error_share": 0.008598552058741138
+        },
+        {
+          "feature": "count_EVENT_LOGIN",
+          "mse": 0.03359105044711035,
+          "mae": 0.10538915780429937,
+          "squared_error_share": 0.007486119490173126
+        },
+        {
+          "feature": "count_EVENT_SENDTO",
+          "mse": 0.033192597804874296,
+          "mae": 0.10944519298417228,
+          "squared_error_share": 0.007397320120958672
+        },
+        {
+          "feature": "count_EVENT_RECVMSG",
+          "mse": 0.031809315909561764,
+          "mae": 0.1277556288227135,
+          "squared_error_share": 0.007089041177041525
+        },
+        {
+          "feature": "count_EVENT_SENDMSG",
+          "mse": 0.02893872608252905,
+          "mae": 0.1110609525016376,
+          "squared_error_share": 0.006449299991028961
+        },
+        {
+          "feature": "count_EVENT_OPEN",
+          "mse": 0.02204449440376971,
+          "mae": 0.1045342920994272,
+          "squared_error_share": 0.0049128478273375705
+        },
+        {
+          "feature": "count_EVENT_CLOSE",
+          "mse": 0.01907859555426605,
+          "mae": 0.09525637906424854,
+          "squared_error_share": 0.004251866021540503
+        },
+        {
+          "feature": "count_EVENT_WRITE",
+          "mse": 0.017697995602406758,
+          "mae": 0.06903234352262652,
+          "squared_error_share": 0.003944184776977489
+        },
+        {
+          "feature": "count_EVENT_RECVFROM",
+          "mse": 0.015580359598664714,
+          "mae": 0.10250710848034644,
+          "squared_error_share": 0.0034722472832195528
+        },
+        {
+          "feature": "count_EVENT_ACCEPT",
+          "mse": 0.01195907716398825,
+          "mae": 0.08260706599269595,
+          "squared_error_share": 0.0026652063406822787
+        },
+        {
+          "feature": "count_EVENT_BIND",
+          "mse": 0.009655433432843155,
+          "mae": 0.04843246134720287,
+          "squared_error_share": 0.002151815065190804
+        },
+        {
+          "feature": "count_EVENT_CONNECT",
+          "mse": 0.003966503532419851,
+          "mae": 0.04503018104908418,
+          "squared_error_share": 0.000883977101241357
+        },
+        {
+          "feature": "count_EVENT_CLONE",
+          "mse": 0.00029960220947417357,
+          "mae": 0.010347113659491345,
+          "squared_error_share": 6.676950883613951e-05
+        },
+        {
+          "feature": "count_EVENT_UNIT",
+          "mse": 0.00026417375283230917,
+          "mae": 0.010190779894438326,
+          "squared_error_share": 5.8873904017498586e-05
+        },
+        {
+          "feature": "count_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 0.00020289156137066208,
+          "mae": 0.006188121937899565,
+          "squared_error_share": 4.521652201261334e-05
+        },
+        {
+          "feature": "count_EVENT_SHM",
+          "mse": 0.00013062167954790404,
+          "mae": 0.008901992147522313,
+          "squared_error_share": 2.911041745009888e-05
+        },
+        {
+          "feature": "count_EVENT_SERVICEINSTALL",
+          "mse": 0.0001283057895073546,
+          "mae": 0.005041675839326059,
+          "squared_error_share": 2.8594296955535825e-05
+        },
+        {
+          "feature": "count_EVENT_FLOWS_TO",
+          "mse": 0.00012226241327055606,
+          "mae": 0.006696633101269907,
+          "squared_error_share": 2.724746689126082e-05
+        },
+        {
+          "feature": "count_EVENT_CORRELATION",
+          "mse": 0.00010958545300238665,
+          "mae": 0.007298724469253603,
+          "squared_error_share": 2.4422272737564525e-05
+        },
+        {
+          "feature": "count_EVENT_CHANGE_PRINCIPAL",
+          "mse": 0.00010627251982687877,
+          "mae": 0.0063681003865690864,
+          "squared_error_share": 2.368395067604221e-05
+        },
+        {
+          "feature": "count_EVENT_BLIND",
+          "mse": 0.00010502925410333386,
+          "mae": 0.0056962531383092305,
+          "squared_error_share": 2.3406875811141864e-05
+        },
+        {
+          "feature": "count_EVENT_VMSPLICE",
+          "mse": 9.924189318938688e-05,
+          "mae": 0.006216459242360932,
+          "squared_error_share": 2.2117101458810122e-05
+        },
+        {
+          "feature": "count_EVENT_UMOUNT",
+          "mse": 9.669405785239329e-05,
+          "mae": 0.005378862937950358,
+          "squared_error_share": 2.1549289511278117e-05
+        },
+        {
+          "feature": "count_EVENT_WAIT",
+          "mse": 9.083310124757146e-05,
+          "mae": 0.004417613550203339,
+          "squared_error_share": 2.024311358386856e-05
+        },
+        {
+          "feature": "count_EVENT_SPLICE",
+          "mse": 9.036902911688862e-05,
+          "mae": 0.0065179738805306205,
+          "squared_error_share": 2.013969022032055e-05
+        },
+        {
+          "feature": "count_EVENT_TEE",
+          "mse": 8.343095986888051e-05,
+          "mae": 0.006353108991621708,
+          "squared_error_share": 1.8593468392471988e-05
+        },
+        {
+          "feature": "count_EVENT_TRUNCATE",
+          "mse": 7.01303014700999e-05,
+          "mae": 0.004892765373295667,
+          "squared_error_share": 1.5629276539406197e-05
+        },
+        {
+          "feature": "count_EVENT_LSEEK",
+          "mse": 4.9739134587963115e-05,
+          "mae": 0.004983079020998308,
+          "squared_error_share": 1.1084890168873132e-05
+        },
+        {
+          "feature": "count_EVENT_DUP",
+          "mse": 4.218236449963288e-05,
+          "mae": 0.005147763209569515,
+          "squared_error_share": 9.40078434044487e-06
+        },
+        {
+          "feature": "count_EVENT_STARTSERVICE",
+          "mse": 3.9690186432246446e-05,
+          "mae": 0.003156192016274649,
+          "squared_error_share": 8.845376201821195e-06
+        },
+        {
+          "feature": "count_EVENT_FINIT_MODULE",
+          "mse": 3.309050805392185e-05,
+          "mae": 0.0029724755286410147,
+          "squared_error_share": 7.3745683443938e-06
+        },
+        {
+          "feature": "count_EVENT_LOGCLEAR",
+          "mse": 3.0480996116092636e-05,
+          "mae": 0.0025884641437762777,
+          "squared_error_share": 6.793011116572624e-06
+        },
+        {
+          "feature": "count_EVENT_MODIFY_PROCESS",
+          "mse": 2.614228280352547e-05,
+          "mae": 0.003280732728426858,
+          "squared_error_share": 5.8260831444145894e-06
+        },
+        {
+          "feature": "count_EVENT_INIT_MODULE",
+          "mse": 2.4729925348759047e-05,
+          "mae": 0.002577626569272608,
+          "squared_error_share": 5.511324405748e-06
+        },
+        {
+          "feature": "count_EVENT_BOOT",
+          "mse": 2.3206722866367775e-05,
+          "mae": 0.002465031309319394,
+          "squared_error_share": 5.171862684869e-06
+        },
+        {
+          "feature": "count_unknown_action",
+          "mse": 1.835557672644489e-05,
+          "mae": 0.0024770929059964053,
+          "squared_error_share": 4.090733658405973e-06
+        },
+        {
+          "feature": "count_EVENT_MPROTECT",
+          "mse": 3.846384619792457e-06,
+          "mae": 0.0009842027924308668,
+          "squared_error_share": 8.572073360512456e-07
+        },
+        {
+          "feature": "count_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 3.1021188471314076e-06,
+          "mae": 0.001033344538288419,
+          "squared_error_share": 6.913398674122604e-07
+        },
+        {
+          "feature": "count_EVENT_LOGOUT",
+          "mse": 2.8069805141280144e-06,
+          "mae": 0.0013340717556943394,
+          "squared_error_share": 6.255651804767414e-07
+        },
+        {
+          "feature": "count_EVENT_READ_SOCKET_PARAMS",
+          "mse": 1.6504020640431572e-06,
+          "mae": 0.0007725060888927202,
+          "squared_error_share": 3.6780948775950755e-07
+        },
+        {
+          "feature": "count_EVENT_MMAP",
+          "mse": 1.5460027739408862e-06,
+          "mae": 0.0010210950027352997,
+          "squared_error_share": 3.445430060629793e-07
+        },
+        {
+          "feature": "count_EVENT_MOUNT",
+          "mse": 1.5435398564561324e-06,
+          "mae": 0.0008291537455896068,
+          "squared_error_share": 3.439941189534698e-07
+        }
+      ],
+      "largest_sample_error_shares": {
+        "1": 0.1301055444060734,
+        "5": 0.5743297027516802,
+        "10": 0.7457524127727541
+      },
+      "aggregate_metrics": {
+        "mse": 0.07237275689840317,
+        "mae": 0.09019967168569565
+      },
+      "mean_baseline_metrics": {
+        "mse": 0.2825376093387604,
+        "mae": 0.18102014064788818
+      },
+      "per_sample_baseline_comparison": {
+        "autoencoder_lower_mse": 98,
+        "mean_baseline_lower_mse": 0,
+        "tied_mse": 0
+      },
+      "exact_raw_profile_groups": {
+        "exact_raw_profile_seen_in_training": {
+          "rows": 34,
+          "mean_mse": 0.005588621387998293,
+          "median_mse": 0.0035726841389141658
+        },
+        "exact_raw_profile_unseen_in_training": {
+          "rows": 64,
+          "mean_mse": 0.10785183507968883,
+          "median_mse": 0.026447186678965555
+        }
+      }
+    }
+  },
+  "runtime": {
+    "device_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "compiled_cuda": "13.2",
+    "compute_capability": [
+      8,
+      9
+    ],
+    "total_vram_bytes": 6438780928,
+    "peak_allocated_bytes": 1723904,
+    "peak_reserved_bytes": 4194304,
+    "matmul_precision": "highest",
+    "cublas_workspace_config": ":4096:8"
+  },
+  "weights_updated": false,
+  "configuration_changed": false,
+  "preprocessing_refit": false,
+  "security_labels_assigned": false,
+  "security_threshold": null,
+  "original_supervised_tasks_completed": false,
+  "production_integration_performed": false,
+  "interpretation_limits": [
+    "Post-evaluation diagnostics; the holdout is already evaluated, not fresh tuning data",
+    "Residual contributions are numerical error decomposition, not causal feature importance",
+    "High or low reconstruction error does not establish attack/benign intent",
+    "A native witness verifies identity/time/source, not intent or all actions in a window",
+    "Exact raw profile overlap is a narrow descriptor; lack of it does not prove context/incident independence"
+  ]
+}

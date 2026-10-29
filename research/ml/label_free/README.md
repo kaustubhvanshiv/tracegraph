@@ -1,5 +1,11 @@
 # Separate label-free DARPA workflow
 
+**Error analysis completed, 2026-10-29:** the frozen model's largest ten holdout
+residuals account for 74.58% of squared error; 34 of 98 rows have raw profiles
+seen in training. Thirty native source-linked review entries remain local,
+with all security labels unknown. All 74 relevant software tests pass. See the
+[diagnostic findings and reproduction steps](ERROR_ANALYSIS.md).
+
 **GPU full run completed, 2026-10-29:** 200 epochs on the RTX 4050, with epoch
 185 selected on development. Full-run histories and weights match across two
 same-seed runs. Final holdout reconstruction MSE is 0.072373 versus the mean

@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 frozen-model error analysis completed:** the highest-error ten
+holdout rows account for 74.58% of squared residual; 34 of 98 raw profiles
+also appear in training. Per-feature diagnostics and 30 native evidence-linked
+review entries are ready, with weights/settings/labels unchanged. All 74
+relevant software tests pass. See the [findings, chart and teammate steps](label_free/ERROR_ANALYSIS.md).
+No attack labels or security threshold were inferred from reconstruction error.
+
 **2026-10-29 GPU training and final reconstruction evaluation completed:** the
 RTX 4050 ran 200 epochs; development selected epoch 185. Two same-seed full
 runs reproduced identical losses and weights. Holdout MSE is 0.072373 versus
