@@ -1,0 +1,111 @@
+{
+  "status": "frozen_offline_scoring_reuse_verified",
+  "bundle_sha256": "540f7b24bce1bcdbcdd5b8e7a2f7d028e7e3147ff47265b99dd1969f918e8417",
+  "bundle_bytes": 39525,
+  "bundle_file_count": 10,
+  "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+  "checkpoint_state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+  "source_run_sha256_utf8_lf": "88a90635741868f869a20025400538817ce743eec5dfe3884431f7aae191b24a",
+  "source_evaluation_sha256_utf8_lf": "1dfca24d5fa545fe5b06737b146a08c6d4885f7997f57c59c3c2891658e94b65",
+  "scorer_sha256_utf8_lf": "a04534b91b78fff11471925970d73ea804dddb6145d997c5d7441c04639ffd44",
+  "all_original_inputs_checkpoint_config_and_annotations_unchanged": true,
+  "replay_partitions": {
+    "train": {
+      "rows": 1184,
+      "max_absolute_cpu_cuda_row_difference": {
+        "reconstruction_mse": 9.5367431640625e-07,
+        "reconstruction_mae": 3.8743019104003906e-07,
+        "training_mean_baseline_mse": 5.7220458984375e-06
+      },
+      "cpu_mse": 0.1107114942552053,
+      "cuda_mse": 0.11071149281230425,
+      "cpu_mae": 0.10085972978708309,
+      "cuda_mae": 0.10085972961403329,
+      "model_parameter_devices": {
+        "cpu": "cpu",
+        "cuda": "cuda:0"
+      }
+    },
+    "development": {
+      "rows": 76,
+      "max_absolute_cpu_cuda_row_difference": {
+        "reconstruction_mse": 5.960464477539063e-08,
+        "reconstruction_mae": 5.21540641784668e-08,
+        "training_mean_baseline_mse": 1.1920928955078125e-07
+      },
+      "cpu_mse": 0.033141205663253605,
+      "cuda_mse": 0.033141207112318,
+      "cpu_mae": 0.06641470302680605,
+      "cuda_mae": 0.06641470351697583,
+      "model_parameter_devices": {
+        "cpu": "cpu",
+        "cuda": "cuda:0"
+      }
+    },
+    "holdout": {
+      "rows": 98,
+      "max_absolute_cpu_cuda_row_difference": {
+        "reconstruction_mse": 2.980232238769531e-07,
+        "reconstruction_mae": 1.1920928955078125e-07,
+        "training_mean_baseline_mse": 2.384185791015625e-07
+      },
+      "cpu_mse": 0.07237276381561153,
+      "cuda_mse": 0.07237275962584785,
+      "cpu_mae": 0.09019966299968715,
+      "cuda_mae": 0.09019966364591098,
+      "model_parameter_devices": {
+        "cpu": "cpu",
+        "cuda": "cuda:0"
+      }
+    }
+  },
+  "aggregate_tolerance": {
+    "relative": 2e-06,
+    "absolute": 1e-07
+  },
+  "row_cpu_cuda_tolerance": {
+    "relative": 2e-05,
+    "absolute": 2e-06
+  },
+  "weights_updated": false,
+  "preprocessing_refit": false,
+  "security_labels_assigned": false,
+  "security_threshold": null,
+  "attack_detection_metrics_available": false,
+  "new_evaluation_data": false,
+  "production_integration": false,
+  "interpretation": "Replay of previously evaluated real rows; normalized reconstruction errors only",
+  "limitations": [
+    "Unlabeled training data may contain attacks; no certified normal-data claim",
+    "First-selected-partition ownership biases later data toward newly observed actors, which may be threads",
+    "Common object context and identical feature profiles remain; no independent incident or host-generalization claim",
+    "No metadata availability or process-lineage inference is used by these aggregate vectors",
+    "Feature artifacts are model inputs, not anomaly scores, attack predictions or detection metrics",
+    "Already evaluated and inspected holdout; replay is a reuse check, not a new benchmark",
+    "Hashes detect changed artifacts relative to a trusted bundle digest; no digital signature"
+  ],
+  "independent_cpu_only_runtime": {
+    "torch_version": "2.15.0+cpu",
+    "rows": 98,
+    "compiled_cuda": null,
+    "model_parameter_device": "cpu",
+    "reconstruction_mse": 0.07237276381561153,
+    "reconstruction_mae": 0.09019966299968715,
+    "row_scores_identical_to_cpu_on_cuda_build": true
+  },
+  "software_tests": {
+    "passed": 82,
+    "skipped": 0,
+    "new_offline_scoring_tests": 8,
+    "runtime": "Python 3.11.9; PyTorch 2.15.0+cu132",
+    "command": ".cache/ml-envs/darpa-gpu-py311/Scripts/python.exe -m unittest research.ml.tests.test_build_graphs research.ml.tests.test_recover_metadata research.ml.tests.test_node_protocol research.ml.tests.test_uniform_metadata research.ml.tests.test_background_review research.ml.tests.test_review_inputs research.ml.tests.test_review_packets research.ml.tests.test_adjudicate_review research.ml.tests.test_label_free research.ml.tests.test_label_free_training research.ml.tests.test_label_free_error_analysis research.ml.tests.test_label_free_inference -q"
+  },
+  "normalization_exactly_reproduces_prepared_vectors": true,
+  "input_scope": {
+    "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+    "window_nanos": 300000000000,
+    "feature_count": 62,
+    "caller_native_source_evidence_reverified": false
+  },
+  "bundle_uploaded_to_git": false
+}

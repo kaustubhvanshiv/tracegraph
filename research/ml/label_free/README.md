@@ -1,5 +1,12 @@
 # Separate label-free DARPA workflow
 
+**Standalone scoring completed, 2026-10-29:** the frozen epoch-185 model and
+training-only scaler now score compatible named features without the training
+folders or retraining. All 1,358 existing real rows reproduced the frozen metrics
+on CPU/CUDA; the separate CPU-only runtime also passed. All 82 relevant software
+tests pass. See the [teammate commands and input contract](INFERENCE.md).
+Scores remain reconstruction errors; production integration is deferred.
+
 **Error analysis completed, 2026-10-29:** the frozen model's largest ten holdout
 residuals account for 74.58% of squared error; 34 of 98 rows have raw profiles
 seen in training. Thirty native source-linked review entries remain local,
@@ -34,17 +41,18 @@ their annotations and incomplete ML-02.4 status are preserved.
 
 ## Objective and interpretation
 
-These vectors support a later label-free activity-reconstruction experiment.
-A future reconstruction model would learn a vector representation without
-attack/benign targets. This preparation does not choose, install or train that
-model. Every `security_label` remains NULL, including training data. The early
+These vectors support the completed label-free activity-reconstruction pilot.
+The autoencoder reconstructs vectors without attack/benign targets; its saved
+checkpoint can be reused through [standalone scoring](INFERENCE.md). The
+preparation command itself does not train a model. Every `security_label`
+remains NULL, including training data. The early
 collection period is not certified normal and may contain undocumented attacks.
 
-Reconstruction error or novelty, if computed later, would mean unusual activity
-relative to the fitted data. It would not by itself establish an attack,
+Reconstruction error measures difficulty reproducing activity relative to the
+fitted model. It does not by itself establish an attack,
 attack probability, precision, recall, F1 or detection AUC. Suitable independent
 security annotations and evaluation design would still be required for those
-claims. No security score or threshold exists in this preparation.
+claims. No security threshold has been set in this workflow.
 
 ## Fixed scope and features
 

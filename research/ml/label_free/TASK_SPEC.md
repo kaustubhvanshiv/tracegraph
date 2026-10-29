@@ -98,3 +98,13 @@ seed to check same-runtime histories and weights. This is reproducibility
 verification, not a hyperparameter search. Do not change settings in response
 to holdout outcomes. The 98 real holdout rows remain reserved until the full
 checkpoint is selected and both run configurations are frozen.
+
+## Standalone reuse addendum - 2026-10-29
+
+After final evaluation and frozen-model diagnostics, LF-06 adds local bundle
+export and offline scoring for this same checkpoint. Preserve weights, feature
+order and training-only scaler; validate named native aggregates and pin bundle
+integrity. Support explicit CPU/CUDA execution, reject incompatible inputs, and
+keep labels/thresholds unknown. Replaying existing rows checks numerical reuse,
+not new evaluation performance. This does not activate deferred GNN production
+integration. See [commands and verified scope](INFERENCE.md).

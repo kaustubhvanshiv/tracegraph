@@ -3,6 +3,14 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 standalone frozen-model scoring completed:** the saved
+autoencoder and training-only scaler now score named raw features without
+retraining. All 1,358 existing DARPA rows reproduce the frozen metrics on
+CPU/CUDA; the independent CPU-only runtime also passes. All 82 relevant
+software tests pass. See the [teammate commands and input contract](label_free/INFERENCE.md).
+This is numerical replay and checkpoint reuse; labels remain unknown and
+production integration stays deferred. Weights and row outputs stay local.
+
 **2026-10-29 frozen-model error analysis completed:** the highest-error ten
 holdout rows account for 74.58% of squared residual; 34 of 98 raw profiles
 also appear in training. Per-feature diagnostics and 30 native evidence-linked
