@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 label-free training readiness verified:** a 2,210-parameter
+autoencoder and the complete training/checkpoint/final-evaluation code are ready.
+Two real DARPA three-epoch smoke runs produced identical losses and weights;
+all 65 relevant software tests pass. The real holdout remains unevaluated by a
+model. Full training is pending. See the [launch commands and task-status audit](label_free/TRAINING.md).
+The original supervised/GNN tasks retain their incomplete/deferred states.
+
 **2026-10-29 separate label-free preparation completed:** the approved DARPA
 route produced 1,358 unlabeled actor-window vectors with 62 features: 1,184
 training, 76 development and 98 holdout rows. Native actor IDs are disjoint;

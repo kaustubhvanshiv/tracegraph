@@ -1,5 +1,11 @@
 # Separate label-free DARPA workflow
 
+**Training-ready, 2026-10-29:** the autoencoder, training/configuration/runtime,
+checkpointing and separate holdout evaluator are implemented. Two identical
+real-data three-epoch smoke runs passed; all 65 relevant software tests pass.
+Full training and final model evaluation are pending. See the
+[training commands](TRAINING.md) and [task alignment/status](TASK_STATUS.md).
+
 **Preparation completed on 2026-10-29:** 1,358 native actor-window samples,
 62 numeric features, chronological actor-disjoint partitions and training-only
 normalization. The independent verifier recomputed every vector and scaler
@@ -143,7 +149,7 @@ source completeness, duplicate/conflict quarantine, deterministic artifacts,
 actor ownership, training-only scaling, resource guards and independent detection
 of relabeled/tampered vectors, scaler statistics or concealed shared context.
 
-**This preparation task is complete.** Next is to specify and review a minimal
-reconstruction model and its loss, development criteria, contamination limits
-and allowed holdout interpretation before training. No detection-performance
-claim follows from the prepared rows or software-test count.
+**Preparation and training-readiness tasks are complete.** The reviewed model,
+loss and configuration are in the [training specification](TASK_SPEC.md).
+Use the [full-run instructions](TRAINING.md) for the next execution step.
+No detection-performance claim follows from the prepared rows or software-test count.

@@ -1,0 +1,77 @@
+{
+  "status": "ready_for_full_label_free_reconstruction_training",
+  "task_scope": "Separately user-approved label-free route; original supervised/GNN tasks not completed",
+  "task_spec_sha256_utf8_lf": "a9c0ec8778e9db57983ed00da06079a78ff4981b4748e28e453da9e9fbc70e6e",
+  "config_sha256_utf8_lf": "fe9c82a74d56e854bff741c43ad59dd01697f0af415247d8fe6809d991d80a7c",
+  "requirements_sha256_utf8_lf": "d12a68aff2980ba65185f3e321bab9297bb685e3cd985e3463e74cea25164b99",
+  "smoke_runs": 2,
+  "epochs_per_smoke_run": 3,
+  "optimizer_steps_per_smoke_run": 57,
+  "input_features": 62,
+  "parameter_count": 2210,
+  "training_samples": 1184,
+  "development_samples": 76,
+  "holdout_samples_reserved": 98,
+  "exact_history_match": true,
+  "exact_model_state_match": true,
+  "checkpoint_state_sha256": "6ba09ffded514cc1129b75482fd1dc4bf864da15398bcf2226f6645135146e9f",
+  "checkpoint_reload_verified": true,
+  "holdout_read_by_readiness_training": false,
+  "smoke_checkpoint_rejected_by_final_evaluator": true,
+  "initial_reconstruction": {
+    "epoch": 0,
+    "train": {
+      "mse": 0.5449756979942322,
+      "mae": 0.31364336609840393
+    },
+    "development": {
+      "mse": 0.18469251692295074,
+      "mae": 0.2662084996700287
+    }
+  },
+  "selected_reconstruction": {
+    "train": {
+      "mse": 0.4969238042831421,
+      "mae": 0.24468770623207092
+    },
+    "development": {
+      "mse": 0.1455673724412918,
+      "mae": 0.1925777941942215
+    }
+  },
+  "training_mean_baseline": {
+    "train": {
+      "mse": 0.5161290168762207,
+      "mae": 0.215315043926239
+    },
+    "development": {
+      "mse": 0.14763754606246948,
+      "mae": 0.1643204540014267
+    }
+  },
+  "software_tests_passed": 65,
+  "dependency_check": "pip check: no broken requirements",
+  "runtime": {
+    "python": "3.11.9",
+    "torch": "2.15.0+cpu",
+    "numpy": "2.4.6",
+    "device": "cpu"
+  },
+  "full_training_completed": false,
+  "final_holdout_evaluation_completed": false,
+  "original_supervised_annotations_and_policy_unchanged": true,
+  "attack_detection_metrics_available": false,
+  "task_status": {
+    "label_free_data_preparation": "complete",
+    "label_free_training_readiness": "complete",
+    "label_free_full_training": "not_run",
+    "label_free_final_evaluation": "not_run",
+    "original_ML02_4": "incomplete_missing_ground_truth_and_independent_groups",
+    "original_GNN_track": "deferred"
+  },
+  "limitations": [
+    "Smoke results verify execution/reproducibility, not final model quality",
+    "Development MSE is slightly below the mean baseline but development MAE is higher",
+    "Unknown security intent and shared object context prevent attack-detection or incident-independence claims"
+  ]
+}

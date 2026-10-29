@@ -1,0 +1,69 @@
+{
+  "status": "smoke_passed_training_ready",
+  "mode": "smoke",
+  "config_sha256_utf8_lf": "fe9c82a74d56e854bff741c43ad59dd01697f0af415247d8fe6809d991d80a7c",
+  "code_sha256_utf8_lf": {
+    "model.py": "88a46e0a7ae8eedfdadcca2936ff0dc17bd8b3ce7a659dc6d2b5fff4dc2d7412",
+    "training_data.py": "761da17c2c14035663ecdabf52bf1de245cfb95b2b6fcd7c724b2de6c147c846",
+    "train.py": "dd60fa33e01497d960b8f4dc2ad53bc68577f67fa542730f8f4bec5624efadc4"
+  },
+  "dataset_manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+  "feature_schema_sha256": "ea25feb33a32687b31244b8b7b46d7f81734b30b7bf44f846a5aa160270cab09",
+  "scaler_sha256": "3f46f271d6eacff5519f0648e6d33fe73d98da983653261eabdcaa5d1948f900",
+  "seed": 42,
+  "python_version": "3.11.9",
+  "torch_version": "2.15.0+cpu",
+  "device": "cpu",
+  "parameter_count": 2210,
+  "partition_samples": {
+    "train": 1184,
+    "development": 76
+  },
+  "security_labels_used": false,
+  "holdout_vectors_read": false,
+  "holdout_metrics": null,
+  "attack_detection_metrics_available": false,
+  "full_training_completed": false,
+  "baseline_metrics": {
+    "train": {
+      "mse": 0.5161290168762207,
+      "mae": 0.215315043926239
+    },
+    "development": {
+      "mse": 0.14763754606246948,
+      "mae": 0.1643204540014267
+    }
+  },
+  "epochs_completed": 3,
+  "best_epoch": 3,
+  "optimizer_steps": 57,
+  "initial_metrics": {
+    "epoch": 0,
+    "train": {
+      "mse": 0.5449756979942322,
+      "mae": 0.31364336609840393
+    },
+    "development": {
+      "mse": 0.18469251692295074,
+      "mae": 0.2662084996700287
+    }
+  },
+  "selected_checkpoint_metrics": {
+    "train": {
+      "mse": 0.4969238042831421,
+      "mae": 0.24468770623207092
+    },
+    "development": {
+      "mse": 0.1455673724412918,
+      "mae": 0.1925777941942215
+    }
+  },
+  "checkpoint_sha256": "894e97796006781edf4cd00e5a70938c5c55b76c8473d7df27a3ac46b9bd6625",
+  "checkpoint_state_sha256": "6ba09ffded514cc1129b75482fd1dc4bf864da15398bcf2226f6645135146e9f",
+  "optimizer_changed_weights": true,
+  "checkpoint_reload_verified": true,
+  "history_sha256": "ee6211c5c540205a64be23752abf9bc77b3aaaab77a22749988291a961f9d728",
+  "development_mse_improvement_over_mean_baseline": 0.0020701736211776733,
+  "evaluation_scope": "Reconstruction only; unlabeled same-host/day pilot with shared object context",
+  "threshold_created": false
+}

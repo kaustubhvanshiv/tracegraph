@@ -1,3 +1,3 @@
-# Inspection and offline SecurityEvent validation; no model dependencies yet.
+# Base inspection and offline validation. Optional CPU training: label_free/requirements-training.txt.
 fastavro==1.12.2
 pydantic==2.13.5
