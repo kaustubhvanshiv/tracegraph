@@ -1,5 +1,10 @@
 # Separate label-free DARPA workflow
 
+**All approved training verified complete, 2026-10-29:** both models and their
+repeat runs pass checkpoint/history/configuration and CUDA metric reload checks.
+All 87 relevant software tests pass. See the [completion summary and recheck command](TRAINING_COMPLETE.md).
+A fresh final model comparison remains a separate evaluation step.
+
 **Second model completed, 2026-10-29:** the approved denoising autoencoder ran
 on the RTX 4050; epoch 40 was selected and repeat runs matched exactly. Its
 development MSE is 0.062846 versus 0.033141 for the original model. All 33

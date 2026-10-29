@@ -1,5 +1,11 @@
 # Task alignment and progress - 2026-10-29
 
+**Training completion audit passed:** both approved models and all four full
+runs are complete and verified; 87 relevant software tests pass. See the
+[completion summary](TRAINING_COMPLETE.md). No additional training is pending
+for the two approved configurations. Fresh final comparison data and original
+supervised/GNN prerequisites remain separate outstanding work.
+
 **Subsequent approved experiment completed:** second-model denoising training
 and train/development comparison are complete. Epoch 40 was selected after
 60 epochs; two full GPU runs match. Development MSE 0.062846 is higher than

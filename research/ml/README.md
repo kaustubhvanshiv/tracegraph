@@ -3,6 +3,11 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 all approved training verified complete:** both frozen models and
+all four full runs pass checkpoint/history/configuration and GPU metric reload
+checks. All 87 relevant software tests pass. See the [training completion summary](label_free/TRAINING_COMPLETE.md).
+Fresh final comparison data remains a separate evaluation requirement.
+
 **2026-10-29 second model trained:** the approved denoising autoencoder selected
 epoch 40 on the RTX 4050. Development MSE is 0.062846 versus 0.033141 for the
 original autoencoder; repeat runs match and the inspected holdout was not read.

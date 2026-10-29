@@ -1,0 +1,110 @@
+{
+  "status": "all_approved_two_model_training_verified",
+  "models": {
+    "ordinary_autoencoder": {
+      "training_complete": true,
+      "repeatability_verified": true,
+      "runs": [
+        {
+          "run": "full-a",
+          "epochs": 200,
+          "best_epoch": 185,
+          "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+          "state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+          "history_sha256": "ce01bc641fe866417f5ccc1376919ba3b82302e3ba7dc7b179aed060ba96b8ea",
+          "config_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+          "metrics": {
+            "train": {
+              "mse": 0.1107114925980568,
+              "mae": 0.10085973143577576
+            },
+            "development": {
+              "mse": 0.03314121067523956,
+              "mae": 0.06641470640897751
+            }
+          },
+          "parameter_device": "cuda:0"
+        },
+        {
+          "run": "full-b",
+          "epochs": 200,
+          "best_epoch": 185,
+          "checkpoint_sha256": "bb51bad25af35a8f553ec0e24d82986cd751d792939bd32caef4442d88f0eaa0",
+          "state_sha256": "3f49dd2461293976045c1286340bebb776da38c83da1b0e63d829b0a4f658cc1",
+          "history_sha256": "ce01bc641fe866417f5ccc1376919ba3b82302e3ba7dc7b179aed060ba96b8ea",
+          "config_sha256_utf8_lf": "6d99c786b2b7f6b65dfb22069b5497bfcb75af9620aa48987a344647ac424b68",
+          "metrics": {
+            "train": {
+              "mse": 0.1107114925980568,
+              "mae": 0.10085973143577576
+            },
+            "development": {
+              "mse": 0.03314121067523956,
+              "mae": 0.06641470640897751
+            }
+          },
+          "parameter_device": "cuda:0"
+        }
+      ]
+    },
+    "denoising_autoencoder": {
+      "training_complete": true,
+      "repeatability_verified": true,
+      "runs": [
+        {
+          "run": "full-a",
+          "epochs": 60,
+          "best_epoch": 40,
+          "checkpoint_sha256": "437edff8caadfef34aa631627dd8a0eb737f5f732ae192a4072776a0861694c8",
+          "state_sha256": "c2683f7d41ab815eb5484a27e9cd562a691be177313ced26f360c3047437fe33",
+          "history_sha256": "5de11038b38c005e247e514778423a7aad66b32208f0ba8d436e15fa6d112b47",
+          "config_sha256_utf8_lf": "11842eab480303a3344cfdb47dd9bcf0f231f01bb7af48ef32f905482d279e3f",
+          "metrics": {
+            "train": {
+              "mse": 0.23064887523651123,
+              "mae": 0.14101509749889374
+            },
+            "development": {
+              "mse": 0.06284555792808533,
+              "mae": 0.10150470584630966
+            }
+          },
+          "parameter_device": "cuda:0"
+        },
+        {
+          "run": "full-b",
+          "epochs": 60,
+          "best_epoch": 40,
+          "checkpoint_sha256": "437edff8caadfef34aa631627dd8a0eb737f5f732ae192a4072776a0861694c8",
+          "state_sha256": "c2683f7d41ab815eb5484a27e9cd562a691be177313ced26f360c3047437fe33",
+          "history_sha256": "5de11038b38c005e247e514778423a7aad66b32208f0ba8d436e15fa6d112b47",
+          "config_sha256_utf8_lf": "11842eab480303a3344cfdb47dd9bcf0f231f01bb7af48ef32f905482d279e3f",
+          "metrics": {
+            "train": {
+              "mse": 0.23064887523651123,
+              "mae": 0.14101509749889374
+            },
+            "development": {
+              "mse": 0.06284555792808533,
+              "mae": 0.10150470584630966
+            }
+          },
+          "parameter_device": "cuda:0"
+        }
+      ]
+    }
+  },
+  "verifier_sha256_utf8_lf": "beedb67c86cd87c114478be376206b94e05257cfbd16a603c746d2ec4f912920",
+  "additional_optimization_performed": false,
+  "holdout_read_by_completion_check": false,
+  "new_final_evaluation_performed": false,
+  "attack_detection_metrics_available": false,
+  "security_threshold": null,
+  "production_integration": false,
+  "scope": "Two approved label-free vector models; not completion of deferred supervised/GNN training",
+  "remaining_evaluation": "Fresh source-verified cohort needed for a final comparison",
+  "software_tests": {
+    "passed": 87,
+    "skipped": 0
+  }
+}
