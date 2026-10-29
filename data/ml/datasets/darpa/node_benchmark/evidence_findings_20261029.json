@@ -1,0 +1,63 @@
+{
+  "review_id": "darpa-frozen-500-source-sufficiency-20261029",
+  "reviewer": "Codex source-evidence review; not independent expert or STARC annotation",
+  "scope": "Sufficiency of currently downloaded evidence for the exact frozen 500 node/anchor candidates",
+  "reviewed_window": {
+    "host_uuid": "2ab88dcdcbe641dfac699f6d6058e398",
+    "start_nanos": 1557234300000000000,
+    "end_nanos": 1557234600000000000
+  },
+  "packet_file_sha256": "9d6c6252dde7fa65e1fe92519503e867001cb29c0c4d7c82dac485d7ef5080af",
+  "classification_decision": "retain_unknown_all_candidates",
+  "binary_intent_evidence_rows": [],
+  "source_files": [
+    {
+      "path": "C:/codes/PBL sem 7/tracegraph/.cache/ml-runs/background-group-review-20261028/source/TA51_Final_report_E5.pdf",
+      "sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+      "hash_format": "binary",
+      "pages_used": [8, 26, 27, 28, 29, 30, 31, 135]
+    },
+    {
+      "path": "D:/Deep Learning/darpa-tc-e5-support/Engagement-5-Event-Log.md",
+      "sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9",
+      "hash_format": "utf8_lf",
+      "section_used": "2019-05-07"
+    }
+  ],
+  "findings": [
+    {
+      "id": "act_schedule_is_not_benign_annotation",
+      "source": "ACT report page 8",
+      "decision": "The first listed attack day is May 8. This supports the earlier-window review rationale, but is not explicit action-level benign intent or a certified benign-only host interval."
+    },
+    {
+      "id": "historical_logon_dates_are_not_action_annotations",
+      "source": "ACT report pages 26-31",
+      "decision": "May 7 dates occur as historical Logon Time fields inside the later May 9 Copykatz output. They do not map the host-1 May 7 13:05-13:10 UTC candidate actions or certify that window benign."
+    },
+    {
+      "id": "operational_recovery_is_different_host_and_action",
+      "source": "Operational log May 7 section",
+      "decision": "The specific FiveDirections reboot/BCDEDIT recovery concerns host 2. It is not benign evidence for host 1 candidate actions. Do not transfer its label or clock correction."
+    },
+    {
+      "id": "false_positive_examples_do_not_label_this_window",
+      "source": "ACT report page 135",
+      "decision": "The SCP false positive and filemon setup refer to different dated actions. They cannot label this May 7 host-1 cohort."
+    },
+    {
+      "id": "native_metadata_does_not_establish_intent",
+      "source": "All 500 native evidence packets",
+      "decision": "Native actions, paths, command lines and process ancestry establish identity/context only. Familiar Windows executables and missing annotation membership do not establish benign intent. No matching action-intent evidence was established in the reviewed support sources."
+    },
+    {
+      "id": "pilot_overlap_is_not_a_security_label",
+      "source": "Pinned pilot graph and conservative group manifest",
+      "decision": "Sixty native identities overlap the attack pilot. Keep that constraint visible for later grouping/purging; do not transfer later attack labels to these earlier actions or claim the remaining 440 are independent benign examples."
+    }
+  ],
+  "source_absence_proves_no_attack": false,
+  "all_candidate_actions_certified_benign": false,
+  "original_event_labels_changed": false,
+  "training_authorized": false
+}

@@ -1,0 +1,32 @@
+{
+  "input_spec_id": "darpa-e5-node-past-five-minutes-v1",
+  "version": 1,
+  "scope": "Input definition for the existing node-benchmark preparation route only",
+  "sample_unit": ["evaluation_group", "publishing_host_uuid", "native_node_uuid", "anchor_nanos"],
+  "anchor_rule": "window_end_nanos_minus_1",
+  "history_horizon_nanos": 300000000000,
+  "history_interval": "[anchor_nanos - history_horizon_nanos + 1, anchor_nanos]",
+  "equivalent_window": "[window_end_nanos - history_horizon_nanos, window_end_nanos)",
+  "selection_basis": "A fixed five-minute preparation horizon fits the already frozen five-minute review window and the six-minute/32-minute pilot windows. It is a bounded input definition chosen without model metrics, not a performance optimum.",
+  "native_event_reference_neighborhood_hops": 1,
+  "neighborhood_rule": "Keep nonconflicting native Event relations incident on the sampled node in the declared history, retaining the native subject/predicate roles. All retained endpoints are context; no recursive expansion.",
+  "fanout_cap": null,
+  "information_flow_direction_inferred": false,
+  "future_events_allowed": false,
+  "event_time_policy": "Use original integer UTC nanoseconds, not source publication order; perform no timestamp correction.",
+  "process_context_policy": "Exclude a relation whose required native Subject ancestry is missing, conflicting, cyclic or starts after that relation's Event. A timing flag on an early witness does not label or automatically exclude the entire node lifetime.",
+  "offline_metadata_proves_arrival_time_availability": false,
+  "metadata_predictor_policy": "Exclude metadata fields without defensible availability at or before the anchor. Current offline definitions are review evidence, not accepted predictor fields.",
+  "purge_gap_minimum_nanos": 300000000000,
+  "partition_context_policy": "All retained Events and sampled/context identities must remain within the assigned whole-group partition; merge or purge overlap before any export.",
+  "predictor_fields_frozen": false,
+  "unknown_labels_used_for_supervised_training": false,
+  "graph_inputs_created": false,
+  "models_selected_or_trained": false,
+  "original_event_track_history_changed": false,
+  "limitations": [
+    "Existing window bounds accommodate this horizon but do not prove continuous telemetry coverage.",
+    "No current binary partitions exist; this definition does not supply labels or independent groups.",
+    "Any later horizon, neighborhood or feature change requires a new input-spec version and fresh context/split checks."
+  ]
+}

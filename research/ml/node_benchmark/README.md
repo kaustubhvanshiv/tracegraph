@@ -1,5 +1,13 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
+**Source review and input history, 2026-10-29:** all 500 frozen candidates now
+have recorded evidence-sufficiency decisions; all remain unknown. A fixed
+five-minute past-only, one-hop native-reference input definition clears the
+history gap. Three dataset blockers remain: an accepted background cohort,
+binary ground truth and enough independent groups. All 46 relevant software
+tests pass. See the [pretraining review and remaining evidence](PRETRAINING_REVIEW.md).
+ML-02.4 and supervised training remain incomplete.
+
 **Native evidence packets, 2026-10-29:** the next preparation step attaches
 source-linked native Events, entity definitions, actor lineage and pilot overlap
 to all 500 candidates in the existing frozen review draw. Seven actor chains

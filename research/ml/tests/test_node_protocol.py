@@ -115,6 +115,31 @@ class NodeProtocolTests(unittest.TestCase):
         self.assertFalse((self.base/'splits').exists())
         self.assertFalse((self.base/'features').exists())
 
+    def test_frozen_history_requires_a_pinned_past_only_spec_for_every_window(self):
+        policy = json.loads(POLICY.read_text(encoding='utf-8'))
+        policy['split']['history_horizon_nanos'] = 10
+        policy_path = self.base/'policy.json'
+        policy_path.write_text(json.dumps(policy),encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,'sibling input-spec'):
+            audit(policy_path,self.original,self.review,self.recovery,self.gate,self.annotations)
+        spec = json.loads((POLICY.parent/'node_input_spec_20261029.json').read_text())
+        spec['history_horizon_nanos'] = spec['purge_gap_minimum_nanos'] = 10
+        spec_path = self.base/'spec.json'
+        spec_path.write_text(json.dumps(spec),encoding='utf-8')
+        policy['split']['input_spec_file'] = spec_path.name
+        policy['split']['input_spec_sha256_utf8_lf'] = text_hash(spec_path)
+        policy_path.write_text(json.dumps(policy),encoding='utf-8')
+        result = audit(policy_path,self.original,self.review,self.recovery,self.gate,self.annotations)
+        self.assertNotIn('history_horizon_not_frozen',{r['code'] for r in result['blocking_conditions']})
+        self.assertEqual(len(result['input_history_review']['intervals']),2)
+        self.assertFalse(result['training_authorized_by_this_audit'])
+        spec['future_events_allowed'] = True
+        spec_path.write_text(json.dumps(spec),encoding='utf-8')
+        policy['split']['input_spec_sha256_utf8_lf'] = text_hash(spec_path)
+        policy_path.write_text(json.dumps(policy),encoding='utf-8')
+        with self.assertRaisesRegex(ValueError,'past-only'):
+            audit(policy_path,self.original,self.review,self.recovery,self.gate,self.annotations)
+
 
 if __name__ == '__main__':
     unittest.main()

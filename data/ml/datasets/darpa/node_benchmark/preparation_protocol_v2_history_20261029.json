@@ -1,0 +1,92 @@
+{
+  "protocol_id": "darpa-e5-node-preparation-v2-five-minute-input",
+  "version": 2,
+  "review_date": "2026-10-29",
+  "scope": "Preparation and evidence review for the existing DARPA E5 FiveDirections node pilot",
+  "label_contract": {
+    "observed_typed_published_reference": 1,
+    "unlisted_missing_conflicting_or_mismatched": null,
+    "unlisted_is_benign": false,
+    "published_reference_is_verified_event_attack": false,
+    "verified_node_classification_labels": null,
+    "original_event_annotations": "data/ml/datasets/darpa/review_annotations.json",
+    "original_event_contract_unchanged": true
+  },
+  "metadata": {
+    "recovery_scope": "all_selected_nodes_before_reference_join",
+    "join_key": [
+      "publishing_host_uuid",
+      "native_entity_uuid"
+    ],
+    "retain_conflicts_as_unknown": true,
+    "annotation_directed_graph_role": "review_only",
+    "required_availability_for_predictive_fields": "defensible_at_or_before_sample_anchor",
+    "missing_availability": "exclude_field_or_sample_until_reviewed",
+    "offline_reconstruction_is_online_availability_proof": false
+  },
+  "sampling": {
+    "sample_unit": [
+      "incident_or_background_group",
+      "publishing_host_uuid",
+      "native_entity_uuid",
+      "anchor_nanos"
+    ],
+    "anchor_rule": "window_end_nanos_minus_1",
+    "select_windows_before_node_reference_join": true,
+    "candidate_order": "sha256_of_canonical_seed_host_window_uuid_anchor",
+    "seed": 42,
+    "max_review_candidates_per_host_window": 500,
+    "background_windows": [],
+    "background_candidate_label": null,
+    "background_window_or_missing_annotation_proves_benign": false,
+    "verify_coverage_and_native_clock_before_sampling": true,
+    "exclude_documented_attack_and_persistence_context_for_background_review": true,
+    "review_pool_plan_sha256_utf8_lf": "d565ec7dbdacdd81baea06373497eb3451f2050e11af972d41f2f76aac707f9b",
+    "review_pool_role": "unknown_label_evidence_triage_not_accepted_training_background"
+  },
+  "split": {
+    "method": "chronological_whole_incident_or_verified_background_group",
+    "target_proportions": {
+      "train": 0.6,
+      "validation": 0.2,
+      "test": 0.2
+    },
+    "minimum_distinct_groups": 3,
+    "require_campaign_and_cross_host_group_review": true,
+    "campaign_group_review_complete": true,
+    "random_row_splitting": false,
+    "history_horizon_nanos": 300000000000,
+    "purge_gap_at_least_history_horizon": true,
+    "separate_partition_graphs": true,
+    "no_shared_sample_context_or_positive_incident": true,
+    "require_known_classes_each_partition": [
+      0,
+      1
+    ],
+    "training_only_vocabularies_scalers_and_sampling_statistics": true,
+    "threshold_selection": "validation_only",
+    "test_use": "final_locked_evaluation_only",
+    "grouping_scope": "accepted_conservative_single_holdout_for_current_pilot_only",
+    "input_spec_file": "node_input_spec_20261029.json",
+    "input_spec_sha256_utf8_lf": "2b2e0c3505749e101f68920dca0bce897c3780e4a248aac4be5f82c660d6e62a"
+  },
+  "excluded_predictors": [
+    "reference_membership_or_annotation_file_or_row",
+    "raw_uuid_or_source_filename_or_raw_record_index",
+    "incident_name_or_case_id_or_partition_id",
+    "metadata_recovery_target_or_recovery_source_indicator",
+    "future_events_or_future_only_attributes",
+    "statistics_or_vocabulary_fit_on_validation_or_test"
+  ],
+  "execution": {
+    "audit_only": true,
+    "create_background_samples": false,
+    "create_feature_vectors": false,
+    "create_partitions": false,
+    "select_or_train_models": false
+  },
+  "review_inputs_required": [
+    "background_review_manifest",
+    "group_review_manifest"
+  ]
+}

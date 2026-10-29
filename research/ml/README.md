@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 source review completed; training still blocked:** all 500 frozen
+candidates have recorded unknown decisions after checking source-evidence
+sufficiency. A five-minute past-only input specification clears the history
+gap; three dataset gaps remain: accepted background, binary ground truth and
+independent groups. All 46 relevant software tests pass. See the
+[completed review and evidence needed to finish](node_benchmark/PRETRAINING_REVIEW.md).
+
 **2026-10-29 native evidence review prepared:** the fixed 500 candidates now
 have source-linked Events, entity metadata, actor context and pilot-overlap
 details in a local reader and blank review worksheet. All labels remain unknown.

@@ -1,5 +1,10 @@
 # DARPA metadata, background and split protocol v1
 
+**2026-10-29 update:** the [source review and input definition](PRETRAINING_REVIEW.md)
+fix a five-minute past-only history for the node preparation route. All 500
+review candidates still have unknown security intent. The current audit has
+three dataset blockers; the v1 decisions below are retained as historical scope.
+
 Reviewed on 2026-10-28 against Requirement ML-02, tasks ML-02.1/02.2/02.4 and
 the design's ML evaluation checks. These require a written sample/label contract,
 incident isolation and reproducible preparation before training. This document

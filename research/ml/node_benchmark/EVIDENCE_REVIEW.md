@@ -1,5 +1,9 @@
 # Review native DARPA evidence before assigning labels
 
+Follow-up: the [source-sufficiency review](PRETRAINING_REVIEW.md) records an
+unknown decision for every frozen candidate and fixes a bounded input history.
+No candidate was promoted to verified binary ground truth.
+
 The 2026-10-29 follow-up attaches native evidence to the existing 500-ID
 unknown-label draw. It keeps the selected identities and ordering fixed.
 This supports ML-02 evidence preparation; it does not finish ML-02.4, create

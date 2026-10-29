@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 import sqlite3
 
+from research.ml.node_benchmark.input_contract import validate_input_contract
+
 
 def text_hash(path):
     return hashlib.sha256(path.read_text(encoding="utf-8").encode()).hexdigest()
@@ -226,6 +228,17 @@ def audit(policy_path, original, review, recovery_report_path, event_gate_path, 
                    n.metadata_status,COUNT(*) FROM baseline.case_nodes c JOIN baseline.nodes n ON n.id=c.node_id
             GROUP BY 1,2 ORDER BY 1,2""")]
         reviewed_inputs=validate_review_inputs(policy,db,inventory,recovery,after_hash,background_path,group_path)
+    history_review = None
+    if policy["split"]["history_horizon_nanos"] is not None:
+        name = policy["split"].get("input_spec_file", "")
+        if not name or Path(name).name != name:
+            raise ValueError("A frozen history requires a sibling input-spec file")
+        windows = [dict(case_id=c["case_id"], host_uuid=c["host_uuid"],
+                        start_nanos=c["start_nanos"], end_nanos=c["end_nanos"])
+                   for c in inventory["cases"]]
+        if background_path is not None:
+            windows.append(json.loads(background_path.read_text(encoding="utf-8"))["window"])
+        history_review = validate_input_contract(policy, policy_path.parent / name, windows)
     report = {"protocol_id": policy["protocol_id"], "review_completed": True,
         "status": "review_complete_preparation_incomplete", "policy_sha256_utf8_lf": text_hash(policy_path),
         "audit_code_sha256_utf8_lf": text_hash(Path(__file__)),
@@ -235,6 +248,7 @@ def audit(policy_path, original, review, recovery_report_path, event_gate_path, 
         "inventory": inventory, "metadata_change_scope": changes,
         "baseline_metadata_by_reference_membership": baseline_metadata,
         **reviewed_inputs,
+        "input_history_review": history_review,
         "blocking_conditions": blockers(policy, inventory, changes, recovery),
         "original_event_track_unchanged": {"status": event_gate["status"],
             "eligible_label_counts": event_gate["eligible_label_counts"],

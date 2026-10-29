@@ -1,0 +1,55 @@
+{
+  "status": "source_sufficiency_review_complete_training_blocked",
+  "candidate_count": 500,
+  "source_sufficiency_decisions": 500,
+  "verified_binary_labels": 0,
+  "unknown_labels": 500,
+  "supervised_eligible": 0,
+  "review_flag_counts": {
+    "pilot_identity_overlap_requires_group_or_purge_review": 60,
+    "future_start_in_witness_chain_no_clock_repair": 7
+  },
+  "witness_action_counts": {
+    "EVENT_READ": 82,
+    "EVENT_OPEN": 48,
+    "EVENT_CREATE_OBJECT": 184,
+    "EVENT_OTHER": 107,
+    "EVENT_CREATE_THREAD": 18,
+    "EVENT_CLOSE": 20,
+    "EVENT_LOADLIBRARY": 8,
+    "EVENT_ACCEPT": 5,
+    "EVENT_BIND": 4,
+    "EVENT_CONNECT": 9,
+    "EVENT_RECVFROM": 4,
+    "EVENT_MODIFY_FILE_ATTRIBUTES": 2,
+    "EVENT_EXIT": 4,
+    "EVENT_CHECK_FILE_ATTRIBUTES": 2,
+    "EVENT_WRITE": 2,
+    "EVENT_SENDMSG": 1
+  },
+  "history_interval_for_review_window": {
+    "start_inclusive_nanos": 1557234300000000000,
+    "end_exclusive_nanos": 1557234600000000000,
+    "anchor_nanos": 1557234599999999999,
+    "within_existing_window": true,
+    "continuous_coverage_proven": false
+  },
+  "input_spec_id": "darpa-e5-node-past-five-minutes-v1",
+  "input_spec_sha256_utf8_lf": "2b2e0c3505749e101f68920dca0bce897c3780e4a248aac4be5f82c660d6e62a",
+  "findings_sha256_utf8_lf": "385b04efce0d8c8fce4007ea8717ce4d5bde0eb85bf45274334e320fac168751",
+  "packet_file_sha256": "9d6c6252dde7fa65e1fe92519503e867001cb29c0c4d7c82dac485d7ef5080af",
+  "decision_file_sha256": "c71c5b4786fd7c436eee5bb6c607e820b2c013f98f1b4220c90946ac884e7733",
+  "producer_sha256_utf8_lf": "6265f9184614b59724a6dc6568ca0b4baecef4f27363916cca3f9b7e953b96a7",
+  "preparation_policy_sha256_utf8_lf": "5d15d92b2022530ceafbe2cc249c0e3a62082926b1547149924e1c917ec90019",
+  "binary_labels_assigned": false,
+  "original_event_labels_changed": false,
+  "actual_partitions_created": false,
+  "graph_inputs_created": false,
+  "models_selected_or_trained": false,
+  "preparation_complete": false,
+  "limitations": [
+    "Evidence sufficiency review by Codex, not independent expert security annotation",
+    "No source-absence, process-name, pre-attack-date or reference-membership rule supplied benign labels",
+    "Unknown decisions do not supply an accepted background training cohort or independent groups"
+  ]
+}
