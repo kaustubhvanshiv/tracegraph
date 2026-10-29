@@ -33,6 +33,11 @@ The pipeline performs these stages automatically, stopping on failed checks:
    and quarantine all conflicting raw-record fingerprints. Export five-minute
    host/time buckets. Delete only verified derived staging copies after durable
    deduplication/export; source archives stay untouched.
+   Recovery revision: hash all eligible rows by the exact native key into 128
+   partitions, then aggregate one partition at a time with two SQL threads.
+   Equal native keys always enter the same partition. Verify input row totals
+   and file hashes, and commit each partition and ledger entry atomically.
+   No rows are sampled out and the duplicate/conflict rules are unchanged.
 3. Compile every eligible graph and independently recompute all node vectors
    with SQL. Fit the scaler on training node-windows only. Record native entity
    overlap, purge gaps, invalid-record exclusions and partition coverage.
@@ -48,7 +53,8 @@ It is within-window feature imputation, with recurring entities across temporal
 partitions. It is not independent-incident attack classification.
 
 At the user's request the extraction was upgraded to **four parallel CPU
-readers**, and DuckDB uses **ten threads** for deduplication/aggregation. The
+readers**. DuckDB uses up to **ten threads** for other aggregation; deduplication
+uses **two threads** after the resource-limit recovery below. The
 machine has ten physical cores / sixteen logical threads but only about
 2.6 GiB RAM was available at the resource check, so four reader processes are
 the current memory-bounded setting. Reader subprocesses do not load GPU
@@ -63,13 +69,27 @@ in `cpu_resource_revision.json`. The unfinished derived source was preserved
 and restarted. The objective, split rules, schema and full local coverage did
 not change.
 
+After all 37 archives had been extracted, the original single aggregation hit
+its 40 GiB temporary spill limit. The stopped worker and empty rolled-back
+database were confirmed on the host before repair. The old contract and error
+are preserved as `contract.pre-partitioned-dedup.json` and
+`failure.dedup-temp-limit.json`; `dedup_recovery_review.json` records review of
+unchanged model, feature, split and coverage rules. All extracted source files
+and receipts are reused and verified. The new implementation checkpoints exact
+hash partitions in `completed_dedup_shards`, allowing safe resume after a
+committed partition without duplicate insertion. Archived failures and old
+stderr lines are historical; check current `progress.json` and `failure.json`.
+
 The isolated CUDA environment has PyTorch 2.15.0+cu132, PyG 2.8.1, DuckDB 2.0.0
 and PyArrow 26.0.0. All three real PyG operators passed CUDA forward/backward;
-the dependency lock is [requirements-gnn.txt](requirements-gnn.txt). Six new
+the dependency lock is [requirements-gnn.txt](requirements-gnn.txt). Seven new
 software checks cover full-stream/dedup integrity, independent node features,
 temporal gaps, bounded sampling, CUDA gradients and the complete three-model
 execution sequence on a tiny software fixture. Fixture metrics are not DARPA
-training results. The full relevant suite contains 93 passing tests.
+training results. They also test interruption after a committed dedup partition
+and successful resume. The full relevant suite contains 94 distinct passing
+tests; the recovery run executed 100 checks because one existing six-test
+module was listed twice. These are software checks, not full-data ML results.
 
 From the repository root, using the approved derived D: workspace:
 

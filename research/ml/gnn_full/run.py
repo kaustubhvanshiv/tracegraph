@@ -15,7 +15,9 @@ def run(source,audit,work,plan_path):
     if work==source or source in work.parents or work in source.parents:raise ValueError('Derived work must be separate from raw files')
     work.mkdir(parents=True,exist_ok=True);disk_guard(work)
     config=json.loads(plan_path.read_text(encoding='utf-8'))
-    if config.get('cpu_workers')!=4:raise ValueError('Use the RAM-bounded four-worker extraction setting')
+    if (config.get('cpu_workers')!=4 or config.get('deduplication_threads')!=2
+            or config.get('deduplication_hash_partitions')!=128):
+        raise ValueError('Use the reviewed bounded CPU extraction/deduplication settings')
     required=dict(task='self_supervised_masked_node_feature_reconstruction',models=['gcn','graphsage','gat'],
         window_nanos=300000000000,epochs=5,seed=42,batch_size=256,fanouts=[10,5],
         training_mask_probability=.2,hidden_dim=64,latent_dim=32,learning_rate=.001,weight_decay=.0001,

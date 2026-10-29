@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import shutil
 import unittest
+from unittest.mock import patch
 import numpy as np
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -14,6 +15,26 @@ from research.ml.tests.test_label_free import LabelFreeTests
 
 
 class FullGNNTests(unittest.TestCase):
+    def test_partitioned_dedup_resumes_after_an_atomic_shard_commit(self):
+        from research.ml.gnn_full.prepare import save
+        import duckdb
+        with tempfile.TemporaryDirectory() as folder:
+            base=Path(folder);source,_,audit=LabelFreeTests().fixture(base)
+            path=audit/'reference_report.json';report=json.loads(path.read_text(encoding='utf-8'))
+            report['all_files_fully_scanned']=True;path.write_text(json.dumps(report),encoding='utf-8')
+            work=base/'work';extract(source,audit,work,['EVENT_READ','EVENT_WRITE'])
+            def interrupted(path,value):
+                save(path,value)
+                if value.get('phase')=='global_deduplication_partitioned':raise RuntimeError('simulated interruption after commit')
+            with patch('research.ml.gnn_full.prepare.save',side_effect=interrupted):
+                with self.assertRaisesRegex(RuntimeError,'simulated interruption'):deduplicate(work)
+            with duckdb.connect(str(work/'dedup.duckdb'),read_only=True) as con:
+                self.assertEqual(con.execute('SELECT count(*) FROM completed_dedup_shards').fetchone()[0],1)
+            result=deduplicate(work)
+            self.assertEqual(result['conflicting_event_keys_quarantined'],1)
+            self.assertEqual(result['identical_repeats_removed'],1)
+            self.assertEqual(result['hash_partitions'],128)
+
     def test_full_archive_counts_global_duplicates_and_conflicts_are_preserved(self):
         with tempfile.TemporaryDirectory() as folder:
             base=Path(folder);source,_,audit=LabelFreeTests().fixture(base)

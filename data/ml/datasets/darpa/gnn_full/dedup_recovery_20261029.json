@@ -1,0 +1,43 @@
+{
+  "status": "reviewed_dedup_repair_resumed_full_pipeline",
+  "observed_at_utc": "2026-10-29T13:08:14.028871+00:00",
+  "review": {
+    "status": "reviewed_resource_only_dedup_repair",
+    "reason": "Out of Memory Error: failed to offload data block of size 256.0 KiB (40.0 GiB/40.0 GiB used).\nThis limit was set by the 'max_temp_directory_size' setting.\nBy default, this setting utilizes the available disk space on the drive where the 'temp_directory' is located.\nYou can adjust this setting, by using (for example) PRAGMA max_temp_directory_size='10GiB'\n\nPossible solutions:\n* Reducing the number of threads (SET threads=X)\n* Disabling insertion-order preservation (SET preserve_insertion_order=false)\n* Increasing the memory limit (SET memory_limit='...GB')\n\nSee also https://duckdb.org/docs/current/guides/performance/how_to_tune_workloads",
+    "preserved_extraction_sha256": "88f8cbedd4b4b4fb382e10fccfccc0d9c5c48fcace3f53c9b6e5ce23100da073",
+    "sources_preserved": 37,
+    "raw_records_preserved": 345099571,
+    "previous_contract_sha256": "33e6162e55403dda88ea2008f9d929e52b41d97cd076e03603116dec6ce7b2a6",
+    "changed_pipeline_files": [
+      "prepare.py",
+      "run.py"
+    ],
+    "new_config_sha256_utf8_lf": "6044c637ce383e0658d8fe9cc5f161ad6022ab5e1f07a3b3674935ae7fe3fe6c",
+    "model_training_features_splits_and_coverage_unchanged": true,
+    "previous_database_has_no_committed_tables": true,
+    "raw_source_files_modified": false,
+    "strategy": "128 deterministic native-key hash partitions, transactional shard checkpoints, two dedup threads"
+  },
+  "current_progress": {
+    "phase": "hash_partitioning_for_bounded_deduplication",
+    "shards": 128
+  },
+  "all_37_extracts_revalidated": true,
+  "resumed_contract_sha256": "0f7aa07b60ab4b7f23ccd7a3c1ce21f21e557b4c31baf1c3cbe6eef0cd7e9dbe",
+  "source_coverage_or_learning_protocol_reduced": false,
+  "raw_files_modified": false,
+  "full_data_gnn_training_started": false,
+  "full_experiment_complete": false,
+  "tests": {
+    "unique_tests_passed": 94,
+    "test_executions_passed": 100,
+    "skipped": 0,
+    "explanation": "One pre-existing six-test module was inadvertently listed twice; 94 distinct tests passed",
+    "focused_gnn_tests": 7,
+    "interruption_after_shard_commit_and_resume_verified": true
+  },
+  "limitations": [
+    "The full-data resource repair is still executing, not a completed deduplication or training result",
+    "Reconstruction metrics will not establish attack-detection performance"
+  ]
+}

@@ -3,6 +3,13 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 full-data GNN deduplication recovery:** all 37 source extracts
+(345,099,571 raw records) are preserved. After the original aggregation reached
+its temporary-storage limit, an explicitly reviewed repair resumed deduplication
+using 128 exact-key hash partitions and transactional checkpoints. All 94
+distinct relevant software tests pass. Full-data GNN training is still pending
+verified graph preparation. See [recovery and live-output instructions](gnn_full/README.md).
+
 **2026-10-29 full-download GNN experiment started:** following explicit approval
 of self-supervised graph-feature reconstruction, the sequential GCN/GraphSAGE/GAT
 pipeline is extracting all 37 local archives (345,099,571 raw records) with

@@ -85,5 +85,7 @@
   "security_labels_used": false,
   "cuda_scatter_nondeterminism_possible": true,
   "cpu_workers": 4,
-  "resource_policy": "Four parallel archive readers, ten DuckDB threads and CUDA GNN batches; constrained by currently available RAM"
+  "resource_policy": "Four CPU archive readers, bounded two-thread deduplication, up to ten threads for other SQL, CUDA graph batches",
+  "deduplication_threads": 2,
+  "deduplication_hash_partitions": 128
 }

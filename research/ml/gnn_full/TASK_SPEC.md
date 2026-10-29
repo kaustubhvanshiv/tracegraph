@@ -93,6 +93,13 @@ concurrency. Preserve verified serial extraction receipts and the prior
 contract when switching. This performance amendment changes no target, feature,
 partition or source-coverage rule.
 
+Reviewed recovery after the first aggregation reached its 40 GiB spill limit:
+deduplicate by 128 deterministic hash partitions of the same `(host,Event UUID)`
+key, sequentially with two SQL threads. Verify partition input accounting and
+fingerprints, commit each partition plus ledger entry atomically, and preserve
+the failed contract/review record before resuming extracted data. All original
+model, feature, temporal split, conflict and source-coverage rules are retained.
+
 Completion requires 37/37 source validation, explicit deduplication/conflict
 policy, independent graph/vector checks, all three completed training runs,
 checkpoint reload, development-only selection, held-out reconstruction metrics,

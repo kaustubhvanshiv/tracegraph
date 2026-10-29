@@ -174,11 +174,62 @@ def deduplicate(work):
     if done.exists():return json.loads(done.read_text(encoding='utf-8'))
     disk_guard(work);save(work/'progress.json',dict(phase='global_deduplication'))
     with connect(work) as con:
-        con.execute('''CREATE TABLE IF NOT EXISTS event_groups AS
-            SELECT host,event,min(fp) first_fp,max(fp) last_fp,count(*) occurrences,
+        con.execute('SET threads=2')
+        partition_receipt=work/'hash_partitioning.json'
+        if partition_receipt.exists():
+            partitioning=json.loads(partition_receipt.read_text(encoding='utf-8'))
+            if partitioning['extraction_sha256']!=file_hash(work/'extraction.json'):
+                raise ValueError('Hash partitions belong to a different source extraction')
+        else:
+            target=work/'hash-shards'
+            if target.exists():raise ValueError('Incomplete hash partition export requires inspection')
+            save(work/'progress.json',dict(phase='hash_partitioning_for_bounded_deduplication',shards=128))
+            con.execute('''COPY (SELECT *, (hash(host,event)%128)::USMALLINT dedup_shard
+                FROM read_parquet(?)) TO ? (FORMAT PARQUET,PARTITION_BY(dedup_shard),
+                COMPRESSION ZSTD,ROW_GROUP_SIZE 10000)''',[str(work/'staged'/'*.parquet'),str(target)])
+            files=[dict(file=str(p.relative_to(work)),sha256=file_hash(p),
+                rows=pq.ParquetFile(p).metadata.num_rows) for p in sorted(target.rglob('*.parquet'))]
+            extraction=json.loads((work/'extraction.json').read_text(encoding='utf-8'))
+            expected=sum(s['eligible_event_occurrences'] for s in extraction['sources'])
+            if sum(f['rows'] for f in files)!=expected:raise ValueError('Hash partitioning lost source rows')
+            partitioning=dict(status='hash_partitioning_verified',shards=128,
+                extraction_sha256=file_hash(work/'extraction.json'),input_rows=expected,files=files)
+            save(partition_receipt,partitioning)
+        grouping='''SELECT host,event,min(fp) first_fp,max(fp) last_fp,count(*) occurrences,
             arg_min(struct_pack(actor:=actor,obj1:=obj1,obj2:=obj2,ts:=ts,action:=action,source:=source,ordinal:=ordinal),
                     struct_pack(source:=source,ordinal:=ordinal)) payload
-            FROM read_parquet(?) GROUP BY host,event''',[str(work/'staged'/'*.parquet')])
+            FROM read_parquet(?) {filter} GROUP BY host,event'''
+        first=str(work/partitioning['files'][0]['file'])
+        con.execute('CREATE TABLE IF NOT EXISTS event_groups AS '+grouping.format(filter='WHERE FALSE'),[first])
+        con.execute('''CREATE TABLE IF NOT EXISTS completed_dedup_shards
+            (shard INTEGER PRIMARY KEY,input_rows BIGINT,unique_keys BIGINT,conflicts BIGINT,repeats BIGINT)''')
+        groups={}
+        for item in partitioning['files']:
+            path=work/item['file'];shard=int(path.parent.name.split('=')[1])
+            groups.setdefault(shard,[]).append(item)
+        completed={r[0] for r in con.execute('SELECT shard FROM completed_dedup_shards').fetchall()}
+        for shard,items in sorted(groups.items()):
+            if shard in completed:continue
+            disk_guard(work)
+            for item in items:
+                if file_hash(work/item['file'])!=item['sha256']:raise ValueError('Hash-partition artifact changed')
+            paths=[str(work/item['file']) for item in items]
+            con.execute('BEGIN')
+            try:
+                con.execute('CREATE TEMP TABLE current_dedup_shard AS '+grouping.format(filter=''),[paths])
+                metrics=con.execute('''SELECT sum(occurrences),count(*),count(*) FILTER(WHERE first_fp<>last_fp),
+                    coalesce(sum(occurrences-1) FILTER(WHERE first_fp=last_fp),0) FROM current_dedup_shard''').fetchone()
+                if metrics[0]!=sum(i['rows'] for i in items):raise ValueError('Dedup shard row accounting failed')
+                con.execute('INSERT INTO event_groups SELECT * FROM current_dedup_shard')
+                con.execute('INSERT INTO completed_dedup_shards VALUES (?,?,?,?,?)',[shard,*metrics])
+                con.execute('DROP TABLE current_dedup_shard');con.execute('COMMIT')
+            except BaseException:
+                con.execute('ROLLBACK');raise
+            completed.add(shard)
+            progress=dict(phase='global_deduplication_partitioned',completed_shards=len(completed),total_shards=len(groups))
+            save(work/'progress.json',progress);print(json.dumps(progress),flush=True)
+        if con.execute('SELECT sum(input_rows) FROM completed_dedup_shards').fetchone()[0]!=partitioning['input_rows']:
+            raise ValueError('Not all hash partitions were globally deduplicated')
         occurrences,unique,conflicts,repeats=con.execute('''SELECT sum(occurrences),count(*),
             count(*) FILTER(WHERE first_fp<>last_fp),
             coalesce(sum(occurrences-1) FILTER(WHERE first_fp=last_fp),0) FROM event_groups''').fetchone()
@@ -191,7 +242,8 @@ def deduplicate(work):
             (FORMAT PARQUET,PARTITION_BY(host_key,"window"),COMPRESSION ZSTD,ROW_GROUP_SIZE 100000)''',[str(target)])
         result=dict(status='global_deduplication_complete',eligible_raw_event_occurrences=occurrences,
             unique_event_keys=unique,conflicting_event_keys_quarantined=conflicts,identical_repeats_removed=repeats,
-            unique_usable_events=unique-conflicts,policy='Native (host,Event UUID), full canonical raw-record SHA256; quarantine all conflicting keys')
+            unique_usable_events=unique-conflicts,policy='Native (host,Event UUID), full canonical raw-record SHA256; quarantine all conflicting keys',
+            strategy='exact_hash_partitioned_native_key_groups',hash_partitions=128,deduplication_threads=2)
     save(done,result)
     # Only derived, fully receipted staging files within this approved work folder.
     # Durable global groups and verified extraction receipts remain for auditing.
