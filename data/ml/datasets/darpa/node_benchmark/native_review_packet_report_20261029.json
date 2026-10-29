@@ -1,0 +1,62 @@
+{
+  "status": "complete_native_evidence_packets_unknown_labels",
+  "producer_sha256_utf8_lf": "26b358cf3fa61c5497205dee887bda8a284a5d523ccac2e942e9c6646f588005",
+  "pool_manifest_sha256_utf8_lf": "c82e267e2d6048d94ef168e5ca0a55a784099ecd8c84467b81d07e20e4f99c82",
+  "plan_sha256_utf8_lf": "d565ec7dbdacdd81baea06373497eb3451f2050e11af972d41f2f76aac707f9b",
+  "candidate_file_sha256": "429c3a9b41673aefd49138acdeb83002ff58195278c17101f886b69d1af70f82",
+  "universe_sha256": "0280b8c754aa7abf608a4687904b17e9c5b76fe933a599fb102938694a951708",
+  "source_reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "native_index_sha256": "f8c9ee863fd8814dfcf7bcb554ae33920d2d028be86ad491ae4cb0fea026297e",
+  "pilot_graph_sha256": "89e5f5d92f2cb02f9c039c8e41809c2cb081449b137fb83ac4ade0d30145d82e",
+  "group_review_sha256_utf8_lf": "8c3006a25250caca887c2e34fd2f8ee758585dc7f54e110f62beebe0b8fc54c7",
+  "event_annotations_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "candidate_count": 500,
+  "new_verified_benign_labels": 0,
+  "new_verified_attack_labels": 0,
+  "candidate_labels_assigned": false,
+  "feature_vectors_created": false,
+  "partitions_created": false,
+  "models_trained": false,
+  "ready_for_training": false,
+  "object_metadata_scope": "All frozen candidates searched equally in complete original review-window source streams only",
+  "subject_metadata_scope": "Host-scoped exact UUID lookup in the completed 37-file Host/Principal/Subject index; includes offline later definitions",
+  "definition_conflict_scope": "Complete kind and cleaned datum payloads in these review sources only",
+  "source_authenticity": "Local counts, fingerprints and size/mtime guards; no publisher authenticity claim",
+  "scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "records": 10000000,
+      "complete_scan": true,
+      "record_type_counts": {
+        "RECORD_HOST": 1,
+        "RECORD_SUBJECT": 51581,
+        "RECORD_EVENT": 9572528,
+        "RECORD_PRINCIPAL": 5,
+        "RECORD_FILE_OBJECT": 19257,
+        "RECORD_IPC_OBJECT": 2867,
+        "RECORD_MEMORY_OBJECT": 327073,
+        "RECORD_NET_FLOW_OBJECT": 13653,
+        "RECORD_REGISTRY_KEY_OBJECT": 12177,
+        "RECORD_SRC_SINK_OBJECT": 602,
+        "RECORD_TIME_MARKER": 256
+      },
+      "gzip_exhaustion_verified": true
+    }
+  ],
+  "verified_candidate_witnesses": 500,
+  "distinct_witness_events": 497,
+  "node_definition_status_counts": {
+    "one_payload_in_review_sources": 500
+  },
+  "witness_actor_chain_status_counts": {
+    "native_starts_at_or_before_witness": 493,
+    "future_start_in_chain": 7
+  },
+  "candidates_overlapping_pilot": 60,
+  "unknown_labels": 500,
+  "packet_file_sha256": "9d6c6252dde7fa65e1fe92519503e867001cb29c0c4d7c82dac485d7ef5080af",
+  "packet_bytes": 2236674,
+  "viewer_sha256": "3e261cfd959a2901b057017d3c9b80222c7085039d7b3169bd616b9d5296fffc",
+  "worksheet_sha256": "508e56300217ebbaf7a39450559ba97b205a877e3c6dbfa490cff348d00ca812",
+  "input_databases_and_event_annotations_unchanged": true
+}

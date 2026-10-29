@@ -1,0 +1,29 @@
+{
+  "status": "independent_saved_packet_verification_passed",
+  "candidate_rows_unchanged": 500,
+  "unknown_labels": 500,
+  "native_source_positions_verified": 945,
+  "additional_prefix_records_read": 506452,
+  "prefix_check_is_complete_archive_scan": false,
+  "distinct_cached_definition_positions_verified": 179,
+  "node_kind_counts": {
+    "RECORD_REGISTRY_KEY_OBJECT": 84,
+    "RECORD_SRC_SINK_OBJECT": 16,
+    "RECORD_MEMORY_OBJECT": 270,
+    "RECORD_FILE_OBJECT": 49,
+    "RECORD_SUBJECT": 52,
+    "RECORD_NET_FLOW_OBJECT": 22,
+    "RECORD_IPC_OBJECT": 7
+  },
+  "witness_actor_chain_status_counts": {
+    "native_starts_at_or_before_witness": 493,
+    "future_start_in_chain": 7
+  },
+  "future_start_unique_witness_actors": 1,
+  "future_start_minimum_delta_nanos": 3000000,
+  "future_start_maximum_delta_nanos": 7000000,
+  "packet_file_sha256": "9d6c6252dde7fa65e1fe92519503e867001cb29c0c4d7c82dac485d7ef5080af",
+  "all_source_strings_treated_as_data": true,
+  "new_security_labels": 0,
+  "training_performed": false
+}

@@ -1,5 +1,9 @@
 # Unknown-label background review and conservative grouping
 
+Follow-up: [native evidence packets and review steps](EVIDENCE_REVIEW.md) attach
+source Events, definitions and actor context to this frozen draw without
+resampling or assigning security labels.
+
 This is the next evidence-preparation step after uniform metadata recovery.
 The [measured result](../../../data/ml/datasets/darpa/node_benchmark/background_group_review_20261028.md)
 records 500 review candidates from 7,034 observed nodes, one conservative

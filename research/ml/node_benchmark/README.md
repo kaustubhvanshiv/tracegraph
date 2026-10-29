@@ -1,5 +1,14 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
+**Native evidence packets, 2026-10-29:** the next preparation step attaches
+source-linked native Events, entity definitions, actor lineage and pilot overlap
+to all 500 candidates in the existing frozen review draw. Seven actor chains
+have future-start flags; all 40 relevant software tests pass. See the
+[measured result](../../../data/ml/datasets/darpa/node_benchmark/native_evidence_review_20261029.md)
+and use the [review guide](EVIDENCE_REVIEW.md)
+to reproduce the packets and inspect the local reader. Security labels remain
+unknown; a human action-intent review and the four preparation gaps still stand.
+
 **Active route, 2026-10-28: background/group review completed.** There are
 500 seeded unknown-label review candidates from 7,034 observed host-1 nodes;
 60 candidate identities recur in the attack pilot. No verified benign labels
