@@ -3,6 +3,14 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 full-download GNN experiment started:** following explicit approval
+of self-supervised graph-feature reconstruction, the sequential GCN/GraphSAGE/GAT
+pipeline is extracting all 37 local archives (345,099,571 raw records) with
+four CPU readers and ten database threads configured. Full-data
+GPU training follows verified preparation; it has not started at this snapshot.
+All 93 relevant software tests pass. See [protocol, live output and teammate steps](gnn_full/README.md).
+This is the complete local download, not the whole DARPA release.
+
 **2026-10-29 all approved training verified complete:** both frozen models and
 all four full runs pass checkpoint/history/configuration and GPU metric reload
 checks. All 87 relevant software tests pass. See the [training completion summary](label_free/TRAINING_COMPLETE.md).

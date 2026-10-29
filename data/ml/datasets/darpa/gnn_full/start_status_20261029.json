@@ -1,0 +1,55 @@
+{
+  "status": "full_local_gnn_pipeline_running_preparation",
+  "observed_at_utc": "2026-10-29T11:34:20.379584+00:00",
+  "progress": {
+    "phase": "extracting_parallel",
+    "cpu_workers": 4,
+    "active_workers": 4,
+    "active_sources": [
+      "ta1-fivedirections-1-e5-official-1.bin.15.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.17.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.2.gz",
+      "ta1-fivedirections-1-e5-official-1.bin.20.gz"
+    ],
+    "verified_complete_sources": 3,
+    "total_sources": 37,
+    "verified_complete_records": 20358733,
+    "active_source_record_counts": {
+      "ta1-fivedirections-1-e5-official-1.bin.15.gz": 2750000,
+      "ta1-fivedirections-1-e5-official-1.bin.17.gz": 2750000,
+      "ta1-fivedirections-1-e5-official-1.bin.2.gz": 3000000,
+      "ta1-fivedirections-1-e5-official-1.bin.20.gz": 3000000
+    }
+  },
+  "fully_verified_source_receipts": 3,
+  "fully_verified_raw_records": 20358733,
+  "sources_total": 37,
+  "raw_records_expected": 345099571,
+  "raw_events_expected_before_deduplication": 330788968,
+  "software_tests_passed": 93,
+  "software_tests_skipped": 0,
+  "pyg_cuda_forward_backward_verified_for_all_three_models": true,
+  "full_data_model_training_started": false,
+  "full_data_training_complete": false,
+  "whole_darpa_release_claimed": false,
+  "task": "self_supervised_masked_node_feature_reconstruction",
+  "local_work_directory": "D:\\Deep Learning\\tracegraph-gnn-workspace",
+  "live_output": "D:\\Deep Learning\\tracegraph-gnn-workspace\\stdout.log",
+  "scope": "All 37 downloaded archives; models follow full extraction/global dedup/independent graph checks",
+  "follow_up": "Current-thread follow-up every 30 minutes; quiet unless phase completes, failure occurs or action is needed",
+  "cpu_workers": 4,
+  "duckdb_threads": 10,
+  "cpu_resource_revision": {
+    "authorized_change": "User requested full CPU and GPU utilization",
+    "previous_contract_sha256": "48e0ac885846c572deea55d2d2b11b717b4ed4e068fcb9bb77768b6961277739",
+    "completed_source_receipts": 3,
+    "interrupted_derived_outputs_preserved": [
+      "D:\\Deep Learning\\tracegraph-gnn-workspace\\staged\\003.interrupted-serial"
+    ],
+    "raw_files_modified": false,
+    "training_objective_or_source_coverage_changed": false,
+    "new_cpu_workers": 4,
+    "duckdb_threads": 10,
+    "gpu_training": "CUDA; bounded graph batches"
+  }
+}

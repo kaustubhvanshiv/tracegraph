@@ -1,0 +1,12 @@
+{
+  "scope": "First 100000 records of one real archive, throughput/storage preflight only; not training data selection",
+  "records": 100000,
+  "eligible_events": 87149,
+  "seconds": 2.0565018999986933,
+  "records_per_second": 48626.261906231906,
+  "parquet_bytes": 4858473,
+  "bytes_per_eligible_event": 55.7490390021687,
+  "projected_staging_GiB": 17.174675202480643,
+  "projected_scan_hours_if_this_prefix_were_representative": 1.9713831206950945,
+  "projection_is_not_a_guarantee": true
+}
