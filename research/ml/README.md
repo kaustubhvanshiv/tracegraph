@@ -3,6 +3,14 @@
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 
+**2026-10-29 separate label-free preparation completed:** the approved DARPA
+route produced 1,358 unlabeled actor-window vectors with 62 features: 1,184
+training, 76 development and 98 holdout rows. Native actor IDs are disjoint;
+shared object context remains disclosed. An independent check recomputed every
+vector and the training-only scaler. All 54 relevant software tests pass.
+See the [teammate workflow and reproduction commands](label_free/README.md).
+No model has been selected/trained; the supervised task remains incomplete.
+
 **2026-10-29 source review completed; training still blocked:** all 500 frozen
 candidates have recorded unknown decisions after checking source-evidence
 sufficiency. A five-minute past-only input specification clears the history

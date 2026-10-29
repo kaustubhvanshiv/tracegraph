@@ -1,0 +1,31 @@
+{
+  "status": "verified_label_free_preparation",
+  "verifier_sha256_utf8_lf": "cb8cab2120b708dab24b1f50cad2b270f970b0931acb4fa09ed50578f26bff92",
+  "plan_sha256_utf8_lf": "0b7e33153d428bdf50a5f693822107f9a16fb6b55e88a082487539fee2afd77e",
+  "manifest_sha256_utf8_lf": "f615de929560a4b241eb0624b2318f8657a1cdfc6da0043fd58b7da6cd3ec2ef",
+  "independently_recomputed_vectors": 1358,
+  "feature_count": 62,
+  "partition_sample_counts": {
+    "train": 1184,
+    "development": 76,
+    "holdout": 98
+  },
+  "sample_actor_overlap": {
+    "train/development": 0,
+    "train/holdout": 0,
+    "development/holdout": 0
+  },
+  "independent_sql_feature_reaggregation": true,
+  "training_only_scaler_recomputed": true,
+  "all_security_labels_unknown": true,
+  "temporal_windows_and_witnesses_verified": true,
+  "source_validation_scope": "Saved disk-backed native Event index; raw archives not reread by this verifier",
+  "shared_object_context_counts": {
+    "train/development": 634,
+    "train/holdout": 1059,
+    "development/holdout": 440
+  },
+  "incident_independence_established": false,
+  "models_trained": false,
+  "attack_detection_metrics_available": false
+}

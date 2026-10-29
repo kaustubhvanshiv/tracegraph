@@ -1,5 +1,11 @@
 # DARPA E5 FiveDirections node-benchmark preparation
 
+**Separate route approved, 2026-10-29:** [label-free DARPA preparation](../label_free/README.md)
+is complete with 1,358 unlabeled vectors and 62 numeric features. It provides
+chronological actor-disjoint data for later reconstruction work, with shared
+context limitations disclosed. This node-supervision track retains its
+documented label/group blockers; no label contract was relaxed.
+
 **Source review and input history, 2026-10-29:** all 500 frozen candidates now
 have recorded evidence-sufficiency decisions; all remain unknown. A fixed
 five-minute past-only, one-hop native-reference input definition clears the

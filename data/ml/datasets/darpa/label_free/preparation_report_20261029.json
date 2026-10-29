@@ -1,0 +1,212 @@
+{
+  "status": "complete_label_free_preparation_not_trained",
+  "plan_sha256_utf8_lf": "0b7e33153d428bdf50a5f693822107f9a16fb6b55e88a082487539fee2afd77e",
+  "producer_sha256_utf8_lf": "a4911743101c4ec39f605d58ec14d8eb0a5eaa1ff508924ccd94d17fc138e3fb",
+  "source_reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65",
+  "source_inventory_files": 37,
+  "windows": [
+    {
+      "index": 0,
+      "role": "train",
+      "start_nanos": 1557234300000000000,
+      "end_nanos": 1557234600000000000,
+      "anchor_nanos": 1557234599999999999
+    },
+    {
+      "index": 1,
+      "role": "train",
+      "start_nanos": 1557234600000000000,
+      "end_nanos": 1557234900000000000,
+      "anchor_nanos": 1557234899999999999
+    },
+    {
+      "index": 2,
+      "role": "train",
+      "start_nanos": 1557234900000000000,
+      "end_nanos": 1557235200000000000,
+      "anchor_nanos": 1557235199999999999
+    },
+    {
+      "index": 3,
+      "role": "development",
+      "start_nanos": 1557235500000000000,
+      "end_nanos": 1557235800000000000,
+      "anchor_nanos": 1557235799999999999
+    },
+    {
+      "index": 4,
+      "role": "holdout",
+      "start_nanos": 1557236100000000000,
+      "end_nanos": 1557236400000000000,
+      "anchor_nanos": 1557236399999999999
+    }
+  ],
+  "scans": [
+    {
+      "filename": "ta1-fivedirections-1-e5-official-1.bin.gz",
+      "records": 10000000,
+      "record_type_counts": {
+        "RECORD_HOST": 1,
+        "RECORD_SUBJECT": 51581,
+        "RECORD_EVENT": 9572528,
+        "RECORD_PRINCIPAL": 5,
+        "RECORD_FILE_OBJECT": 19257,
+        "RECORD_IPC_OBJECT": 2867,
+        "RECORD_MEMORY_OBJECT": 327073,
+        "RECORD_NET_FLOW_OBJECT": 13653,
+        "RECORD_REGISTRY_KEY_OBJECT": 12177,
+        "RECORD_SRC_SINK_OBJECT": 602,
+        "RECORD_TIME_MARKER": 256
+      },
+      "complete_scan": true,
+      "gzip_exhaustion_verified": true,
+      "compressed_bytes": 308986723
+    }
+  ],
+  "representation": "native_actor_five_minute_numeric_activity_vector",
+  "security_labels": "unknown_for_every_sample",
+  "training_period_certified_normal": false,
+  "annotation_content_read": false,
+  "metadata_predictors_used": false,
+  "native_uuid_values_are_predictors": false,
+  "clock_corrections_applied": false,
+  "models_selected_or_trained": false,
+  "supervised_task_completed": false,
+  "attack_detection_accuracy_established": false,
+  "raw_events_in_envelope": 906147,
+  "raw_event_records_per_window": {
+    "0": 162830,
+    "1": 170677,
+    "2": 91356,
+    "-1": 282476,
+    "3": 91164,
+    "4": 107644
+  },
+  "unique_envelope_events": 906147,
+  "conflicting_event_uuids": 0,
+  "identical_duplicate_occurrences": 0,
+  "dedup_conflict_scope": "Available selected streams, same-host full time envelope including purge gaps only",
+  "unique_nonconflicting_selected_events": 623671,
+  "selected_events_without_native_actor": 0,
+  "actor_windows_before_ownership_purge": 1575,
+  "dropped_later_partition_actor_windows": {
+    "development": 112,
+    "holdout": 105
+  },
+  "partition_sample_counts": {
+    "train": 1184,
+    "development": 76,
+    "holdout": 98
+  },
+  "feature_count": 62,
+  "feature_names": [
+    "event_count",
+    "count_EVENT_ACCEPT",
+    "count_EVENT_ADD_OBJECT_ATTRIBUTE",
+    "count_EVENT_BIND",
+    "count_EVENT_BLIND",
+    "count_EVENT_BOOT",
+    "count_EVENT_CHANGE_PRINCIPAL",
+    "count_EVENT_CHECK_FILE_ATTRIBUTES",
+    "count_EVENT_CLONE",
+    "count_EVENT_CLOSE",
+    "count_EVENT_CONNECT",
+    "count_EVENT_CORRELATION",
+    "count_EVENT_CREATE_OBJECT",
+    "count_EVENT_CREATE_THREAD",
+    "count_EVENT_DUP",
+    "count_EVENT_EXECUTE",
+    "count_EVENT_EXIT",
+    "count_EVENT_FLOWS_TO",
+    "count_EVENT_FCNTL",
+    "count_EVENT_FORK",
+    "count_EVENT_LINK",
+    "count_EVENT_LOADLIBRARY",
+    "count_EVENT_LOGCLEAR",
+    "count_EVENT_LOGIN",
+    "count_EVENT_LOGOUT",
+    "count_EVENT_LSEEK",
+    "count_EVENT_MMAP",
+    "count_EVENT_MODIFY_FILE_ATTRIBUTES",
+    "count_EVENT_MODIFY_PROCESS",
+    "count_EVENT_MOUNT",
+    "count_EVENT_MPROTECT",
+    "count_EVENT_OPEN",
+    "count_EVENT_OTHER",
+    "count_EVENT_READ",
+    "count_EVENT_READ_SOCKET_PARAMS",
+    "count_EVENT_RECVFROM",
+    "count_EVENT_RECVMSG",
+    "count_EVENT_RENAME",
+    "count_EVENT_SENDTO",
+    "count_EVENT_SENDMSG",
+    "count_EVENT_SERVICEINSTALL",
+    "count_EVENT_SHM",
+    "count_EVENT_SIGNAL",
+    "count_EVENT_STARTSERVICE",
+    "count_EVENT_TRUNCATE",
+    "count_EVENT_UMOUNT",
+    "count_EVENT_UNIT",
+    "count_EVENT_UNLINK",
+    "count_EVENT_UPDATE",
+    "count_EVENT_WAIT",
+    "count_EVENT_WRITE",
+    "count_EVENT_WRITE_SOCKET_PARAMS",
+    "count_EVENT_TEE",
+    "count_EVENT_SPLICE",
+    "count_EVENT_VMSPLICE",
+    "count_EVENT_INIT_MODULE",
+    "count_EVENT_FINIT_MODULE",
+    "count_unknown_action",
+    "predicate_reference_count",
+    "second_predicate_event_count",
+    "no_predicate_event_count",
+    "active_span_seconds"
+  ],
+  "scaler_fit_on": "train_only",
+  "constant_training_feature_count": 30,
+  "sample_actor_overlap": {
+    "train/development": 0,
+    "train/holdout": 0,
+    "development/holdout": 0
+  },
+  "shared_object_context_counts": {
+    "train/development": 634,
+    "train/holdout": 1059,
+    "development/holdout": 440
+  },
+  "common_raw_feature_profile_counts": {
+    "train/development": 5,
+    "train/holdout": 11,
+    "development/holdout": 3
+  },
+  "exported_native_event_counts": {
+    "train": 424863,
+    "development": 5451,
+    "holdout": 13697
+  },
+  "partition_file_sha256": {
+    "train": "27f75d910aedc9f5210af79d1fc72077b4cc396f76fd1e1838f6fcbb97b85a5f",
+    "development": "801e51d8cc0aa626710c3525519309b2c7d86992312d406d8e5cd99d4864acba",
+    "holdout": "1c73025d17d1e612b7410e378380ad4d70d400ff621cf9563d79718693ff0453"
+  },
+  "scaler_sha256": "3f46f271d6eacff5519f0648e6d33fe73d98da983653261eabdcaa5d1948f900",
+  "feature_schema_sha256": "ea25feb33a32687b31244b8b7b46d7f81734b30b7bf44f846a5aa160270cab09",
+  "security_label_counts": {
+    "unknown": 1358,
+    "attack": 0,
+    "benign": 0
+  },
+  "temporal_purge_gap_nanos": 300000000000,
+  "context_identity_isolation_proven": false,
+  "incident_independence_established": false,
+  "scope": "Same-host same-day actor-disjoint label-free preparation, not an independent attack benchmark",
+  "dedup_index_bytes": 268972032,
+  "limitations": [
+    "Unlabeled training data may contain attacks; no certified normal-data claim",
+    "First-selected-partition ownership biases later data toward newly observed actors, which may be threads",
+    "Common object context and identical feature profiles remain; no independent incident or host-generalization claim",
+    "No metadata availability or process-lineage inference is used by these aggregate vectors",
+    "Feature artifacts are model inputs, not anomaly scores, attack predictions or detection metrics"
+  ]
+}
