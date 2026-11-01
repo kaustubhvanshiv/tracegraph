@@ -1,0 +1,32 @@
+{
+  "status": "real_training_graph_throughput_benchmark",
+  "family": "gat",
+  "repeats": 3,
+  "seconds": {
+    "serial": [
+      6.136564499989618,
+      7.089245800016215,
+      6.9604584999906365
+    ],
+    "prefetch": [
+      5.9571895000117365,
+      4.686854100000346,
+      6.143309300008696
+    ]
+  },
+  "median_seconds": {
+    "serial": 6.9604584999906365,
+    "prefetch": 5.9571895000117365
+  },
+  "speedup": 1.1684131417973063,
+  "benchmark_only": true,
+  "test_partition_read": false,
+  "selected_checkpoints_modified": false,
+  "model_protocol_unchanged": true,
+  "seed_nodes": 30654,
+  "limitation": "Small training-only workload; does not guarantee full-epoch speedup.",
+  "training_graph_count": 3,
+  "benchmark_code": "research/ml/benchmark_gnn_prefetch.py",
+  "tests_passed": 14,
+  "experiment_complete": false
+}

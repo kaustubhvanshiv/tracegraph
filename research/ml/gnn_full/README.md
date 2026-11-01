@@ -5,6 +5,15 @@ Read the [frozen task specification](TASK_SPEC.md) before interpreting results.
  
 ## Restart status on 1 November 2026
 
+Latest execution revision: after the user stopped GAT during epoch 1, the
+completed GCN and GraphSAGE runs were retained. GAT was restarted using the
+[tested CPU-prefetch/CUDA adapter](../gnn_accel/README.md), with a separately
+fingerprinted execution profile and the stopped GAT artifacts archived. A
+training-only benchmark measured 1.1684 times throughput on 30,654 nodes;
+full-epoch gains are not yet measured. This changes scheduling/transfers,
+not the model protocol or all-37-source coverage. GAT and final tests remain
+pending. The original frozen pipeline files were not edited.
+
 Later disk recovery: GCN completed all five epochs. GraphSAGE completed two
 epochs before the 8 GiB free-space guard stopped execution. After available
 space recovered to 37.6 GiB, the partial GraphSAGE run and failure logs were
