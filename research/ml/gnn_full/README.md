@@ -2,6 +2,31 @@
 
 User-approved target: **self-supervised masked-node feature reconstruction**.
 Read the [frozen task specification](TASK_SPEC.md) before interpreting results.
+ 
+## Restart status on 1 November 2026
+
+Full preparation completed: 37 archives, 1,312 graphs and 24,106,424
+node-window rows. The interrupted GCN checkpoint selected epoch 2; its
+development MSE was 0.3358432214. The user stopped that run during epoch 3.
+It did not complete final evaluation. GraphSAGE and GAT had not started.
+
+The user authorized continuing the ML work. Since the checkpoint contains no
+optimizer state, the original partial GCN folder was preserved under
+`interrupted-run-20261029/gcn` in the derived workspace. A clean five-epoch
+restart was launched on 1 November with the unchanged frozen code/config/runtime,
+followed sequentially by GraphSAGE and GAT and then common final evaluation.
+This is a fresh training run, not an exact epoch-3 resume. Prepared graphs are
+reused; extraction is not repeated. `restart_review_20261101.json` records the
+preserved checkpoint hash, contract hash and preparation binding. All 37 source
+sizes and modification times were rechecked. No raw files were modified.
+
+CUDA is required; there is no silent CPU fallback. Inspect current progress and
+logs using the commands below. `stopped.json` and older log lines describe the
+previous run. The earlier automatic follow-up was deleted when training stopped;
+do not assume it is active. Completion still requires a valid `complete.json`
+and all three checkpoint/test reports. Never rerun directly over a partial
+`runs` folder: the original trainer does not restore optimizer state.
+
 This route covers every locally downloaded archive; it does not turn unknown
 security intent into benign labels or claim full Engagement 5 coverage.
 
