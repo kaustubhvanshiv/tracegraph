@@ -5,6 +5,15 @@ Read the [frozen task specification](TASK_SPEC.md) before interpreting results.
  
 ## Restart status on 1 November 2026
 
+Later disk recovery: GCN completed all five epochs. GraphSAGE completed two
+epochs before the 8 GiB free-space guard stopped execution. After available
+space recovered to 37.6 GiB, the partial GraphSAGE run and failure logs were
+preserved under `disk-failure-graphsage-20261101`. The unchanged pipeline was
+relaunched: completed GCN is reused, GraphSAGE restarts cleanly, then GAT and
+the common final evaluation follow. `disk_recovery_review_20261101.json`
+records validation and checkpoint preservation. This is not an optimizer-state
+resume. Final completion remains pending; keep adequate D: free space.
+
 Full preparation completed: 37 archives, 1,312 graphs and 24,106,424
 node-window rows. The interrupted GCN checkpoint selected epoch 2; its
 development MSE was 0.3358432214. The user stopped that run during epoch 3.
