@@ -1,0 +1,1959 @@
+{
+  "status": "frozen_full_test_error_analysis_complete",
+  "models": {
+    "gcn": {
+      "replayed_test": {
+        "mse": 0.3733782161562218,
+        "mae": 0.0863573318154569,
+        "mean_reference_mse": 0.5591168302698646
+      },
+      "row_errors": {
+        "rows": 2664540,
+        "median": 0.01618325337767601,
+        "p95": 0.8704149931669207,
+        "p99": 5.149458189010607,
+        "maximum": 1726.4478759765625,
+        "top_10_squared_error_share": 0.015133491731448954,
+        "top_1_percent_squared_error_share": 0.651634203898951
+      },
+      "top_features": [
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4421390860426713,
+          "squared_error_share": 0.03358615803460199
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3185292842160374,
+          "squared_error_share": 0.03070739385786272
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.1981743085780285,
+          "squared_error_share": 0.02790443173642055
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.1489064929037858,
+          "squared_error_share": 0.02675702739846906
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.143574492934615,
+          "squared_error_share": 0.026632849782496894
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.1069736752057822,
+          "squared_error_share": 0.02578044874827385
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.0900644845645733,
+          "squared_error_share": 0.025386648486836343
+        },
+        {
+          "feature": "in_ref_EVENT_FCNTL",
+          "mse": 1.0813123969053409,
+          "squared_error_share": 0.025182820019734542
+        },
+        {
+          "feature": "out_ref_EVENT_SENDMSG",
+          "mse": 1.0686209673981506,
+          "squared_error_share": 0.024887247726299806
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0450077156860884,
+          "squared_error_share": 0.024337315745821826
+        }
+      ],
+      "all_feature_errors": [
+        {
+          "feature": "out_ref_EVENT_ACCEPT",
+          "mse": 0.3923490101955382,
+          "squared_error_share": 0.009137465303230197
+        },
+        {
+          "feature": "out_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 5.735075613412392e-06,
+          "squared_error_share": 1.3356489520093433e-07
+        },
+        {
+          "feature": "out_ref_EVENT_BIND",
+          "mse": 0.49660854879542615,
+          "squared_error_share": 0.011565578772950629
+        },
+        {
+          "feature": "out_ref_EVENT_BLIND",
+          "mse": 7.320109664695073e-05,
+          "squared_error_share": 1.7047895200157665e-06
+        },
+        {
+          "feature": "out_ref_EVENT_BOOT",
+          "mse": 2.7179404591285657e-05,
+          "squared_error_share": 6.329845621161515e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 0.0001319435416350967,
+          "squared_error_share": 3.0728496882791815e-06
+        },
+        {
+          "feature": "out_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.48504856050225303,
+          "squared_error_share": 0.01129635675584404
+        },
+        {
+          "feature": "out_ref_EVENT_CLONE",
+          "mse": 2.3145541047024257e-05,
+          "squared_error_share": 5.390394081439677e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CLOSE",
+          "mse": 0.4881971752689928,
+          "squared_error_share": 0.011369685240016804
+        },
+        {
+          "feature": "out_ref_EVENT_CONNECT",
+          "mse": 0.48845653762507407,
+          "squared_error_share": 0.01137572556245441
+        },
+        {
+          "feature": "out_ref_EVENT_CORRELATION",
+          "mse": 2.7134980095111126e-05,
+          "squared_error_share": 6.319499544534331e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.3819107061251573,
+          "squared_error_share": 0.008894366330659483
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_THREAD",
+          "mse": 0.747839733316359,
+          "squared_error_share": 0.01741653333635162
+        },
+        {
+          "feature": "out_ref_EVENT_DUP",
+          "mse": 4.112850767860123e-05,
+          "squared_error_share": 9.578469732842191e-07
+        },
+        {
+          "feature": "out_ref_EVENT_EXECUTE",
+          "mse": 0.7585326801343142,
+          "squared_error_share": 0.017665562715805536
+        },
+        {
+          "feature": "out_ref_EVENT_EXIT",
+          "mse": 0.0001672637530277579,
+          "squared_error_share": 3.89542652093731e-06
+        },
+        {
+          "feature": "out_ref_EVENT_FLOWS_TO",
+          "mse": 2.361983846442605e-05,
+          "squared_error_share": 5.500853801798362e-07
+        },
+        {
+          "feature": "out_ref_EVENT_FCNTL",
+          "mse": 0.9435717074879351,
+          "squared_error_share": 0.021974959829728472
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.1981743085780285,
+          "squared_error_share": 0.02790443173642055
+        },
+        {
+          "feature": "out_ref_EVENT_LINK",
+          "mse": 0.8870622771011185,
+          "squared_error_share": 0.02065890461855947
+        },
+        {
+          "feature": "out_ref_EVENT_LOADLIBRARY",
+          "mse": 0.6057611888607038,
+          "squared_error_share": 0.014107648296346082
+        },
+        {
+          "feature": "out_ref_EVENT_LOGCLEAR",
+          "mse": 2.0706636786099492e-05,
+          "squared_error_share": 4.822394609464616e-07
+        },
+        {
+          "feature": "out_ref_EVENT_LOGIN",
+          "mse": 0.581022005326561,
+          "squared_error_share": 0.013531494348459698
+        },
+        {
+          "feature": "out_ref_EVENT_LOGOUT",
+          "mse": 0.777806828480135,
+          "squared_error_share": 0.018114440773816888
+        },
+        {
+          "feature": "out_ref_EVENT_LSEEK",
+          "mse": 2.7686625087759266e-05,
+          "squared_error_share": 6.447972838694317e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MMAP",
+          "mse": 4.173488492473599e-05,
+          "squared_error_share": 9.719689690156809e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.75776143030863,
+          "squared_error_share": 0.01764760098189215
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_PROCESS",
+          "mse": 2.268058400168107e-05,
+          "squared_error_share": 5.282109652043552e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MOUNT",
+          "mse": 3.4807273883264945e-05,
+          "squared_error_share": 8.10630966673918e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MPROTECT",
+          "mse": 5.649145566032097e-06,
+          "squared_error_share": 1.3156365955094234e-07
+        },
+        {
+          "feature": "out_ref_EVENT_OPEN",
+          "mse": 0.4991361891677675,
+          "squared_error_share": 0.011624445306575379
+        },
+        {
+          "feature": "out_ref_EVENT_OTHER",
+          "mse": 0.4316527137334262,
+          "squared_error_share": 0.010052814184031277
+        },
+        {
+          "feature": "out_ref_EVENT_READ",
+          "mse": 0.6030671965003414,
+          "squared_error_share": 0.014044907570409977
+        },
+        {
+          "feature": "out_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 2.5766902016036872e-05,
+          "squared_error_share": 6.000886124981656e-07
+        },
+        {
+          "feature": "out_ref_EVENT_RECVFROM",
+          "mse": 0.607439765103306,
+          "squared_error_share": 0.01414674086897156
+        },
+        {
+          "feature": "out_ref_EVENT_RECVMSG",
+          "mse": 0.9609420097300226,
+          "squared_error_share": 0.022379498977067203
+        },
+        {
+          "feature": "out_ref_EVENT_RENAME",
+          "mse": 0.5913333910292449,
+          "squared_error_share": 0.013771637503248188
+        },
+        {
+          "feature": "out_ref_EVENT_SENDTO",
+          "mse": 0.6441763440239339,
+          "squared_error_share": 0.015002303662616227
+        },
+        {
+          "feature": "out_ref_EVENT_SENDMSG",
+          "mse": 1.0686209673981506,
+          "squared_error_share": 0.024887247726299806
+        },
+        {
+          "feature": "out_ref_EVENT_SERVICEINSTALL",
+          "mse": 3.4009421980833223e-05,
+          "squared_error_share": 7.920496936589747e-07
+        },
+        {
+          "feature": "out_ref_EVENT_SHM",
+          "mse": 3.267632205644698e-05,
+          "squared_error_share": 7.610029623348729e-07
+        },
+        {
+          "feature": "out_ref_EVENT_SIGNAL",
+          "mse": 1.025872112598054,
+          "squared_error_share": 0.02389166428569413
+        },
+        {
+          "feature": "out_ref_EVENT_STARTSERVICE",
+          "mse": 5.303560061144737e-06,
+          "squared_error_share": 1.235152753874809e-07
+        },
+        {
+          "feature": "out_ref_EVENT_TRUNCATE",
+          "mse": 2.331632707346004e-05,
+          "squared_error_share": 5.430168653320354e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UMOUNT",
+          "mse": 2.3356424873781995e-05,
+          "squared_error_share": 5.43950708032429e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UNIT",
+          "mse": 2.6950703815306702e-05,
+          "squared_error_share": 6.276583210628402e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UNLINK",
+          "mse": 0.9147691797665967,
+          "squared_error_share": 0.021304174149479424
+        },
+        {
+          "feature": "out_ref_EVENT_UPDATE",
+          "mse": 0.9513153139707898,
+          "squared_error_share": 0.022155301652239227
+        },
+        {
+          "feature": "out_ref_EVENT_WAIT",
+          "mse": 1.7953788199365574e-05,
+          "squared_error_share": 4.1812802497319075e-07
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE",
+          "mse": 0.7023876757416946,
+          "squared_error_share": 0.016357994667318323
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 9.036724899676477e-06,
+          "squared_error_share": 2.1045741949107434e-07
+        },
+        {
+          "feature": "out_ref_EVENT_TEE",
+          "mse": 6.182345046460447e-05,
+          "squared_error_share": 1.4398140911958858e-06
+        },
+        {
+          "feature": "out_ref_EVENT_SPLICE",
+          "mse": 2.2503894681414614e-05,
+          "squared_error_share": 5.240960254659284e-07
+        },
+        {
+          "feature": "out_ref_EVENT_VMSPLICE",
+          "mse": 1.8896437216758803e-05,
+          "squared_error_share": 4.400814961575884e-07
+        },
+        {
+          "feature": "out_ref_EVENT_INIT_MODULE",
+          "mse": 2.3166187399955598e-05,
+          "squared_error_share": 5.395202436466605e-07
+        },
+        {
+          "feature": "out_ref_EVENT_FINIT_MODULE",
+          "mse": 1.9501936195376595e-05,
+          "squared_error_share": 4.541830378067033e-07
+        },
+        {
+          "feature": "out_ref_UNKNOWN",
+          "mse": 4.505759748802431e-05,
+          "squared_error_share": 1.0493520386059997e-06
+        },
+        {
+          "feature": "in_ref_EVENT_ACCEPT",
+          "mse": 0.6450524759703375,
+          "squared_error_share": 0.015022708009392394
+        },
+        {
+          "feature": "in_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 2.3496190126570053e-05,
+          "squared_error_share": 5.472057185326762e-07
+        },
+        {
+          "feature": "in_ref_EVENT_BIND",
+          "mse": 0.8300832825301191,
+          "squared_error_share": 0.019331913668216634
+        },
+        {
+          "feature": "in_ref_EVENT_BLIND",
+          "mse": 3.607621747968295e-05,
+          "squared_error_share": 8.401835532300736e-07
+        },
+        {
+          "feature": "in_ref_EVENT_BOOT",
+          "mse": 2.8603263959094613e-05,
+          "squared_error_share": 6.661450015003352e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 7.305928502815752e-05,
+          "squared_error_share": 1.701486851440989e-06
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.0900644845645733,
+          "squared_error_share": 0.025386648486836343
+        },
+        {
+          "feature": "in_ref_EVENT_CLONE",
+          "mse": 3.423996065165119e-05,
+          "squared_error_share": 7.974187376756835e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CLOSE",
+          "mse": 0.6587551613086123,
+          "squared_error_share": 0.015341831566699615
+        },
+        {
+          "feature": "in_ref_EVENT_CONNECT",
+          "mse": 0.7048193516720017,
+          "squared_error_share": 0.016414626273017565
+        },
+        {
+          "feature": "in_ref_EVENT_CORRELATION",
+          "mse": 5.42728876106274e-06,
+          "squared_error_share": 1.2639680859678117e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.5600053071234059,
+          "squared_error_share": 0.01304203382828639
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_THREAD",
+          "mse": 0.5151487637144759,
+          "squared_error_share": 0.011997364163342763
+        },
+        {
+          "feature": "in_ref_EVENT_DUP",
+          "mse": 2.498709033091885e-05,
+          "squared_error_share": 5.819274803666784e-07
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3185292842160374,
+          "squared_error_share": 0.03070739385786272
+        },
+        {
+          "feature": "in_ref_EVENT_EXIT",
+          "mse": 2.8735304425782802e-05,
+          "squared_error_share": 6.692201084883313e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FLOWS_TO",
+          "mse": 1.7892233673774897e-05,
+          "squared_error_share": 4.166944739071099e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FCNTL",
+          "mse": 1.0813123969053409,
+          "squared_error_share": 0.025182820019734542
+        },
+        {
+          "feature": "in_ref_EVENT_FORK",
+          "mse": 0.7585326782149797,
+          "squared_error_share": 0.017665562671105913
+        },
+        {
+          "feature": "in_ref_EVENT_LINK",
+          "mse": 0.9538560521456857,
+          "squared_error_share": 0.022214473222230274
+        },
+        {
+          "feature": "in_ref_EVENT_LOADLIBRARY",
+          "mse": 1.0307362663780903,
+          "squared_error_share": 0.024004946173094597
+        },
+        {
+          "feature": "in_ref_EVENT_LOGCLEAR",
+          "mse": 7.15399983584878e-06,
+          "squared_error_share": 1.6661039936561597e-07
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.1489064929037858,
+          "squared_error_share": 0.02675702739846906
+        },
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4421390860426713,
+          "squared_error_share": 0.03358615803460199
+        },
+        {
+          "feature": "in_ref_EVENT_LSEEK",
+          "mse": 4.128175889834628e-05,
+          "squared_error_share": 9.61416060160213e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MMAP",
+          "mse": 2.6837862702146497e-05,
+          "squared_error_share": 6.250303502269628e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.6488267158337246,
+          "squared_error_share": 0.015110606754901093
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_PROCESS",
+          "mse": 3.0061380161675884e-05,
+          "squared_error_share": 7.001032526057069e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MOUNT",
+          "mse": 1.2235987013477474e-05,
+          "squared_error_share": 2.8496543608126874e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MPROTECT",
+          "mse": 2.6963916081183868e-05,
+          "squared_error_share": 6.279660231798138e-07
+        },
+        {
+          "feature": "in_ref_EVENT_OPEN",
+          "mse": 0.4947888431677671,
+          "squared_error_share": 0.011523199420377418
+        },
+        {
+          "feature": "in_ref_EVENT_OTHER",
+          "mse": 0.6279227899562742,
+          "squared_error_share": 0.014623772603563982
+        },
+        {
+          "feature": "in_ref_EVENT_READ",
+          "mse": 0.32817026623040096,
+          "squared_error_share": 0.007642798486321263
+        },
+        {
+          "feature": "in_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 2.294173362156889e-05,
+          "squared_error_share": 5.342929114528941e-07
+        },
+        {
+          "feature": "in_ref_EVENT_RECVFROM",
+          "mse": 0.777360248844702,
+          "squared_error_share": 0.018104040324681398
+        },
+        {
+          "feature": "in_ref_EVENT_RECVMSG",
+          "mse": 0.9571811394448393,
+          "squared_error_share": 0.02229191159734198
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.143574492934615,
+          "squared_error_share": 0.026632849782496894
+        },
+        {
+          "feature": "in_ref_EVENT_SENDTO",
+          "mse": 0.8268786687150352,
+          "squared_error_share": 0.0192572810151841
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0450077156860884,
+          "squared_error_share": 0.024337315745821826
+        },
+        {
+          "feature": "in_ref_EVENT_SERVICEINSTALL",
+          "mse": 4.159535701844412e-05,
+          "squared_error_share": 9.68719486107749e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SHM",
+          "mse": 2.8275533504121593e-05,
+          "squared_error_share": 6.585124458335441e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SIGNAL",
+          "mse": 0.8269999063711385,
+          "squared_error_share": 0.019260104534161597
+        },
+        {
+          "feature": "in_ref_EVENT_STARTSERVICE",
+          "mse": 1.4539710663184276e-05,
+          "squared_error_share": 3.386171450710169e-07
+        },
+        {
+          "feature": "in_ref_EVENT_TRUNCATE",
+          "mse": 2.3418154295053762e-05,
+          "squared_error_share": 5.453883322659606e-07
+        },
+        {
+          "feature": "in_ref_EVENT_UMOUNT",
+          "mse": 6.039223614814991e-05,
+          "squared_error_share": 1.4064823614903049e-06
+        },
+        {
+          "feature": "in_ref_EVENT_UNIT",
+          "mse": 3.319838239935607e-05,
+          "squared_error_share": 7.731612911328656e-07
+        },
+        {
+          "feature": "in_ref_EVENT_UNLINK",
+          "mse": 0.9543510595780217,
+          "squared_error_share": 0.022226001512401204
+        },
+        {
+          "feature": "in_ref_EVENT_UPDATE",
+          "mse": 0.9656421496654536,
+          "squared_error_share": 0.02248896112547156
+        },
+        {
+          "feature": "in_ref_EVENT_WAIT",
+          "mse": 1.0881385692989368e-05,
+          "squared_error_share": 2.5341795604684447e-07
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.1069736752057822,
+          "squared_error_share": 0.02578044874827385
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 2.7889331365790608e-05,
+          "squared_error_share": 6.495181358000514e-07
+        },
+        {
+          "feature": "in_ref_EVENT_TEE",
+          "mse": 3.675631970964591e-05,
+          "squared_error_share": 8.560225393558164e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SPLICE",
+          "mse": 2.124761218016677e-05,
+          "squared_error_share": 4.948383047430281e-07
+        },
+        {
+          "feature": "in_ref_EVENT_VMSPLICE",
+          "mse": 2.274941898819785e-05,
+          "squared_error_share": 5.298140718379924e-07
+        },
+        {
+          "feature": "in_ref_EVENT_INIT_MODULE",
+          "mse": 1.4593467155908044e-05,
+          "squared_error_share": 3.3986908677170314e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FINIT_MODULE",
+          "mse": 2.3946723212912718e-05,
+          "squared_error_share": 5.576982400822059e-07
+        },
+        {
+          "feature": "in_ref_UNKNOWN",
+          "mse": 2.277052364468862e-05,
+          "squared_error_share": 5.303055808297568e-07
+        },
+        {
+          "feature": "subject_no_predicate_event_count",
+          "mse": 0.504175718124361,
+          "squared_error_share": 0.011741811528456627
+        }
+      ],
+      "graph_mse_median": 0.13420303346330104,
+      "graph_mse_maximum": 2.0043637483016306,
+      "model_state_unchanged": true
+    },
+    "graphsage": {
+      "replayed_test": {
+        "mse": 0.3548783080187744,
+        "mae": 0.0667724345899813,
+        "mean_reference_mse": 0.5591168302698646
+      },
+      "row_errors": {
+        "rows": 2664540,
+        "median": 0.010363574605435133,
+        "p95": 0.9905462324619277,
+        "p99": 5.171816930770861,
+        "maximum": 1682.260009765625,
+        "top_10_squared_error_share": 0.01543476351099394,
+        "top_1_percent_squared_error_share": 0.6135997835092677
+      },
+      "top_features": [
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4325925607362882,
+          "squared_error_share": 0.0351030937704398
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.333449595130622,
+          "squared_error_share": 0.03267377442750916
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3238278392413017,
+          "squared_error_share": 0.03243801067410429
+        },
+        {
+          "feature": "in_ref_EVENT_FCNTL",
+          "mse": 1.3027659707519585,
+          "squared_error_share": 0.03192192761962989
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.1684801619028076,
+          "squared_error_share": 0.028631496362854135
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.1412706894606952,
+          "squared_error_share": 0.027964777374666197
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.1407537287291423,
+          "squared_error_share": 0.027952110185450855
+        },
+        {
+          "feature": "in_ref_EVENT_LOADLIBRARY",
+          "mse": 1.1276715320816186,
+          "squared_error_share": 0.02763155458002084
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.0746520422570405,
+          "squared_error_share": 0.026332407722789847
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0360488789186502,
+          "squared_error_share": 0.02538650691355581
+        }
+      ],
+      "all_feature_errors": [
+        {
+          "feature": "out_ref_EVENT_ACCEPT",
+          "mse": 0.23363869719672947,
+          "squared_error_share": 0.005724894377425087
+        },
+        {
+          "feature": "out_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 2.694037840998275e-05,
+          "squared_error_share": 6.601253248521086e-07
+        },
+        {
+          "feature": "out_ref_EVENT_BIND",
+          "mse": 0.2657279774257967,
+          "squared_error_share": 0.006511184243629565
+        },
+        {
+          "feature": "out_ref_EVENT_BLIND",
+          "mse": 2.6577935911364494e-05,
+          "squared_error_share": 6.512443259106857e-07
+        },
+        {
+          "feature": "out_ref_EVENT_BOOT",
+          "mse": 2.6469826334822535e-05,
+          "squared_error_share": 6.485952959583841e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 2.65913064223372e-05,
+          "squared_error_share": 6.515719461380254e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.5906881272488839,
+          "squared_error_share": 0.014473745912268453
+        },
+        {
+          "feature": "out_ref_EVENT_CLONE",
+          "mse": 2.6621185136261673e-05,
+          "squared_error_share": 6.523040700687067e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CLOSE",
+          "mse": 0.8174207184543896,
+          "squared_error_share": 0.020029418633206696
+        },
+        {
+          "feature": "out_ref_EVENT_CONNECT",
+          "mse": 0.18708115171265055,
+          "squared_error_share": 0.004584085797483018
+        },
+        {
+          "feature": "out_ref_EVENT_CORRELATION",
+          "mse": 2.6889518021532394e-05,
+          "squared_error_share": 6.588790828752157e-07
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.4630601288273502,
+          "squared_error_share": 0.011346452277557652
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_THREAD",
+          "mse": 0.8593863762911443,
+          "squared_error_share": 0.021057711298236782
+        },
+        {
+          "feature": "out_ref_EVENT_DUP",
+          "mse": 2.6447957888651847e-05,
+          "squared_error_share": 6.480594491743209e-07
+        },
+        {
+          "feature": "out_ref_EVENT_EXECUTE",
+          "mse": 0.49373339082632467,
+          "squared_error_share": 0.012098045174034707
+        },
+        {
+          "feature": "out_ref_EVENT_EXIT",
+          "mse": 2.6448505649499853e-05,
+          "squared_error_share": 6.48072871064772e-07
+        },
+        {
+          "feature": "out_ref_EVENT_FLOWS_TO",
+          "mse": 2.645860519361986e-05,
+          "squared_error_share": 6.48320342155995e-07
+        },
+        {
+          "feature": "out_ref_EVENT_FCNTL",
+          "mse": 0.9736426411982083,
+          "squared_error_share": 0.023857354749429585
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.1412706894606952,
+          "squared_error_share": 0.027964777374666197
+        },
+        {
+          "feature": "out_ref_EVENT_LINK",
+          "mse": 0.7806471715767396,
+          "squared_error_share": 0.019128349271479474
+        },
+        {
+          "feature": "out_ref_EVENT_LOADLIBRARY",
+          "mse": 0.613219184054574,
+          "squared_error_share": 0.015025828773421072
+        },
+        {
+          "feature": "out_ref_EVENT_LOGCLEAR",
+          "mse": 2.6374864231675626e-05,
+          "squared_error_share": 6.462684211003359e-07
+        },
+        {
+          "feature": "out_ref_EVENT_LOGIN",
+          "mse": 0.31643195879628727,
+          "squared_error_share": 0.00775359374746518
+        },
+        {
+          "feature": "out_ref_EVENT_LOGOUT",
+          "mse": 0.5297257898073391,
+          "squared_error_share": 0.012979973917127074
+        },
+        {
+          "feature": "out_ref_EVENT_LSEEK",
+          "mse": 2.6380111002691876e-05,
+          "squared_error_share": 6.463969837496357e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MMAP",
+          "mse": 2.6400388839273888e-05,
+          "squared_error_share": 6.46893855518001e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.7391971167652088,
+          "squared_error_share": 0.018112690527522842
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_PROCESS",
+          "mse": 2.6393439757672422e-05,
+          "squared_error_share": 6.467235808217892e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MOUNT",
+          "mse": 2.637403685451749e-05,
+          "squared_error_share": 6.462481477171273e-07
+        },
+        {
+          "feature": "out_ref_EVENT_MPROTECT",
+          "mse": 2.67333923080961e-05,
+          "squared_error_share": 6.550535041943421e-07
+        },
+        {
+          "feature": "out_ref_EVENT_OPEN",
+          "mse": 0.822286712298704,
+          "squared_error_share": 0.02014865102550361
+        },
+        {
+          "feature": "out_ref_EVENT_OTHER",
+          "mse": 0.4619291078384416,
+          "squared_error_share": 0.01131873865058643
+        },
+        {
+          "feature": "out_ref_EVENT_READ",
+          "mse": 0.4487175731647756,
+          "squared_error_share": 0.010995013850380321
+        },
+        {
+          "feature": "out_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 2.60092005025655e-05,
+          "squared_error_share": 6.373084917225061e-07
+        },
+        {
+          "feature": "out_ref_EVENT_RECVFROM",
+          "mse": 0.47244542024315295,
+          "squared_error_share": 0.01157642189603906
+        },
+        {
+          "feature": "out_ref_EVENT_RECVMSG",
+          "mse": 0.8259374051639241,
+          "squared_error_share": 0.02023810466185995
+        },
+        {
+          "feature": "out_ref_EVENT_RENAME",
+          "mse": 0.4924314594081601,
+          "squared_error_share": 0.012066143695619223
+        },
+        {
+          "feature": "out_ref_EVENT_SENDTO",
+          "mse": 0.5086597478983579,
+          "squared_error_share": 0.012463788600540674
+        },
+        {
+          "feature": "out_ref_EVENT_SENDMSG",
+          "mse": 0.842315697164408,
+          "squared_error_share": 0.02063942513192936
+        },
+        {
+          "feature": "out_ref_EVENT_SERVICEINSTALL",
+          "mse": 2.6739020475324967e-05,
+          "squared_error_share": 6.551914122691189e-07
+        },
+        {
+          "feature": "out_ref_EVENT_SHM",
+          "mse": 2.6599232761681867e-05,
+          "squared_error_share": 6.517661667705332e-07
+        },
+        {
+          "feature": "out_ref_EVENT_SIGNAL",
+          "mse": 0.9576669270611776,
+          "squared_error_share": 0.023465898722941702
+        },
+        {
+          "feature": "out_ref_EVENT_STARTSERVICE",
+          "mse": 2.638902965811794e-05,
+          "squared_error_share": 6.466155192958251e-07
+        },
+        {
+          "feature": "out_ref_EVENT_TRUNCATE",
+          "mse": 2.715452315553957e-05,
+          "squared_error_share": 6.653725551461599e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UMOUNT",
+          "mse": 2.674262048182948e-05,
+          "squared_error_share": 6.552796239277338e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UNIT",
+          "mse": 2.686627396674005e-05,
+          "squared_error_share": 6.583095292859095e-07
+        },
+        {
+          "feature": "out_ref_EVENT_UNLINK",
+          "mse": 0.8175498067187248,
+          "squared_error_share": 0.02003258170802072
+        },
+        {
+          "feature": "out_ref_EVENT_UPDATE",
+          "mse": 0.8634029397112326,
+          "squared_error_share": 0.02115612993186267
+        },
+        {
+          "feature": "out_ref_EVENT_WAIT",
+          "mse": 2.638935971110394e-05,
+          "squared_error_share": 6.466236066482477e-07
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE",
+          "mse": 0.6769645987355555,
+          "squared_error_share": 0.016587795050721856
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 2.6585636554092982e-05,
+          "squared_error_share": 6.514330162551699e-07
+        },
+        {
+          "feature": "out_ref_EVENT_TEE",
+          "mse": 3.6446860338620925e-05,
+          "squared_error_share": 8.93064498008548e-07
+        },
+        {
+          "feature": "out_ref_EVENT_SPLICE",
+          "mse": 2.6392459188579403e-05,
+          "squared_error_share": 6.466995537468454e-07
+        },
+        {
+          "feature": "out_ref_EVENT_VMSPLICE",
+          "mse": 2.6970139758304374e-05,
+          "squared_error_share": 6.60854572950627e-07
+        },
+        {
+          "feature": "out_ref_EVENT_INIT_MODULE",
+          "mse": 2.7136475955889517e-05,
+          "squared_error_share": 6.649303411077985e-07
+        },
+        {
+          "feature": "out_ref_EVENT_FINIT_MODULE",
+          "mse": 2.6370598845696166e-05,
+          "squared_error_share": 6.461639055192085e-07
+        },
+        {
+          "feature": "out_ref_UNKNOWN",
+          "mse": 2.6528803427038024e-05,
+          "squared_error_share": 6.500404231041542e-07
+        },
+        {
+          "feature": "in_ref_EVENT_ACCEPT",
+          "mse": 0.6400224234478715,
+          "squared_error_share": 0.015682593754310612
+        },
+        {
+          "feature": "in_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 2.677077742566124e-05,
+          "squared_error_share": 6.559695589914112e-07
+        },
+        {
+          "feature": "in_ref_EVENT_BIND",
+          "mse": 0.8359659551971091,
+          "squared_error_share": 0.02048383617118421
+        },
+        {
+          "feature": "in_ref_EVENT_BLIND",
+          "mse": 2.6594422363104482e-05,
+          "squared_error_share": 6.516482966398602e-07
+        },
+        {
+          "feature": "in_ref_EVENT_BOOT",
+          "mse": 2.672617705292084e-05,
+          "squared_error_share": 6.548767073953523e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 2.6579316847500427e-05,
+          "squared_error_share": 6.512781632570459e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.333449595130622,
+          "squared_error_share": 0.03267377442750916
+        },
+        {
+          "feature": "in_ref_EVENT_CLONE",
+          "mse": 2.6521885424511388e-05,
+          "squared_error_share": 6.498709099445494e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CLOSE",
+          "mse": 0.7400437028766803,
+          "squared_error_share": 0.01813343459144599
+        },
+        {
+          "feature": "in_ref_EVENT_CONNECT",
+          "mse": 0.6999409705296888,
+          "squared_error_share": 0.017150789551530536
+        },
+        {
+          "feature": "in_ref_EVENT_CORRELATION",
+          "mse": 2.6455548489056585e-05,
+          "squared_error_share": 6.482454431303724e-07
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.5884805675003657,
+          "squared_error_share": 0.01441965364697269
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_THREAD",
+          "mse": 0.3638784414998933,
+          "squared_error_share": 0.008916184128757004
+        },
+        {
+          "feature": "in_ref_EVENT_DUP",
+          "mse": 2.659822233457461e-05,
+          "squared_error_share": 6.517414080788674e-07
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3238278392413017,
+          "squared_error_share": 0.03243801067410429
+        },
+        {
+          "feature": "in_ref_EVENT_EXIT",
+          "mse": 2.637130572624871e-05,
+          "squared_error_share": 6.461812263506861e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FLOWS_TO",
+          "mse": 2.7443349827829805e-05,
+          "squared_error_share": 6.724497311965488e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FCNTL",
+          "mse": 1.3027659707519585,
+          "squared_error_share": 0.03192192761962989
+        },
+        {
+          "feature": "in_ref_EVENT_FORK",
+          "mse": 0.49373339405511824,
+          "squared_error_share": 0.012098045253150464
+        },
+        {
+          "feature": "in_ref_EVENT_LINK",
+          "mse": 0.9665116706817499,
+          "squared_error_share": 0.023682623193805125
+        },
+        {
+          "feature": "in_ref_EVENT_LOADLIBRARY",
+          "mse": 1.1276715320816186,
+          "squared_error_share": 0.02763155458002084
+        },
+        {
+          "feature": "in_ref_EVENT_LOGCLEAR",
+          "mse": 2.6769389588208347e-05,
+          "squared_error_share": 6.55935552540741e-07
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.1407537287291423,
+          "squared_error_share": 0.027952110185450855
+        },
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4325925607362882,
+          "squared_error_share": 0.0351030937704398
+        },
+        {
+          "feature": "in_ref_EVENT_LSEEK",
+          "mse": 2.6386297057780654e-05,
+          "squared_error_share": 6.465485618590033e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MMAP",
+          "mse": 2.656510477842697e-05,
+          "squared_error_share": 6.509299221681063e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.8523936644723048,
+          "squared_error_share": 0.020886367522334283
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_PROCESS",
+          "mse": 2.6375820948123613e-05,
+          "squared_error_share": 6.462918637092856e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MOUNT",
+          "mse": 2.6747492639474773e-05,
+          "squared_error_share": 6.553990073528433e-07
+        },
+        {
+          "feature": "in_ref_EVENT_MPROTECT",
+          "mse": 2.6740232744658725e-05,
+          "squared_error_share": 6.552211167400649e-07
+        },
+        {
+          "feature": "in_ref_EVENT_OPEN",
+          "mse": 0.541162766045059,
+          "squared_error_share": 0.013260216367301906
+        },
+        {
+          "feature": "in_ref_EVENT_OTHER",
+          "mse": 0.6806082606946268,
+          "squared_error_share": 0.016677076407419205
+        },
+        {
+          "feature": "in_ref_EVENT_READ",
+          "mse": 0.28534413855647983,
+          "squared_error_share": 0.006991842849892691
+        },
+        {
+          "feature": "in_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 2.640711051990665e-05,
+          "squared_error_share": 6.470585581641082e-07
+        },
+        {
+          "feature": "in_ref_EVENT_RECVFROM",
+          "mse": 0.6757233407178737,
+          "squared_error_share": 0.016557380264423095
+        },
+        {
+          "feature": "in_ref_EVENT_RECVMSG",
+          "mse": 0.922892925457323,
+          "squared_error_share": 0.02261382460743313
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.0746520422570405,
+          "squared_error_share": 0.026332407722789847
+        },
+        {
+          "feature": "in_ref_EVENT_SENDTO",
+          "mse": 0.46857882166663856,
+          "squared_error_share": 0.011481677880103172
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0360488789186502,
+          "squared_error_share": 0.02538650691355581
+        },
+        {
+          "feature": "in_ref_EVENT_SERVICEINSTALL",
+          "mse": 2.654185966460953e-05,
+          "squared_error_share": 6.503603426293024e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SHM",
+          "mse": 2.650930987558509e-05,
+          "squared_error_share": 6.495627688266396e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SIGNAL",
+          "mse": 0.5841561976057488,
+          "squared_error_share": 0.01431369277151569
+        },
+        {
+          "feature": "in_ref_EVENT_STARTSERVICE",
+          "mse": 2.6466477467099482e-05,
+          "squared_error_share": 6.485132380021102e-07
+        },
+        {
+          "feature": "in_ref_EVENT_TRUNCATE",
+          "mse": 2.7314605763674837e-05,
+          "squared_error_share": 6.692950903863964e-07
+        },
+        {
+          "feature": "in_ref_EVENT_UMOUNT",
+          "mse": 2.730655980252241e-05,
+          "squared_error_share": 6.690979386374988e-07
+        },
+        {
+          "feature": "in_ref_EVENT_UNIT",
+          "mse": 2.740662826966227e-05,
+          "squared_error_share": 6.715499357242834e-07
+        },
+        {
+          "feature": "in_ref_EVENT_UNLINK",
+          "mse": 1.0192977674177728,
+          "squared_error_share": 0.024976051174854935
+        },
+        {
+          "feature": "in_ref_EVENT_UPDATE",
+          "mse": 0.9609886777744344,
+          "squared_error_share": 0.023547292225857528
+        },
+        {
+          "feature": "in_ref_EVENT_WAIT",
+          "mse": 2.6935727431178277e-05,
+          "squared_error_share": 6.600113610150956e-07
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.1684801619028076,
+          "squared_error_share": 0.028631496362854135
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 2.6487622639165692e-05,
+          "squared_error_share": 6.490313622603089e-07
+        },
+        {
+          "feature": "in_ref_EVENT_TEE",
+          "mse": 2.637910601885406e-05,
+          "squared_error_share": 6.463723584354581e-07
+        },
+        {
+          "feature": "in_ref_EVENT_SPLICE",
+          "mse": 2.6393467161713386e-05,
+          "squared_error_share": 6.467242523083277e-07
+        },
+        {
+          "feature": "in_ref_EVENT_VMSPLICE",
+          "mse": 2.6586414620925313e-05,
+          "squared_error_share": 6.514520813778877e-07
+        },
+        {
+          "feature": "in_ref_EVENT_INIT_MODULE",
+          "mse": 2.700144129877391e-05,
+          "squared_error_share": 6.616215606764998e-07
+        },
+        {
+          "feature": "in_ref_EVENT_FINIT_MODULE",
+          "mse": 2.6479283872413835e-05,
+          "squared_error_share": 6.488270358389362e-07
+        },
+        {
+          "feature": "in_ref_UNKNOWN",
+          "mse": 2.743521650731113e-05,
+          "squared_error_share": 6.72250438864132e-07
+        },
+        {
+          "feature": "subject_no_predicate_event_count",
+          "mse": 0.3542524934564159,
+          "squared_error_share": 0.008680317654184568
+        }
+      ],
+      "graph_mse_median": 0.08126148140948752,
+      "graph_mse_maximum": 1.9850904381793477,
+      "model_state_unchanged": true
+    },
+    "gat": {
+      "replayed_test": {
+        "mse": 0.3687433892518955,
+        "mae": 0.07187894984327452,
+        "mean_reference_mse": 0.5591168302698646
+      },
+      "row_errors": {
+        "rows": 2664540,
+        "median": 0.012119865044951439,
+        "p95": 0.763578990101814,
+        "p99": 4.745698189735341,
+        "maximum": 2705.2900390625,
+        "top_10_squared_error_share": 0.018953456701514434,
+        "top_1_percent_squared_error_share": 0.6994465858030564
+      },
+      "top_features": [
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4213707766169825,
+          "squared_error_share": 0.033518555494804286
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3252125431974644,
+          "squared_error_share": 0.03125096625195679
+        },
+        {
+          "feature": "out_ref_EVENT_LOGOUT",
+          "mse": 1.223942816979901,
+          "squared_error_share": 0.028862838541714907
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.2009097070325594,
+          "squared_error_share": 0.028319675148539326
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.124300048712475,
+          "squared_error_share": 0.026513077513296325
+        },
+        {
+          "feature": "out_ref_EVENT_SENDMSG",
+          "mse": 1.080392378738012,
+          "squared_error_share": 0.02547765333200744
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0763867835938141,
+          "squared_error_share": 0.025383193979571565
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.0709065780816844,
+          "squared_error_share": 0.025253960583470333
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.0566660344734948,
+          "squared_error_share": 0.024918142189663647
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.0498550247287606,
+          "squared_error_share": 0.024757525964917634
+        }
+      ],
+      "all_feature_errors": [
+        {
+          "feature": "out_ref_EVENT_ACCEPT",
+          "mse": 0.3508937784249903,
+          "squared_error_share": 0.008274725200776349
+        },
+        {
+          "feature": "out_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 0.00023158209270693087,
+          "squared_error_share": 5.4611346692207135e-06
+        },
+        {
+          "feature": "out_ref_EVENT_BIND",
+          "mse": 0.5735167923372505,
+          "squared_error_share": 0.01352458819852213
+        },
+        {
+          "feature": "out_ref_EVENT_BLIND",
+          "mse": 0.00026585335459830295,
+          "squared_error_share": 6.269314499902904e-06
+        },
+        {
+          "feature": "out_ref_EVENT_BOOT",
+          "mse": 0.0002643376024312607,
+          "squared_error_share": 6.233570256414024e-06
+        },
+        {
+          "feature": "out_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 7.138422545089692e-05,
+          "squared_error_share": 1.6833722499377585e-06
+        },
+        {
+          "feature": "out_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 0.39699854822252656,
+          "squared_error_share": 0.009361961065236736
+        },
+        {
+          "feature": "out_ref_EVENT_CLONE",
+          "mse": 0.0002524895219203005,
+          "squared_error_share": 5.954170573624187e-06
+        },
+        {
+          "feature": "out_ref_EVENT_CLOSE",
+          "mse": 0.3611541298726186,
+          "squared_error_share": 0.008516683291551278
+        },
+        {
+          "feature": "out_ref_EVENT_CONNECT",
+          "mse": 0.5742343797872457,
+          "squared_error_share": 0.013541510239667709
+        },
+        {
+          "feature": "out_ref_EVENT_CORRELATION",
+          "mse": 0.000214015740975812,
+          "squared_error_share": 5.046887560002551e-06
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.5453853932086602,
+          "squared_error_share": 0.012861197703691212
+        },
+        {
+          "feature": "out_ref_EVENT_CREATE_THREAD",
+          "mse": 0.7887863811059164,
+          "squared_error_share": 0.0186010438117858
+        },
+        {
+          "feature": "out_ref_EVENT_DUP",
+          "mse": 0.00013787871580702853,
+          "squared_error_share": 3.251435489851492e-06
+        },
+        {
+          "feature": "out_ref_EVENT_EXECUTE",
+          "mse": 0.5995540613786237,
+          "squared_error_share": 0.014138595227267726
+        },
+        {
+          "feature": "out_ref_EVENT_EXIT",
+          "mse": 0.00025894144898331846,
+          "squared_error_share": 6.106318963662794e-06
+        },
+        {
+          "feature": "out_ref_EVENT_FLOWS_TO",
+          "mse": 0.00010575622621102808,
+          "squared_error_share": 2.4939276897280955e-06
+        },
+        {
+          "feature": "out_ref_EVENT_FCNTL",
+          "mse": 0.9179141367969457,
+          "squared_error_share": 0.02164611545407102
+        },
+        {
+          "feature": "out_ref_EVENT_FORK",
+          "mse": 1.2009097070325594,
+          "squared_error_share": 0.028319675148539326
+        },
+        {
+          "feature": "out_ref_EVENT_LINK",
+          "mse": 0.9271273699856726,
+          "squared_error_share": 0.021863380556888124
+        },
+        {
+          "feature": "out_ref_EVENT_LOADLIBRARY",
+          "mse": 0.40566375088523465,
+          "squared_error_share": 0.00956630259321932
+        },
+        {
+          "feature": "out_ref_EVENT_LOGCLEAR",
+          "mse": 0.00027242342731157403,
+          "squared_error_share": 6.424248983197137e-06
+        },
+        {
+          "feature": "out_ref_EVENT_LOGIN",
+          "mse": 0.9076809538067555,
+          "squared_error_share": 0.021404798045842357
+        },
+        {
+          "feature": "out_ref_EVENT_LOGOUT",
+          "mse": 1.223942816979901,
+          "squared_error_share": 0.028862838541714907
+        },
+        {
+          "feature": "out_ref_EVENT_LSEEK",
+          "mse": 0.00016011538797079433,
+          "squared_error_share": 3.7758174049735597e-06
+        },
+        {
+          "feature": "out_ref_EVENT_MMAP",
+          "mse": 0.00017080664962550486,
+          "squared_error_share": 4.0279371565388854e-06
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.7439351344922941,
+          "squared_error_share": 0.01754336834570651
+        },
+        {
+          "feature": "out_ref_EVENT_MODIFY_PROCESS",
+          "mse": 0.00020000294847067994,
+          "squared_error_share": 4.716439959033607e-06
+        },
+        {
+          "feature": "out_ref_EVENT_MOUNT",
+          "mse": 0.0002113437251940387,
+          "squared_error_share": 4.983876478912556e-06
+        },
+        {
+          "feature": "out_ref_EVENT_MPROTECT",
+          "mse": 0.00023647820555773949,
+          "squared_error_share": 5.576594078544756e-06
+        },
+        {
+          "feature": "out_ref_EVENT_OPEN",
+          "mse": 0.37214256276908303,
+          "squared_error_share": 0.008775810891400847
+        },
+        {
+          "feature": "out_ref_EVENT_OTHER",
+          "mse": 0.4978703134196938,
+          "squared_error_share": 0.011740704117536886
+        },
+        {
+          "feature": "out_ref_EVENT_READ",
+          "mse": 0.6448492052657365,
+          "squared_error_share": 0.01520673861321723
+        },
+        {
+          "feature": "out_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 0.00030096534760262896,
+          "squared_error_share": 7.0973203273829355e-06
+        },
+        {
+          "feature": "out_ref_EVENT_RECVFROM",
+          "mse": 0.6002104842075187,
+          "squared_error_share": 0.01415407489336213
+        },
+        {
+          "feature": "out_ref_EVENT_RECVMSG",
+          "mse": 0.9754875601996875,
+          "squared_error_share": 0.0230038034121306
+        },
+        {
+          "feature": "out_ref_EVENT_RENAME",
+          "mse": 0.4369029521954954,
+          "squared_error_share": 0.010302980819588609
+        },
+        {
+          "feature": "out_ref_EVENT_SENDTO",
+          "mse": 0.6298557548921694,
+          "squared_error_share": 0.014853165283391812
+        },
+        {
+          "feature": "out_ref_EVENT_SENDMSG",
+          "mse": 1.080392378738012,
+          "squared_error_share": 0.02547765333200744
+        },
+        {
+          "feature": "out_ref_EVENT_SERVICEINSTALL",
+          "mse": 0.00026049795188134913,
+          "squared_error_share": 6.143024184864568e-06
+        },
+        {
+          "feature": "out_ref_EVENT_SHM",
+          "mse": 0.00020676136983293557,
+          "squared_error_share": 4.87581605231956e-06
+        },
+        {
+          "feature": "out_ref_EVENT_SIGNAL",
+          "mse": 0.8656792790885045,
+          "squared_error_share": 0.020414320762871044
+        },
+        {
+          "feature": "out_ref_EVENT_STARTSERVICE",
+          "mse": 0.00024493084090360356,
+          "squared_error_share": 5.775922875491054e-06
+        },
+        {
+          "feature": "out_ref_EVENT_TRUNCATE",
+          "mse": 0.00013087372623097398,
+          "squared_error_share": 3.086244861404527e-06
+        },
+        {
+          "feature": "out_ref_EVENT_UMOUNT",
+          "mse": 0.0002578149830558553,
+          "squared_error_share": 6.079754810717038e-06
+        },
+        {
+          "feature": "out_ref_EVENT_UNIT",
+          "mse": 0.00026444846833285706,
+          "squared_error_share": 6.236184679713189e-06
+        },
+        {
+          "feature": "out_ref_EVENT_UNLINK",
+          "mse": 0.9277907147963907,
+          "squared_error_share": 0.02187902345613442
+        },
+        {
+          "feature": "out_ref_EVENT_UPDATE",
+          "mse": 0.9647440367569109,
+          "squared_error_share": 0.022750451230806358
+        },
+        {
+          "feature": "out_ref_EVENT_WAIT",
+          "mse": 0.0002312352464896289,
+          "squared_error_share": 5.45295539300788e-06
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE",
+          "mse": 0.6740997527942142,
+          "squared_error_share": 0.015896520700140554
+        },
+        {
+          "feature": "out_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 0.0002587184755041504,
+          "squared_error_share": 6.101060836045204e-06
+        },
+        {
+          "feature": "out_ref_EVENT_TEE",
+          "mse": 0.00012761636630911083,
+          "squared_error_share": 3.0094302813500626e-06
+        },
+        {
+          "feature": "out_ref_EVENT_SPLICE",
+          "mse": 0.00017449282330412097,
+          "squared_error_share": 4.114863959202055e-06
+        },
+        {
+          "feature": "out_ref_EVENT_VMSPLICE",
+          "mse": 0.00017498254865386956,
+          "squared_error_share": 4.126412589990589e-06
+        },
+        {
+          "feature": "out_ref_EVENT_INIT_MODULE",
+          "mse": 0.00025623313006608385,
+          "squared_error_share": 6.042451787400017e-06
+        },
+        {
+          "feature": "out_ref_EVENT_FINIT_MODULE",
+          "mse": 0.0002577777000939434,
+          "squared_error_share": 6.078875609421773e-06
+        },
+        {
+          "feature": "out_ref_UNKNOWN",
+          "mse": 0.00022931802867678686,
+          "squared_error_share": 5.407743846019188e-06
+        },
+        {
+          "feature": "in_ref_EVENT_ACCEPT",
+          "mse": 0.6756149127851617,
+          "squared_error_share": 0.015932250979020325
+        },
+        {
+          "feature": "in_ref_EVENT_ADD_OBJECT_ATTRIBUTE",
+          "mse": 0.0002537077456794994,
+          "squared_error_share": 5.982898546190913e-06
+        },
+        {
+          "feature": "in_ref_EVENT_BIND",
+          "mse": 0.8076461717091233,
+          "squared_error_share": 0.019045792605241772
+        },
+        {
+          "feature": "in_ref_EVENT_BLIND",
+          "mse": 0.00024756347175142375,
+          "squared_error_share": 5.8380051868918975e-06
+        },
+        {
+          "feature": "in_ref_EVENT_BOOT",
+          "mse": 0.00017344106357234198,
+          "squared_error_share": 4.090061516717103e-06
+        },
+        {
+          "feature": "in_ref_EVENT_CHANGE_PRINCIPAL",
+          "mse": 5.125048054904963e-05,
+          "squared_error_share": 1.2085812545740943e-06
+        },
+        {
+          "feature": "in_ref_EVENT_CHECK_FILE_ATTRIBUTES",
+          "mse": 1.0566660344734948,
+          "squared_error_share": 0.024918142189663647
+        },
+        {
+          "feature": "in_ref_EVENT_CLONE",
+          "mse": 0.00024119847096372015,
+          "squared_error_share": 5.687906679425112e-06
+        },
+        {
+          "feature": "in_ref_EVENT_CLOSE",
+          "mse": 0.6651247466379471,
+          "squared_error_share": 0.015684873431979423
+        },
+        {
+          "feature": "in_ref_EVENT_CONNECT",
+          "mse": 0.7360776264250093,
+          "squared_error_share": 0.017358073752250035
+        },
+        {
+          "feature": "in_ref_EVENT_CORRELATION",
+          "mse": 0.00024889598185116695,
+          "squared_error_share": 5.8694282430433225e-06
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_OBJECT",
+          "mse": 0.5549242481669526,
+          "squared_error_share": 0.013086141570932809
+        },
+        {
+          "feature": "in_ref_EVENT_CREATE_THREAD",
+          "mse": 0.4687376521157877,
+          "squared_error_share": 0.011053702006131125
+        },
+        {
+          "feature": "in_ref_EVENT_DUP",
+          "mse": 0.000288631224396297,
+          "squared_error_share": 6.8064588576155745e-06
+        },
+        {
+          "feature": "in_ref_EVENT_EXECUTE",
+          "mse": 1.3252125431974644,
+          "squared_error_share": 0.03125096625195679
+        },
+        {
+          "feature": "in_ref_EVENT_EXIT",
+          "mse": 0.00011109107345173948,
+          "squared_error_share": 2.61973326856495e-06
+        },
+        {
+          "feature": "in_ref_EVENT_FLOWS_TO",
+          "mse": 0.00017877602941908448,
+          "squared_error_share": 4.215869892503846e-06
+        },
+        {
+          "feature": "in_ref_EVENT_FCNTL",
+          "mse": 0.973225026735985,
+          "squared_error_share": 0.02295044868252059
+        },
+        {
+          "feature": "in_ref_EVENT_FORK",
+          "mse": 0.599554186548759,
+          "squared_error_share": 0.014138598179011351
+        },
+        {
+          "feature": "in_ref_EVENT_LINK",
+          "mse": 1.017457250372352,
+          "squared_error_share": 0.02399352644027702
+        },
+        {
+          "feature": "in_ref_EVENT_LOADLIBRARY",
+          "mse": 0.9137200288310076,
+          "squared_error_share": 0.021547210620145776
+        },
+        {
+          "feature": "in_ref_EVENT_LOGCLEAR",
+          "mse": 0.00017991464611661294,
+          "squared_error_share": 4.242720583112707e-06
+        },
+        {
+          "feature": "in_ref_EVENT_LOGIN",
+          "mse": 1.124300048712475,
+          "squared_error_share": 0.026513077513296325
+        },
+        {
+          "feature": "in_ref_EVENT_LOGOUT",
+          "mse": 1.4213707766169825,
+          "squared_error_share": 0.033518555494804286
+        },
+        {
+          "feature": "in_ref_EVENT_LSEEK",
+          "mse": 0.0002540647394552821,
+          "squared_error_share": 5.9913171206274515e-06
+        },
+        {
+          "feature": "in_ref_EVENT_MMAP",
+          "mse": 0.0002612058194907027,
+          "squared_error_share": 6.159717014165284e-06
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_FILE_ATTRIBUTES",
+          "mse": 0.6142935977347109,
+          "squared_error_share": 0.014486180794275855
+        },
+        {
+          "feature": "in_ref_EVENT_MODIFY_PROCESS",
+          "mse": 0.00018038050734738267,
+          "squared_error_share": 4.253706453775953e-06
+        },
+        {
+          "feature": "in_ref_EVENT_MOUNT",
+          "mse": 0.00026658464198449686,
+          "squared_error_share": 6.286559610918294e-06
+        },
+        {
+          "feature": "in_ref_EVENT_MPROTECT",
+          "mse": 0.000261293917258442,
+          "squared_error_share": 6.161794522698254e-06
+        },
+        {
+          "feature": "in_ref_EVENT_OPEN",
+          "mse": 0.523020012026317,
+          "squared_error_share": 0.012333780591523562
+        },
+        {
+          "feature": "in_ref_EVENT_OTHER",
+          "mse": 0.6203332588214888,
+          "squared_error_share": 0.014628607189019106
+        },
+        {
+          "feature": "in_ref_EVENT_READ",
+          "mse": 0.2756348108252382,
+          "squared_error_share": 0.0064999793543913794
+        },
+        {
+          "feature": "in_ref_EVENT_READ_SOCKET_PARAMS",
+          "mse": 0.00013476785775126912,
+          "squared_error_share": 3.1780756951421844e-06
+        },
+        {
+          "feature": "in_ref_EVENT_RECVFROM",
+          "mse": 0.7408047098951149,
+          "squared_error_share": 0.01746954713571049
+        },
+        {
+          "feature": "in_ref_EVENT_RECVMSG",
+          "mse": 0.906147771917906,
+          "squared_error_share": 0.02136864277723092
+        },
+        {
+          "feature": "in_ref_EVENT_RENAME",
+          "mse": 1.0498550247287606,
+          "squared_error_share": 0.024757525964917634
+        },
+        {
+          "feature": "in_ref_EVENT_SENDTO",
+          "mse": 0.8947424623525828,
+          "squared_error_share": 0.02109968445341439
+        },
+        {
+          "feature": "in_ref_EVENT_SENDMSG",
+          "mse": 1.0763867835938141,
+          "squared_error_share": 0.025383193979571565
+        },
+        {
+          "feature": "in_ref_EVENT_SERVICEINSTALL",
+          "mse": 8.992464140949523e-05,
+          "squared_error_share": 2.120589597746292e-06
+        },
+        {
+          "feature": "in_ref_EVENT_SHM",
+          "mse": 0.00027320561552948296,
+          "squared_error_share": 6.4426944300999944e-06
+        },
+        {
+          "feature": "in_ref_EVENT_SIGNAL",
+          "mse": 0.6728956762829237,
+          "squared_error_share": 0.015868126345882236
+        },
+        {
+          "feature": "in_ref_EVENT_STARTSERVICE",
+          "mse": 0.0002639795103491889,
+          "squared_error_share": 6.225125781880967e-06
+        },
+        {
+          "feature": "in_ref_EVENT_TRUNCATE",
+          "mse": 0.000274692324043148,
+          "squared_error_share": 6.477753770449236e-06
+        },
+        {
+          "feature": "in_ref_EVENT_UMOUNT",
+          "mse": 0.0001665015299834232,
+          "squared_error_share": 3.926414461680659e-06
+        },
+        {
+          "feature": "in_ref_EVENT_UNIT",
+          "mse": 0.00026531195968233827,
+          "squared_error_share": 6.25654740504356e-06
+        },
+        {
+          "feature": "in_ref_EVENT_UNLINK",
+          "mse": 0.9720797519359978,
+          "squared_error_share": 0.022923440981523997
+        },
+        {
+          "feature": "in_ref_EVENT_UPDATE",
+          "mse": 0.9633639350688566,
+          "squared_error_share": 0.022717905876856126
+        },
+        {
+          "feature": "in_ref_EVENT_WAIT",
+          "mse": 0.0002640938857095592,
+          "squared_error_share": 6.227822964718041e-06
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE",
+          "mse": 1.0709065780816844,
+          "squared_error_share": 0.025253960583470333
+        },
+        {
+          "feature": "in_ref_EVENT_WRITE_SOCKET_PARAMS",
+          "mse": 0.00023393739676514188,
+          "squared_error_share": 5.516677101273653e-06
+        },
+        {
+          "feature": "in_ref_EVENT_TEE",
+          "mse": 0.00025787018002773507,
+          "squared_error_share": 6.081056457546658e-06
+        },
+        {
+          "feature": "in_ref_EVENT_SPLICE",
+          "mse": 0.00026052090740516547,
+          "squared_error_share": 6.143565518633074e-06
+        },
+        {
+          "feature": "in_ref_EVENT_VMSPLICE",
+          "mse": 0.0002594328731249281,
+          "squared_error_share": 6.117907655109816e-06
+        },
+        {
+          "feature": "in_ref_EVENT_INIT_MODULE",
+          "mse": 0.0002627598087047386,
+          "squared_error_share": 6.1963629580427576e-06
+        },
+        {
+          "feature": "in_ref_EVENT_FINIT_MODULE",
+          "mse": 9.951953175197244e-05,
+          "squared_error_share": 2.3468548831325186e-06
+        },
+        {
+          "feature": "in_ref_UNKNOWN",
+          "mse": 0.0002421771446563512,
+          "squared_error_share": 5.710985617741148e-06
+        },
+        {
+          "feature": "subject_no_predicate_event_count",
+          "mse": 0.48469547461166246,
+          "squared_error_share": 0.011430017016755795
+        }
+      ],
+      "graph_mse_median": 0.07748658719270125,
+      "graph_mse_maximum": 1.9714237378991168,
+      "model_state_unchanged": true
+    }
+  },
+  "test_rows": 2664540,
+  "test_graphs": 270,
+  "verification_sha256": "f4b329cf44479b14ee36ce4755f7177934b280ab961f5cd5cf5a366e17819b00",
+  "complete_sha256": "ebd0c3402f2a032bf1b730fbb5feb88ca732459bcff386e2f56888ff71c0717e",
+  "elapsed_seconds": 242.44976460002363,
+  "training_performed": false,
+  "checkpoint_selection_changed": false,
+  "security_metrics_available": false,
+  "security_threshold": null,
+  "limitation": "Descriptive inspection of an already evaluated test cohort. Do not tune on it; errors do not label attacks."
+}

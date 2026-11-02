@@ -1,0 +1,129 @@
+{
+  "status": "verified_full_local_gnn_comparison_complete",
+  "date": "2026-11-02",
+  "models": {
+    "gcn": {
+      "development": {
+        "mse": 0.33107253812727283,
+        "mae": 0.0802195572069729,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 264.23043239998515
+      },
+      "test": {
+        "mse": 0.3733782161562218,
+        "mae": 0.0863573318154569,
+        "mean_reference_mse": 0.5591168302698646,
+        "seed_nodes_visited": 2664540,
+        "target_node_count": 2664540,
+        "seconds": 124.32886579999467
+      },
+      "test_mse_reduction_percent": 33.220000554087015,
+      "parameter_count": 13299,
+      "selected_epoch": 5,
+      "epochs_completed": 5,
+      "training_function_seconds": 9543.243219900003,
+      "checkpoint_sha256": "1574b91e12a9382c7aebbd6924f5129f3528748fa11a21b40e260c7e1f95573c",
+      "checkpoint_state_sha256": "c92316b573c697369467cdafc28b52d8456a88fbed07ae697dfd49bf2f0502a9",
+      "training_execution": "original_serial_cuda",
+      "final_test_execution": "bounded_cpu_prefetch_cuda"
+    },
+    "graphsage": {
+      "development": {
+        "mse": 0.298864339366623,
+        "mae": 0.05907256294626912,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 207.95498020001105
+      },
+      "test": {
+        "mse": 0.3548783080187744,
+        "mae": 0.0667724345899813,
+        "mean_reference_mse": 0.5591168302698646,
+        "seed_nodes_visited": 2664540,
+        "target_node_count": 2664540,
+        "seconds": 108.14275469997665
+      },
+      "test_mse_reduction_percent": 36.52877380788412,
+      "parameter_count": 22707,
+      "selected_epoch": 5,
+      "epochs_completed": 5,
+      "training_function_seconds": 19210.8869708,
+      "checkpoint_sha256": "cd4eec384931a2fe3bad5c1ee4ca23ad71511b5594dc2dcde204ab99a3fffd5e",
+      "checkpoint_state_sha256": "99823415f0a5050555f29406cf6459dc055197c5b1262f801ace85ee06784eef",
+      "training_execution": "original_serial_cuda",
+      "final_test_execution": "bounded_cpu_prefetch_cuda"
+    },
+    "gat": {
+      "development": {
+        "mse": 0.3325444909139586,
+        "mae": 0.06778343464685299,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 326.3664861000143
+      },
+      "test": {
+        "mse": 0.3687433892518955,
+        "mae": 0.07187894984327452,
+        "mean_reference_mse": 0.5591168302698646,
+        "seed_nodes_visited": 2664540,
+        "target_node_count": 2664540,
+        "seconds": 153.79536009998992
+      },
+      "test_mse_reduction_percent": 34.048955551218704,
+      "parameter_count": 13491,
+      "selected_epoch": 3,
+      "epochs_completed": 5,
+      "training_function_seconds": 11219.53979640003,
+      "checkpoint_sha256": "9c6a420804a6bfa77a6255af00acc7467edd2f89f4dfc5f81b7a5aace0ff4444",
+      "checkpoint_state_sha256": "837b01f17eb14852e2d19ae090896b648de9bdf6fdf2d03639ae320f5cf051d0",
+      "training_execution": "bounded_cpu_prefetch_cuda",
+      "final_test_execution": "bounded_cpu_prefetch_cuda"
+    }
+  },
+  "selected_family_by_development_mse": "graphsage",
+  "partitions": {
+    "train": {
+      "graphs": 758,
+      "node_windows": 15819608,
+      "native_events": 211686253
+    },
+    "development": {
+      "graphs": 284,
+      "node_windows": 5622276,
+      "native_events": 77198703
+    },
+    "test": {
+      "graphs": 270,
+      "node_windows": 2664540,
+      "native_events": 39845072
+    }
+  },
+  "sources": 37,
+  "raw_records": 345099571,
+  "eligible_unique_events": 330788968,
+  "features": 115,
+  "task": "self_supervised_masked_node_feature_reconstruction",
+  "temporal_native_entity_overlap": {
+    "train/development": 115807,
+    "train/test": 90656,
+    "development/test": 104835
+  },
+  "complete_sha256": "ebd0c3402f2a032bf1b730fbb5feb88ca732459bcff386e2f56888ff71c0717e",
+  "graph_manifest_sha256": "daae7186fa05bacdf947e9c6b95a8081cfd24b05f7e122a0648fa843128107b1",
+  "scaler_sha256": "8ea1a82f4a4fb6702a1d749a034d95497ee7fba361df6dd1ef5f3639144b4280",
+  "execution_profile_sha256": "baf1969a37b13542f5638bfabee05909ea94ec48a01f423ff09c138142348a0d",
+  "whole_darpa_release_claimed": false,
+  "attack_detection_metrics_available": false,
+  "security_threshold": null,
+  "training_seeds_per_family": 1,
+  "independent_clean_machine_reproduction": false,
+  "runtime": {
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "torch": "2.15.0+cu132",
+    "pyg": "2.8.1"
+  }
+}

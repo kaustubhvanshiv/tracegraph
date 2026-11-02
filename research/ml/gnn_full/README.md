@@ -5,6 +5,16 @@ Read the [frozen task specification](TASK_SPEC.md) before interpreting results.
  
 ## Restart status on 1 November 2026
 
+**Final verified status on 2 November 2026:** GCN, GraphSAGE and GAT all
+completed five epochs, selected checkpoints and final reconstruction tests.
+All 1,312 graph files and all three checkpoint states passed verification.
+See the [measured comparison, charts and residual analysis](../../../data/ml/datasets/darpa/gnn_full/RESULTS_20261102.md)
+and [reproduction/reporting instructions](../gnn_results/README.md).
+GraphSAGE has the lowest observed test MSE, 0.354878308 (36.53% below the
+training-mean reference). These are self-supervised reconstruction results;
+original supervised security tasks and production integration remain deferred.
+The restart notes below are historical snapshots.
+
 Latest execution revision: after the user stopped GAT during epoch 1, the
 completed GCN and GraphSAGE runs were retained. GAT was restarted using the
 [tested CPU-prefetch/CUDA adapter](../gnn_accel/README.md), with a separately

@@ -1,0 +1,329 @@
+{
+  "gcn": [
+    {
+      "epoch": 0,
+      "training": null,
+      "development": {
+        "mse": 0.886148488320031,
+        "mae": 0.43463153948288274,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 428.36353860000963
+      }
+    },
+    {
+      "epoch": 1,
+      "training": {
+        "mse": 0.3361539389285555,
+        "mae": 0.08008017839494758,
+        "mean_reference_mse": 0.4783868524341634,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164895,
+        "seconds": 2423.9331982999865
+      },
+      "development": {
+        "mse": 0.3521713583470492,
+        "mae": 0.09680793680136597,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 322.90691320001497
+      }
+    },
+    {
+      "epoch": 2,
+      "training": {
+        "mse": 0.3163104201585472,
+        "mae": 0.07512117552906726,
+        "mean_reference_mse": 0.47979135238858217,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164024,
+        "seconds": 1209.4028872000054
+      },
+      "development": {
+        "mse": 0.33584322140522654,
+        "mae": 0.08109278735375229,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 317.7886930000095
+      }
+    },
+    {
+      "epoch": 3,
+      "training": {
+        "mse": 0.3097739605665423,
+        "mae": 0.07247117878575743,
+        "mean_reference_mse": 0.47504168260119556,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3163835,
+        "seconds": 1210.6129165999882
+      },
+      "development": {
+        "mse": 0.3382437808507974,
+        "mae": 0.09156435484971377,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 318.67575699998997
+      }
+    },
+    {
+      "epoch": 4,
+      "training": {
+        "mse": 0.31330652370238066,
+        "mae": 0.07249656640051533,
+        "mean_reference_mse": 0.4827738814865169,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164033,
+        "seconds": 1205.5860386999848
+      },
+      "development": {
+        "mse": 0.3437210381678597,
+        "mae": 0.09671594020532714,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 320.0903389999876
+      }
+    },
+    {
+      "epoch": 5,
+      "training": {
+        "mse": 0.30514222713909817,
+        "mae": 0.07156295910194305,
+        "mean_reference_mse": 0.4795069538302394,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3160791,
+        "seconds": 1204.2908650000172
+      },
+      "development": {
+        "mse": 0.33107253812727283,
+        "mae": 0.0802195572069729,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 317.29402209998807
+      }
+    }
+  ],
+  "graphsage": [
+    {
+      "epoch": 0,
+      "training": null,
+      "development": {
+        "mse": 1.802108075485651,
+        "mae": 0.7458064857629495,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 462.0628568000102
+      }
+    },
+    {
+      "epoch": 1,
+      "training": {
+        "mse": 0.31502330276959295,
+        "mae": 0.06162479690320346,
+        "mean_reference_mse": 0.4783868524341634,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164895,
+        "seconds": 3238.5904728999885
+      },
+      "development": {
+        "mse": 0.3135535382576548,
+        "mae": 0.0645721961813976,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 819.0136415000015
+      }
+    },
+    {
+      "epoch": 2,
+      "training": {
+        "mse": 0.287254024726367,
+        "mae": 0.055845936719968646,
+        "mean_reference_mse": 0.47979135238858217,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164024,
+        "seconds": 3136.1762455000135
+      },
+      "development": {
+        "mse": 0.30588699721558277,
+        "mae": 0.061811720405432986,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 810.3577558000106
+      }
+    },
+    {
+      "epoch": 3,
+      "training": {
+        "mse": 0.28228011694610267,
+        "mae": 0.05486288051910804,
+        "mean_reference_mse": 0.47504168260119556,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3163835,
+        "seconds": 3161.4795034000126
+      },
+      "development": {
+        "mse": 0.30942325077769667,
+        "mae": 0.07389325693714745,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 825.2380337000068
+      }
+    },
+    {
+      "epoch": 4,
+      "training": {
+        "mse": 0.28176732824995526,
+        "mae": 0.05475208195490005,
+        "mean_reference_mse": 0.4827738814865169,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164033,
+        "seconds": 3218.803982499987
+      },
+      "development": {
+        "mse": 0.3019829510988219,
+        "mae": 0.06233846208946309,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 819.4274311999907
+      }
+    },
+    {
+      "epoch": 5,
+      "training": {
+        "mse": 0.2776069530801261,
+        "mae": 0.05455643169491015,
+        "mean_reference_mse": 0.4795069538302394,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3160791,
+        "seconds": 2350.006670200004
+      },
+      "development": {
+        "mse": 0.298864339366623,
+        "mae": 0.05907256294626912,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 161.65724760000012
+      }
+    }
+  ],
+  "gat": [
+    {
+      "epoch": 0,
+      "training": null,
+      "development": {
+        "mse": 4.339407155072701,
+        "mae": 1.2220279358186588,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 752.4641146999784
+      }
+    },
+    {
+      "epoch": 1,
+      "training": {
+        "mse": 0.34974881752410486,
+        "mae": 0.06786035749559755,
+        "mean_reference_mse": 0.4783868524341634,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164895,
+        "seconds": 2528.4962280000036
+      },
+      "development": {
+        "mse": 0.3467658092331306,
+        "mae": 0.07025086708139962,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 346.4150510999898
+      }
+    },
+    {
+      "epoch": 2,
+      "training": {
+        "mse": 0.32086989882610784,
+        "mae": 0.06231911606001647,
+        "mean_reference_mse": 0.47979135238858217,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164024,
+        "seconds": 1524.65430189998
+      },
+      "development": {
+        "mse": 0.3330903078846865,
+        "mae": 0.06303854273712509,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 328.97817399998894
+      }
+    },
+    {
+      "epoch": 3,
+      "training": {
+        "mse": 0.312087359952403,
+        "mae": 0.06093291160361555,
+        "mean_reference_mse": 0.47504168260119556,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3163835,
+        "seconds": 1543.9606697999989
+      },
+      "development": {
+        "mse": 0.3325444909139586,
+        "mae": 0.06778343464685299,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 325.46377840000787
+      }
+    },
+    {
+      "epoch": 4,
+      "training": {
+        "mse": 0.3207897524843351,
+        "mae": 0.060374448908441916,
+        "mean_reference_mse": 0.4827738814865169,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3164033,
+        "seconds": 1445.6427477000107
+      },
+      "development": {
+        "mse": 0.344632750636532,
+        "mae": 0.07275891790196809,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 315.6152153000003
+      }
+    },
+    {
+      "epoch": 5,
+      "training": {
+        "mse": 0.3164635734119285,
+        "mae": 0.05950843277571463,
+        "mean_reference_mse": 0.4795069538302394,
+        "seed_nodes_visited": 15819608,
+        "target_node_count": 3160791,
+        "seconds": 1453.5357310000109
+      },
+      "development": {
+        "mse": 0.3382640966636255,
+        "mae": 0.06444291092619452,
+        "mean_reference_mse": 0.49179723806035647,
+        "seed_nodes_visited": 5622276,
+        "target_node_count": 5622276,
+        "seconds": 327.8666889999877
+      }
+    }
+  ]
+}

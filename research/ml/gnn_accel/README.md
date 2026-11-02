@@ -1,5 +1,11 @@
 # CPU preparation with NVIDIA GPU training
 
+Completed on 2 November 2026: GAT finished all five epochs, all three models
+received final test evaluation, and checkpoint/graph verification and frozen
+error analysis passed. See the [measured results](../../../data/ml/datasets/darpa/gnn_full/RESULTS_20261102.md)
+and [reporting/replay guide](../gnn_results/README.md). The restart notes below
+describe the execution history; no full-data training remains active.
+
 This execution adapter overlaps one CPU batch producer with CUDA computation.
 It is used for the remaining full-local DARPA GAT run and subsequent frozen
 test evaluation. Completed GCN and GraphSAGE reports/checkpoints are reused.

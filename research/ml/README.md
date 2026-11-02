@@ -1,5 +1,17 @@
 # TraceGraph deep learning research
 
+**2026-11-02 full-local GNN training and evaluation verified complete:**
+GCN, GraphSAGE and GAT each completed five epochs and the common 2,664,540-row
+final test. GraphSAGE has the lowest measured test MSE, 0.354878308, versus
+0.373378216 for GCN and 0.368743389 for GAT; the mean reference is 0.559116830.
+All 1,312 graph files and all selected checkpoint states passed verification.
+Frozen residual replay reproduced the saved metrics; six new reporting checks
+pass. See [results, CSV and charts](../../data/ml/datasets/darpa/gnn_full/RESULTS_20261102.md)
+and [methods, limitations and teammate commands](gnn_results/README.md).
+All 37 locally downloaded archives are included. These are masked-feature
+reconstruction results; original supervised security tasks remain deferred.
+The dated progress notes below are historical snapshots.
+
 Follow this guide to reproduce the DARPA FiveDirections inspection and evidence
 alignment. Run commands from the repository root. Branch: **`deeplearning/shlok`**.
 

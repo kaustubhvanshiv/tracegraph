@@ -1,0 +1,65 @@
+{
+  "status": "completed_full_local_gnn_artifacts_verified",
+  "complete_sha256": "ebd0c3402f2a032bf1b730fbb5feb88ca732459bcff386e2f56888ff71c0717e",
+  "graph_manifest_sha256": "daae7186fa05bacdf947e9c6b95a8081cfd24b05f7e122a0648fa843128107b1",
+  "scaler_sha256": "8ea1a82f4a4fb6702a1d749a034d95497ee7fba361df6dd1ef5f3639144b4280",
+  "execution_profile_sha256": "baf1969a37b13542f5638bfabee05909ea94ec48a01f423ff09c138142348a0d",
+  "graphs_hash_checked": 1312,
+  "sources": 37,
+  "raw_source_metadata_rechecked": true,
+  "raw_source_bytes_rehashed": false,
+  "partitions": {
+    "train": {
+      "graphs": 758,
+      "node_windows": 15819608,
+      "native_events": 211686253
+    },
+    "development": {
+      "graphs": 284,
+      "node_windows": 5622276,
+      "native_events": 77198703
+    },
+    "test": {
+      "graphs": 270,
+      "node_windows": 2664540,
+      "native_events": 39845072
+    }
+  },
+  "models": {
+    "gcn": {
+      "checkpoint_sha256": "1574b91e12a9382c7aebbd6924f5129f3528748fa11a21b40e260c7e1f95573c",
+      "state_sha256": "c92316b573c697369467cdafc28b52d8456a88fbed07ae697dfd49bf2f0502a9",
+      "run_sha256": "0d39a8add512ddabb728e96aca382504727bd7a90e1de97524f7fa84073464a2",
+      "test_sha256": "0f4b9d4c5da0dc8656a3eb9ded2573efe14b1c35c935b8d87185363336a41280",
+      "history_sha256": "cfcb5b8a8e7e4bb9c5b5bf9de7640a0dc539f35ec3c09f4912f7fa8732a141ed",
+      "epochs": 5,
+      "selected_epoch": 5,
+      "cpu_strict_reload": true,
+      "parameter_count": 13299
+    },
+    "graphsage": {
+      "checkpoint_sha256": "cd4eec384931a2fe3bad5c1ee4ca23ad71511b5594dc2dcde204ab99a3fffd5e",
+      "state_sha256": "99823415f0a5050555f29406cf6459dc055197c5b1262f801ace85ee06784eef",
+      "run_sha256": "8a6cfbc1746ccd59fac3d312dad72eede97fffc5bb155ba65ec3b5b81e343cee",
+      "test_sha256": "f638a89fc0b66a21ba6af8331b3fd32690669be97f52f6e58ca93b51c44fcb9f",
+      "history_sha256": "87440d01394f38dca365aa8c1618e05215a325050e3877b887d9e8e0e2594535",
+      "epochs": 5,
+      "selected_epoch": 5,
+      "cpu_strict_reload": true,
+      "parameter_count": 22707
+    },
+    "gat": {
+      "checkpoint_sha256": "9c6a420804a6bfa77a6255af00acc7467edd2f89f4dfc5f81b7a5aace0ff4444",
+      "state_sha256": "837b01f17eb14852e2d19ae090896b648de9bdf6fdf2d03639ae320f5cf051d0",
+      "run_sha256": "63119724b4e5e4e0ac788d4b107aa6bc15edab9a4cf3ac8f892946fe8d8184f7",
+      "test_sha256": "acf8cf10f623b54ea976a825a2089069994b3170dadda29f983df758b0643472",
+      "history_sha256": "966b209443736620358dc2377036e5a6776a7a46250b8eab37d77e8c918c47ac",
+      "epochs": 5,
+      "selected_epoch": 3,
+      "cpu_strict_reload": true,
+      "parameter_count": 13491
+    }
+  },
+  "security_metrics_available": false,
+  "independent_clean_machine_reproduction": false
+}
