@@ -15,6 +15,10 @@ contains the dataset, architectures, training protocol, complete epoch histories
 measured comparison and charts, execution timings, residual analysis, verification,
 limitations, checkpoint fingerprints and reproduction commands.
 
+For a quick overview, use the [two-page illustrated summary](../../../Documents/TraceGraph_DARPA_GNN_Short_Report_20261102.docx).
+It keeps the essential model settings, measured results, comparison chart,
+learning curve, residual findings and interpretation limits.
+
 GraphSAGE's median row MSE is 0.010364, but its 95th percentile is 0.990546,
 higher than GAT's 0.763579. GAT has the largest maximum row error, 2705.290039.
 The highest-error 1% of test rows contributes 65.16% of squared residual for
