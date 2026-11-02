@@ -10,6 +10,13 @@ GraphSAGE has the lowest development MSE and lowest observed test MSE/MAE.
 Its test MSE is 0.354878308, 36.53% below the training-mean reference.
 This is a reconstruction result; no attack-detection accuracy was measured.
 
+The separately approved [standalone GraphSAGE scorer](../gnn_scoring/README.md)
+now exports a small frozen model/scaler bundle and scores portable prepared
+graphs on CPU or CUDA. The full test replay and CPU/CUDA row-parity evidence
+are recorded in the [offline scoring receipt](../../../data/ml/datasets/darpa/gnn_full/offline_scoring_20261102.json).
+It requires no raw archives or original training folder after export. Backend
+integration and security thresholds remain deferred.
+
 A [12-page Word report](../../../Documents/TraceGraph_DARPA_GNN_Comparative_Report_20261102.docx)
 contains the dataset, architectures, training protocol, complete epoch histories,
 measured comparison and charts, execution timings, residual analysis, verification,

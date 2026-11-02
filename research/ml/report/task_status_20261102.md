@@ -18,6 +18,7 @@ artifact bindings. No label, split, timestamp, model or raw file was changed.
 | GCN, GraphSAGE and GAT training | Five epochs per family; checkpoints selected by development reconstruction MSE |
 | Final reconstruction evaluation | Common 2,664,540-row test cohort; all three checkpoint/test receipts complete |
 | Reconstruction comparison and diagnostics | GraphSAGE has the lowest average error; frozen residual replay, charts and reports complete |
+| Standalone GraphSAGE reconstruction scorer | Separately approved frozen model/scaler reuse, portable prepared-graph inputs and CPU/CUDA scoring; [commands and verification](../gnn_scoring/README.md) |
 | Current readiness audit | Six Event reviews and the existing 500-node unknown-decision set revalidated; supervised gate still fails |
 
 See [the measured results](../../../data/ml/datasets/darpa/gnn_full/RESULTS_20261102.md)

@@ -1,0 +1,93 @@
+{
+  "status": "standalone_graphsage_scoring_verified",
+  "date": "2026-11-02",
+  "model": "graphsage",
+  "selected_epoch": 5,
+  "parameter_count": 22707,
+  "bundle_sha256": "f79497e145e1ec873fb79fda42917d7d0c05eaf0ea44a8a41bf12cec7075d679",
+  "bundle_bytes": 115395,
+  "checkpoint_sha256": "cd4eec384931a2fe3bad5c1ee4ca23ad71511b5594dc2dcde204ab99a3fffd5e",
+  "checkpoint_state_sha256": "99823415f0a5050555f29406cf6459dc055197c5b1262f801ace85ee06784eef",
+  "scaler_sha256": "8ea1a82f4a4fb6702a1d749a034d95497ee7fba361df6dd1ef5f3639144b4280",
+  "source_graph_manifest_sha256": "daae7186fa05bacdf947e9c6b95a8081cfd24b05f7e122a0648fa843128107b1",
+  "full_replay": {
+    "graphs": 270,
+    "node_windows": 2664540,
+    "native_events": 39845072,
+    "measured_metrics": {
+      "mse": 0.3548783080187744,
+      "mae": 0.0667724345899813,
+      "mean_reference_mse": 0.5591168302698646
+    },
+    "frozen_metrics": {
+      "mse": 0.3548783080187744,
+      "mae": 0.0667724345899813,
+      "mean_reference_mse": 0.5591168302698646
+    },
+    "absolute_metric_differences": {
+      "mse": 0.0,
+      "mae": 0.0,
+      "mean_reference_mse": 0.0
+    },
+    "seconds": 122.59847939998144,
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 4050 Laptop GPU",
+    "input_manifest_sha256": "f0240b469c5e33a8182628b93f3db24277e733a321057f5042ad53439523ae16",
+    "summary_sha256": "89e3cbce35fba3396cdf3437d8a57ec8dbdc5f0edbf73c4a43835b883f4a286d",
+    "row_csv_sha256": "668af5a21d3c845286cb1fc9586905a6dc9bb844e35e754ce4a05929ce2ff350",
+    "graph_csv_sha256": "fd502afe76da60b8dd6f7622997f9c883e0f6978a77e3872ccb7b915c62f70f0",
+    "all_recorded_test_graphs_included": true,
+    "all_native_row_ids_checked": true,
+    "all_row_metrics_finite": true,
+    "rows_reconcile_with_graph_and_global_metrics": true
+  },
+  "cpu_cuda_parity": {
+    "graphs": 2,
+    "node_windows": 3495,
+    "all_selected_rows_compared": true,
+    "maximum_absolute_row_differences": {
+      "reconstruction_mse": 1.52587890625e-05,
+      "reconstruction_mae": 4.76837158203125e-07,
+      "training_mean_reference_mse": 3.0517578125e-05
+    },
+    "cpu_metrics": {
+      "mse": 0.5329010284401524,
+      "mae": 0.08082869698961717,
+      "mean_reference_mse": 0.9771089770395438
+    },
+    "cpu_seconds": 1.129347299982328,
+    "input_manifest_sha256": "9f13b81c1783f810f78eceeb3838aeb7a68ad39aacc1567842127cb8137cc5ec",
+    "cpu_summary_sha256": "b9e87abe8bc81a363f97443c3d5b9dfdd0532eeb247eaef031eb8d3b7d1bb18c",
+    "independent_cpu_only_wheel_installation_tested": false
+  },
+  "tolerance": {
+    "rtol": 1e-05,
+    "atol": 1e-07
+  },
+  "runtime": {
+    "torch": "2.15.0+cu132",
+    "numpy": "2.4.6",
+    "pyg": "2.8.1"
+  },
+  "scoring_code_sha256_utf8_lf": {
+    "research/ml/gnn_full/model.py": "16320d8c0687ef6fcc750b8ef6198fb4c4773325060510cab24b088292c44f1a",
+    "research/ml/gnn_scoring/__init__.py": "d2f5b5a0ff28d0c9c7c14501e836593544770971981ea8d65d50dc08e6e4ea51",
+    "research/ml/gnn_scoring/__main__.py": "2d879c8486784ee6482d06888559d98fb1d6ff7b1be060c1f8fe205189a7143b",
+    "research/ml/gnn_scoring/artifacts.py": "2f82b0b4b371feabb6fdbf872721f410bd376b01b217b016828d1515781a4107",
+    "research/ml/gnn_scoring/inputs.py": "0c4c83cbdcdef9fd6895e803ac3dfdcdb11b8f0d3027df47d2562ddf07cd93d0",
+    "research/ml/gnn_scoring/score.py": "171e3dac6a2394e62b23e1f8d9744f585516e5fc21cec09a7029e312d1a3e57e",
+    "research/ml/label_free/model.py": "bf8ab4a161123f0e80c0edf6aed82a2e416f9cd0135b152c13bd2eeabf9167e8",
+    "research/ml/node_benchmark/audit_protocol.py": "7953b904bf180ec862069a65f9478f08b957e02c9573b3f07f64e1a06281e7e8"
+  },
+  "verification_code_sha256": "ba59376609c8d1722d08fee4f22a086952b910ab419c62272097613c12f2d455",
+  "weights_updated": false,
+  "scaler_refit": false,
+  "security_labels_used": false,
+  "security_threshold": null,
+  "attack_detection_metrics_available": false,
+  "backend_integration": false,
+  "fresh_security_evaluation": false,
+  "raw_avro_required_for_scoring": false,
+  "external_event_semantics_independently_verified": false,
+  "independent_clean_machine_reproduction": false
+}

@@ -1,5 +1,15 @@
 # TraceGraph deep learning research
 
+**2026-11-02 standalone GraphSAGE scorer completed:** the verified epoch-5
+checkpoint and training-only scaler are reusable through a portable bundle
+and strict prepared-graph input package. CPU/CUDA scoring writes per-node
+reconstruction errors, graph metrics and a completion receipt. Full test replay
+covers all 270 graphs / 2,664,540 node-window rows and reproduces the frozen
+MSE/MAE; a separate CPU subset checks row parity. See [commands and input/output
+contract](gnn_scoring/README.md) and [measured verification](../../data/ml/datasets/darpa/gnn_full/offline_scoring_20261102.json).
+Weights and row outputs stay local. Security labels, thresholds and backend
+integration remain deferred.
+
 **2026-11-02 post-training benchmark-readiness audit completed:** all 37 raw
 source metadata entries, six Event reviews, support ZIP contents, reference-index
 integrity, 500 existing unknown node decisions and completed GNN bindings were
