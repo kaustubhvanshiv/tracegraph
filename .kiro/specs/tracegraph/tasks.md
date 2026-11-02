@@ -564,6 +564,17 @@ Later tasks may create additional subdirectories (`research/ml/baseline/`, `rese
 
 ## ML/DL/GNN Research Track
 
+**Status audit on 2026-11-02:** the explicitly user-approved separate DARPA
+self-supervised GCN, GraphSAGE and GAT reconstruction experiment is complete,
+including final tests, artifact verification, residual analysis and reports.
+This does not complete the original supervised ML-02/ML-07/ML-08 security
+acceptance criteria. A fresh local readiness audit still finds three eligible
+attack actions, zero eligible benign actions and two named attack groups.
+Original security comparison and integration remain gated. See
+[the task-status audit](../../../research/ml/report/task_status_20261102.md)
+for the exact mapping, evidence needed and reproduction commands. No task
+checkbox is changed by this status note.
+
 These tasks form a parallel research track that builds on the deterministic pipeline above. They are labeled `ML-NN` and do NOT replace or renumber Tasks 1–30.
 
 **Prerequisites before starting ML-01:**

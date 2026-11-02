@@ -1,5 +1,14 @@
 # ML-02 — ground truth and split plan
 
+**Post-training readiness audit, 2026-11-02:** all 37 local sources, six cached
+Event reviews and the existing 500 unknown node decisions were revalidated.
+Eligible Event labels remain three attack actions and zero benign actions;
+ML-02.4 supervised splits remain unavailable. The completed GCN/GraphSAGE/GAT
+masked-feature reconstruction experiment has a separate target and does not
+change these labels or acceptance criteria. See the
+[task-status and evidence audit](../../research/ml/report/task_status_20261102.md)
+and [annotation evidence checklist](../../research/ml/report/annotation_evidence_checklist.md).
+
 **Benign/split readiness, 2026-10-28:** the published normal-day assignments
 cannot replace reviewed benign Event evidence or our chronological split rules.
 The local subset lacks the published validation day. The label contract remains

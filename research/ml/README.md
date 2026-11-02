@@ -1,5 +1,14 @@
 # TraceGraph deep learning research
 
+**2026-11-02 post-training benchmark-readiness audit completed:** all 37 raw
+source metadata entries, six Event reviews, support ZIP contents, reference-index
+integrity, 500 existing unknown node decisions and completed GNN bindings were
+rechecked. Eligible Event labels remain three attacks / zero benign. The original
+supervised split gate still fails; no labels or models were changed. Sixteen
+checks pass. See [task status and reproduction](report/task_status_20261102.md)
+and [the evidence checklist and empty intake sheet](report/annotation_evidence_checklist.md).
+The completed reconstruction experiments remain separate from security detection.
+
 **2026-11-02 full-local GNN training and evaluation verified complete:**
 GCN, GraphSAGE and GAT each completed five epochs and the common 2,664,540-row
 final test. GraphSAGE has the lowest measured test MSE, 0.354878308, versus

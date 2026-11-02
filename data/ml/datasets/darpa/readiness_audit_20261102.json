@@ -1,0 +1,212 @@
+{
+  "status": "readiness_audit_complete_supervised_not_ready",
+  "date": "2026-11-02",
+  "event_target": "A native CDM Event is a documented ACT attack action",
+  "event_track": {
+    "reviewed_label_counts": {
+      "0": 1,
+      "1": 3,
+      "None": 2
+    },
+    "eligible_label_counts": {
+      "0": 0,
+      "1": 3
+    },
+    "named_attack_group_count": 2,
+    "named_benign_group_count": 0,
+    "positive_incident_count": 2,
+    "independent_group_validation_claimed": false,
+    "excluded": [
+      {
+        "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+        "label": 0,
+        "reason": "Uncalibrated mixed clock epochs around the documented host-2 four-hour time reset; raw timestamps are preserved and cannot establish reliable chronological/context boundaries"
+      }
+    ],
+    "supervised_gate_passes": false,
+    "blocking_reasons": [
+      "At least three independent labeled groups required",
+      "Verified benign and attack samples required in every partition"
+    ],
+    "structural_context_check_nanos": 0,
+    "history_horizon_selected": false,
+    "note": "The existing preparation split function is checked at zero context. Failure already prevents splits; no supervised input horizon is selected."
+  },
+  "source_inventory": {
+    "current_archives": 37,
+    "audited_archives": 37,
+    "unreviewed_archives": [],
+    "raw_records": 345099571,
+    "eligible_label_volume_inferred_from_raw_count": false,
+    "metadata_revalidated": true,
+    "raw_bytes_rescanned": false
+  },
+  "support_inventory": {
+    "archives": [
+      {
+        "name": "Ground_Truth-20261011T062242Z-1-001.zip",
+        "sha256": "e020ed51d02e9dd7ce30ec71d0ac13bf2901de6184da358474072c692d0f2254",
+        "members": [
+          {
+            "name": "Ground_Truth/TA51_Final_report_E5.docx",
+            "bytes": 2297885,
+            "sha256": "0d7bcbafe92232a3c039afd9b7a8665ef7b21a1a36d0fc3a84b559174825edc6",
+            "matches_cached_copy": false
+          },
+          {
+            "name": "Ground_Truth/TA51_Final_report_E5.pdf",
+            "bytes": 3457780,
+            "sha256": "95785dd6e32e1585e3a3b49f7f69aac785ca9d2db05593ad919b1b627897f0a1",
+            "matches_cached_copy": true
+          }
+        ]
+      },
+      {
+        "name": "Schema-20261011T062309Z-1-001.zip",
+        "sha256": "d19b5bc689f3ed9ceaa15fdf583f6947cee7ac106c39d9e04c551fd4ee8359fc",
+        "members": [
+          {
+            "name": "Schema/TCCDMDatum.avsc",
+            "bytes": 51115,
+            "sha256": "f5a36712da9d8416f21b53a9fb6b375e4850475a8a7412901073ff139348fb11",
+            "matches_cached_copy": true
+          },
+          {
+            "name": "Schema/cdm.pdf",
+            "bytes": 77763,
+            "sha256": "c7b13a84999e1b77bf7c9c1d647ebab42f388d7e0ffa7ef5269e0c908ce74b2c",
+            "matches_cached_copy": true
+          },
+          {
+            "name": "Schema/CDM20.avdl",
+            "bytes": 53312,
+            "sha256": "cb17265a7b36a148ebff35aa764c2f0e0b4acc2b0acdab2b3a3dfcea4913397f",
+            "matches_cached_copy": true
+          }
+        ]
+      }
+    ],
+    "standalone_files": [
+      {
+        "name": "Engagement-5-Event-Log.md",
+        "sha256": "70b111fff7bc4662d4c22664be19c4c08702a36676f31f160d4b3a856ee5c3c9"
+      }
+    ],
+    "standalone_annotation_candidates": [],
+    "archived_annotation_candidates": [],
+    "scope": "Current local support folder only; no fresh website/Drive check or new document interpretation."
+  },
+  "reference_index": {
+    "definitions": 1799467,
+    "quick_check": "ok",
+    "read_only": true,
+    "sha256": "f8c9ee863fd8814dfcf7bcb554ae33920d2d028be86ad491ae4cb0fea026297e",
+    "reference_report_sha256_utf8_lf": "aa0085a03fb45f4faa6a25a4cab7649b9ff6ea5c494557b2898902efdfcd7c65"
+  },
+  "annotation_sha256_utf8_lf": "f3c129e55ed3117f4b69b19c0cc3c15b8c12ce2f7a19af6391682aedbb8ce2be",
+  "prepared_rows_sha256": "e888af898e117bca40f51ae42711f4e4f8e0a89321364c4b7172d3a0891911a8",
+  "process_resolution_checks": [
+    {
+      "event_uuid": "cba5c7333a594b0b9b6f7b3e6489d9c2",
+      "chain_length": 2,
+      "process_resolved": false,
+      "previous_process_resolved": false,
+      "resolution_changed": false,
+      "missing_reference": "1fca97f4e4134d05869b31eb09df8770",
+      "future_or_unknown_start": false
+    },
+    {
+      "event_uuid": "8f5db838a1504f5b9b0ce074a1e356a0",
+      "chain_length": 2,
+      "process_resolved": false,
+      "previous_process_resolved": false,
+      "resolution_changed": false,
+      "missing_reference": "1fca97f4e4134d05869b31eb09df8770",
+      "future_or_unknown_start": false
+    },
+    {
+      "event_uuid": "b2f735d934fc4f92ac98996118533f5c",
+      "chain_length": 2,
+      "process_resolved": true,
+      "previous_process_resolved": true,
+      "resolution_changed": false,
+      "missing_reference": null,
+      "future_or_unknown_start": false
+    },
+    {
+      "event_uuid": "fce7334c4dc6494b82d4f35cd1b2f8d6",
+      "chain_length": 1,
+      "process_resolved": true,
+      "previous_process_resolved": true,
+      "resolution_changed": false,
+      "missing_reference": null,
+      "future_or_unknown_start": false
+    },
+    {
+      "event_uuid": "1d92d20361b242f7984f23422ef135be",
+      "chain_length": 2,
+      "process_resolved": true,
+      "previous_process_resolved": true,
+      "resolution_changed": false,
+      "missing_reference": null,
+      "future_or_unknown_start": false
+    },
+    {
+      "event_uuid": "fb20dd62334c48e9a9ea6972c43501f0",
+      "chain_length": 2,
+      "process_resolved": true,
+      "previous_process_resolved": true,
+      "resolution_changed": false,
+      "missing_reference": null,
+      "future_or_unknown_start": false
+    }
+  ],
+  "controlled_scenario_nonplaceholder_files": {
+    "basic_attack_sequence": [],
+    "legitimate_access": [],
+    "multi_user_host": [],
+    "unrelated_events": []
+  },
+  "frozen_gnn_work": {
+    "status": "complete_verified_reconstruction_only",
+    "models": {
+      "gcn": {
+        "epochs": 5,
+        "selected_epoch": 5,
+        "checkpoint_sha256": "1574b91e12a9382c7aebbd6924f5129f3528748fa11a21b40e260c7e1f95573c"
+      },
+      "graphsage": {
+        "epochs": 5,
+        "selected_epoch": 5,
+        "checkpoint_sha256": "cd4eec384931a2fe3bad5c1ee4ca23ad71511b5594dc2dcde204ab99a3fffd5e"
+      },
+      "gat": {
+        "epochs": 5,
+        "selected_epoch": 3,
+        "checkpoint_sha256": "9c6a420804a6bfa77a6255af00acc7467edd2f89f4dfc5f81b7a5aace0ff4444"
+      }
+    },
+    "completion_sha256": "ebd0c3402f2a032bf1b730fbb5feb88ca732459bcff386e2f56888ff71c0717e",
+    "new_graph_hash_scan_performed": false,
+    "new_training_performed": false
+  },
+  "separate_node_pilot": {
+    "status": "existing_unknown_decisions_revalidated",
+    "candidates": 500,
+    "verified_binary_labels": 0,
+    "decision_file_sha256": "c71c5b4786fd7c436eee5bb6c607e820b2c013f98f1b4220c90946ac884e7733",
+    "source_report_sha256": "5de1c516cad0bde4fc3b13269e74e35fb437391a750560ed16c4c95879932938"
+  },
+  "new_labels_assigned": 0,
+  "supervised_splits_exported": false,
+  "security_metrics_computed": false,
+  "raw_sources_modified": false,
+  "annotations_modified": false,
+  "models_modified": false,
+  "limitations": [
+    "Exact cached review rows reused; no fresh Avro normalization or raw-byte scan",
+    "Local support inventory is not a current Drive availability check",
+    "Annotation count/group checks are necessary gates, not statistical sample-size validation",
+    "Self-supervised reconstruction and original Event-level security classification have different targets"
+  ]
+}
