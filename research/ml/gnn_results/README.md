@@ -10,6 +10,11 @@ GraphSAGE has the lowest development MSE and lowest observed test MSE/MAE.
 Its test MSE is 0.354878308, 36.53% below the training-mean reference.
 This is a reconstruction result; no attack-detection accuracy was measured.
 
+A [12-page Word report](../../../Documents/TraceGraph_DARPA_GNN_Comparative_Report_20261102.docx)
+contains the dataset, architectures, training protocol, complete epoch histories,
+measured comparison and charts, execution timings, residual analysis, verification,
+limitations, checkpoint fingerprints and reproduction commands.
+
 GraphSAGE's median row MSE is 0.010364, but its 95th percentile is 0.990546,
 higher than GAT's 0.763579. GAT has the largest maximum row error, 2705.290039.
 The highest-error 1% of test rows contributes 65.16% of squared residual for
